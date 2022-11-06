@@ -1,5 +1,5 @@
 # STM32Cube Expansion Pack CAN Stack
-Com-Stack for CAN using the [STM32ExpansionPack system](https://wiki.st.com/stm32mcu/wiki/Introduction_to_STM32Cube_Expansion_Packages).  
+Com-Stack for CAN using the [STM32ExpansionPack system](https://wiki.st.com/stm32mcu/wiki/Introduction_to_STM32Cube_Expansion_Packages) (external link to STM-page).  
 
 ## Dependencies
 + The software using the STM32Cube system based on the STM32 HAL.
@@ -19,5 +19,5 @@ There will be compileable projects inside the "projects" folder. These projects 
 I started this project on my own. And changed the name and version numbering on publishing. I kept the old version log, so you can see work done and some experimental states. Maybe there are some points with deviating naming.
 
 ## Source code documentation
-There will be also the doxygen generated [source code documentation](./html/index.html). This docu don't comes from the pack it self. You can build this docu inside a project using the ExpansionPack.  
+There will be also the doxygen generated [source code documentation](./docu/html/index.html). This docu don't comes from the pack it self. You can build this docu inside a project using the ExpansionPack.  
 Besides the normal source code documentation it includes a detailed description in german language for usage and internal behavior. If somebody can add a multi language support to doxygen it would be nice.
