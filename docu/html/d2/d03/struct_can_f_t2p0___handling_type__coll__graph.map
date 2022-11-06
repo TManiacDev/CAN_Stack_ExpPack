@@ -1,0 +1,7 @@
+<map id="CanFT2p0_HandlingType" name="CanFT2p0_HandlingType">
+<area shape="rect" id="node1" title=" " alt="" coords="86,288,253,315"/>
+<area shape="rect" id="node2" href="$db/dee/struct_can_f_t2p0___cfg_type.html" title="this is the overall config container of this communication module" alt="" coords="102,199,237,225"/>
+<area shape="rect" id="node3" href="$df/d69/struct_can_f_t2p0___data_base_type.html" title="this are static information defined by the protocol" alt="" coords="5,109,179,136"/>
+<area shape="rect" id="node4" href="$d0/d0a/struct_can_f_t2p0___object_cfg_type.html" title="Configuration of the Fueltech communication object." alt="" coords="203,109,376,136"/>
+<area shape="rect" id="node5" href="$d7/de2/struct_can_f_t2p0___channel_config_type.html" title="configuration of a rx channel" alt="" coords="190,5,389,32"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="CanIf::Receive" name="CanIf::Receive">
+<area shape="rect" id="node1" title="poll the RxBuffer for a message" alt="" coords="5,5,109,32"/>
+<area shape="rect" id="node2" href="$db/d0a/group___t_m___can_if___func.html#ga6b6faa51ed2dc5386ccaa4c6894fc732" title="poll the RxBuffer for a message" alt="" coords="157,5,261,32"/>
+</map>

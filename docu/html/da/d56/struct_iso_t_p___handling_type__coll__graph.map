@@ -1,0 +1,6 @@
+<map id="IsoTP_HandlingType" name="IsoTP_HandlingType">
+<area shape="rect" id="node1" title="we need a type to manage the work of the protocol using object" alt="" coords="160,95,300,121"/>
+<area shape="rect" id="node2" href="$de/d36/struct_iso_tp___tx_buffer_type.html" title=" " alt="" coords="5,5,140,32"/>
+<area shape="rect" id="node3" href="$d7/df3/struct_iso_t_p___control_type.html" title="to control the flow" alt="" coords="165,5,295,32"/>
+<area shape="rect" id="node4" href="$db/d09/struct_iso_tp___rx_buffer_type.html" title=" " alt="" coords="320,5,457,32"/>
+</map>

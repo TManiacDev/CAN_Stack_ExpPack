@@ -1,0 +1,6 @@
+<map id="FT_SwitchPanel" name="FT_SwitchPanel">
+<area shape="rect" id="node1" title=" " alt="" coords="78,155,194,181"/>
+<area shape="rect" id="node2" href="$d5/d4a/class_can_f_t2p0.html" title="a class to handle the Fueltech CAN FT2.0 protocol" alt="" coords="95,80,177,107"/>
+<area shape="rect" id="node3" href="$da/d43/class_t_m_e___version_info.html" title="to hold the version info" alt="" coords="5,5,125,32"/>
+<area shape="rect" id="node4" href="$d6/df4/class_can_if_upper_layer.html" title=" " alt="" coords="149,5,267,32"/>
+</map>

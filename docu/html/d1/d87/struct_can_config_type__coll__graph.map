@@ -1,0 +1,5 @@
+<map id="CanConfigType" name="CanConfigType">
+<area shape="rect" id="node1" title="The structure of the overall configuration for the CAN." alt="" coords="132,95,241,121"/>
+<area shape="rect" id="node2" href="$dd/d76/struct_can_controller_para_type.html" title="to hold the handling parameters" alt="" coords="5,5,160,32"/>
+<area shape="rect" id="node3" href="$d1/dc3/struct_can_controller_baudrate_config_type.html" title="Configuration parameters for a baudrate setting." alt="" coords="184,5,400,32"/>
+</map>

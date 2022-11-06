@@ -1,0 +1,5 @@
+<map id="ComStack_CanMessageType" name="ComStack_CanMessageType">
+<area shape="rect" id="node1" title="this is a test structure to hold data and header for a rx message" alt="" coords="5,184,200,211"/>
+<area shape="rect" id="node2" href="$d5/d65/struct_com_stack___can_msg_header.html" title="upper layer can use a smaller CAN message header" alt="" coords="13,95,192,121"/>
+<area shape="rect" id="node3" href="$de/d22/struct_com_stack___can_id_type.html" title="to use the 32bit for extended CAN Id" alt="" coords="27,5,178,32"/>
+</map>

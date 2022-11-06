@@ -1,0 +1,4 @@
+<map id="Baudrate configuration" name="Baudrate configuration">
+<area shape="rect" id="node1" href="$d9/dd8/group___t_m___can_cfg___config_set.html" title="Collection of the configuration parameters of hardware relevant elements. &#160;Access via pointer." alt="" coords="5,5,159,45"/>
+<area shape="rect" id="node2" title="This container contains bit timing related configuration parameters of the CAN controller(s)" alt="" coords="207,13,357,38"/>
+</map>

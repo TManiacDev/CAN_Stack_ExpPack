@@ -1,0 +1,9 @@
+<map id="Type definitions for FT2.0 Layer Module" name="Type definitions for FT2.0 Layer Module">
+<area shape="rect" id="node1" href="$de/d50/group___can_f_t2p0__group.html" title="To handle the Fueltech FTCAN2.0 protocol." alt="" coords="5,149,193,174"/>
+<area shape="rect" id="node6" title="there are no special public types then the configuration all types defined in the COM stack" alt="" coords="241,141,383,181"/>
+<area shape="rect" id="node2" href="$db/dc5/group___can_f_t2p0___i_d___types.html" title=" " alt="" coords="462,5,602,45"/>
+<area shape="rect" id="node3" href="$de/d83/group___can_f_t2p0___data_field_i_ds.html" title=" " alt="" coords="439,69,625,109"/>
+<area shape="rect" id="node4" href="$de/d7a/group___can_f_t2p0___data_i_ds.html" title=" " alt="" coords="461,134,603,189"/>
+<area shape="rect" id="node5" href="$dd/dcb/group___can_f_t2p0___product_type_i_ds.html" title=" " alt="" coords="431,213,633,238"/>
+<area shape="rect" id="node7" href="$d8/d45/group___can_f_t2p0___unique_i_ds.html" title=" " alt="" coords="439,263,625,303"/>
+</map>

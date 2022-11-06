@@ -1,0 +1,7 @@
+<map id="CanFT2p0" name="CanFT2p0">
+<area shape="rect" id="node1" title="a class to handle the Fueltech CAN FT2.0 protocol" alt="" coords="98,80,179,107"/>
+<area shape="rect" id="node4" href="$d5/de1/class_can_f_t2p0_stream.html" title=" " alt="" coords="5,155,128,181"/>
+<area shape="rect" id="node5" href="$d8/dc4/class_f_t___switch_panel.html" title=" " alt="" coords="153,155,269,181"/>
+<area shape="rect" id="node2" href="$da/d43/class_t_m_e___version_info.html" title="to hold the version info" alt="" coords="8,5,128,32"/>
+<area shape="rect" id="node3" href="$d6/df4/class_can_if_upper_layer.html" title=" " alt="" coords="152,5,269,32"/>
+</map>

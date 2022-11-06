@@ -1,0 +1,10 @@
+<map id="Configuration for CAN Interface Module" name="Configuration for CAN Interface Module">
+<area shape="rect" id="node1" href="$d4/dea/group___t_m___can_if___drv_cfg.html" title=" " alt="" coords="408,5,563,45"/>
+<area shape="rect" id="node2" href="$d4/d35/group___t_m___can_if___trcv_cfg.html" title=" " alt="" coords="416,69,555,109"/>
+<area shape="rect" id="node3" href="$dd/d50/group___t_m___can_if___public_cfg.html" title=" " alt="" coords="396,133,575,173"/>
+<area shape="rect" id="node4" href="$d1/d08/group___t_m___can_if___init_cfg.html" title=" " alt="" coords="396,197,575,237"/>
+<area shape="rect" id="node5" href="$db/d19/group___t_m___can_if___dispatch_cfg.html" title=" " alt="" coords="403,262,568,317"/>
+<area shape="rect" id="node6" href="$d4/dab/group___t_m___can_if___private_cfg.html" title=" " alt="" coords="400,341,571,381"/>
+<area shape="rect" id="node7" href="$d3/d86/group___t_m___can_if___main.html" title="Interfacing dependencies." alt="" coords="5,173,153,198"/>
+<area shape="rect" id="node8" title="configuration to connect hardware to upper layers" alt="" coords="201,165,348,205"/>
+</map>

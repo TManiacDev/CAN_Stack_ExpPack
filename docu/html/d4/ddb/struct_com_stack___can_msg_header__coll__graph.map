@@ -1,0 +1,4 @@
+<map id="ComStack_CanMsgHeader" name="ComStack_CanMsgHeader">
+<area shape="rect" id="node1" title="upper layer can use a smaller CAN message header" alt="" coords="5,95,184,121"/>
+<area shape="rect" id="node2" href="$de/d22/struct_com_stack___can_id_type.html" title="to use the 32bit for extended CAN Id" alt="" coords="19,5,170,32"/>
+</map>

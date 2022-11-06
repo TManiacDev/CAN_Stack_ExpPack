@@ -1,0 +1,7 @@
+<map id="CanIf_CanIdSelectType" name="CanIf_CanIdSelectType">
+<area shape="rect" id="node1" title="to unify to handle the CAN Id formats" alt="" coords="259,95,415,121"/>
+<area shape="rect" id="node2" href="$dc/d97/struct_can_if___std_can_id_type.html" title="to use the 32bit for standard CAN Id" alt="" coords="5,5,144,32"/>
+<area shape="rect" id="node3" href="$de/d22/struct_com_stack___can_id_type.html" title="to use the 32bit for extended CAN Id" alt="" coords="169,5,319,32"/>
+<area shape="rect" id="node4" href="$d5/d54/struct_can_if___s_t_m___std_can_id_type.html" title="to use the 32bit for standard CAN Id on STM registers" alt="" coords="344,5,517,32"/>
+<area shape="rect" id="node5" href="$d2/da0/struct_can_if___s_t_m___ext_can_id_type.html" title="to use the 32bit for extended CAN Id on STM registers" alt="" coords="541,5,715,32"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="CanFT2p0_RxPduType" name="CanFT2p0_RxPduType">
+<area shape="rect" id="node1" title="Struct containing the data for linking an application to a CAN instance. The data stored in this stru..." alt="" coords="74,273,229,300"/>
+<area shape="rect" id="node2" href="$d7/dc0/struct_can_f_t2p0___mailbox_type.html" title=" " alt="" coords="5,184,167,211"/>
+<area shape="rect" id="node3" href="$d2/da8/struct_com_stack___can_message_type.html" title="this is a test structure to hold data and header for a rx message" alt="" coords="191,184,386,211"/>
+<area shape="rect" id="node4" href="$d5/d65/struct_com_stack___can_msg_header.html" title="upper layer can use a smaller CAN message header" alt="" coords="199,95,378,121"/>
+<area shape="rect" id="node5" href="$de/d22/struct_com_stack___can_id_type.html" title="to use the 32bit for extended CAN Id" alt="" coords="213,5,364,32"/>
+</map>

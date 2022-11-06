@@ -1,0 +1,4 @@
+<map id="CanFT2p0_ObjectCfgType" name="CanFT2p0_ObjectCfgType">
+<area shape="rect" id="node1" title="Configuration of the Fueltech communication object." alt="" coords="18,109,191,136"/>
+<area shape="rect" id="node2" href="$d7/de2/struct_can_f_t2p0___channel_config_type.html" title="configuration of a rx channel" alt="" coords="5,5,204,32"/>
+</map>

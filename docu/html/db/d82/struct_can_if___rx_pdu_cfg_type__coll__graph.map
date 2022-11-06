@@ -1,0 +1,4 @@
+<map id="CanIf_RxPduCfgType" name="CanIf_RxPduCfgType">
+<area shape="rect" id="node1" title="to hold the configuration of a RxPdu" alt="" coords="9,109,153,136"/>
+<area shape="rect" id="node2" href="$de/d22/struct_com_stack___can_id_type.html" title="to use the 32bit for extended CAN Id" alt="" coords="5,5,156,32"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="CanIf::SetFilterByCanId" name="CanIf::SetFilterByCanId">
+<area shape="rect" id="node1" title="configure a free hardware filter using single CAN Id filtering" alt="" coords="5,31,163,57"/>
+<area shape="rect" id="node2" href="$d0/d88/class_can_if.html#ac9e0d39e49a3f00e97a606c419eeb3ac" title="change the 32bit format to use with STM Registers" alt="" coords="211,5,377,32"/>
+<area shape="rect" id="node3" href="$d0/d88/class_can_if.html#a5191e6da6723030adc9e16b27546cfa5" title="to find a free CAN hardware filter" alt="" coords="225,56,363,83"/>
+</map>

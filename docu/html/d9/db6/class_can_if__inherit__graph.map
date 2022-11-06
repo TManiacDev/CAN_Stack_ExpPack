@@ -1,0 +1,5 @@
+<map id="CanIf" name="CanIf">
+<area shape="rect" id="node1" title="the class to work on the CAN controller interface" alt="" coords="96,80,147,107"/>
+<area shape="rect" id="node2" href="$da/d43/class_t_m_e___version_info.html" title="to hold the version info" alt="" coords="5,5,125,32"/>
+<area shape="rect" id="node3" href="$db/db1/class_com_if.html" title="the base class to hold a unique interface to all communication controller interface types" alt="" coords="150,5,205,32"/>
+</map>

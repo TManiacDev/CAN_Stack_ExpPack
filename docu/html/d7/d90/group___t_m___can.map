@@ -1,0 +1,5 @@
+<map id="CAN Module" name="CAN Module">
+<area shape="rect" id="node1" title="to work with the STM HAL" alt="" coords="5,45,100,70"/>
+<area shape="rect" id="node2" href="$dc/d40/group___t_m___can___types.html" title="to handle hardware module access" alt="" coords="156,5,287,45"/>
+<area shape="rect" id="node3" href="$df/d57/group___t_m___can_cfg.html" title="configuration for hardware dependencies" alt="" coords="148,69,295,109"/>
+</map>

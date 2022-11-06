@@ -1,0 +1,7 @@
+<map id="Hardware configuration container" name="Hardware configuration container">
+<area shape="rect" id="node1" title="Collection of the configuration parameters of hardware relevant elements. &#160;Access via pointer." alt="" coords="200,69,353,109"/>
+<area shape="rect" id="node2" href="$d2/dd3/group___t_m___can_cfg___hw_filter.html" title="This container contains configuration parameters for the hardware filter." alt="" coords="430,5,559,45"/>
+<area shape="rect" id="node3" href="$d2/de5/group___t_m___can_cfg___para_cfg.html" title="This container contains configuration parameters of the CAN controller(s) that will be needed at star..." alt="" coords="401,69,588,109"/>
+<area shape="rect" id="node4" href="$de/d26/group___t_m___can_cfg___baud_cfg.html" title="This container contains bit timing related configuration parameters of the CAN controller(s)" alt="" coords="419,134,570,159"/>
+<area shape="rect" id="node5" href="$df/d57/group___t_m___can_cfg.html" title="configuration for hardware dependencies" alt="" coords="5,69,152,109"/>
+</map>

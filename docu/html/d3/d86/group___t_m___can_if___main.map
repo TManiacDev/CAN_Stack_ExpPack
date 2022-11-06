@@ -1,0 +1,7 @@
+<map id="CAN Interface Module" name="CAN Interface Module">
+<area shape="rect" id="node1" href="$df/df9/group___t_m___can_if___types.html" title="Extended variable types used on the API." alt="" coords="201,5,372,45"/>
+<area shape="rect" id="node2" href="$d5/dc5/group___t_m___can_if___intern_func.html" title="Internal functions not public." alt="" coords="201,69,372,109"/>
+<area shape="rect" id="node3" href="$db/d0a/group___t_m___can_if___func.html" title="Functions used in the API." alt="" coords="201,133,372,173"/>
+<area shape="rect" id="node4" title="Interfacing dependencies." alt="" coords="5,109,153,134"/>
+<area shape="rect" id="node5" href="$d7/d66/group___t_m___can_if_cfg.html" title="configuration to connect hardware to upper layers" alt="" coords="213,197,360,237"/>
+</map>
