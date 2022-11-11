@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<package schemaVersion="1.6.3" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="PACK.xsd">
+    <vendor>TM_Engineering</vendor>
+    <name>CAN_Stack</name>
+    <description>To add a configurable com-stack with support of transport protocols used on the controller area network (CAN) &lt;br&gt;
+We need the ST HAL functions. &lt;br&gt;
+The modules inside the ExpansionPack uses their own Init- and ISR-callback function. 
+The generation of the MX-function and ISR-callback function normaly generated for the HAL must be deactivated.</description>
+    <url/>
+    <license>LICENSE</license>
+    <supportContact>engineer@tmaniac.de</supportContact>
+    <releases>
+        <release date="2022-10-23" version="0.1.0">We create the project on github.
+First step to publish it.</release>
+    </releases>
+    <keywords>
+        <keyword>IMPLEMENTED_WITH_STM32CUBEMX</keyword>
+    </keywords>
+    <taxonomy>
+        <description Cclass="Utility">Utility</description>
+        <description Cclass="Board Support">Board Support</description>
+        <description Cclass="Board Part">Board Part</description>
+    </taxonomy>
+    <conditions>
+        <condition id="hasComIfClass">
+            <description>communication controller interface class is the base class of CanIf</description>
+            <accept Cbundle="CanIf" Cgroup="ComIf"/>
+        </condition>
+        <condition id="hasComStackGeneral">
+            <description>compiler and platform specific files</description>
+            <accept Cbundle="CanIf" Cgroup="general"/>
+        </condition>
+        <condition id="hasCanMaster">
+            <require Cbundle="CanIf" Cgroup="CanIf" Csub="Can"/>
+        </condition>
+    </conditions>
+    <components>
+        <bundle Cbundle="DemoApplications" Cclass="Device" Cversion="0.1.0">
+            <description>Bundle of applications</description>
+            <doc>README.md</doc>
+            <component Cgroup="Application" Cvariant="CanIf_AppDemo" condition="hasCanMaster" maxInstances="1">
+                <description>Application demo to show the usage of the plain CanIf Class</description>
+                <files/>
+            </component>
+        </bundle>
+        <bundle Cbundle="CanIf" Cclass="Board Support" Cversion="0.1.0">
+            <description>Interface for abstraction of the CAN controller hardware</description>
+            <doc>README.md</doc>
+            <component Cgroup="general" Csub="Common" maxInstances="1">
+                <description>platform independancy files</description>
+                <files>
+                    <file category="header" name="Drivers/BSP/general/TM_Compiler.h"/>
+                    <file category="header" name="Drivers/BSP/general/TM_Compiler_Cfg.h"/>
+                    <file category="header" name="Drivers/BSP/general/TM_ComStack_Types.h"/>
+                    <file category="header" name="Drivers/BSP/general/TM_Platform_Types.h"/>
+                    <file category="header" name="Drivers/BSP/general/TM_Std_Types.h"/>
+                    <file category="sourceCpp" name="Drivers/BSP/general/TMEVersionInfo.cpp"/>
+                    <file category="header" name="Drivers/BSP/general/TMEVersionInfo.h"/>
+                </files>
+            </component>
+            <component Cgroup="ComIf" Csub="Common" condition="hasComStackGeneral" maxInstances="1">
+                <description>Abstract communication controller class</description>
+                <files>
+                    <file category="sourceCpp" name="Drivers/BSP/ComIf/ComIf.cpp"/>
+                    <file category="header" name="Drivers/BSP/ComIf/ComIf.h"/>
+                    <file category="header" name="Drivers/BSP/ComIf/ComIf_Compiler_Cfg.h"/>
+                </files>
+            </component>
+            <component Cgroup="CanIf" Csub="Can" condition="hasComIfClass" maxInstances="1">
+                <description>Use this as platform indepetend abstraction layer</description>
+                <files>
+                    <file category="source" name="Drivers/BSP/CanIf/CanIf.cpp"/>
+                    <file category="header" name="Drivers/BSP/CanIf/CanIf.h"/>
+                    <file category="header" name="Drivers/BSP/CanIf/CanIf_Doxy.h"/>
+                    <file category="header" name="Drivers/BSP/CanIf/CanIf_Switch.h"/>
+                    <file category="header" name="Drivers/BSP/CanIf/CanIfUpperLayer.h"/>
+                    <file category="sourceCpp" name="Drivers/BSP/CanIf/CanIfUpperLayer.cpp"/>
+                    <file category="header" name="Drivers/BSP/CanIf/CanIf_Compiler_Cfg.h"/>
+                </files>
+            </component>
+        </bundle>
+        <bundle Cbundle="bxCAN Slave" Cclass="Board Part" Cversion="0.1.0">
+            <description>To handle the slave part of the bxCAN</description>
+            <doc>README.md</doc>
+            <component Cgroup="bxCAN_Slave" Csub="virtualCAN" condition="hasCanMaster" maxInstances="1">
+                <description>We need a virtual component	</description>
+                <files/>
+            </component>
+        </bundle>
+        <bundle Cbundle="SourceCodeDocu" Cclass="Utility" Cversion="0.1.0">
+            <description>This bundle holds the additional source for the doxygen job.
+Today the STM32CubeIDE doesn't copy other files then source or header.
+So we must do the copy handmade :-(</description>
+            <doc>README.md</doc>
+            <component Cgroup="DoxyPages" maxInstances="1">
+                <description>To hold the additional pages</description>
+                <files>
+                    <file category="header" name="Utilities/DoxyPages/Doxy_Page_Abrev.h"/>
+                    <file category="header" name="Utilities/DoxyPages/Doxy_Page_AddPack.h"/>
+                    <file category="header" name="Utilities/DoxyPages/Doxy_Page_Api.h"/>
+                    <file category="header" name="Utilities/DoxyPages/Doxy_Page_Architecture.h"/>
+                    <file category="header" name="Utilities/DoxyPages/Doxy_Page_Examples.h"/>
+                    <file category="header" name="Utilities/DoxyPages/Doxy_Page_FileSystem.h"/>
+                    <file category="header" name="Utilities/DoxyPages/Doxy_Page_History.h"/>
+                    <file category="header" name="Utilities/DoxyPages/Doxy_Page_SearchFor.h"/>
+                    <file category="header" name="Utilities/DoxyPages/TM_Doxy.h"/>
+                    <file category="doc" name="Utilities/DoxyPages/TME.doxyfile" public="false"/>
+                    <file category="image" name="Utilities/DoxyPages/pictures/CanIf_StateMachine.svg" public="false"/>
+                    <file category="image" name="Utilities/DoxyPages/pictures/config_canhw.png" public="false"/>
+                    <file category="image" name="Utilities/DoxyPages/pictures/config_canif.png" public="false"/>
+                    <file category="image" name="Utilities/DoxyPages/pictures/config_isotp.png" public="false"/>
+                    <file category="image" name="Utilities/DoxyPages/pictures/config_parameter.png" public="false"/>
+                    <file category="image" name="Utilities/DoxyPages/pictures/overview.svg" public="false"/>
+                    <file category="image" name="Utilities/DoxyPages/pictures/pre_Load_From_Local.png" public="false"/>
+                    <file category="image" name="Utilities/DoxyPages/pictures/pre_Manage_Software_Packs.png" public="false"/>
+                    <file category="image" name="Utilities/DoxyPages/pictures/pre_Select_Pack_File.png" public="false"/>
+                </files>
+            </component>
+        </bundle>
+    </components>
+</package>

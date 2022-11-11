@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<IP xmlns="http://mcd.rou.st.com/modules.php?name=mcu" xmlns:ns0="http://www.w3.org/2001/XMLSchema-instance" CodeTemplate="app_CAN_Stack_h.ftl" DBVersion="V4.0" Name="CAN_Stack" RootFolder="Packs/TM_Engineering/CAN_Stack/0.1.0/" Version="0.1.0" ns0:schemaLocation="http://mcd.rou.st.com/modules.php?name=mcu ../../../../../../../doc/V4/Development/Specifications/db/thirdPartyDb.xsd">
+    <RefConfig Name="DeviceJjDemoApplications">
+        <Component Name="DemoApplicationsCcDevice:Application:CanIfIiAppDemo:$DemoApplicationsCcDeviceJjApplication"/>
+        <ConfigFile Name="app_CanIf_AppDemo_Template"/>
+    </RefConfig>
+    <RefConfig Name="BoardOoSupportJjCanIf">
+        <Component Name="CanIfCcBoardOoSupport:general:Common:$CanIfCcBoardOoSupportJjgeneralJjCommon"/>
+        <Component Name="CanIfCcBoardOoSupport:ComIf:Common:$CanIfCcBoardOoSupportJjComIfJjCommon"/>
+        <Component Name="CanIfCcBoardOoSupport:CanIf:Can:$CanIfCcBoardOoSupportJjCanIfJjCan"/>
+        <ConfigFile Name="Can_Master_h_Template"/>
+        <ConfigFile Name="Can_Master_c_Template"/>
+        <ConfigFile Name="CanIf_Hal_template"/>
+        <ConfigFile Name="CanIf_c_Template"/>
+        <ConfigFile Name="CanIf_h_Template"/>
+        <ConfigFile Name="CANIF_PDU_NAMES_TO_ECU_H"/>
+    </RefConfig>
+    <RefConfig Name="BoardOoPartJjbxCANOoSlave">
+        <Component Name="bxCANOoSlaveCcBoardOoPart:bxCANIiSlave:virtualCAN:$bxCANOoSlaveCcBoardOoPartJjbxCANIiSlaveJjvirtualCAN"/>
+        <ConfigFile Name="Can_Slave_c_Template"/>
+    </RefConfig>
+    <RefConfig Name="UtilityJjSourceCodeDocu">
+        <Component Name="SourceCodeDocuCcUtility:DoxyPages:$SourceCodeDocuCcUtilityJjDoxyPages"/>
+    </RefConfig>
+    <RefConfigFile Added="true" Description="To show the usage of the CanIf class" Name="app_CanIf_AppDemo_Template" Template="app_CanIf_AppDemo.ftl">
+        <File Category="source" Condition="Condition_1::SEMDemoApplicationsCcDeviceJjApplicationJjCanIfIiAppDemo" Name="App/CanIf_AppDemo.cpp"/>
+    </RefConfigFile>
+    <RefConfigFile Added="true" Description="To generate puplic names like the Bitrate list" Name="Can_Master_h_Template" Template="Can_Cfg_h.ftl" destinationFolder="Target/BSW/CanIF">
+        <File Category="header" Condition="all" Name="./Can_Cfg.h"/>
+        <Argument Added="true" AddressOf="false" Comment="Number of used HW filter for bxCAN Master" GenericType="simple" Name="CAN1_USED_RX_HW_FILTER" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" Comment="the used sample point for bitrate generator" GenericType="simple" Name="CAN_SAMPLE_POINT" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" Comment="The List of generated bitrate values" GenericType="simple" Name="CAN_BITRATES" OptimizationCondition="equal"/>
+    </RefConfigFile>
+    <RefConfigFile Added="true" Description="Generation of the Config structure values" Name="Can_Master_c_Template" Template="Can_Cfg_cpp.ftl" destinationFolder="Target/BSW/CanIf">
+        <File Category="source" Condition="all" Name="./Can_Cfg.cpp"/>
+        <Argument Added="true" AddressOf="false" Comment="bxCAN Master initial bitrate" GenericType="simple" Name="CAN1_STARTUP_BITRATE" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" Comment="bxCAN Master uses Auto Wake up" GenericType="simple" Name="CAN1_STARTUP_AUTOWAKEUP" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" Comment="bxCAN Master Rx buffer locked " GenericType="simple" Name="CAN1_STARTUP_RXFIFO_LOCKED" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" Comment="bxCAN Master Tx buffer based on request or CAN-Id" GenericType="simple" Name="CAN1_STARTUP_TXFIFO_PRIO" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" Comment="Sample point" GenericType="simple" Name="CAN_SAMPLE_POINT" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" Comment="Mode for the bxCAN Master" GenericType="simple" Name="CAN1_STARTUP_MODE" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" Comment="List of Bitrates to generate" GenericType="simple" Name="CAN_BITRATES" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" Comment="bxCAN Master in TTMode" GenericType="simple" Name="CAN1_STARTUP_TTMODE" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" Comment="bxCAN Master uses Auto Bus off" GenericType="simple" Name="CAN1_STARTUP_AUTOBUSOFF" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" Comment="bxCAN Master usage of HW filter " GenericType="simple" Name="CAN1_USED_RX_HW_FILTER" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" Comment="bxCAN Master uses Retransmission" GenericType="simple" Name="CAN1_STARTUP_AUTO_RETRANSMISSION" OptimizationCondition="equal"/>
+    </RefConfigFile>
+    <RefConfigFile Added="true" Description="generates IRQ handle function and MSP function" Name="CanIf_Hal_template" Template="CanIf_HAL_c.ftl" destinationFolder="Target/BSW/CanIf">
+        <File Category="source" Condition="all" Name="./CanIf_HAL.c"/>
+        <Argument Added="true" AddressOf="false" GenericType="simple" Name="CANIF_TX_BUFFER_SIZE" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" GenericType="simple" Name="CANIF_RX_BUFFER_SIZE" OptimizationCondition="equal"/>
+    </RefConfigFile>
+    <RefConfigFile Added="true" Description="Generation of the Config structure values" Name="CanIf_c_Template" Template="CanIf_Cfg_cpp.ftl" destinationFolder="Target/BSW/CanIf">
+        <File Category="source" Condition="all" Name="./CanIf_Cfg.cpp"/>
+        <Argument Added="true" AddressOf="false" Comment="Rx Upper Layer List" GenericType="simple" Name="CANIF_RXUL_LIST" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" Comment="Tx Message Length List" GenericType="simple" Name="CANIF_TXMSGLENGTH_LIST" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" Comment="Rx ID Mask List" GenericType="simple" Name="CANIF_RXMASK_LIST" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" Comment="Rx Controller List" GenericType="simple" Name="CANIF_RX_CONTROLLER_LIST" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" Comment="Rx Message Length List" GenericType="simple" Name="CANIF_RXMSGLENGTH_LIST" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" Comment="Tx Name List" GenericType="simple" Name="CANIF_TXPDU_LIST" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" Comment="Rx N-PDU List" GenericType="simple" Name="CANIF_RX_TARGETPDU_LIST" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" Comment="Tx Controller List" GenericType="simple" Name="CANIF_TX_CONTROLLER_LIST" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" Comment="Tx Upper Layer List" GenericType="simple" Name="CANIF_TXUL_LIST" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" Comment="Tx CAN Id List" GenericType="simple" Name="CANIF_TXID_LIST" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" Comment="Tx N-PDU List" GenericType="simple" Name="CANIF_TX_TARGETPDU_LIST" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" Comment="Rx Name List" GenericType="simple" Name="CANIF_RXPDU_LIST" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" Comment="Rx ID Mask List" GenericType="simple" Name="CANIF_RXID_LIST" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" Comment="Tx ID Mask List" GenericType="simple" Name="CANIF_TXMASK_LIST" OptimizationCondition="equal"/>
+    </RefConfigFile>
+    <RefConfigFile Added="true" Description="Generation of the Config structure values" Name="CanIf_h_Template" Template="CanIf_Cfg_h.ftl" destinationFolder="Target/BSW/CanIf">
+        <File Category="header" Condition="all" Name="./CanIf_Cfg.h"/>
+        <Argument Added="true" AddressOf="false" Comment="used upper layer for Rx" GenericType="simple" Name="CANIF_RXUL_LIST" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" Comment="Size of TX buffer" GenericType="simple" Name="CANIF_TX_BUFFER_SIZE" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" Comment="Size of RX buffer" GenericType="simple" Name="CANIF_RX_BUFFER_SIZE" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" Comment="used upper layer for Tx" GenericType="simple" Name="CANIF_TXUL_LIST" OptimizationCondition="equal"/>
+    </RefConfigFile>
+    <RefConfigFile Added="true" Description="Creates the enum list for PDU names" Name="CANIF_PDU_NAMES_TO_ECU_H" Template="EcuNames_Cfg_h.ftl" destinationFolder="Target/general">
+        <File Category="header" Condition="all" Name="./EcuNames_Cfg.h"/>
+        <Argument Added="true" AddressOf="false" Comment="Name list of Rx PDUs" GenericType="simple" Name="CANIF_RXPDU_LIST" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" Comment="Name list of Tx PDUs" GenericType="simple" Name="CANIF_TXPDU_LIST" OptimizationCondition="equal"/>
+    </RefConfigFile>
+    <RefConfigFile Added="true" Description="The template to generate bxCAN Slave Parameter" Name="Can_Slave_c_Template" Template="Can_Cfg_cpp.ftl" destinationFolder="Target/BSW/CanIf">
+        <File Category="source" Condition="all" Name="./Can_Cfg.cpp"/>
+        <Argument Added="true" AddressOf="false" Comment="bxCAN Slave usage of HW filter " GenericType="simple" Name="CAN2_USED_RX_HW_FILTER" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" Comment="bxCAN Slave uses Retransmission" GenericType="simple" Name="CAN2_STARTUP_AUTO_RETRANSMISSION" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" Comment="bxCAN Slave uses Auto Wake up" GenericType="simple" Name="CAN2_STARTUP_AUTOWAKEUP" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" Comment="bxCAN Slave Tx buffer based on request or CAN-Id" GenericType="simple" Name="CAN2_STARTUP_TXFIFO_PRIO" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" Comment="operation mode" GenericType="simple" Name="CAN2_STARTUP_MODE" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" Comment="bxCAN Slave Startup Bitrate" GenericType="simple" Name="CAN2_STARTUP_BITRATE" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" Comment="use TT Mode" GenericType="simple" Name="CAN2_STARTUP_TTMODE" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" Comment="bxCAN Slave uses Auto Bus off" GenericType="simple" Name="CAN2_STARTUP_AUTOBUSOFF" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" Comment="bxCAN Slave Rx buffer locked " GenericType="simple" Name="CAN2_STARTUP_RXFIFO_LOCKED" OptimizationCondition="equal"/>
+    </RefConfigFile>
+    <RefComponent Cclass="DemoApplicationsCcDevice" Cgroup="Application" Cversion="0Gg1Gg0">
+        <SubComponent Csub="" Cvariant="CanIfIiAppDemo:CanIfIiAppDemo" ModuleName="CanIf_AppDemo"/>
+    </RefComponent>
+    <RefComponent Cclass="CanIfCcBoardOoSupport" Cgroup="general" Cversion="0Gg1Gg0">
+        <SubComponent Csub="Common" Cvariant="true" Cversion="0Gg1Gg0">
+            <File Category="header" Condition="" Name="Drivers/BSP/general/TM_Compiler.h"/>
+            <File Category="header" Condition="" Name="Drivers/BSP/general/TM_Compiler_Cfg.h"/>
+            <File Category="header" Condition="" Name="Drivers/BSP/general/TM_ComStack_Types.h"/>
+            <File Category="header" Condition="" Name="Drivers/BSP/general/TM_Platform_Types.h"/>
+            <File Category="header" Condition="" Name="Drivers/BSP/general/TM_Std_Types.h"/>
+            <File Category="sourceCpp" Condition="" Name="Drivers/BSP/general/TMEVersionInfo.cpp"/>
+            <File Category="header" Condition="" Name="Drivers/BSP/general/TMEVersionInfo.h"/>
+        </SubComponent>
+    </RefComponent>
+    <RefComponent Cclass="CanIfCcBoardOoSupport" Cgroup="ComIf" Cversion="0Gg1Gg0">
+        <SubComponent Csub="Common" Cvariant="true" Cversion="0Gg1Gg0">
+            <File Category="sourceCpp" Condition="" Name="Drivers/BSP/ComIf/ComIf.cpp"/>
+            <File Category="header" Condition="" Name="Drivers/BSP/ComIf/ComIf.h"/>
+            <File Category="header" Condition="" Name="Drivers/BSP/ComIf/ComIf_Compiler_Cfg.h"/>
+        </SubComponent>
+    </RefComponent>
+    <RefComponent Cclass="CanIfCcBoardOoSupport" Cgroup="CanIf" Cversion="0Gg1Gg0">
+        <SubComponent Csub="Can" Cvariant="true" Cversion="0Gg1Gg0">
+            <File Category="source" Condition="" Name="Drivers/BSP/CanIf/CanIf.cpp"/>
+            <File Category="header" Condition="" Name="Drivers/BSP/CanIf/CanIf.h"/>
+            <File Category="header" Condition="" Name="Drivers/BSP/CanIf/CanIf_Doxy.h"/>
+            <File Category="header" Condition="" Name="Drivers/BSP/CanIf/CanIf_Switch.h"/>
+            <File Category="header" Condition="" Name="Drivers/BSP/CanIf/CanIfUpperLayer.h"/>
+            <File Category="sourceCpp" Condition="" Name="Drivers/BSP/CanIf/CanIfUpperLayer.cpp"/>
+            <File Category="header" Condition="" Name="Drivers/BSP/CanIf/CanIf_Compiler_Cfg.h"/>
+        </SubComponent>
+    </RefComponent>
+    <RefComponent Cclass="bxCANOoSlaveCcBoardOoPart" Cgroup="bxCANIiSlave" Cversion="0Gg1Gg0">
+        <SubComponent Csub="virtualCAN" Cvariant="true" Cversion="0Gg1Gg0"/>
+    </RefComponent>
+    <RefComponent Cclass="SourceCodeDocuCcUtility" Cgroup="DoxyPages" Cversion="0Gg1Gg0">
+        <File Category="header" Condition="" Name="Utilities/DoxyPages/Doxy_Page_Abrev.h"/>
+        <File Category="header" Condition="" Name="Utilities/DoxyPages/Doxy_Page_AddPack.h"/>
+        <File Category="header" Condition="" Name="Utilities/DoxyPages/Doxy_Page_Api.h"/>
+        <File Category="header" Condition="" Name="Utilities/DoxyPages/Doxy_Page_Architecture.h"/>
+        <File Category="header" Condition="" Name="Utilities/DoxyPages/Doxy_Page_Examples.h"/>
+        <File Category="header" Condition="" Name="Utilities/DoxyPages/Doxy_Page_FileSystem.h"/>
+        <File Category="header" Condition="" Name="Utilities/DoxyPages/Doxy_Page_History.h"/>
+        <File Category="header" Condition="" Name="Utilities/DoxyPages/Doxy_Page_SearchFor.h"/>
+        <File Category="header" Condition="" Name="Utilities/DoxyPages/TM_Doxy.h"/>
+        <File Category="doc" Condition="" Name="Utilities/DoxyPages/TME.doxyfile"/>
+        <File Category="image" Condition="" Name="Utilities/DoxyPages/pictures/CanIf_StateMachine.svg"/>
+        <File Category="image" Condition="" Name="Utilities/DoxyPages/pictures/config_canhw.png"/>
+        <File Category="image" Condition="" Name="Utilities/DoxyPages/pictures/config_canif.png"/>
+        <File Category="image" Condition="" Name="Utilities/DoxyPages/pictures/config_isotp.png"/>
+        <File Category="image" Condition="" Name="Utilities/DoxyPages/pictures/config_parameter.png"/>
+        <File Category="image" Condition="" Name="Utilities/DoxyPages/pictures/overview.svg"/>
+        <File Category="image" Condition="" Name="Utilities/DoxyPages/pictures/pre_Load_From_Local.png"/>
+        <File Category="image" Condition="" Name="Utilities/DoxyPages/pictures/pre_Manage_Software_Packs.png"/>
+        <File Category="image" Condition="" Name="Utilities/DoxyPages/pictures/pre_Select_Pack_File.png"/>
+    </RefComponent>
+</IP>
