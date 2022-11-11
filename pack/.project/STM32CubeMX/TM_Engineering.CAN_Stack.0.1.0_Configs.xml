@@ -21,6 +21,7 @@
     </RefConfig>
     <RefConfig Name="UtilityJjSourceCodeDocu">
         <Component Name="SourceCodeDocuCcUtility:DoxyPages:$SourceCodeDocuCcUtilityJjDoxyPages"/>
+        <Component Name="SourceCodeDocuCcUtility:T01IiCanIfIiAppDemo:$SourceCodeDocuCcUtilityJjT01IiCanIfIiAppDemo"/>
     </RefConfig>
     <RefConfigFile Added="true" Description="To show the usage of the CanIf class" Name="app_CanIf_AppDemo_Template" Template="app_CanIf_AppDemo.ftl">
         <File Category="source" Condition="Condition_1::SEMDemoApplicationsCcDeviceJjApplicationJjCanIfIiAppDemo" Name="App/CanIf_AppDemo.cpp"/>
@@ -92,7 +93,9 @@
         <Argument Added="true" AddressOf="false" Comment="bxCAN Slave Rx buffer locked " GenericType="simple" Name="CAN2_STARTUP_RXFIFO_LOCKED" OptimizationCondition="equal"/>
     </RefConfigFile>
     <RefComponent Cclass="DemoApplicationsCcDevice" Cgroup="Application" Cversion="0Gg1Gg0">
-        <SubComponent Csub="" Cvariant="CanIfIiAppDemo:CanIfIiAppDemo" ModuleName="CanIf_AppDemo"/>
+        <SubComponent Csub="" Cvariant="CanIfIiAppDemo:CanIfIiAppDemo" ModuleName="CanIf_AppDemo">
+            <File Category="doc" Condition="" Name="Docu/Tutorial_01_CanIf_AppDemo.pdf"/>
+        </SubComponent>
     </RefComponent>
     <RefComponent Cclass="CanIfCcBoardOoSupport" Cgroup="general" Cversion="0Gg1Gg0">
         <SubComponent Csub="Common" Cvariant="true" Cversion="0Gg1Gg0">
@@ -114,7 +117,7 @@
     </RefComponent>
     <RefComponent Cclass="CanIfCcBoardOoSupport" Cgroup="CanIf" Cversion="0Gg1Gg0">
         <SubComponent Csub="Can" Cvariant="true" Cversion="0Gg1Gg0">
-            <File Category="source" Condition="" Name="Drivers/BSP/CanIf/CanIf.cpp"/>
+            <File Category="sourceCpp" Condition="" Name="Drivers/BSP/CanIf/CanIf.cpp"/>
             <File Category="header" Condition="" Name="Drivers/BSP/CanIf/CanIf.h"/>
             <File Category="header" Condition="" Name="Drivers/BSP/CanIf/CanIf_Doxy.h"/>
             <File Category="header" Condition="" Name="Drivers/BSP/CanIf/CanIf_Switch.h"/>
@@ -136,15 +139,45 @@
         <File Category="header" Condition="" Name="Utilities/DoxyPages/Doxy_Page_History.h"/>
         <File Category="header" Condition="" Name="Utilities/DoxyPages/Doxy_Page_SearchFor.h"/>
         <File Category="header" Condition="" Name="Utilities/DoxyPages/TM_Doxy.h"/>
-        <File Category="doc" Condition="" Name="Utilities/DoxyPages/TME.doxyfile"/>
+        <File Category="source" Condition="" Name="Utilities/TME.doxyfile"/>
         <File Category="image" Condition="" Name="Utilities/DoxyPages/pictures/CanIf_StateMachine.svg"/>
-        <File Category="image" Condition="" Name="Utilities/DoxyPages/pictures/config_canhw.png"/>
-        <File Category="image" Condition="" Name="Utilities/DoxyPages/pictures/config_canif.png"/>
-        <File Category="image" Condition="" Name="Utilities/DoxyPages/pictures/config_isotp.png"/>
-        <File Category="image" Condition="" Name="Utilities/DoxyPages/pictures/config_parameter.png"/>
         <File Category="image" Condition="" Name="Utilities/DoxyPages/pictures/overview.svg"/>
-        <File Category="image" Condition="" Name="Utilities/DoxyPages/pictures/pre_Load_From_Local.png"/>
-        <File Category="image" Condition="" Name="Utilities/DoxyPages/pictures/pre_Manage_Software_Packs.png"/>
-        <File Category="image" Condition="" Name="Utilities/DoxyPages/pictures/pre_Select_Pack_File.png"/>
+        <File Category="image" Condition="" Name="Utilities/DoxyPages/pictures/DependenciesButton.png"/>
+        <File Category="image" Condition="" Name="Utilities/DoxyPages/pictures/DetailsButton.png"/>
+        <File Category="image" Condition="" Name="Utilities/DoxyPages/pictures/general_P00_nucleo_board.jpg"/>
+    </RefComponent>
+    <RefComponent Cclass="SourceCodeDocuCcUtility" Cgroup="T01IiCanIfIiAppDemo" Cversion="0Gg1Gg0">
+        <File Category="header" Condition="" Name="Utilities/T01_CanIf_AppDemo/Doxy_Page_T01_CanIf_AppDemo.h"/>
+        <File Category="doc" Condition="" Name="Utilities/T01_CanIf_AppDemo/Tutorial_01_CanIf_AppDemo.pdf"/>
+        <File Category="other" Condition="" Name="Utilities/T01_CanIf_AppDemo/pictures/T01_P00_select_workspace.png"/>
+        <File Category="other" Condition="" Name="Utilities/T01_CanIf_AppDemo/pictures/T01_P01_start_new_project.png"/>
+        <File Category="other" Condition="" Name="Utilities/T01_CanIf_AppDemo/pictures/T01_P02_select_board.png"/>
+        <File Category="other" Condition="" Name="Utilities/T01_CanIf_AppDemo/pictures/T01_P03_create_project.png"/>
+        <File Category="other" Condition="" Name="Utilities/T01_CanIf_AppDemo/pictures/T01_P04_new_project.png"/>
+        <File Category="other" Condition="" Name="Utilities/T01_CanIf_AppDemo/pictures/T01_P05_activate_can1.png"/>
+        <File Category="other" Condition="" Name="Utilities/T01_CanIf_AppDemo/pictures/T01_P06_other_parameter.png"/>
+        <File Category="other" Condition="" Name="Utilities/T01_CanIf_AppDemo/pictures/T01_P07_select_pinout.png"/>
+        <File Category="other" Condition="" Name="Utilities/T01_CanIf_AppDemo/pictures/T01_P08_first_save.png"/>
+        <File Category="other" Condition="" Name="Utilities/T01_CanIf_AppDemo/pictures/T01_P09_new_main_c.png"/>
+        <File Category="other" Condition="" Name="Utilities/T01_CanIf_AppDemo/pictures/T01_P10_basics_on_main_c.png"/>
+        <File Category="other" Condition="" Name="Utilities/T01_CanIf_AppDemo/pictures/T01_P10_basics_on_main_c_teil1.png"/>
+        <File Category="other" Condition="" Name="Utilities/T01_CanIf_AppDemo/pictures/T01_P10_basics_on_main_c_teil2.png"/>
+        <File Category="other" Condition="" Name="Utilities/T01_CanIf_AppDemo/pictures/T01_P10_basics_on_main_c_teil3.png"/>
+        <File Category="other" Condition="" Name="Utilities/T01_CanIf_AppDemo/pictures/T01_P10_basics_on_main_c_teil4.png"/>
+        <File Category="other" Condition="" Name="Utilities/T01_CanIf_AppDemo/pictures/T01_P10_basics_on_main_c_teil5.png"/>
+        <File Category="other" Condition="" Name="Utilities/T01_CanIf_AppDemo/pictures/T01_P11_manage_software_packs.png"/>
+        <File Category="other" Condition="" Name="Utilities/T01_CanIf_AppDemo/pictures/T01_P12_load_pack.png"/>
+        <File Category="other" Condition="" Name="Utilities/T01_CanIf_AppDemo/pictures/T01_P13_accept_license.png"/>
+        <File Category="other" Condition="" Name="Utilities/T01_CanIf_AppDemo/pictures/T01_P14_select_component.png"/>
+        <File Category="other" Condition="" Name="Utilities/T01_CanIf_AppDemo/pictures/T01_P15_pack_selector.png"/>
+        <File Category="other" Condition="" Name="Utilities/T01_CanIf_AppDemo/pictures/T01_P16_select_appdemo.png"/>
+        <File Category="other" Condition="" Name="Utilities/T01_CanIf_AppDemo/pictures/T01_P17_additional_info.png"/>
+        <File Category="other" Condition="" Name="Utilities/T01_CanIf_AppDemo/pictures/T01_P18_select_modules.png"/>
+        <File Category="other" Condition="" Name="Utilities/T01_CanIf_AppDemo/pictures/T01_P19_config_modules.png"/>
+        <File Category="other" Condition="" Name="Utilities/T01_CanIf_AppDemo/pictures/T01_P20_config_canif.png"/>
+        <File Category="other" Condition="" Name="Utilities/T01_CanIf_AppDemo/pictures/T01_P21_change_parameter.png"/>
+        <File Category="other" Condition="" Name="Utilities/T01_CanIf_AppDemo/pictures/T01_P22_file_generation.png"/>
+        <File Category="other" Condition="" Name="Utilities/T01_CanIf_AppDemo/pictures/T01_P23_file_generation_done.png"/>
+        <File Category="other" Condition="" Name="Utilities/T01_CanIf_AppDemo/pictures/T01_P24_multiple_definition.png"/>
     </RefComponent>
 </IP>

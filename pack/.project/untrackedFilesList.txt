@@ -1,7 +1,0 @@
-Z:/GIT Repro/CAN_Stack_ExpPack/pack/.project/OriginalPack/Drivers/BSP/bxCan_Master/CanIf.cpp::Drivers/BSP/bxCan_Master/CanIf.cpp
-Z:/GIT Repro/CAN_Stack_ExpPack/pack/.project/OriginalPack/Drivers/BSP/bxCan_Master/CanIf.h::Drivers/BSP/bxCan_Master/CanIf.h
-Z:/GIT Repro/CAN_Stack_ExpPack/pack/.project/OriginalPack/Drivers/BSP/bxCan_Master/CanIfUpperLayer.cpp::Drivers/BSP/bxCan_Master/CanIfUpperLayer.cpp
-Z:/GIT Repro/CAN_Stack_ExpPack/pack/.project/OriginalPack/Drivers/BSP/bxCan_Master/CanIfUpperLayer.h::Drivers/BSP/bxCan_Master/CanIfUpperLayer.h
-Z:/GIT Repro/CAN_Stack_ExpPack/pack/.project/OriginalPack/Drivers/BSP/bxCan_Master/CanIf_Compiler_Cfg.h::Drivers/BSP/bxCan_Master/CanIf_Compiler_Cfg.h
-Z:/GIT Repro/CAN_Stack_ExpPack/pack/.project/OriginalPack/Drivers/BSP/bxCan_Master/CanIf_Doxy.h::Drivers/BSP/bxCan_Master/CanIf_Doxy.h
-Z:/GIT Repro/CAN_Stack_ExpPack/pack/.project/OriginalPack/Drivers/BSP/bxCan_Master/CanIf_Switch.h::Drivers/BSP/bxCan_Master/CanIf_Switch.h

@@ -53,6 +53,7 @@
     <RefMode Abstract="true" Name="UtilityJjSourceCodeDocu">
         <ConfigForMode>UtilityJjSourceCodeDocu</ConfigForMode>
         <Parameter Name="SourceCodeDocuCcUtilityJjDoxyPages"/>
+        <Parameter Name="SourceCodeDocuCcUtilityJjT01IiCanIfIiAppDemo"/>
     </RefMode>
     <ModeLogicOperator Name="OR">
         <Mode Name="DeviceJjDemoApplications">
@@ -122,6 +123,10 @@
     </RefParameter>
     <RefParameter Comment="To hold the additional pages" DefaultValue="false" Group="Software component selection" Name="SourceCodeDocuCcUtilityJjDoxyPages" TabName="UtilityJjSourceCodeDocu" Type="boolean" Visible="false">
         <PossibleValue Comment="ENABLE" Semaphore="SEMSourceCodeDocuCcUtilityJjDoxyPages" Value="true"/>
+        <PossibleValue Comment="DISABLE" Value="false"/>
+    </RefParameter>
+    <RefParameter Comment="Docu files for tutorial 01" DefaultValue="false" Group="Software component selection" Name="SourceCodeDocuCcUtilityJjT01IiCanIfIiAppDemo" TabName="UtilityJjSourceCodeDocu" Type="boolean" Visible="false">
+        <PossibleValue Comment="ENABLE" Semaphore="SEMSourceCodeDocuCcUtilityJjT01IiCanIfIiAppDemo" Value="true"/>
         <PossibleValue Comment="DISABLE" Value="false"/>
     </RefParameter>
     <RefParameter Comment="Condition Iihas Can Master" DefaultValue="true" Name="CONDITIONIihasCanMaster" Type="boolean" Visible="false"/>

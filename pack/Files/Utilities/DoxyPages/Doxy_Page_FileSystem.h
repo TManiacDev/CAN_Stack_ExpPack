@@ -17,7 +17,7 @@
 
 /** @page folder Verzeichnisstruktur
  *  Beschreibung wo was zu finden ist
- * *
+ *
  * */
 
 

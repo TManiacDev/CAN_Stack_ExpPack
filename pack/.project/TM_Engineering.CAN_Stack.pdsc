@@ -7,7 +7,7 @@ We need the ST HAL functions. &lt;br&gt;
 The modules inside the ExpansionPack uses their own Init- and ISR-callback function. 
 The generation of the MX-function and ISR-callback function normaly generated for the HAL must be deactivated.</description>
     <url/>
-    <license>LICENSE</license>
+    <license>license.txt</license>
     <supportContact>engineer@tmaniac.de</supportContact>
     <releases>
         <release date="2022-10-23" version="0.1.0">We create the project on github.
@@ -37,15 +37,17 @@ First step to publish it.</release>
     <components>
         <bundle Cbundle="DemoApplications" Cclass="Device" Cversion="0.1.0">
             <description>Bundle of applications</description>
-            <doc>README.md</doc>
+            <doc>readme.txt</doc>
             <component Cgroup="Application" Cvariant="CanIf_AppDemo" condition="hasCanMaster" maxInstances="1">
                 <description>Application demo to show the usage of the plain CanIf Class</description>
-                <files/>
+                <files>
+                    <file category="doc" name="Docu/Tutorial_01_CanIf_AppDemo.pdf"/>
+                </files>
             </component>
         </bundle>
         <bundle Cbundle="CanIf" Cclass="Board Support" Cversion="0.1.0">
             <description>Interface for abstraction of the CAN controller hardware</description>
-            <doc>README.md</doc>
+            <doc>readme.txt</doc>
             <component Cgroup="general" Csub="Common" maxInstances="1">
                 <description>platform independancy files</description>
                 <files>
@@ -69,7 +71,7 @@ First step to publish it.</release>
             <component Cgroup="CanIf" Csub="Can" condition="hasComIfClass" maxInstances="1">
                 <description>Use this as platform indepetend abstraction layer</description>
                 <files>
-                    <file category="source" name="Drivers/BSP/CanIf/CanIf.cpp"/>
+                    <file category="sourceCpp" name="Drivers/BSP/CanIf/CanIf.cpp"/>
                     <file category="header" name="Drivers/BSP/CanIf/CanIf.h"/>
                     <file category="header" name="Drivers/BSP/CanIf/CanIf_Doxy.h"/>
                     <file category="header" name="Drivers/BSP/CanIf/CanIf_Switch.h"/>
@@ -81,7 +83,7 @@ First step to publish it.</release>
         </bundle>
         <bundle Cbundle="bxCAN Slave" Cclass="Board Part" Cversion="0.1.0">
             <description>To handle the slave part of the bxCAN</description>
-            <doc>README.md</doc>
+            <doc>readme.txt</doc>
             <component Cgroup="bxCAN_Slave" Csub="virtualCAN" condition="hasCanMaster" maxInstances="1">
                 <description>We need a virtual component	</description>
                 <files/>
@@ -91,7 +93,7 @@ First step to publish it.</release>
             <description>This bundle holds the additional source for the doxygen job.
 Today the STM32CubeIDE doesn't copy other files then source or header.
 So we must do the copy handmade :-(</description>
-            <doc>README.md</doc>
+            <doc>Utilities/readme.txt</doc>
             <component Cgroup="DoxyPages" maxInstances="1">
                 <description>To hold the additional pages</description>
                 <files>
@@ -104,16 +106,49 @@ So we must do the copy handmade :-(</description>
                     <file category="header" name="Utilities/DoxyPages/Doxy_Page_History.h"/>
                     <file category="header" name="Utilities/DoxyPages/Doxy_Page_SearchFor.h"/>
                     <file category="header" name="Utilities/DoxyPages/TM_Doxy.h"/>
-                    <file category="doc" name="Utilities/DoxyPages/TME.doxyfile" public="false"/>
-                    <file category="image" name="Utilities/DoxyPages/pictures/CanIf_StateMachine.svg" public="false"/>
-                    <file category="image" name="Utilities/DoxyPages/pictures/config_canhw.png" public="false"/>
-                    <file category="image" name="Utilities/DoxyPages/pictures/config_canif.png" public="false"/>
-                    <file category="image" name="Utilities/DoxyPages/pictures/config_isotp.png" public="false"/>
-                    <file category="image" name="Utilities/DoxyPages/pictures/config_parameter.png" public="false"/>
-                    <file category="image" name="Utilities/DoxyPages/pictures/overview.svg" public="false"/>
-                    <file category="image" name="Utilities/DoxyPages/pictures/pre_Load_From_Local.png" public="false"/>
-                    <file category="image" name="Utilities/DoxyPages/pictures/pre_Manage_Software_Packs.png" public="false"/>
-                    <file category="image" name="Utilities/DoxyPages/pictures/pre_Select_Pack_File.png" public="false"/>
+                    <file category="source" name="Utilities/TME.doxyfile"/>
+                    <file category="image" name="Utilities/DoxyPages/pictures/CanIf_StateMachine.svg"/>
+                    <file category="image" name="Utilities/DoxyPages/pictures/overview.svg"/>
+                    <file category="image" name="Utilities/DoxyPages/pictures/DependenciesButton.png"/>
+                    <file category="image" name="Utilities/DoxyPages/pictures/DetailsButton.png"/>
+                    <file category="image" name="Utilities/DoxyPages/pictures/general_P00_nucleo_board.jpg"/>
+                </files>
+            </component>
+            <component Cgroup="T01_CanIf_AppDemo" maxInstances="1">
+                <description>Docu files for tutorial 01</description>
+                <files>
+                    <file category="header" name="Utilities/T01_CanIf_AppDemo/Doxy_Page_T01_CanIf_AppDemo.h"/>
+                    <file category="doc" name="Utilities/T01_CanIf_AppDemo/Tutorial_01_CanIf_AppDemo.pdf"/>
+                    <file category="other" name="Utilities/T01_CanIf_AppDemo/pictures/T01_P00_select_workspace.png"/>
+                    <file category="other" name="Utilities/T01_CanIf_AppDemo/pictures/T01_P01_start_new_project.png"/>
+                    <file category="other" name="Utilities/T01_CanIf_AppDemo/pictures/T01_P02_select_board.png"/>
+                    <file category="other" name="Utilities/T01_CanIf_AppDemo/pictures/T01_P03_create_project.png"/>
+                    <file category="other" name="Utilities/T01_CanIf_AppDemo/pictures/T01_P04_new_project.png"/>
+                    <file category="other" name="Utilities/T01_CanIf_AppDemo/pictures/T01_P05_activate_can1.png"/>
+                    <file category="other" name="Utilities/T01_CanIf_AppDemo/pictures/T01_P06_other_parameter.png"/>
+                    <file category="other" name="Utilities/T01_CanIf_AppDemo/pictures/T01_P07_select_pinout.png"/>
+                    <file category="other" name="Utilities/T01_CanIf_AppDemo/pictures/T01_P08_first_save.png"/>
+                    <file category="other" name="Utilities/T01_CanIf_AppDemo/pictures/T01_P09_new_main_c.png"/>
+                    <file category="other" name="Utilities/T01_CanIf_AppDemo/pictures/T01_P10_basics_on_main_c.png"/>
+                    <file category="other" name="Utilities/T01_CanIf_AppDemo/pictures/T01_P10_basics_on_main_c_teil1.png"/>
+                    <file category="other" name="Utilities/T01_CanIf_AppDemo/pictures/T01_P10_basics_on_main_c_teil2.png"/>
+                    <file category="other" name="Utilities/T01_CanIf_AppDemo/pictures/T01_P10_basics_on_main_c_teil3.png"/>
+                    <file category="other" name="Utilities/T01_CanIf_AppDemo/pictures/T01_P10_basics_on_main_c_teil4.png"/>
+                    <file category="other" name="Utilities/T01_CanIf_AppDemo/pictures/T01_P10_basics_on_main_c_teil5.png"/>
+                    <file category="other" name="Utilities/T01_CanIf_AppDemo/pictures/T01_P11_manage_software_packs.png"/>
+                    <file category="other" name="Utilities/T01_CanIf_AppDemo/pictures/T01_P12_load_pack.png"/>
+                    <file category="other" name="Utilities/T01_CanIf_AppDemo/pictures/T01_P13_accept_license.png"/>
+                    <file category="other" name="Utilities/T01_CanIf_AppDemo/pictures/T01_P14_select_component.png"/>
+                    <file category="other" name="Utilities/T01_CanIf_AppDemo/pictures/T01_P15_pack_selector.png"/>
+                    <file category="other" name="Utilities/T01_CanIf_AppDemo/pictures/T01_P16_select_appdemo.png"/>
+                    <file category="other" name="Utilities/T01_CanIf_AppDemo/pictures/T01_P17_additional_info.png"/>
+                    <file category="other" name="Utilities/T01_CanIf_AppDemo/pictures/T01_P18_select_modules.png"/>
+                    <file category="other" name="Utilities/T01_CanIf_AppDemo/pictures/T01_P19_config_modules.png"/>
+                    <file category="other" name="Utilities/T01_CanIf_AppDemo/pictures/T01_P20_config_canif.png"/>
+                    <file category="other" name="Utilities/T01_CanIf_AppDemo/pictures/T01_P21_change_parameter.png"/>
+                    <file category="other" name="Utilities/T01_CanIf_AppDemo/pictures/T01_P22_file_generation.png"/>
+                    <file category="other" name="Utilities/T01_CanIf_AppDemo/pictures/T01_P23_file_generation_done.png"/>
+                    <file category="other" name="Utilities/T01_CanIf_AppDemo/pictures/T01_P24_multiple_definition.png"/>
                 </files>
             </component>
         </bundle>
