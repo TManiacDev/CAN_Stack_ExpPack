@@ -42,9 +42,9 @@ extern "C" {
 void ${fctName}(void);
 void ${fctProcessName}(void);
 
-[#assign secFctName = fctName?keep_before_last("_")]
-[#if secFctName == "FT500_Read"]
-void ${fctName + "_Task2"}(void);
+[#assign MX_secFctName = fctName?keep_before_last("_")]
+[#if MX_secFctName?contains("Sandbox")]
+void ${MX_secFctName + "_Task2"}(void);
 [/#if]
 /* private function -----------------------------------------------------------*/
 /* USER CODE BEGIN app_func 0 */

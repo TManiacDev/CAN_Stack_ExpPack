@@ -20,8 +20,9 @@
   [#assign dashedFileNamed = to?replace(".","_")]
   [#assign UserCodeCounter = 0]
   
+[#assign MX_secFctName = fctName?keep_before_last("_")]
 /* Private includes ----------------------------------------------------------*/
-#include "app_ft500_read.h"
+#include "app_sandbox.h"
 #include "CanIf.h"
 #include "FTSwitchPanel.h" 
 #include "FuelTechEcu.h"
@@ -93,19 +94,19 @@ void ${fctName}(void)
   
 }
 
-/* USER CODE BEGIN MX_FT500_Task_2 0 */ 
+/* USER CODE BEGIN ${MX_secFctName + "_Task2"} 0 */ 
 /** 
   * @brief  Function implementing the baseTask thread. 
   * @param  argument: Not used 
   * @retval None 
   */ 
-/* USER CODE END MX_FT500_Task_2 0 */ 
-void MX_FT500_Task_2(void) 
+/* USER CODE END ${MX_secFctName + "_Task2"} 0 */ 
+void ${MX_secFctName + "_Task2"}(void) 
 { 
  
-/* USER CODE BEGIN MX_FT500_Task_2 1 */ 
+/* USER CODE BEGIN ${MX_secFctName + "_Task2"} 1 */ 
  
-/* USER CODE END MX_FT500_Task_2 1 */ 
+/* USER CODE END ${MX_secFctName + "_Task2"} 1 */ 
 } 
 
 /* USER CODE BEGIN Header_Process_Task */

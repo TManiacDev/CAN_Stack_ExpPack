@@ -2,3 +2,7 @@
 *.launch
 
 projects/.metadata/
+
+*.zip
+
+*.ftl.c

@@ -10,6 +10,7 @@ The generation of the MX-function and ISR-callback function normaly generated fo
     <license>license.txt</license>
     <supportContact>engineer@tmaniac.de</supportContact>
     <releases>
+        <release date="2022-11-13" version="0.1.1">To complete the puplic pack and have the same content like my private pack before</release>
         <release date="2022-10-23" version="0.1.0">We create the project on github.
 First step to publish it.</release>
     </releases>
@@ -17,6 +18,8 @@ First step to publish it.</release>
         <keyword>IMPLEMENTED_WITH_STM32CUBEMX</keyword>
     </keywords>
     <taxonomy>
+        <description Cclass="Device">Device</description>
+        <description Cclass="DataExchange">DataExchange</description>
         <description Cclass="Utility">Utility</description>
         <description Cclass="Board Support">Board Support</description>
         <description Cclass="Board Part">Board Part</description>
@@ -33,6 +36,12 @@ First step to publish it.</release>
         <condition id="hasCanMaster">
             <require Cbundle="CanIf" Cgroup="CanIf" Csub="Can"/>
         </condition>
+        <condition id="hasFT2p0_Protocol">
+            <require Cbundle="Fueltech" Cgroup="FTCAN2p0" Csub="FTCAN2p0_Layer"/>
+        </condition>
+        <condition id="hasFT2p0_Switchpanel">
+            <accept Cbundle="Fueltech" Cgroup="FTCAN2p0" Csub="Switchpanel"/>
+        </condition>
     </conditions>
     <components>
         <bundle Cbundle="DemoApplications" Cclass="Device" Cversion="0.1.0">
@@ -43,6 +52,10 @@ First step to publish it.</release>
                 <files>
                     <file category="doc" name="Docu/Tutorial_01_CanIf_AppDemo.pdf"/>
                 </files>
+            </component>
+            <component Cgroup="Application" Cvariant="Sandbox" maxInstances="1">
+                <description>To play on the sandbox</description>
+                <files/>
             </component>
         </bundle>
         <bundle Cbundle="CanIf" Cclass="Board Support" Cversion="0.1.0">
@@ -149,6 +162,55 @@ So we must do the copy handmade :-(</description>
                     <file category="other" name="Utilities/T01_CanIf_AppDemo/pictures/T01_P22_file_generation.png"/>
                     <file category="other" name="Utilities/T01_CanIf_AppDemo/pictures/T01_P23_file_generation_done.png"/>
                     <file category="other" name="Utilities/T01_CanIf_AppDemo/pictures/T01_P24_multiple_definition.png"/>
+                </files>
+            </component>
+        </bundle>
+        <bundle Cbundle="Common" Cclass="DataExchange" Cversion="0.1.0">
+            <description>To handle standard protocols</description>
+            <doc>readme.txt</doc>
+            <component Cgroup="IsoTp" condition="hasCanMaster" maxInstances="1">
+                <description>To handle the ISO15765-2 transport protocol</description>
+                <files>
+                    <file category="sourceCpp" name="Middlewares/Third_Party/IsoTP/IsoTP.cpp"/>
+                    <file category="header" name="Middlewares/Third_Party/IsoTP/IsoTP.h"/>
+                    <file category="header" name="Middlewares/Third_Party/IsoTP/IsoTP_Compiler_Cfg.h"/>
+                    <file category="header" name="Middlewares/Third_Party/IsoTP/IsoTP_Doxy.h"/>
+                    <file category="header" name="Middlewares/Third_Party/IsoTP/IsoTP_Names.h"/>
+                </files>
+            </component>
+        </bundle>
+        <bundle Cbundle="Fueltech" Cclass="DataExchange" Cversion="0.1.0">
+            <description>To handle the communication with Fueltech components</description>
+            <doc>Docu/Fueltech/Protocol_FTCAN20_Public_R020.pdf</doc>
+            <component Cgroup="FTCAN2p0" Csub="FTCAN2p0_Layer" condition="hasCanMaster" maxInstances="1">
+                <description>To handle the Fueltech FT2.0 transport protocol</description>
+                <files>
+                    <file category="sourceCpp" name="Middlewares/Third_Party/FTCAN2p0/CanFT2p0.cpp"/>
+                    <file category="header" name="Middlewares/Third_Party/FTCAN2p0/CanFT2p0.h"/>
+                    <file category="sourceCpp" name="Middlewares/Third_Party/FTCAN2p0/CanFT2p0Stream.cpp"/>
+                    <file category="header" name="Middlewares/Third_Party/FTCAN2p0/CanFT2p0Stream.h"/>
+                    <file category="header" name="Middlewares/Third_Party/FTCAN2p0/CanFT2p0_CanIf_Callback.h"/>
+                    <file category="header" name="Middlewares/Third_Party/FTCAN2p0/CanFT2p0_Compiler_Cfg.h"/>
+                    <file category="sourceCpp" name="Middlewares/Third_Party/FTCAN2p0/CanFT2p0_DatabaseCfg.cpp"/>
+                    <file category="header" name="Middlewares/Third_Party/FTCAN2p0/CanFT2p0_DatabaseCfg.h"/>
+                    <file category="header" name="Middlewares/Third_Party/FTCAN2p0/CanFT2p0_Doxy.h"/>
+                    <file category="header" name="Middlewares/Third_Party/FTCAN2p0/CanFT2p0_FixedNames.h"/>
+                </files>
+            </component>
+            <component Cgroup="FTCAN2p0" Csub="Switchpanel" condition="hasFT2p0_Protocol" maxInstances="1">
+                <description>To handle work with a Fueltech Switchpanel</description>
+                <files>
+                    <file category="sourceCpp" name="Middlewares/Third_Party/FTSwitchPanel/FTSwitchPanel.cpp"/>
+                    <file category="header" name="Middlewares/Third_Party/FTSwitchPanel/FTSwitchPanel.h"/>
+                    <file category="header" name="Middlewares/Third_Party/FTSwitchPanel/FTSwitchPanel_Doxy.h"/>
+                </files>
+            </component>
+            <component Cgroup="FTCAN2p0" Csub="ECU" condition="hasFT2p0_Protocol" maxInstances="1">
+                <description>To handle work with a Fueltech Ecus</description>
+                <files>
+                    <file category="sourceCpp" name="Middlewares/Third_Party/FuelTechEcu/FuelTechEcu.cpp"/>
+                    <file category="header" name="Middlewares/Third_Party/FuelTechEcu/FuelTechEcu.h"/>
+                    <file category="header" name="Middlewares/Third_Party/FuelTechEcu/FueltechEcu_Doxy.h"/>
                 </files>
             </component>
         </bundle>
