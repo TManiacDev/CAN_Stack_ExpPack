@@ -24,7 +24,7 @@
   */
 [/#list] [#-- end of SWIPdatas as SWIP --] 
   
-  [#assign s = name]
+  [#assign s = fileName]
   [#assign to = s?keep_after_last("/")]
   [#assign dashedFileNamed = to?replace(".","_")]
   [#assign UserCodeCounter = 0]
@@ -211,6 +211,26 @@
       [/#if] [#-- end of FT_SwPType?? --]
       [#break]
 [#-- end of extract FTCAN2.0 specific --]
+
+[#-- handle the IsoTp configuration --]  
+      [#case "ISOTP_PDU_RX_LIST"]
+        [#assign _IsoTp_RxPduListC = definition.value?replace(","," ")]
+[#if extractDebug_FTL > 0]
+/* ISOTP_PDU_RX_LIST is ${_IsoTp_RxPduListC} */
+[/#if] [#-- end of extractDebug_FTL --]
+        [#assign _IsoTp_RxPduList_ = _IsoTp_RxPduListC?replace("|"," ")]
+        [#assign IsoTp_RxPduList = _IsoTp_RxPduList_?word_list ]
+      [#break]
+      [#case "ISOTP_PDU_TX_LIST"]
+        [#assign _IsoTp_txPduListC = definition.value?replace(","," ")]
+[#if extractDebug_FTL > 0]
+/* ISOTP_PDU_TX_LIST is ${_IsoTp_txPduListC} */
+[/#if] [#-- end of extractDebug_FTL --]
+        [#assign _IsoTp_txPduList_ = _IsoTp_txPduListC?replace("|"," ")]
+        [#assign IsoTp_TxPduList = _IsoTp_txPduList_?word_list ]
+      [#break]
+[#-- end of handle the IsoTp configuration --]  
+
     [#default]
       [#-- notthing to do --]
       [#break]
@@ -316,12 +336,47 @@
 [/#if] [#-- end of FT_EcuType?? && FT_EcuStreamList?? --]
 [#-- end of add fueltech pdu --]
 
+[#-- add IsoTP pdu  --]
+[#if IsoTp_RxPduList?? ]
+[#if extractDebug_FTL > 0]
+// FTL Debug: add the IsoTp_RxPduList 
+[/#if] [#-- end of extractDebug_FTL --]
+  [#list IsoTp_RxPduList as IsoTp_RxPdu]
+    [#assign RxPduNameList += ["MyTest" + "_" + IsoTp_RxPdu ] ]
+    [#assign RxIdList += ["S:" + "0x7EF"] ]
+    [#assign RxMaskList += ["S:0x0"] ]
+    [#assign RxLengthList += ["8"] ]
+    [#assign RxControllerList += ["M"] ]
+    [#assign RxTargetPduNameList += [IsoTp_RxPdu ] ]
+    [#assign RxUpperLayerList += ["CanTP"] ]
+  [/#list] [#-- end of IsoTp_RxPduList as IsoTp_RxPdu --]
+[/#if] [#-- end of IsoTp_RxPduList?? --]
+
+[#if IsoTp_TxPduList?? ]
+[#if extractDebug_FTL > 0]
+// FTL Debug: add the IsoTp_TxPduList
+[/#if] [#-- end of extractDebug_FTL --]
+  [#list IsoTp_TxPduList as IsoTp_TxPdu]
+    [#assign TxPduNameList += ["MyTest" + "_" + IsoTp_TxPdu ] ]
+    [#assign TxIdList += ["S:" + "0x7DF"] ]
+    [#assign TxMaskList += ["S:0x0"] ]
+    [#assign TxLengthList += ["8"] ]
+    [#assign TxControllerList += ["M"] ]
+    [#assign TxTargetPduNameList += [IsoTp_TxPdu ] ]
+    [#assign TxUpperLayerList += ["CanTP"] ]
+  [/#list] [#-- end of IsoTp_TxPduList as IsoTp_TxPdu --]
+[/#if] [#-- end of IsoTp_TxPduList?? --]
+[#-- end of add IsoTP pdu --]
+
 [#if RxPduNameList?? && (RxPduNameList?size > 0)]
 [#-- test for all RX lists have the same length --]
 [#if extractDebug_FTL > 0]
 // FTL Debug: test the Rx PDU Lists 
 [/#if] [#-- end of extractDebug_FTL --]
     [#if RxIdList??] 
+[#if extractDebug_FTL > 0]
+/* RxPduNameList has ${RxPduNameList?size} elements */
+[/#if] [#-- end of extractDebug_FTL --]
       [#if RxIdList?size != RxPduNameList?size] 
     /* >>> @attention Rx ID List with wrong count of members */ 
         [#assign RxPduTestReturn = "failed"]
@@ -404,6 +459,9 @@
 // FTL Debug: test the Tx PDU Lists 
 [/#if] [#-- end of extractDebug_FTL --]
     [#if TxIdList??] 
+[#if extractDebug_FTL > 0]
+/* TxPduNameList has ${TxPduNameList?size} elements */
+[/#if] [#-- end of extractDebug_FTL --]
       [#if TxIdList?size != TxPduNameList?size] 
     /* >>> @attention Tx ID List with wrong count of members */ 
         [#assign TxPduTestReturn = "failed"]

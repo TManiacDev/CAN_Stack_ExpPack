@@ -10,6 +10,7 @@ The generation of the MX-function and ISR-callback function normaly generated fo
     <license>license.txt</license>
     <supportContact>engineer@tmaniac.de</supportContact>
     <releases>
+        <release date="2022-11-13" version="0.1.2">add IsoTp to CanIf configuration</release>
         <release date="2022-11-13" version="0.1.1">To complete the puplic pack and have the same content like my private pack before</release>
         <release date="2022-10-23" version="0.1.0">We create the project on github.
 First step to publish it.</release>

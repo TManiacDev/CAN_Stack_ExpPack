@@ -121,13 +121,14 @@ extern ${variable.value} ${variable.name};
       [#assign NameList = definition.value]
       [#assign _NameList_ = NameList?replace(","," ")]
       
-      [#assign PduNameList = _NameList_?word_list]
+      [#assign IsoTp_RxPduNameList = _NameList_?word_list]
       [#-- extract IF PDU list --]
 /** @brief to use generic names for the PDUs */
 typedef enum
 {
-  [#list PduNameList as word] 
+  [#list IsoTp_RxPduNameList as word] 
     [#assign PduName = word]
+    [#assign CanIfRxPduNameList += ["MyTest" + "_" + PduName] ]
   /** @brief symbolic name for ${PduName} */
   ${IsoTp_Prefix}_Rx_${PduName},
   [/#list]
@@ -147,7 +148,7 @@ typedef enum
 
 /** @brief number of all RxPdu-Names 
  *  @details this will be used to define the used memory to handle the RxPdus */
-#define ${IsoTp_Prefix?upper_case}_RXPDU_COUNT ( ${PduNameList?size} + ${IsoTp_Prefix?upper_case}_RXPDU_USERCOUNT )
+#define ${IsoTp_Prefix?upper_case}_RXPDU_COUNT ( ${IsoTp_RxPduNameList?size} + ${IsoTp_Prefix?upper_case}_RXPDU_USERCOUNT )
 
 /** @} */ // end of grouping TM_IsoTP_Cfg
 
@@ -160,13 +161,14 @@ typedef enum
       [#assign NameList = definition.value]
       [#assign _NameList_ = NameList?replace(","," ")]
       
-      [#assign PduNameList = _NameList_?word_list]
+      [#assign IsoTp_TxPduNameList = _NameList_?word_list]
       [#-- extract IF PDU list --]
 /** @brief to use generic names for the PDUs */
 typedef enum
 {
-  [#list PduNameList as word] 
+  [#list IsoTp_TxPduNameList as word] 
     [#assign PduName = word]
+    [#assign CanIfTxPduNameList += ["MyTest" + "_" + PduName] ]
   /** @brief symbolic name for ${PduName} */
   ${IsoTp_Prefix}_Tx_${PduName},
   [/#list]
@@ -186,7 +188,7 @@ typedef enum
 
 /** @brief number of all TxPdu-Names 
  *  @details this will be used to define the used memory to handle the TxPdus */
-#define ${IsoTp_Prefix?upper_case}_TXPDU_COUNT ( ${PduNameList?size} + ${IsoTp_Prefix?upper_case}_TXPDU_USERCOUNT )
+#define ${IsoTp_Prefix?upper_case}_TXPDU_COUNT ( ${IsoTp_TxPduNameList?size} + ${IsoTp_Prefix?upper_case}_TXPDU_USERCOUNT )
 
 /** @} */ // end of grouping TM_IsoTP_Cfg
 
@@ -271,7 +273,7 @@ typedef enum
   /* we add it to CanFT_RxPduType*/
     [/#if] [#-- end of extractDebug_FTL --]
     [#assign FT_RxList += [FT_DeviceType] ]
-    [#assign FT_TxList += [FT_DeviceType+"_Responce"] ]
+    [#-- assign FT_TxList += [FT_DeviceType+"_Responce"] --]
   [#else]
     [#if extractDebug_FTL > 0]
     /* we add it to CanFT_TxPduType*/
