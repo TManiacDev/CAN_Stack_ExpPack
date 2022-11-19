@@ -25,7 +25,5 @@ So be careful when you touching templates for code generation.
 * the first project "CanIf_AppDemo shows how to integrate the ExpansionPack and how do basically configurations.
 
 ## Source code documentation
-+ *sorry, I am not able to link to the docu :-(*  
-
 There will be also the doxygen generated [source code documentation](https://tmaniacdev.github.io/CAN_Stack_ExpPack/). This docu don't comes from the pack it self. You can build this docu inside a project using the ExpansionPack.  
 Besides the normal source code documentation it includes a detailed description in german language for usage and internal behavior. If somebody can add a multi language support to doxygen it would be nice.

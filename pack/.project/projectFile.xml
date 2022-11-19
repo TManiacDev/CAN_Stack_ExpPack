@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<package schemaVersion="1.6.3" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="PACK.xsd">
+    <vendor>TM_Engineering</vendor>
+    <name>CAN_Stack::FROM_PACK_GENERATED::NO_CUBE_RULES</name>
+    <description>To add a configurable com-stack with support of transport protocols used on the controller area network (CAN) &lt;br&gt;
+We need the ST HAL functions. &lt;br&gt;
+The modules inside the ExpansionPack uses their own Init- and ISR-callback function. 
+The generation of the MX-function and ISR-callback function normaly generated for the HAL must be deactivated.</description>
+    <url/>
+    <license>Z:/GIT Repro/CAN_Stack_ExpPack/LICENSE::license.txt</license>
+    <supportContact>engineer@tmaniac.de</supportContact>
+    <releases>
+        <release date="2022-11-13" version="0.1.2">add IsoTp to CanIf configuration</release>
+        <release date="2022-11-13" version="0.1.1">To complete the puplic pack and have the same content like my private pack before</release>
+        <release date="2022-10-23" version="0.1.0">We create the project on github.
+First step to publish it.</release>
+    </releases>
+    <keywords>
+        <keyword>IMPLEMENTED_WITH_STM32CUBEMX</keyword>
+    </keywords>
+    <taxonomy>
+        <description Cclass="Device">Device</description>
+        <description Cclass="DataExchange">DataExchange</description>
+        <description Cclass="Utility">Utility</description>
+        <description Cclass="Board Support">Board Support</description>
+        <description Cclass="Board Part">Board Part</description>
+    </taxonomy>
+    <conditions>
+        <condition id="hasComIfClass">
+            <description>communication controller interface class is the base class of CanIf</description>
+            <accept Cbundle="CanIf" Cgroup="ComIf"/>
+        </condition>
+        <condition id="hasComStackGeneral">
+            <description>compiler and platform specific files</description>
+            <accept Cbundle="CanIf" Cgroup="general"/>
+        </condition>
+        <condition id="hasCanMaster">
+            <require Cbundle="CanIf" Cgroup="CanIf" Csub="Can"/>
+        </condition>
+        <condition id="hasFT2p0_Protocol">
+            <require Cbundle="Fueltech" Cgroup="FTCAN2p0" Csub="FTCAN2p0_Layer"/>
+        </condition>
+        <condition id="hasFT2p0_Switchpanel">
+            <accept Cbundle="Fueltech" Cgroup="FTCAN2p0" Csub="Switchpanel"/>
+        </condition>
+    </conditions>
+    <components>
+        <bundle Cbundle="DemoApplications" Cclass="Device" Cversion="0.1.0">
+            <description>Bundle of applications</description>
+            <doc>Z:/GIT Repro/CAN_Stack_ExpPack/README.md::readme.txt</doc>
+            <component Cgroup="Application" Cvariant="CanIf_AppDemo" condition="hasCanMaster" maxInstances="1">
+                <description>Application demo to show the usage of the plain CanIf Class</description>
+                <files>
+                    <file category="doc" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/T01_CanIf_AppDemo/Tutorial_01_CanIf_AppDemo.pdf::Docu/Tutorial_01_CanIf_AppDemo.pdf"/>
+                </files>
+            </component>
+            <component Cgroup="Application" Cvariant="Sandbox" maxInstances="1">
+                <description>To play on the sandbox</description>
+                <files/>
+            </component>
+        </bundle>
+        <bundle Cbundle="CanIf" Cclass="Board Support" Cversion="0.1.0">
+            <description>Interface for abstraction of the CAN controller hardware</description>
+            <doc>Z:/GIT Repro/CAN_Stack_ExpPack/README.md::readme.txt</doc>
+            <component Cgroup="general" Csub="Common" maxInstances="1">
+                <description>platform independancy files</description>
+                <files>
+                    <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/Drivers/BSP/general/TM_Compiler.h::Drivers/BSP/general/TM_Compiler.h"/>
+                    <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/Drivers/BSP/general/TM_Compiler_Cfg.h::Drivers/BSP/general/TM_Compiler_Cfg.h"/>
+                    <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/Drivers/BSP/general/TM_ComStack_Types.h::Drivers/BSP/general/TM_ComStack_Types.h"/>
+                    <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/Drivers/BSP/general/TM_Platform_Types.h::Drivers/BSP/general/TM_Platform_Types.h"/>
+                    <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/Drivers/BSP/general/TM_Std_Types.h::Drivers/BSP/general/TM_Std_Types.h"/>
+                    <file category="sourceCpp" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/Drivers/BSP/general/TMEVersionInfo.cpp::Drivers/BSP/general/TMEVersionInfo.cpp"/>
+                    <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/Drivers/BSP/general/TMEVersionInfo.h::Drivers/BSP/general/TMEVersionInfo.h"/>
+                </files>
+            </component>
+            <component Cgroup="ComIf" Csub="Common" condition="hasComStackGeneral" maxInstances="1">
+                <description>Abstract communication controller class</description>
+                <files>
+                    <file category="sourceCpp" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/Drivers/BSP/ComIf/ComIf.cpp::Drivers/BSP/ComIf/ComIf.cpp"/>
+                    <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/Drivers/BSP/ComIf/ComIf.h::Drivers/BSP/ComIf/ComIf.h"/>
+                    <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/Drivers/BSP/ComIf/ComIf_Compiler_Cfg.h::Drivers/BSP/ComIf/ComIf_Compiler_Cfg.h"/>
+                </files>
+            </component>
+            <component Cgroup="CanIf" Csub="Can" condition="hasComIfClass" maxInstances="1">
+                <description>Use this as platform indepetend abstraction layer</description>
+                <files>
+                    <file category="sourceCpp" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/Drivers/BSP/CanIf/CanIf.cpp::Drivers/BSP/CanIf/CanIf.cpp"/>
+                    <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/Drivers/BSP/CanIf/CanIf.h::Drivers/BSP/CanIf/CanIf.h"/>
+                    <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/Drivers/BSP/CanIf/CanIf_Doxy.h::Drivers/BSP/CanIf/CanIf_Doxy.h"/>
+                    <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/Drivers/BSP/CanIf/CanIf_Switch.h::Drivers/BSP/CanIf/CanIf_Switch.h"/>
+                    <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/Drivers/BSP/CanIf/CanIfUpperLayer.h::Drivers/BSP/CanIf/CanIfUpperLayer.h"/>
+                    <file category="sourceCpp" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/Drivers/BSP/CanIf/CanIfUpperLayer.cpp::Drivers/BSP/CanIf/CanIfUpperLayer.cpp"/>
+                    <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/Drivers/BSP/CanIf/CanIf_Compiler_Cfg.h::Drivers/BSP/CanIf/CanIf_Compiler_Cfg.h"/>
+                </files>
+            </component>
+        </bundle>
+        <bundle Cbundle="bxCAN Slave" Cclass="Board Part" Cversion="0.1.0">
+            <description>To handle the slave part of the bxCAN</description>
+            <doc>Z:/GIT Repro/CAN_Stack_ExpPack/README.md::readme.txt</doc>
+            <component Cgroup="bxCAN_Slave" Csub="virtualCAN" condition="hasCanMaster" maxInstances="1">
+                <description>We need a virtual component	</description>
+                <files/>
+            </component>
+        </bundle>
+        <bundle Cbundle="SourceCodeDocu" Cclass="Utility" Cversion="0.1.0">
+            <description>This bundle holds the additional source for the doxygen job.
+Today the STM32CubeIDE doesn't copy other files then source or header.
+So we must do the copy handmade :-(</description>
+            <doc>Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/readme.md::Utilities/readme.txt</doc>
+            <component Cgroup="DoxyPages" maxInstances="1">
+                <description>To hold the additional pages</description>
+                <files>
+                    <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/DoxyPages/Doxy_Page_Abrev.h::Utilities/DoxyPages/Doxy_Page_Abrev.h"/>
+                    <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/DoxyPages/Doxy_Page_AddPack.h::Utilities/DoxyPages/Doxy_Page_AddPack.h"/>
+                    <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/DoxyPages/Doxy_Page_Api.h::Utilities/DoxyPages/Doxy_Page_Api.h"/>
+                    <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/DoxyPages/Doxy_Page_Architecture.h::Utilities/DoxyPages/Doxy_Page_Architecture.h"/>
+                    <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/DoxyPages/Doxy_Page_Examples.h::Utilities/DoxyPages/Doxy_Page_Examples.h"/>
+                    <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/DoxyPages/Doxy_Page_FileSystem.h::Utilities/DoxyPages/Doxy_Page_FileSystem.h"/>
+                    <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/DoxyPages/Doxy_Page_History.h::Utilities/DoxyPages/Doxy_Page_History.h"/>
+                    <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/DoxyPages/Doxy_Page_SearchFor.h::Utilities/DoxyPages/Doxy_Page_SearchFor.h"/>
+                    <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/DoxyPages/TM_Doxy.h::Utilities/DoxyPages/TM_Doxy.h"/>
+                    <file category="source" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/TME.doxyfile::Utilities/TME.doxyfile"/>
+                    <file category="image" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/DoxyPages/pictures/CanIf_StateMachine.svg::Utilities/DoxyPages/pictures/CanIf_StateMachine.svg"/>
+                    <file category="image" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/DoxyPages/pictures/overview.svg::Utilities/DoxyPages/pictures/overview.svg"/>
+                    <file category="image" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/DoxyPages/pictures/DependenciesButton.png::Utilities/DoxyPages/pictures/DependenciesButton.png"/>
+                    <file category="image" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/DoxyPages/pictures/DetailsButton.png::Utilities/DoxyPages/pictures/DetailsButton.png"/>
+                    <file category="image" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/DoxyPages/pictures/general_P00_nucleo_board.jpg::Utilities/DoxyPages/pictures/general_P00_nucleo_board.jpg"/>
+                </files>
+            </component>
+            <component Cgroup="T01_CanIf_AppDemo" maxInstances="1">
+                <description>Docu files for tutorial 01</description>
+                <files>
+                    <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/T01_CanIf_AppDemo/Doxy_Page_T01_CanIf_AppDemo.h::Utilities/T01_CanIf_AppDemo/Doxy_Page_T01_CanIf_AppDemo.h"/>
+                    <file category="doc" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/T01_CanIf_AppDemo/Tutorial_01_CanIf_AppDemo.pdf::Utilities/T01_CanIf_AppDemo/Tutorial_01_CanIf_AppDemo.pdf"/>
+                    <file category="other" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/T01_CanIf_AppDemo/pictures/T01_P00_select_workspace.png::Utilities/T01_CanIf_AppDemo/pictures/T01_P00_select_workspace.png"/>
+                    <file category="other" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/T01_CanIf_AppDemo/pictures/T01_P01_start_new_project.png::Utilities/T01_CanIf_AppDemo/pictures/T01_P01_start_new_project.png"/>
+                    <file category="other" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/T01_CanIf_AppDemo/pictures/T01_P02_select_board.png::Utilities/T01_CanIf_AppDemo/pictures/T01_P02_select_board.png"/>
+                    <file category="other" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/T01_CanIf_AppDemo/pictures/T01_P03_create_project.png::Utilities/T01_CanIf_AppDemo/pictures/T01_P03_create_project.png"/>
+                    <file category="other" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/T01_CanIf_AppDemo/pictures/T01_P04_new_project.png::Utilities/T01_CanIf_AppDemo/pictures/T01_P04_new_project.png"/>
+                    <file category="other" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/T01_CanIf_AppDemo/pictures/T01_P05_activate_can1.png::Utilities/T01_CanIf_AppDemo/pictures/T01_P05_activate_can1.png"/>
+                    <file category="other" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/T01_CanIf_AppDemo/pictures/T01_P06_other_parameter.png::Utilities/T01_CanIf_AppDemo/pictures/T01_P06_other_parameter.png"/>
+                    <file category="other" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/T01_CanIf_AppDemo/pictures/T01_P07_select_pinout.png::Utilities/T01_CanIf_AppDemo/pictures/T01_P07_select_pinout.png"/>
+                    <file category="other" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/T01_CanIf_AppDemo/pictures/T01_P08_first_save.png::Utilities/T01_CanIf_AppDemo/pictures/T01_P08_first_save.png"/>
+                    <file category="other" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/T01_CanIf_AppDemo/pictures/T01_P09_new_main_c.png::Utilities/T01_CanIf_AppDemo/pictures/T01_P09_new_main_c.png"/>
+                    <file category="other" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/T01_CanIf_AppDemo/pictures/T01_P10_basics_on_main_c.png::Utilities/T01_CanIf_AppDemo/pictures/T01_P10_basics_on_main_c.png"/>
+                    <file category="other" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/T01_CanIf_AppDemo/pictures/T01_P10_basics_on_main_c_teil1.png::Utilities/T01_CanIf_AppDemo/pictures/T01_P10_basics_on_main_c_teil1.png"/>
+                    <file category="other" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/T01_CanIf_AppDemo/pictures/T01_P10_basics_on_main_c_teil2.png::Utilities/T01_CanIf_AppDemo/pictures/T01_P10_basics_on_main_c_teil2.png"/>
+                    <file category="other" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/T01_CanIf_AppDemo/pictures/T01_P10_basics_on_main_c_teil3.png::Utilities/T01_CanIf_AppDemo/pictures/T01_P10_basics_on_main_c_teil3.png"/>
+                    <file category="other" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/T01_CanIf_AppDemo/pictures/T01_P10_basics_on_main_c_teil4.png::Utilities/T01_CanIf_AppDemo/pictures/T01_P10_basics_on_main_c_teil4.png"/>
+                    <file category="other" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/T01_CanIf_AppDemo/pictures/T01_P10_basics_on_main_c_teil5.png::Utilities/T01_CanIf_AppDemo/pictures/T01_P10_basics_on_main_c_teil5.png"/>
+                    <file category="other" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/T01_CanIf_AppDemo/pictures/T01_P11_manage_software_packs.png::Utilities/T01_CanIf_AppDemo/pictures/T01_P11_manage_software_packs.png"/>
+                    <file category="other" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/T01_CanIf_AppDemo/pictures/T01_P12_load_pack.png::Utilities/T01_CanIf_AppDemo/pictures/T01_P12_load_pack.png"/>
+                    <file category="other" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/T01_CanIf_AppDemo/pictures/T01_P13_accept_license.png::Utilities/T01_CanIf_AppDemo/pictures/T01_P13_accept_license.png"/>
+                    <file category="other" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/T01_CanIf_AppDemo/pictures/T01_P14_select_component.png::Utilities/T01_CanIf_AppDemo/pictures/T01_P14_select_component.png"/>
+                    <file category="other" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/T01_CanIf_AppDemo/pictures/T01_P15_pack_selector.png::Utilities/T01_CanIf_AppDemo/pictures/T01_P15_pack_selector.png"/>
+                    <file category="other" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/T01_CanIf_AppDemo/pictures/T01_P16_select_appdemo.png::Utilities/T01_CanIf_AppDemo/pictures/T01_P16_select_appdemo.png"/>
+                    <file category="other" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/T01_CanIf_AppDemo/pictures/T01_P17_additional_info.png::Utilities/T01_CanIf_AppDemo/pictures/T01_P17_additional_info.png"/>
+                    <file category="other" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/T01_CanIf_AppDemo/pictures/T01_P18_select_modules.png::Utilities/T01_CanIf_AppDemo/pictures/T01_P18_select_modules.png"/>
+                    <file category="other" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/T01_CanIf_AppDemo/pictures/T01_P19_config_modules.png::Utilities/T01_CanIf_AppDemo/pictures/T01_P19_config_modules.png"/>
+                    <file category="other" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/T01_CanIf_AppDemo/pictures/T01_P20_config_canif.png::Utilities/T01_CanIf_AppDemo/pictures/T01_P20_config_canif.png"/>
+                    <file category="other" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/T01_CanIf_AppDemo/pictures/T01_P21_change_parameter.png::Utilities/T01_CanIf_AppDemo/pictures/T01_P21_change_parameter.png"/>
+                    <file category="other" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/T01_CanIf_AppDemo/pictures/T01_P22_file_generation.png::Utilities/T01_CanIf_AppDemo/pictures/T01_P22_file_generation.png"/>
+                    <file category="other" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/T01_CanIf_AppDemo/pictures/T01_P23_file_generation_done.png::Utilities/T01_CanIf_AppDemo/pictures/T01_P23_file_generation_done.png"/>
+                    <file category="other" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/T01_CanIf_AppDemo/pictures/T01_P24_multiple_definition.png::Utilities/T01_CanIf_AppDemo/pictures/T01_P24_multiple_definition.png"/>
+                </files>
+            </component>
+        </bundle>
+        <bundle Cbundle="Common" Cclass="DataExchange" Cversion="0.1.0">
+            <description>To handle standard protocols</description>
+            <doc>Z:/GIT Repro/CAN_Stack_ExpPack/README.md::readme.txt</doc>
+            <component Cgroup="IsoTp" condition="hasCanMaster" maxInstances="1">
+                <description>To handle the ISO15765-2 transport protocol</description>
+                <files>
+                    <file category="sourceCpp" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/DataExchange_Common/IsoTP/IsoTP.cpp::Middlewares/Third_Party/IsoTP/IsoTP.cpp"/>
+                    <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/DataExchange_Common/IsoTP/IsoTP.h::Middlewares/Third_Party/IsoTP/IsoTP.h"/>
+                    <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/DataExchange_Common/IsoTP/IsoTP_Compiler_Cfg.h::Middlewares/Third_Party/IsoTP/IsoTP_Compiler_Cfg.h"/>
+                    <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/DataExchange_Common/IsoTP/IsoTP_Doxy.h::Middlewares/Third_Party/IsoTP/IsoTP_Doxy.h"/>
+                    <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/DataExchange_Common/IsoTP/IsoTP_Names.h::Middlewares/Third_Party/IsoTP/IsoTP_Names.h"/>
+                </files>
+            </component>
+        </bundle>
+        <bundle Cbundle="Fueltech" Cclass="DataExchange" Cversion="0.1.0">
+            <description>To handle the communication with Fueltech components</description>
+            <doc>Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/Fueltech/Protocol_FTCAN20_Public_R020.pdf::Docu/Fueltech/Protocol_FTCAN20_Public_R020.pdf</doc>
+            <component Cgroup="FTCAN2p0" Csub="FTCAN2p0_Layer" condition="hasCanMaster" maxInstances="1">
+                <description>To handle the Fueltech FT2.0 transport protocol</description>
+                <files>
+                    <file category="sourceCpp" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/DataExchange_Fueltech/FTCAN2p0/CanFT2p0.cpp::Middlewares/Third_Party/FTCAN2p0/CanFT2p0.cpp"/>
+                    <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/DataExchange_Fueltech/FTCAN2p0/CanFT2p0.h::Middlewares/Third_Party/FTCAN2p0/CanFT2p0.h"/>
+                    <file category="sourceCpp" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/DataExchange_Fueltech/FTCAN2p0/CanFT2p0Stream.cpp::Middlewares/Third_Party/FTCAN2p0/CanFT2p0Stream.cpp"/>
+                    <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/DataExchange_Fueltech/FTCAN2p0/CanFT2p0Stream.h::Middlewares/Third_Party/FTCAN2p0/CanFT2p0Stream.h"/>
+                    <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/DataExchange_Fueltech/FTCAN2p0/CanFT2p0_CanIf_Callback.h::Middlewares/Third_Party/FTCAN2p0/CanFT2p0_CanIf_Callback.h"/>
+                    <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/DataExchange_Fueltech/FTCAN2p0/CanFT2p0_Compiler_Cfg.h::Middlewares/Third_Party/FTCAN2p0/CanFT2p0_Compiler_Cfg.h"/>
+                    <file category="sourceCpp" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/DataExchange_Fueltech/FTCAN2p0/CanFT2p0_DatabaseCfg.cpp::Middlewares/Third_Party/FTCAN2p0/CanFT2p0_DatabaseCfg.cpp"/>
+                    <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/DataExchange_Fueltech/FTCAN2p0/CanFT2p0_DatabaseCfg.h::Middlewares/Third_Party/FTCAN2p0/CanFT2p0_DatabaseCfg.h"/>
+                    <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/DataExchange_Fueltech/FTCAN2p0/CanFT2p0_Doxy.h::Middlewares/Third_Party/FTCAN2p0/CanFT2p0_Doxy.h"/>
+                    <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/DataExchange_Fueltech/FTCAN2p0/CanFT2p0_FixedNames.h::Middlewares/Third_Party/FTCAN2p0/CanFT2p0_FixedNames.h"/>
+                </files>
+            </component>
+            <component Cgroup="FTCAN2p0" Csub="Switchpanel" condition="hasFT2p0_Protocol" maxInstances="1">
+                <description>To handle work with a Fueltech Switchpanel</description>
+                <files>
+                    <file category="sourceCpp" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/DataExchange_Fueltech/FTSwitchPanel/FTSwitchPanel.cpp::Middlewares/Third_Party/FTSwitchPanel/FTSwitchPanel.cpp"/>
+                    <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/DataExchange_Fueltech/FTSwitchPanel/FTSwitchPanel.h::Middlewares/Third_Party/FTSwitchPanel/FTSwitchPanel.h"/>
+                    <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/DataExchange_Fueltech/FTSwitchPanel/FTSwitchPanel_Doxy.h::Middlewares/Third_Party/FTSwitchPanel/FTSwitchPanel_Doxy.h"/>
+                </files>
+            </component>
+            <component Cgroup="FTCAN2p0" Csub="ECU" condition="hasFT2p0_Protocol" maxInstances="1">
+                <description>To handle work with a Fueltech Ecus</description>
+                <files>
+                    <file category="sourceCpp" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/DataExchange_Fueltech/FuelTechEcu/FuelTechEcu.cpp::Middlewares/Third_Party/FuelTechEcu/FuelTechEcu.cpp"/>
+                    <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/DataExchange_Fueltech/FuelTechEcu/FuelTechEcu.h::Middlewares/Third_Party/FuelTechEcu/FuelTechEcu.h"/>
+                    <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/DataExchange_Fueltech/FuelTechEcu/FueltechEcu_Doxy.h::Middlewares/Third_Party/FuelTechEcu/FueltechEcu_Doxy.h"/>
+                </files>
+            </component>
+        </bundle>
+    </components>
+</package>
