@@ -6,7 +6,14 @@
 [#list SWIPdatas as SWIP]  
 [#assign instName = SWIP.ipName]   
 [#assign fileName = SWIP.fileName]   
-[#assign version = SWIP.version]   
+[#assign version = SWIP.version]  
+
+[#assign myInstName = instName]
+[#assign SubPatch = myInstName?keep_after_last(".")]
+[#assign myInstName = myInstName?keep_before_last(".")]
+[#assign PatchLevel = myInstName?keep_after_last(".")]
+[#assign myInstName = myInstName?keep_before_last(".")]
+[#assign VersionLevel = myInstName?keep_after_last(".")] 
 /**
   ******************************************************************************
   * @section Can_CFG_H Code generation 
@@ -30,24 +37,36 @@
 [#assign dashReplace = toto?replace("-","_")]
 [#assign inclusion_protection = dashReplace?upper_case]
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+/* Define to prevent recursive inclusion ------------------------------------- */
 #ifndef __${inclusion_protection}__
 #define __${inclusion_protection}__
 
   [#assign UserCodeCounter = 0]
   
-#include "main.h"
-#include "TM_ComStack_Types.h" 
+#include "TM_ComStack_Types.h"
+#include "Can_Compiler_Cfg.h"
 
-/* private Includes -----------------------------------------------------------*/
+/* private Includes ----------------------------------------------------------- */
 /* USER CODE BEGIN ${dashedFileNamed} ${UserCodeCounter} */
 
 /* USER CODE END ${dashedFileNamed} ${UserCodeCounter} */
   [#assign UserCodeCounter++]
 
-#ifdef __cplusplus
- extern "C" {
-#endif
+/** @addtogroup TM_Can_Driver
+ *  @{ */
+/** @brief  my ID */
+#define CAN_VENDOR_ID           TM_VENDOR_ID
+/** @brief  module id to see where the error is come from 
+ *  @todo need a handling of warning: multi-character character constant [-Wmultichar] */
+#define CAN_MODULE_ID           ('CA')
+/** @brief we have only one version at start 
+ *  @todo use a generated value  
+ *  @todo need a handling of warning: multi-character character constant [-Wmultichar] */ 
+#define CAN_VERSION             ('${VersionLevel}${PatchLevel}')
+/** @brief no patching until now 
+ *  @todo use a generated value */
+#define CAN_PATCH_VERSION       ('${SubPatch}')
+/** @} */ // end of grouping TM_Can_Driver
 
 /*******************************/
 [#-- SWIPdatas is a list of SWIPconfigModel --]  
@@ -74,8 +93,8 @@ extern ${variable.value} ${variable.name};
 /** @brief Development Error Detection On/OFF
  *  @details
  *  activates the calling of CAN_DET_REPORTERROR() */
-#define CAN_DEV_ERROR_DETECT  STD_ON
-// #define CAN_DEV_ERROR_DETECT_NO  STD_OFF
+// #define CAN_DEV_ERROR_DETECT  STD_ON
+#define CAN_DEV_ERROR_DETECT_NO  STD_OFF
 
 [#if SWIP.defines??]
 	[#list SWIP.defines as definition]	
@@ -127,14 +146,6 @@ typedef enum
   CanBaudrate_unknown
 }CanControllerBaudRateConfigID;
 
-/** @brief Names for the hardware CAN controller */
-typedef enum
-{
-  CanMasterController,    ///< ST named the first controller Master because of the "Master configuration"
-  CanSlaveController,     ///< ST named the second controller Slave because of fewer configuration
-  NBROF_CanController     ///< for error handling we create a name at last
-}ECU_CanController;
-
 /* private names -----------------------------------------------------------*/
 /* USER CODE BEGIN ${dashedFileNamed} ${UserCodeCounter} */
 
@@ -142,9 +153,6 @@ typedef enum
   [#assign UserCodeCounter++]
 /** @} */ // end of grouping TM_CanCfg_BaudCfg
 
-#ifdef __cplusplus
-}
-#endif
 #endif /*__ ${inclusion_protection}_H */
 
 /*******************  (C) TManiac Engineering  *******************/

@@ -11,6 +11,7 @@
  * @date Apr 24, 2022
  * @version 
  *
+ * This file holds the overview of the APIs of the modules.
  */
 #ifndef _DOXY_PAGE_API_H_
 #define _DOXY_PAGE_API_H_
@@ -20,10 +21,16 @@
  *  @tableofcontents
  *  Beschreibung wo was zu finden ist
  *
- *  @section secApiDescription Grundsätze zur API
+ *  @section de_secApiDescription Grundsätze zur API
  *
- *  Details zu den APIs der jeweiligen Module sind im Source Code dokumentiert.
- *  Die jeweilige API Beschreibung ist dann unter dem Punkt Modules zu finden.
+ *  Details zu den APIs der jeweiligen Module sind im Source Code dokumentiert und damit auch in englischer Sprache.<br>
+ *  Aufgrund des Wechsels von C zu C++ sind die API aktuell (Version 0.1.0) wohl noch etwas unordentlich. Ziel ist es komplett in C++ zu arbeiten.
+ *
+ *  Im Folgenden sind die Module mit ihren API Abschnitten zu finden.
+ *
+ *  @section eng_secApiDescription Basics on the API
+ *
+ *  The API details are written inside the source code docu. You can find a easy entry below.
  *
  *  @section secCanIfApi API für das CAN Interface Modul
  *   @sa TM_CanIf_Types

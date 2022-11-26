@@ -63,14 +63,16 @@
  
 /** @brief  my ID */
 #define CANIF_VENDOR_ID           TM_VENDOR_ID
-/** @brief  module id to see where the error is come from */
-#define CANIF_MODULE_ID           (0x60)
+/** @brief  module id to see where the error is come from 
+ *  @todo need a handling of warning: multi-character character constant [-Wmultichar] */
+#define CANIF_MODULE_ID           ('CI')
 /** @brief we have only one version at start 
- *  todo use a generated value */
-#define CANIF_VERSION             (${VersionLevel})
+ *  @todo use a generated value  
+ *  @todo need a handling of warning: multi-character character constant [-Wmultichar] */ 
+#define CANIF_VERSION             ('${VersionLevel}${PatchLevel}')
 /** @brief no patching until now 
- *  todo use a generated value */
-#define CANIF_PATCH_VERSION       (${PatchLevel})
+ *  @todo use a generated value */
+#define CANIF_PATCH_VERSION       ('${SubPatch}')
 /** @} */ // end of grouping TM_CanIf_Main
 
 #ifdef __cplusplus

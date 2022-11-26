@@ -19,14 +19,14 @@ TME_VersionInfo::TME_VersionInfo() {
 
 }
 
-TME_VersionInfo::TME_VersionInfo(uint8_t Module, uint8_t Version, uint8_t Patch) :
+TME_VersionInfo::TME_VersionInfo(uint16_t Module, uint16_t Version, uint16_t Patch) :
     Module_ID { Module },
     Version_ID { Version },
     PatchVersion_ID { Patch }
 {
 }
 
-TME_VersionInfo::TME_VersionInfo(uint8_t Vendor, uint8_t Module, uint8_t Version, uint8_t Patch) :
+TME_VersionInfo::TME_VersionInfo(uint16_t Vendor, uint16_t Module, uint16_t Version, uint16_t Patch) :
     Vendor_ID { Vendor },
     Module_ID { Module },
     Version_ID { Version },
@@ -46,6 +46,23 @@ TME_VersionInfo::TME_VersionInfo(const TME_VersionInfo &other) :
 {
   // TODO Auto-generated copy constructor stub
 
+}
+
+Std_ReturnType TME_VersionInfo::GetVersionInfo( CONST(uint32_t,AUTOMATIC) BufferLength, P2VAR(uint8_t, AUTOMATIC, AUTOMATIC) Ptr2Buffer )
+{
+  if (BufferLength >= 4*sizeof(uint16_t) )
+  {
+    Ptr2Buffer[0] = (uint8_t)(Vendor_ID >> 8);
+    Ptr2Buffer[1] = (uint8_t)(Vendor_ID );
+    Ptr2Buffer[2] = (uint8_t)(Module_ID >> 8);
+    Ptr2Buffer[3] = (uint8_t)(Module_ID );
+    Ptr2Buffer[4] = (uint8_t)(Version_ID >> 8);
+    Ptr2Buffer[5] = (uint8_t)(Version_ID);
+    Ptr2Buffer[6] = (uint8_t)(PatchVersion_ID >> 8);
+    Ptr2Buffer[7] = (uint8_t)(PatchVersion_ID );
+    return E_OK;
+  }
+  else return E_NOT_OK;
 }
 
 //TME_VersionInfo::TME_VersionInfo(TME_VersionInfo &&other) {

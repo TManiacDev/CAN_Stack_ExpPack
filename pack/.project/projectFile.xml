@@ -10,6 +10,9 @@ The generation of the MX-function and ISR-callback function normaly generated fo
     <license>Z:/GIT Repro/CAN_Stack_ExpPack/LICENSE::license.txt</license>
     <supportContact>engineer@tmaniac.de</supportContact>
     <releases>
+        <release date="2022-11-23" version="0.2.1">The Can and CanDrv_bxCAN classes are ready to use
+Adding this modules to the configuration</release>
+        <release date="2022-11-19" version="0.2.0">AUTOSAR like we bring controller depending code to Can/CanDrv classes and remove them from CanIf Class</release>
         <release date="2022-11-13" version="0.1.2">add IsoTp to CanIf configuration</release>
         <release date="2022-11-13" version="0.1.1">To complete the puplic pack and have the same content like my private pack before</release>
         <release date="2022-10-23" version="0.1.0">We create the project on github.
@@ -23,7 +26,6 @@ First step to publish it.</release>
         <description Cclass="DataExchange">DataExchange</description>
         <description Cclass="Utility">Utility</description>
         <description Cclass="Board Support">Board Support</description>
-        <description Cclass="Board Part">Board Part</description>
     </taxonomy>
     <conditions>
         <condition id="hasComIfClass">
@@ -35,13 +37,38 @@ First step to publish it.</release>
             <accept Cbundle="CanIf" Cgroup="general"/>
         </condition>
         <condition id="hasCanMaster">
-            <require Cbundle="CanIf" Cgroup="CanIf" Csub="Can"/>
+            <require Cbundle="CanDrv" Cgroup="bxCAN" Csub="Master"/>
         </condition>
         <condition id="hasFT2p0_Protocol">
             <require Cbundle="Fueltech" Cgroup="FTCAN2p0" Csub="FTCAN2p0_Layer"/>
         </condition>
         <condition id="hasFT2p0_Switchpanel">
             <accept Cbundle="Fueltech" Cgroup="FTCAN2p0" Csub="Switchpanel"/>
+        </condition>
+        <condition id="hasNoBxCan">
+            <description>We must lock the FDCAN against bxCAN</description>
+            <require Cbundle="CanIf" Cgroup="general"/>
+            <require condition="hasCanDrv_API"/>
+            <deny Cbundle="CanDrv" Cgroup="bxCAN"/>
+        </condition>
+        <condition id="hasNoFdCan">
+            <description>We must lock the bxCAN against FDCAN</description>
+            <require Cbundle="CanIf" Cgroup="general"/>
+            <require condition="hasCanDrv_API"/>
+            <deny Cbundle="CanDrv" Cgroup="FDCAN"/>
+        </condition>
+        <condition id="hasCanDrv">
+            <description>accepts any CanDrv Module</description>
+            <accept Cbundle="CanDrv" Cgroup="bxCAN"/>
+            <accept Cbundle="CanDrv" Cgroup="FDCAN"/>
+        </condition>
+        <condition id="hasComIfAndCanDrv">
+            <require condition="hasComIfClass"/>
+            <require condition="hasCanDrv"/>
+        </condition>
+        <condition id="hasCanDrv_API">
+            <description>Check selected API class for a CanDrv</description>
+            <require Cbundle="CanDrv" Cgroup="CanDrv_APIclass"/>
         </condition>
     </conditions>
     <components>
@@ -56,6 +83,35 @@ First step to publish it.</release>
             </component>
             <component Cgroup="Application" Cvariant="Sandbox" maxInstances="1">
                 <description>To play on the sandbox</description>
+                <files/>
+            </component>
+        </bundle>
+        <bundle Cbundle="CanDrv" Cclass="Board Support" Cversion="0.2.0">
+            <description>To handle the different STM CAN controller modules</description>
+            <doc>Z:/GIT Repro/CAN_Stack_ExpPack/README.md::readme.txt</doc>
+            <component Cgroup="CanDrv_APIclass" condition="hasComStackGeneral" maxInstances="1">
+                <description>This is the virtual API class for all CanDrv implementations</description>
+                <files>
+                    <file category="sourceCpp" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/Drivers/BSP/Can/Can.cpp::Drivers/BSP/Can/Can.cpp"/>
+                    <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/Drivers/BSP/Can/Can.h::Drivers/BSP/Can/Can.h"/>
+                    <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/Drivers/BSP/Can/Can_Compiler_Cfg.h::Drivers/BSP/Can/Can_Compiler_Cfg.h"/>
+                    <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/Drivers/BSP/Can/Can_Doxy.h::Drivers/BSP/Can/Can_Doxy.h"/>
+                </files>
+            </component>
+            <component Cgroup="bxCAN" Csub="Master" condition="hasNoFdCan" maxInstances="1">
+                <description>The bxCAN master ist the first channel of the bxCAN controller</description>
+                <files>
+                    <file category="sourceCpp" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/Drivers/BSP/Can/CanDrv_bxCAN.cpp::Drivers/BSP/Can/CanDrv_bxCAN.cpp"/>
+                    <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/Drivers/BSP/Can/CanDrv_bxCAN.h::Drivers/BSP/Can/CanDrv_bxCAN.h"/>
+                </files>
+            </component>
+            <component Cgroup="bxCAN" Csub="Slave" condition="hasCanMaster" maxInstances="1">
+                <description>This is the bxCAN Slave. It's the second channel of a bxCAN controller</description>
+                <files/>
+            </component>
+            <component Cgroup="FDCAN" condition="hasNoBxCan" maxInstances="1">
+                <description>The FDCAN controller has two channels.
+We will see if we use more instances or subgroups</description>
                 <files/>
             </component>
         </bundle>
@@ -82,25 +138,16 @@ First step to publish it.</release>
                     <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/Drivers/BSP/ComIf/ComIf_Compiler_Cfg.h::Drivers/BSP/ComIf/ComIf_Compiler_Cfg.h"/>
                 </files>
             </component>
-            <component Cgroup="CanIf" Csub="Can" condition="hasComIfClass" maxInstances="1">
+            <component Cgroup="CanIf" Csub="Can" condition="hasComIfAndCanDrv" maxInstances="1">
                 <description>Use this as platform indepetend abstraction layer</description>
                 <files>
                     <file category="sourceCpp" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/Drivers/BSP/CanIf/CanIf.cpp::Drivers/BSP/CanIf/CanIf.cpp"/>
                     <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/Drivers/BSP/CanIf/CanIf.h::Drivers/BSP/CanIf/CanIf.h"/>
                     <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/Drivers/BSP/CanIf/CanIf_Doxy.h::Drivers/BSP/CanIf/CanIf_Doxy.h"/>
-                    <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/Drivers/BSP/CanIf/CanIf_Switch.h::Drivers/BSP/CanIf/CanIf_Switch.h"/>
                     <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/Drivers/BSP/CanIf/CanIfUpperLayer.h::Drivers/BSP/CanIf/CanIfUpperLayer.h"/>
                     <file category="sourceCpp" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/Drivers/BSP/CanIf/CanIfUpperLayer.cpp::Drivers/BSP/CanIf/CanIfUpperLayer.cpp"/>
                     <file category="header" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/Drivers/BSP/CanIf/CanIf_Compiler_Cfg.h::Drivers/BSP/CanIf/CanIf_Compiler_Cfg.h"/>
                 </files>
-            </component>
-        </bundle>
-        <bundle Cbundle="bxCAN Slave" Cclass="Board Part" Cversion="0.1.0">
-            <description>To handle the slave part of the bxCAN</description>
-            <doc>Z:/GIT Repro/CAN_Stack_ExpPack/README.md::readme.txt</doc>
-            <component Cgroup="bxCAN_Slave" Csub="virtualCAN" condition="hasCanMaster" maxInstances="1">
-                <description>We need a virtual component	</description>
-                <files/>
             </component>
         </bundle>
         <bundle Cbundle="SourceCodeDocu" Cclass="Utility" Cversion="0.1.0">
@@ -169,7 +216,7 @@ So we must do the copy handmade :-(</description>
         <bundle Cbundle="Common" Cclass="DataExchange" Cversion="0.1.0">
             <description>To handle standard protocols</description>
             <doc>Z:/GIT Repro/CAN_Stack_ExpPack/README.md::readme.txt</doc>
-            <component Cgroup="IsoTp" condition="hasCanMaster" maxInstances="1">
+            <component Cgroup="IsoTp" condition="hasComIfClass" maxInstances="1">
                 <description>To handle the ISO15765-2 transport protocol</description>
                 <files>
                     <file category="sourceCpp" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/DataExchange_Common/IsoTP/IsoTP.cpp::Middlewares/Third_Party/IsoTP/IsoTP.cpp"/>
@@ -183,7 +230,7 @@ So we must do the copy handmade :-(</description>
         <bundle Cbundle="Fueltech" Cclass="DataExchange" Cversion="0.1.0">
             <description>To handle the communication with Fueltech components</description>
             <doc>Z:/GIT Repro/CAN_Stack_ExpPack/source/docu/Fueltech/Protocol_FTCAN20_Public_R020.pdf::Docu/Fueltech/Protocol_FTCAN20_Public_R020.pdf</doc>
-            <component Cgroup="FTCAN2p0" Csub="FTCAN2p0_Layer" condition="hasCanMaster" maxInstances="1">
+            <component Cgroup="FTCAN2p0" Csub="FTCAN2p0_Layer" condition="hasComIfClass" maxInstances="1">
                 <description>To handle the Fueltech FT2.0 transport protocol</description>
                 <files>
                     <file category="sourceCpp" name="Z:/GIT Repro/CAN_Stack_ExpPack/source/code/DataExchange_Fueltech/FTCAN2p0/CanFT2p0.cpp::Middlewares/Third_Party/FTCAN2p0/CanFT2p0.cpp"/>

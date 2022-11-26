@@ -63,25 +63,25 @@ FUNC(Std_ReturnType, TM_CANFT_CODE) CanFT2p0Stream::RxIndication(
          (rxPduId < CanFT_Rx_unknownPdu ) )
     {
       // first segmented message, we need a hard reset of segment counter:
-      if ( ptr2Sdu->Data[0] == 0x0 )
+      if ( ptr2Sdu->ptr2Data[0] == 0x0 )
       {
         // start new reading of segmented message
-        dataCount = (ptr2Sdu->Data[1] << 8) + ptr2Sdu->Data[2];
+        dataCount = (ptr2Sdu->ptr2Data[1] << 8) + ptr2Sdu->ptr2Data[2];
         readCount = 0;
-        for ( uint8_t byteCount = 3; byteCount < ptr2Sdu->CanIf_Header.DLC; byteCount++ )
+        for ( uint8_t byteCount = 3; byteCount < ptr2Sdu->CanMsgHeader.DLC; byteCount++ )
         {
-          ((uint8_t*)dataList)[(dataCount-1)-readCount] = ptr2Sdu->Data[byteCount];
+          ((uint8_t*)dataList)[(dataCount-1)-readCount] = ptr2Sdu->ptr2Data[byteCount];
           readCount++;
         }
         segmCount = 1;
       }
 
       // all other segmented messages
-      if ( ptr2Sdu->Data[0] == segmCount )
+      if ( ptr2Sdu->ptr2Data[0] == segmCount )
       {
-        for ( uint8_t byteCount = 1; byteCount < ptr2Sdu->CanIf_Header.DLC; byteCount++ )
+        for ( uint8_t byteCount = 1; byteCount < ptr2Sdu->CanMsgHeader.DLC; byteCount++ )
         {
-          ((uint8_t*)dataList)[(dataCount-1)-readCount] = ptr2Sdu->Data[byteCount];
+          ((uint8_t*)dataList)[(dataCount-1)-readCount] = ptr2Sdu->ptr2Data[byteCount];
           readCount++;
         }
         segmCount++;

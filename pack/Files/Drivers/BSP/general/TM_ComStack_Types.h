@@ -20,6 +20,7 @@
 /** the unified type to use PduNames as numbers */
 typedef uint32_t ComStack_PduType;
 
+/** @brief generic value for a invalid PDU name */
 #define ComStack_InvalidPdu   0xFCCFFCCF
 
 /** @brief to see it is a HAL name */
@@ -72,9 +73,9 @@ typedef struct
 {
   /** @brief The header of the CAN message
    *  @details this is the public header used by inside my implementation */
-  ComStack_CanMsgHeader       CanIf_Header;
+  VAR(ComStack_CanMsgHeader, AUTOMATIC)       CanMsgHeader;
   /** @brief CAN has 8 data bytes. */
-  uint8_t               Data[8];
+  P2CONST(uint8_t, AUTOMATIC, AUTOMATIC)               ptr2Data;
 }ComStack_CanMessageType;
 
 /** @brief The length type for PDU Data */

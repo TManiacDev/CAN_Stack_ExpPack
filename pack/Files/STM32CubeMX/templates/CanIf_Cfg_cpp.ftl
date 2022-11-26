@@ -243,6 +243,38 @@
 /* ########################################################################## */
 [/#if] [#-- end of extractDebug_FTL --]
 
+[#-- add IsoTP pdu  --]
+[#if IsoTp_RxPduList?? ]
+[#if extractDebug_FTL > 0]
+// FTL Debug: add the IsoTp_RxPduList 
+[/#if] [#-- end of extractDebug_FTL --]
+  [#list IsoTp_RxPduList as IsoTp_RxPdu]
+    [#assign RxPduNameList += ["MyTest" + "_" + IsoTp_RxPdu ] ]
+    [#assign RxIdList += ["S:" + "0x7EF"] ]
+    [#assign RxMaskList += ["S:0x0"] ]
+    [#assign RxLengthList += ["8"] ]
+    [#assign RxControllerList += ["M"] ]
+    [#assign RxTargetPduNameList += [IsoTp_RxPdu ] ]
+    [#assign RxUpperLayerList += ["CanTP"] ]
+  [/#list] [#-- end of IsoTp_RxPduList as IsoTp_RxPdu --]
+[/#if] [#-- end of IsoTp_RxPduList?? --]
+
+[#if IsoTp_TxPduList?? ]
+[#if extractDebug_FTL > 0]
+// FTL Debug: add the IsoTp_TxPduList
+[/#if] [#-- end of extractDebug_FTL --]
+  [#list IsoTp_TxPduList as IsoTp_TxPdu]
+    [#assign TxPduNameList += ["MyTest" + "_" + IsoTp_TxPdu ] ]
+    [#assign TxIdList += ["S:" + "0x7DF"] ]
+    [#assign TxMaskList += ["S:0x0"] ]
+    [#assign TxLengthList += ["8"] ]
+    [#assign TxControllerList += ["M"] ]
+    [#assign TxTargetPduNameList += [IsoTp_TxPdu ] ]
+    [#assign TxUpperLayerList += ["CanTP"] ]
+  [/#list] [#-- end of IsoTp_TxPduList as IsoTp_TxPdu --]
+[/#if] [#-- end of IsoTp_TxPduList?? --]
+[#-- end of add IsoTP pdu --]
+
 [#-- add fueltech pdu --]
 [#if FT_DeviceType?? && FT_Device_Use??]
 // we have a FT Device config 
@@ -335,38 +367,6 @@
   [/#list] [#-- end of FT_EcuStreamList as FT_EcuStreamName --]
 [/#if] [#-- end of FT_EcuType?? && FT_EcuStreamList?? --]
 [#-- end of add fueltech pdu --]
-
-[#-- add IsoTP pdu  --]
-[#if IsoTp_RxPduList?? ]
-[#if extractDebug_FTL > 0]
-// FTL Debug: add the IsoTp_RxPduList 
-[/#if] [#-- end of extractDebug_FTL --]
-  [#list IsoTp_RxPduList as IsoTp_RxPdu]
-    [#assign RxPduNameList += ["MyTest" + "_" + IsoTp_RxPdu ] ]
-    [#assign RxIdList += ["S:" + "0x7EF"] ]
-    [#assign RxMaskList += ["S:0x0"] ]
-    [#assign RxLengthList += ["8"] ]
-    [#assign RxControllerList += ["M"] ]
-    [#assign RxTargetPduNameList += [IsoTp_RxPdu ] ]
-    [#assign RxUpperLayerList += ["CanTP"] ]
-  [/#list] [#-- end of IsoTp_RxPduList as IsoTp_RxPdu --]
-[/#if] [#-- end of IsoTp_RxPduList?? --]
-
-[#if IsoTp_TxPduList?? ]
-[#if extractDebug_FTL > 0]
-// FTL Debug: add the IsoTp_TxPduList
-[/#if] [#-- end of extractDebug_FTL --]
-  [#list IsoTp_TxPduList as IsoTp_TxPdu]
-    [#assign TxPduNameList += ["MyTest" + "_" + IsoTp_TxPdu ] ]
-    [#assign TxIdList += ["S:" + "0x7DF"] ]
-    [#assign TxMaskList += ["S:0x0"] ]
-    [#assign TxLengthList += ["8"] ]
-    [#assign TxControllerList += ["M"] ]
-    [#assign TxTargetPduNameList += [IsoTp_TxPdu ] ]
-    [#assign TxUpperLayerList += ["CanTP"] ]
-  [/#list] [#-- end of IsoTp_TxPduList as IsoTp_TxPdu --]
-[/#if] [#-- end of IsoTp_TxPduList?? --]
-[#-- end of add IsoTP pdu --]
 
 [#if RxPduNameList?? && (RxPduNameList?size > 0)]
 [#-- test for all RX lists have the same length --]
@@ -606,7 +606,7 @@
  *  - Name of the upper layer N-PDU
  *  - name of upper layer
  *
- *  @sa CanIf_PduIdType */
+ *  @warning the struct hasn't the same order like CanIf_RxPduIdType */
 [#if RxPduTestReturn?? && RxPduTestReturn == "passed" ]
 /* ->->-> we have a valid Rx Pdu List */
 EXTERN_CONST( CanIf_RxPduCfgType, TM_CANIF_CONFIG_DATA ) MyTest_RxPduConfig[] =

@@ -11,22 +11,22 @@
  * @date Apr 24, 2022
  * @version 
  *
+ * this file/page is multilingual
  */
 #ifndef _DOXY_PAGE_HISTORY_H_
 #define _DOXY_PAGE_HISTORY_H_
 
 
-
-/** @page history Änderungsverzeichnis
+/** @page history Änderungsverzeichnis / History Overview
  *
- *  Version | Inhalt, Änderung
- *  :-----: | ----------------
- *  0.0.0   | Dies hier sind Entwicklungsänderungen
- *  0.7.12  | Einführung des lokalen Änderungsmanagment mit GitKraken
- *  0.7.13  | Konfiguration des CAN Interface über die Oberfläche möglich
- *  0.7.14  | Source Code Doku verbessert -> separate Page Files, und Bilder
- *  0.8.7   | Umsetzung des PDU Handlings im FTCAN2.0 Modul
- *  0.9.0   | Implementierung CanIf und CanFT2.0 nach C++ überführen
+ *  This history is handmade at this time. Maybe we generate it with a template later.
+ *
+ *  Version | Inhalt, Änderung | Content, Changes (english)
+ *  :-----: | ---------------- | --------------------------
+ *  0.0.0   | Dies hier sind Entwicklungsänderungen des eigentlichen Expansion Packages| This table is for basic development changes naming the Expansion Packages versions
+ *  ^       | Die Tabelle ist aktuell noch nicht automatisch generiert und muss von Hand gepflegt werden, sie dient ausschließlich der Einbindung in die Doxygen Doku | This table isn't managed by code generation
+ *  0.1.0   | erste Veröffentlichung in guthub | first push to github
+ *  ^       | CanIf, IsoTp und @ref CanFT2p0 "CanFT2.0"  (inkl Stream decode) sind grundsätzlich nutzbar | CanIf, IsoTp and @ref CanFT2p0 "CanFT2.0" are ready to use in a simple matter
  *
  *
  *  Version | Inhalt, Änderung
