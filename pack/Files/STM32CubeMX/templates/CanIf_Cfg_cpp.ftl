@@ -606,7 +606,7 @@
  *  - Name of the upper layer N-PDU
  *  - name of upper layer
  *
- *  @warning the struct hasn't the same order like CanIf_RxPduIdType */
+ *  @warning the struct must have the same order like CanIf_RxPduIdType */
 [#if RxPduTestReturn?? && RxPduTestReturn == "passed" ]
 /* ->->-> we have a valid Rx Pdu List */
 EXTERN_CONST( CanIf_RxPduCfgType, TM_CANIF_CONFIG_DATA ) MyTest_RxPduConfig[] =
@@ -657,7 +657,7 @@ EXTERN_CONST( CanIf_RxPduCfgType, TM_CANIF_CONFIG_DATA ) MyTest_RxPduConfig[] =
  *  - Name of the upper layer N-PDU
  *  - name of upper layer
  *
- *  @sa CanIf_PduIdType */
+ *  @warning the struct must have the same order like CanIf_TxPduIdType */
 [#if TxPduTestReturn?? && TxPduTestReturn == "passed" ]
 /* ->->-> we have a valid Tx Pdu List */
 EXTERN_CONST( CanIf_RxPduCfgType, TM_CANIF_CONFIG_DATA ) MyTest_TxPduConfig[] =

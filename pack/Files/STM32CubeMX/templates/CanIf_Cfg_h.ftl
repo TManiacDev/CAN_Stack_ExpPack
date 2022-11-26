@@ -57,9 +57,7 @@
 /** @addtogroup TM_CanIf_Main
  *  @{ */
  
-#ifdef __cplusplus
 #include "TMEVersionInfo.h"
-#endif
  
 /** @brief  my ID */
 #define CANIF_VENDOR_ID           TM_VENDOR_ID
@@ -74,10 +72,6 @@
  *  @todo use a generated value */
 #define CANIF_PATCH_VERSION       ('${SubPatch}')
 /** @} */ // end of grouping TM_CanIf_Main
-
-#ifdef __cplusplus
- extern "C" {
-#endif
 
 /*******************************/
 [#-- SWIPdatas is a list of SWIPconfigModel --]  
@@ -173,10 +167,6 @@ extern ${variable.value} ${variable.name};
 /* USER CODE END ${dashedFileNamed} ${UserCodeCounter} */
   [#assign UserCodeCounter++]
 
-
-#ifdef __cplusplus
-}
-#endif
 #endif /*__ ${inclusion_protection}__ */
 
 /*******************  (C) TManiac Engineering  *******************/

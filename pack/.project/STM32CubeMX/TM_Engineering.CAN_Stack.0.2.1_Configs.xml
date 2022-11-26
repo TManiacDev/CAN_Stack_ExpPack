@@ -51,8 +51,11 @@
     </RefConfigFile>
     <RefConfigFile Added="true" Description="To generate puplic names like the Bitrate list" Name="Can_Master_h_Template" Template="Can_Cfg_h.ftl" destinationFolder="Target/BSW/Can">
         <File Category="header" Condition="all" Name="./Can_Cfg.h"/>
-        <Argument Added="true" AddressOf="false" GenericType="simple" Name="CAN_BITRATES" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" GenericType="simple" Name="CAN1_USED_RX_HW_FILTER" OptimizationCondition="equal"/>
         <Argument Added="true" AddressOf="false" GenericType="simple" Name="CAN_SAMPLE_POINT" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" GenericType="simple" Name="CAN_TX_SW_BUFFER_SIZE" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" GenericType="simple" Name="CAN_BITRATES" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" GenericType="simple" Name="CAN_RX_SW_BUFFER_SIZE" OptimizationCondition="equal"/>
     </RefConfigFile>
     <RefConfigFile Added="true" Description="Generation of the Config structure values" Name="Can_Master_c_Template" Template="Can_Cfg_cpp.ftl" destinationFolder="Target/BSW/Can">
         <File Category="source" Condition="all" Name="./Can_Cfg.cpp"/>
@@ -101,8 +104,6 @@
     <RefConfigFile Added="true" Description="Generation of the Config structure values" Name="CanIf_h_Template" Template="CanIf_Cfg_h.ftl" destinationFolder="Target/BSW/CanIf">
         <File Category="header" Condition="all" Name="./CanIf_Cfg.h"/>
         <Argument Added="true" AddressOf="false" Comment="used upper layer for Rx" GenericType="simple" Name="CANIF_RXUL_LIST" OptimizationCondition="equal"/>
-        <Argument Added="true" AddressOf="false" Comment="Size of TX buffer" GenericType="simple" Name="CANIF_TX_BUFFER_SIZE" OptimizationCondition="equal"/>
-        <Argument Added="true" AddressOf="false" Comment="Size of RX buffer" GenericType="simple" Name="CANIF_RX_BUFFER_SIZE" OptimizationCondition="equal"/>
         <Argument Added="true" AddressOf="false" Comment="used upper layer for Tx" GenericType="simple" Name="CANIF_TXUL_LIST" OptimizationCondition="equal"/>
     </RefConfigFile>
     <RefConfigFile Added="true" Description="Creates the enum list for PDU names" Name="CANIF_PDU_NAMES_TO_ECU_H" Template="EcuNames_Cfg_h.ftl" destinationFolder="Target/general">

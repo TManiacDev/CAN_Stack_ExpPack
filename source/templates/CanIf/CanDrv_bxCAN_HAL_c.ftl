@@ -43,7 +43,8 @@
   [/#if] [#-- if end of includes?? --]
 
 /* Includes ------------------------------------------------------------------*/
-#include "CanIf_Cfg.h"
+#include "main.h"
+#include "TM_Std_Types.h"
 
 /* private Includes ----------------------------------------------------------*/
 /* USER CODE BEGIN ${dashedFileNamed} ${UserCodeCounter} */
