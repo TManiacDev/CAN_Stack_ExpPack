@@ -76,17 +76,27 @@
     <text x="250" y="30" text-anchor="middle" font-size="15" fill="white">CAN expansion board</text>
     <text x="250" y="75" text-anchor="middle" font-size="15" fill="white">STM32 Nucleo development board</text>
   </g>
+  <g id="HW_Abstraction">
+    <rect x="0" y="0" width="400" height="75"  stroke="black" fill="white"/>
+    <rect x="95" y="30" width="300" height="40"  stroke="blue" fill="blue"/>
+    <text x="50" y="35" text-anchor="middle" font-size="15" >Hardware</text>
+    <text x="50" y="55" text-anchor="middle" font-size="15" >Abstraction</text>
+    <text x="200" y="45" text-anchor="middle" font-size="15" fill="white">STM32Cube Hardware</text>
+    <text x="200" y="60" text-anchor="middle" font-size="15" fill="white">Abstraction Layer (HAL)</text>
+  </g>
   <g id="HW_Interface">  
-    <rect x="0" y="0" width="400" height="95"  stroke="black" fill="white"/>
-    <rect x="95" y="50" width="300" height="40"  stroke="blue" fill="blue"/>
-    <rect x="195" y="5" width="200" height="40"  stroke="blue" fill="green"/>
-    <rect x="305" y="5" width="90" height="70"  stroke="blue" fill="green"/>
-    <text x="50" y="45" text-anchor="middle" font-size="15" >Hardware</text>
-    <text x="50" y="65" text-anchor="middle" font-size="15" >Abstraction</text>
-    <text x="300" y="30" text-anchor="middle" font-size="15" fill="white">CAN Interface Module </text>
-    <text x="200" y="65" text-anchor="middle" font-size="15" fill="white">STM32Cube Hardware</text>
-    <text x="200" y="80" text-anchor="middle" font-size="15" fill="white">Abstraction Layer (HAL)</text>
-    <text x="350" y="75" text-anchor="middle" font-size="10" fill="white">CAN HAL</text>
+    <rect x="0" y="0" width="280" height="15"  stroke="blue" fill="lightgreen"/>
+    <rect x="0" y="15" width="280" height="40"  stroke="blue" fill="green"/>
+    <rect x="190" y="55" width="90" height="15"  stroke="blue" fill="lightgreen"/>
+    <rect x="185" y="70" width="50" height="30"  stroke="blue" fill="green"/>
+    <rect x="235" y="70" width="50" height="30"  stroke="blue" fill="green"/>
+    <text x="150" y="10" text-anchor="middle" font-size="10" fill="black">COM Interface API </text>
+    <text x="150" y="40" text-anchor="middle" font-size="15" fill="white">CAN Interface Module </text>
+    <text x="240" y="65" text-anchor="middle" font-size="10" fill="black">Can API</text>
+    <text x="210" y="81" text-anchor="middle" font-size="13" fill="white">CanDrv</text>
+    <text x="210" y="93" text-anchor="middle" font-size="13" fill="white">bxCAN</text>
+    <text x="260" y="81" text-anchor="middle" font-size="13" fill="white">CanDrv</text>
+    <text x="260" y="93" text-anchor="middle" font-size="13" fill="white">FDCAN</text>
   </g>
   
   <g id="TP_Block">  
@@ -111,6 +121,7 @@
 </defs>  
       <use href="#App_Block_1" transform="translate(50,20)"/> 
       <use href="#TP_Block" transform="translate(50,150)"/> 
-      <use href="#HW_Interface" transform="translate(50,270)"/> 
+      <use href="#HW_Abstraction" transform="translate(50,290)"/> 
+      <use href="#HW_Interface" transform="translate(160,260)"/> 
       <use href="#HW_Block" transform="translate(50,370)"/> 
 </svg>

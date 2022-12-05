@@ -1,13 +1,13 @@
 /**
   ******************************************************************************
   * @section EcuNames_CFG_H Code generation
-  * File Name          : ./EcuNames_Cfg.h
+  * File Name          : EcuNames_Cfg.h
   * Description        : This file provides code for the configuration
   *                      of the instances.
   *
-  * MiddleWare name    : TM_Engineering.CAN_Stack.0.1.0
+  * MiddleWare name    : TM_Engineering.CAN_Stack.0.2.1
   * MiddleWare version :
-  * Last updated       : Nov 8, 2022  6:56:52 PM
+  * Last updated       : Dec 5, 2022  12:48:11 PM
   *
   ******************************************************************************
   * @attention
@@ -22,8 +22,8 @@
   ******************************************************************************
   */
  /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef ______ECUNAMES_CFG__H__
-#define ______ECUNAMES_CFG__H__
+#ifndef __ECUNAMES_CFG__H__
+#define __ECUNAMES_CFG__H__
 
 #include "main.h"
 #include "TM_Std_types.h"
@@ -33,7 +33,7 @@
 #endif
 
 /* private Includes -----------------------------------------------------------*/
-/* USER CODE BEGIN __/EcuNames_Cfg__h 0 */
+/* USER CODE BEGIN EcuNames_Cfg__h 0 */
 
 /** @brief this enum shows the naming conventions of used PDU names */
  typedef enum
@@ -46,9 +46,20 @@
    CanUndefUl_Tx_Target2
  }CanUL_PDU_for_Test;
 
-/* USER CODE END __/EcuNames_Cfg__h 0 */
+/* USER CODE END EcuNames_Cfg__h 0 */
 
-/*******************************/
+/* ***************************** */
+
+/** @brief Names for the hardware CAN controller
+  * @todo we need a generic way for this */
+typedef enum
+{
+  CanMasterController,    ///< ST named the first controller Master because of the "Master configuration"
+  CanSlaveController,     ///< ST named the second controller Slave because of fewer configuration
+  NBROF_CanController     ///< for error handling we create a name at last
+}ECU_CanController;
+
+/* ***************************** */
 
 /** @addtogroup TM_CanIfCfg
  *  @{ */
@@ -110,14 +121,14 @@ typedef enum
 /** @} */ // end of grouping TM_CanIfCfg
 
 /* private names -----------------------------------------------------------*/
-/* USER CODE BEGIN __/EcuNames_Cfg__h 1 */
+/* USER CODE BEGIN EcuNames_Cfg__h 1 */
 
-/* USER CODE END __/EcuNames_Cfg__h 1 */
+/* USER CODE END EcuNames_Cfg__h 1 */
 
 #ifdef __cplusplus
 }
 #endif
-#endif /*__ ____ECUNAMES_CFG__H__ */
+#endif /*__ ECUNAMES_CFG__H__ */
 
 /*******************  (C) TManiac Engineering  *******************/
 /*******************         END OF FILE       *******************/

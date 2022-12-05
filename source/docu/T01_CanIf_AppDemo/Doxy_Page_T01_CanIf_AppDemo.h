@@ -43,6 +43,7 @@
   Ich nutze für das gesamte Projekt um den *CAN Stack* durchgängig den Workspace wie im folgenden Bild.
   @image html T01_P00_select_workspace.png "Select Workspace directory" width=500
   Hierbei sei erwähnt, dass das "projects"-Verzeichnis eben auch jenem entspricht, welches als Spiegel zum Repository gepflegt wird.
+  Möchte man das Tutorial unabhängig durch spielen, so macht es Sinn ein abweichendes Verzeichnis anzugeben.
 
   Beim ersten Start der STM32CubeIDE wird man von dem "Information Center" begrüßt. Hier wählen wir natürlich für's Erste aus, dass wir ein neues Projekt starten möchten.
   @image html T01_P01_start_new_project.png "Start new STM32 project" width=80%
@@ -188,22 +189,25 @@
   So steht zum Beispiel bei unserer Application: "This component has unresolved dependencies". Es braucht also noch irgend ein anderes Modul.
   Weiter steht da "There are solutions within this pack". Die Lösung des Problems liegt also nahe. <br>
   Mit dem @image{inline} html DependenciesButton.png "chain button" Button (grün/roter Pfeil) dann kann man die Abhängigkeiten unmittelbar anzeigen.
-  In unserem Fall braucht die @c DemoApplication eine Komponente @c CanIf/Can
+  In unserem Fall braucht die @c DemoApplication eine Komponente @c bxCAN/Master
 
   Wir ergänzen also die noch notwendigen Module die sich alle im Bundle Board Support befinden.
-  - Dies kann man unter anderem in dem man direkt auf "Select" klickt.
+  - Man kann durch Auswahl der einzelnen Module versuchen das Problem selber zu lösen
+  - Man kann auch einzele Probleme mit "Select" lösen. ( So lernt man vielleicht etwas über den Aufbau des Packs)
   - Mit "Show" kann man die Lösung vor selektieren.
-  - Und mit "Resolve" löst man alle verketteten Probleme mit einmal. Also in unserem Fall werden die drei erforderlichen Module ausgewählt.
+  - Und mit "Resolve" löst man alle verketteten Probleme mit einmal. Also in unserem Fall werden die fünf erforderlichen Module ausgewählt.
 
-  Module | Inhalt
-  ------ | ------
-  general / Common | Hier sind die Header Files mit den Compiler Abhängigkeiten oder auch eine Klasse zur Handhabung von Versionsinformationen zur Laufzeit enthalten
-  ComIf / Common | Darin ist eine virtuelle Klasse enthalten, welche zur Abstraktion von Kommunikation Interface Klassen ähnlich dem AUTOSAR Ansatz vorgesehen ist
-  bxCan_Master / Can | Dies ist unsere abgeleitete Interface Klasse welche den Master des bxCAN Controllers darstellt
+  Bundle | Module | Inhalt
+  ------ | ------ | ------
+  CanDrv | CanDrv_APIclass    | Das ist eine virtuelle Klasse Can. Diese stellt das API für alle kompatiblen CanDrv bereit
+  ^      | bxCAN / Master     | Dies ist die Umsetzung des CanDrv_bxCAN für den STM bxCAN Controller. Für das Tutorial reicht uns der Master Controller
+  CanIf  | general            | Hier sind die Header Files mit den Compiler Abhängigkeiten oder auch eine Klasse zur Handhabung von Versionsinformationen zur Laufzeit enthalten
+  ^      | ComIf              | Darin ist eine virtuelle Klasse enthalten, welche zur Abstraktion von Kommunikation Interface Klassen ähnlich dem AUTOSAR Ansatz vorgesehen ist
+  ^      | CanIf              | Dies ist unsere abgeleitete Interface Klasse für die Kommunikation über CAN
 
   @image html T01_P18_select_modules.png "Select needed modules" width=80%
 
-  Haben wir diese drei Module aktiv, werden wir mit grünen Häkchen belohnt und können den Selector wieder schließen.
+  Haben wir diese fünf Module aktiv, werden wir mit grünen Häkchen belohnt und können den Selector wieder schließen.
 
   ########
   @section secConfigPack Konfiguration der Module
@@ -211,24 +215,24 @@
   Das Aktivieren der Module erfolgt auf dem gleichen Weg, wie wir zu Beginn das CAN-Modul aktiviert haben.
   In der linken Spalte des @c CanIf_AppDemo.ioc Viewers findet man jetzt einen weiteren Punkt "Software Packs".
   Unter diesen Punkt werden alle aktiven ExpansionPacks aufgeführt. Aktuell haben wir nur ein Pack, also ist hier auch nur unser @c TM_Engineering.CAN_Stack zu finden.
-  Aktiviert man das Module "Board Support CanIf" erhält man im Configuration Abschnitt die Tabs "Hardware Settings", "CAN Interface" und "User Constants".
+  Aktiviert man hier die Module erhält man im Configuration Abschnitt die Tabs "CAN Driver", "CAN Interface" und "User Constants".
   Der Tab "User Constants" ist der gleiche den wir schon aus den Einstellungen des CAN-Modules kennen.
 
-  @subsection de_subsecHWsettings Hardware Settings
-  Die Hardware Settings sind jene, welche durch das CanIf-Module kontrolliert werden.
-  In der AUTOSAR Spec werden diese Parameter durch das CAN-Modul bearbeitet. Wir müssen dies über die STM-HAL erledigen.
-  @image html T01_P19_config_modules.png "Config the Hardware Settings of the CanIf module" width=80%
+  @subsection de_subsecCanDrvSetting CAN Driver
+  Der Tab CAN Driver beinhaltet die Konfigurationsparameter welche unmittelbar auf die Hardware wirken.
+  In der AUTOSAR Spec werden diese Parameter durch das CAN-Modul bearbeitet.
+  @image html T01_P19_config_modules.png "Config the Hardware Settings of the CanDrv module" width=80%
   Auch in dem "Configuration" Abschnitt gibt es wieder einen (i) Button um mehr über die einzelnen Parameter zu erfahren.
 
   ###Bitrate Generator
-  Mit diese Parameter werden durch den Source Code Generator die notwendigen Hardware Parameter berechnet um die jeweiligen Baudraten zu erzeugen.
+  Mit diese Parameter werden durch den Source Code Generator die notwendigen Hardware Parameter für das Bit Timing berechnet um die jeweiligen Baudraten zu erzeugen.
   Neben diesen Parametern wird die Clock des CAN Modules aus den Systemparametern genutzt.
   @remark Aktuell existiert kein Support für System Clock Switch während der Laufzeit!!!
 
-  Parameter | Beschreibung
-  --------- | ------------
-  List of Bitrates |  Hier wird die Liste der gewünschten Bitraten angelegt. Die einzelnen Bitraten werden durch Kommas getrennt.<br>Die hier gewählten Baudraten sind während der Laufzeit auswählbar.<br>
-  Bittiming Sample Point | Sample Point als Prozent oder Kommazahl. Der Sample Point muss entweder größer 50% oder eben 0.5 < x < 1 sein
+  Parameter               | Beschreibung
+  ---------               | ------------
+  List of Bitrates        | Hier wird die Liste der gewünschten Bitraten angelegt. Die einzelnen Bitraten werden durch Kommas getrennt.<br>Die hier gewählten Baudraten sind während der Laufzeit auswählbar.<br>
+  Bittiming Sample Point  | Sample Point als Prozent oder Kommazahl. Der Sample Point muss entweder größer 50% oder eben 0.5 < x < 1 sein
 
   ###bxCAN Master Setup / bxCAN Slave Setup
   Hier werden die Startup Parameter des bxCAN Master Controllers festgelegt.<br>
@@ -236,7 +240,7 @@
 
   Parameter              | Wert              | Beschreibung
   ---------              | ----              |------------
-  Initial Bitrate        | [ Zahl, Integer ] | Hier kann eine Bitrate ausgewählt werden welche zuvor im Bereich "Baudrate Parameter" definiert wurde
+  Initial Bitrate        | [ Zahl, Integer ] | Hier kann eine Bitrate ausgewählt werden welche zuvor im Bereich "Bitrate Generator" definiert wurde
   Controller Mode        | Normal            | Standard. Der Controller nimmt ganz normal am Bus teil
   ^                      | Loopback          | CAN-Tx und CAN-Rx des Controllers werden innerhalb des µC verbunden. Damit lässt sich ohne weiteren Teilnehmer ein aktives Busverhalten simulieren.
   ^                      | Silent            | Der Controller nimmt nicht an der Arbitrierung Teil. Damit kann man auf einem Bus mithören ohne diesen zu beeinflussen
@@ -248,23 +252,22 @@
   Auto Wake up           | true              | Der CAN Controller wacht bei eingehenden NAchrichten von alleine auf
   ^                      | false             | Der CAN Controller muss per Software geweckt werden
   Auto Retransmission    | true / false      | Wählt aus ob die Nachrichten bei fehlgeschlagener Arbitrierung erneut gesendet werden sollen
+  ^                      | @attention        | This value is inverted to the Bit 4 NART: No automatic retransmission of the bxCAN controller. The inversion is done inside the HAL Init function.
   Receive FIFO Locked    | true              | Neue Nachrichten überschreiben den vollen Rx-FIFO
   ^                      | false             | Es werden keine weiteren Nachrichten mehr angenommen, wenn der Rx-FIFO voll ist
   time based priority on transmission | true | Das Senden erfolgt in der zeitlichen Reihenfolge wie die Messages dem Tx-FIFO übergeben werden
   ^                      | false             | Das Senden unterliegt den normalen Arbitrierungsregeln, es wird also entsprechend der CAN-Id der Vorrang gegeben
   CAN Hardware filter    | [ Zahl, Integer ] | Gibt die maximale Anzahl der genutzten Hardware Filter für diesen Controller an.<br>Der bxCAN Slave hat die restlichen Filter des bxCAN Masters zur Verfügung
 
+  ###Software Message Buffer
+  Der bxCAN Controller stellt nur einen drei Nachrichten großen Receive FIFO und sowie drei Transmit Mailboxen zur Verfügung.
+  Ich habe dem Modul je einen Software Buffer für Receive und Transmit spendiert. Die Größe kann hier über die Parameter eingestellt werden.
+  
   @subsection de_subsecCanInterface CAN Interface
 
   Ich muss hier dann noch das System mit den PDUs erklären.
 
   @image html T01_P20_config_canif.png "Parameter on CAN Interface" width=40%
-
-  ###Parameter Settings
-  Größe des Rx bzw des Tx Buffers.<br>
-  Im Gegensatz zu AUTOSAR habe ich die Buffer im CanIf Module umgesetzt.
-  Das bxCan Modul hat nur drei Rx Mailboxen.
-  Das Hardware Module entspricht der STM HAL, welche ja unverändert übernommen wird.
 
   ###RX/TX PDU Configuration
   Alle Parameter sind als Komma-Listen zu benutzten.
@@ -274,8 +277,25 @@
 
   @todo Vielleicht kennt jemand ja einen Weg diese Konfiguration in Tabellenform ähnlich der FreeRTOS Konfiguration in der STM32CubeIDE umzusetzen.
 
-  Ziel ist e, dass die Konfiguration hier nur für Nachrichten ohne Übertragungsprotokoll notwendig ist.
-  Aktuell kann das CanFT2p0-Protokoll die Konfiguration schon selber durch führen.
+  Ziel ist es, dass die Konfiguration hier nur für Nachrichten ohne Übertragungsprotokoll notwendig ist.
+  Das CanFT2p0, sowie das IsoTp -Protokoll führen die Konfiguration schon selber durch.
+  ####Kurzbeschreibung
+  Die Tabelle gibt einen ersten Überblick. Die Parameter werden danach im Detail beschrieben.
+
+  Parameter             | Wert (Aufbau)   | Beschreibung
+  ---------             | -------------   | ------------
+  Name L-PDU            | Name            | Name als String
+  CAN Id                | S:0x123         | Standard 11bit Identifier in hexadezimal Format
+  ^                     | E:0x123456      | Extended 29bit Identifier in hexadezimal Format
+  CAN Id Masking        | S/E:0x0         | Aufbau genauso wie CAN Id
+  HW Controller         | Master oder M   | wählt den bxCAN Master als Controller aus
+  ^                     | Slave oder S    | wählt den bxCAN Slave als Controller aus
+  assigned N-PDU        | Name            | gibt den Namen der Nachricht im UpperLayer (was in der Regel das Übertragungsprotokoll ist) an
+  assigned upper layer  | undef           | es wurde kein spezielles UpperLayer ausgewählt. Die Message muss im CAN Interface abgeholt werden
+  ^                     | CanTP           | das UpperLayer dieser Message ist das IsoTP
+  ^                     | CanFT           | das UpperLayer dieser Nachricht ist das CANFT2.0 Protokoll
+  ^                     | ...             | die möglichen Protokolle können erweitert werden.
+
 
   ####Name list of Interface L-PDUs
   Liste der L-PDU Namen.<br>
@@ -378,6 +398,32 @@
   Wir erinnern uns daran, dass in der Information des ExpansionPack etwas stand, dass wir das Generieren der HAL-Funktionen deaktivieren müssen.
   Und genau das ist der Grund für diesen Linker Fehler.
 
+  Wir müssen also noch ein mal in die Konfiguration zurück.
+  @image html T01_P25_deactivate_mx_can.png "Advanced Project Settings" width=80%
+  Der @c CanIf_AppDemo.ioc Viewer hat ein Tab "Project Manager".
+  Hier findet man verschiedene Einstellmöglichkeiten für den Umgang mit dem STM32Cube Code Generator.
+  Im Bereich "Advanced Settings" findet man die Möglichkeit die Generierung für die aktiven Module zu beeinflussen.
+  So kann man unter anderem auch wählen ob man die HAL oder gar eine Low Level Ansatz für die Module nutzen möchte.
+
+  Im Bereich "Generated Function Calls" werden alle durch den Code Generator erzeugbaren Funktionen aufgelistet.
+  Das @c TM_Enineering.CAN_Stack Modul soll die Aufgaben des @c CAN1 (oder evtl auch des @c CAN2) Modules übernehmen.
+  Wir müssen somit die Code Generierung sowie den Funktionsaufruf der MX_CAN1_Init() unterbinden.
+
+  Haben wir das getan, können wir den Code Generator noch einmal starten und anschließend das Projekt erfolgreich compilieren.
+
+  @section de_FirstDebug Es wird Zeit für die Hardware
+
+  Wir wollen Software für einen STM32 Mikrocontroller programmieren. Also brauchen wir auch einen Controller welcher unsere Software ausführen soll.
+
+  Wie ich zum Start des Tutorials erwähnt habe, möchte ich als Beispiel ein Nulceo-F439ZI Board, welches per Aufsteckboard mit CAN Transciever erweitert wurde, nutzen.
+  @image html general_P00_nucleo_board.jpg "The NUCLEO-F439ZI with CAN" width=80%
+  Die Beschreibung des Aufsteckboards soll hier nicht explizit erklärt werden. Bei Interesse kann ich das irgendwann mal ergänzen.
+
+  Wir verbinden den auf dem NUCLEO-Board vorhandenen ST-Link mit dem PC und starten den Debug Modus über die STM32CubeIDE.
+  @image html T01_P26_launch_debug.png "Debug Button"
+
+
+
 
 ## Diese Punkte muss ich noch ins Tutorial aufnehmen
  - ich muss noch an das blaue LED denken
@@ -385,9 +431,15 @@
  - Deaktivierung des Code Generators für das STM-CAN-Modul
  - Was ist mit den Interupt Callbacks
 
+
+
    @section de_secRestartIDE Was ist bei einem "normalen" Öffnen der IDE anders als beim ersten Start
    Die "*.ioc" wird nicht automatisch geöffnet
  * */
+
+/* ############################################################### */
+/*                       english docu                              */
+/* ############################################################### */
 
 /**  @page eng_page_T01_CanIf_AppDemo Tutorial 01: CanIf_AppDemo (english text)
  *  @tableofcontents{HTML:3}
@@ -433,26 +485,85 @@
   Here is some text to explain the waring(s): "This component has unresolved dependencies". So we know there must be some more components to use this one.
   The next line says: "There are solutions within this pack". There must be an other component inside our pack. We don't need an other pack. <br>
   The @image{inline} html DependenciesButton.png "chain button" button (like green/red arrow) will show you the needed dependencies.
-  So, the @c DemoApplication needs a component named @c CanIf/Can.
+  So, the @c DemoApplication needs a component named @c bxCAN/Master.
 
   You can choose your way to select the other components.
   The "Component Dependencies" view gives you some shortcuts
-  - you can manual select every with a click on the scare in the "Selection" column
+  - you can manual select every with a click on the square in the "Selection" column
   - you can click on "Select" button to do the same like above
-  - you can click on "Show" button to find were to select like the first point
+  - you can click on "Show" button to find where to select like the first point
   - you can click on "Resolve" button to do the same like the second point but includes all other dependencies
 
   After all you should have selected the following components and get green checkmark for solved dependencies
 
-  component | content
-  ------ | ------
-  general / Common | The component includes compiler dependencies and runtime version management
-  ComIf / Common | This component includes a virtual C++ class to abstract communication interfaces like the AUTOSAR idea.
-  bxCan_Master / Can | This is the derived interface class to give an abstraction of the bxCAN Master controller
+  Bundle | Module             | Content
+  ------ | ------             | ------
+  CanDrv | CanDrv_APIclass    | This module contains a virtual class Can which describes the API for all compatible CanDrv
+  ^      | bxCAN / Master     | Here is the CanDrv_bxCAN for the STM bxCAN Controller. We need in the tutorial the Master controller only
+  CanIf  | general            | The component includes compiler dependencies and runtime version management
+  ^      | ComIf              | This component includes a virtual C++ class to abstract communication interfaces like the AUTOSAR idea.
+  ^      | CanIf              | This is the derived interface class for communication on the CAN
 
   @image html T01_P18_select_modules.png "Select needed modules" width=80%
 
   Now you can close the "Software Pack Component Selector".
+
+  ########
+  @section eng_secConfigPack Module Configuration
+
+  Back in the @c CanIf_AppDemo.ioc viewer you can find on the left column a new point named "Software Packs".
+  Here will be listed all ExpansionPacks you have selected in the previous window.
+  So you can see the @c TM_Engineering.CAN_Stack at this time.
+  If you select it, there will be created a second column with to sections.
+  On the top there is the c Mode Section. Here you can activate and deactivate the modules.
+  On activation of a mode there will appear the configuration tab(s) on the lower section.
+
+  @subsection eng_subsecCanDrvSetting CAN Driver
+
+  The CAN Driver tab contains the configuration parameters for the access to the CAN bus.
+
+  @image html T01_P19_config_modules.png "Config the Hardware Settings of the CanDrv module" width=80%
+  If you need some more help you can select the (i) button at the upper right side in the tab. It will give you some more information about the selected parameter.
+
+  ###Bitrate Generator
+  The "Bitrate Generator" is inside the code generation ftl file.
+  It will calculate the needed timing parameters like @c SeqmentTime1, @c SeqmentTime2 or @c SyncJumpWidth.
+  This calcualtion based on the @c APB1 clock which drives the CAN controller.
+  @remark Today there is no support on switching the clock during run time!!!
+
+  Parameter               | Beschreibung
+  ---------               | ------------
+  List of Bitrates        | Give comma seperated list with bitrate values <br>This values are selectable inside the startup configuration and can be switched during runtime<br>
+  Bittiming Sample Point  | Sample Point can be given as a percent value (50%-100%) or as a float value (0.5 - 1.0)
+
+  ###bxCAN Master Setup / bxCAN Slave Setup
+  This are the startup parameter for th bxCAN Master controller or the bxCAN Slve controller, if activated.
+
+  Parameter              | Value Type        | Beschreibung
+  ---------              | ----              |------------
+  Initial Bitrate        | [Number, Integer] | select a value you have defined in the "Bitrate Generator"
+  Controller Mode        | Normal            | Standard. The controller works as normal CAN device
+  ^                      | Loopback          | This is an internal loopback of CAN-Tx und CAN-Rx lines. So it doesn't needs a second CAN device for testing.
+  ^                      | Silent            | The controller don't do the arbitration.
+  ^                      | Silent & Loopback | combines the two above
+  Time Triggered Mode    | true / false      | Time triggered communication mode
+  Auto Bus off           | true              | The Bus-Off state is left automatically by hardware once 128 occurrences of 11 recessive bits have been monitored.
+  ^                      | false             | The Bus-Off state is left on software request, once 128 occurrences of 11 recessive bits have been monitored and the software has first set and cleared the INRQ bit of the CAN_MCR register.
+  ^                      | -                 | For more information see the CAN-Error Management
+  Auto Wake up           | true              | The Sleep mode is left automatically by hardware on CAN message detection
+  ^                      | false             | The Sleep mode is left on software request by clearing the SLEEP bit of the CAN_MCR register
+  Auto Retransmission    | true              | The CAN hardware will automatically retransmit the message until it has been successfully transmitted according to the CAN standard.
+  ^                      | false             | A message will be transmitted only once, independently of the transmission result (successful, error or arbitration lost)
+  ^                      | @attention        | This value is inverted to the Bit 4 NART: No automatic retransmission of the bxCAN controller. The inversion is done inside the HAL Init function.
+  Receive FIFO Locked    | true              | Receive FIFO locked against overrun. Once a receive FIFO is full the next incoming message will be discarde
+  ^                      | false             | Receive FIFO not locked on overrun. Once a receive FIFO is full the next incoming message will overwrite the previous one.
+  time based priority on transmission | true | Priority driven by the request order (chronologically)
+  ^                      | false             | Priority driven by the identifier of the message
+  CAN Hardware filter    | [Number, Integer] | This gives the maximum count of used hardware filters for use on the bxCAN Master.<br> The bxCAN has 28 filter banks. The remaining filters will be used by the bxCAN Slave
+
+  ###Software Message Buffer
+  The bxCAN controller has only a three message sized receive FIFO and three transmit mailboxes
+  So we have configurable software buffers in the CanDrv. The size of this buffers will be given with this two values
 
  *  */
 #endif /* _DOXY_PAGE_T01_CANIF_APPDEMO_H_ */

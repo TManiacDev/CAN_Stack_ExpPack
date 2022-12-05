@@ -24,7 +24,7 @@
 #include "TM_Compiler.h"
 
 /** @brief we us the 'T' for the vendor Id ;-) */
-#define TM_VENDOR_ID           (0x544D)    /* hex: 'TM' */
+#define TM_VENDOR_ID           (*(uint16_t*)"TM")    /* hex: 'TM' */
 
 /** Standard return type for functions */
 typedef tm_sint16 Std_ReturnType; /* E_OK and E_NOT_OK */

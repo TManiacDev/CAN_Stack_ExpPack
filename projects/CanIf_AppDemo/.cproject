@@ -23,7 +23,7 @@
 							<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.fpu.179148752" name="Floating-point unit" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.fpu" useByScannerDiscovery="true" value="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.fpu.value.fpv4-sp-d16" valueType="enumerated"/>
 							<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.floatabi.150389373" name="Floating-point ABI" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.floatabi" useByScannerDiscovery="true" value="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.floatabi.value.hard" valueType="enumerated"/>
 							<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.target_board.1130596591" name="Board" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.target_board" useByScannerDiscovery="false" value="NUCLEO-F439ZI" valueType="string"/>
-							<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.defaults.320220220" name="Defaults" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.defaults" useByScannerDiscovery="false" value="com.st.stm32cube.ide.common.services.build.inputs.revA.1.0.5 || Debug || true || Executable || com.st.stm32cube.ide.mcu.gnu.managedbuild.option.toolchain.value.workspace || NUCLEO-F439ZI || 0 || 0 || arm-none-eabi- || ${gnu_tools_for_stm32_compiler_path} || ../CanIf_AppDemo/App | ../Drivers/BSP/TM_Engineering_board/ComIf | ../Drivers/CMSIS/Include | ../Core/Inc | ../Drivers/STM32F4xx_HAL_Driver/Inc | ../CanIf_AppDemo/Target/general | ../Drivers/CMSIS/Device/ST/STM32F4xx/Include | ../CanIf_AppDemo/Target/BSW/CanIF | ../Drivers/BSP/TM_Engineering_board/CanIf | ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy | ../Drivers/BSP/TM_Engineering_board/general ||  ||  || USE_HAL_DRIVER | STM32F439xx ||  || CanIf_AppDemo | Drivers | Core/Startup | Core ||  ||  || ${workspace_loc:/${ProjName}/STM32F439ZITX_FLASH.ld} || true || NonSecure ||  || secure_nsclib.o ||  || None || " valueType="string"/>
+							<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.defaults.320220220" name="Defaults" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.defaults" useByScannerDiscovery="false" value="com.st.stm32cube.ide.common.services.build.inputs.revA.1.0.5 || Debug || true || Executable || com.st.stm32cube.ide.mcu.gnu.managedbuild.option.toolchain.value.workspace || NUCLEO-F439ZI || 0 || 0 || arm-none-eabi- || ${gnu_tools_for_stm32_compiler_path} || ../CanIf_AppDemo/Target/BSW/Can | ../CanIf_AppDemo/App | ../Drivers/BSP/TM_Engineering_board/Can | ../Drivers/STM32F4xx_HAL_Driver/Inc | ../CanIf_AppDemo/Target/general | ../Drivers/CMSIS/Device/ST/STM32F4xx/Include | ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy | ../Drivers/BSP/TM_Engineering_board/general | ../Drivers/BSP/TM_Engineering_board/ComIf | ../Drivers/CMSIS/Include | ../Core/Inc | ../CanIf_AppDemo/Target/BSW/CanIf | ../Drivers/BSP/TM_Engineering_board/CanIf ||  ||  || USE_HAL_DRIVER | STM32F439xx ||  || CanIf_AppDemo | Drivers | Core/Startup | Core ||  ||  || ${workspace_loc:/${ProjName}/STM32F439ZITX_FLASH.ld} || true || NonSecure ||  || secure_nsclib.o ||  || None || " valueType="string"/>
 							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="com.st.stm32cube.ide.mcu.gnu.managedbuild.targetplatform.1143046020" isAbstract="false" osList="all" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.targetplatform"/>
 							<builder buildPath="${workspace_loc:/CanIf_AppDemo}/Debug" id="com.st.stm32cube.ide.mcu.gnu.managedbuild.builder.456414718" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Gnu Make Builder" parallelBuildOn="true" parallelizationNumber="optimal" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.builder"/>
 							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.assembler.1319451327" name="MCU GCC Assembler" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.assembler">
@@ -48,10 +48,12 @@
 									<listOptionValue builtIn="false" value="../Drivers/CMSIS/Device/ST/STM32F4xx/Include"/>
 									<listOptionValue builtIn="false" value="../Drivers/CMSIS/Include"/>
 									<listOptionValue builtIn="false" value="../CanIf_AppDemo/App"/>
-									<listOptionValue builtIn="false" value="../CanIf_AppDemo/Target/BSW/CanIF"/>
+									<listOptionValue builtIn="false" value="../CanIf_AppDemo/Target/BSW/Can"/>
+									<listOptionValue builtIn="false" value="../CanIf_AppDemo/Target/BSW/CanIf"/>
 									<listOptionValue builtIn="false" value="../CanIf_AppDemo/Target/general"/>
-									<listOptionValue builtIn="false" value="../Drivers/BSP/TM_Engineering_board/ComIf"/>
+									<listOptionValue builtIn="false" value="../Drivers/BSP/TM_Engineering_board/Can"/>
 									<listOptionValue builtIn="false" value="../Drivers/BSP/TM_Engineering_board/general"/>
+									<listOptionValue builtIn="false" value="../Drivers/BSP/TM_Engineering_board/ComIf"/>
 									<listOptionValue builtIn="false" value="../Drivers/BSP/TM_Engineering_board/CanIf"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c.617327697" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c"/>
@@ -71,10 +73,12 @@
 									<listOptionValue builtIn="false" value="../Drivers/CMSIS/Device/ST/STM32F4xx/Include"/>
 									<listOptionValue builtIn="false" value="../Drivers/CMSIS/Include"/>
 									<listOptionValue builtIn="false" value="../CanIf_AppDemo/App"/>
-									<listOptionValue builtIn="false" value="../CanIf_AppDemo/Target/BSW/CanIF"/>
+									<listOptionValue builtIn="false" value="../CanIf_AppDemo/Target/BSW/Can"/>
+									<listOptionValue builtIn="false" value="../CanIf_AppDemo/Target/BSW/CanIf"/>
 									<listOptionValue builtIn="false" value="../CanIf_AppDemo/Target/general"/>
-									<listOptionValue builtIn="false" value="../Drivers/BSP/TM_Engineering_board/ComIf"/>
+									<listOptionValue builtIn="false" value="../Drivers/BSP/TM_Engineering_board/Can"/>
 									<listOptionValue builtIn="false" value="../Drivers/BSP/TM_Engineering_board/general"/>
+									<listOptionValue builtIn="false" value="../Drivers/BSP/TM_Engineering_board/ComIf"/>
 									<listOptionValue builtIn="false" value="../Drivers/BSP/TM_Engineering_board/CanIf"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.input.cpp.386590928" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.input.cpp"/>
@@ -128,7 +132,7 @@
 							<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.fpu.1552380889" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.fpu" useByScannerDiscovery="true" value="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.fpu.value.fpv4-sp-d16" valueType="enumerated"/>
 							<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.floatabi.1567244762" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.floatabi" useByScannerDiscovery="true" value="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.floatabi.value.hard" valueType="enumerated"/>
 							<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.target_board.386011938" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.target_board" useByScannerDiscovery="false" value="NUCLEO-F439ZI" valueType="string"/>
-							<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.defaults.1131979043" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.defaults" useByScannerDiscovery="false" value="com.st.stm32cube.ide.common.services.build.inputs.revA.1.0.5 || Release || false || Executable || com.st.stm32cube.ide.mcu.gnu.managedbuild.option.toolchain.value.workspace || NUCLEO-F439ZI || 0 || 0 || arm-none-eabi- || ${gnu_tools_for_stm32_compiler_path} || ../CanIf_AppDemo/App | ../Drivers/BSP/TM_Engineering_board/ComIf | ../Drivers/CMSIS/Include | ../Core/Inc | ../Drivers/STM32F4xx_HAL_Driver/Inc | ../CanIf_AppDemo/Target/general | ../Drivers/CMSIS/Device/ST/STM32F4xx/Include | ../CanIf_AppDemo/Target/BSW/CanIF | ../Drivers/BSP/TM_Engineering_board/CanIf | ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy | ../Drivers/BSP/TM_Engineering_board/general ||  ||  || USE_HAL_DRIVER | STM32F439xx ||  || CanIf_AppDemo | Drivers | Core/Startup | Core ||  ||  || ${workspace_loc:/${ProjName}/STM32F439ZITX_FLASH.ld} || true || NonSecure ||  || secure_nsclib.o ||  || None || " valueType="string"/>
+							<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.defaults.1131979043" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.option.defaults" useByScannerDiscovery="false" value="com.st.stm32cube.ide.common.services.build.inputs.revA.1.0.5 || Release || false || Executable || com.st.stm32cube.ide.mcu.gnu.managedbuild.option.toolchain.value.workspace || NUCLEO-F439ZI || 0 || 0 || arm-none-eabi- || ${gnu_tools_for_stm32_compiler_path} || ../CanIf_AppDemo/Target/BSW/Can | ../CanIf_AppDemo/App | ../Drivers/BSP/TM_Engineering_board/Can | ../Drivers/STM32F4xx_HAL_Driver/Inc | ../CanIf_AppDemo/Target/general | ../Drivers/CMSIS/Device/ST/STM32F4xx/Include | ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy | ../Drivers/BSP/TM_Engineering_board/general | ../Drivers/BSP/TM_Engineering_board/ComIf | ../Drivers/CMSIS/Include | ../Core/Inc | ../CanIf_AppDemo/Target/BSW/CanIf | ../Drivers/BSP/TM_Engineering_board/CanIf ||  ||  || USE_HAL_DRIVER | STM32F439xx ||  || CanIf_AppDemo | Drivers | Core/Startup | Core ||  ||  || ${workspace_loc:/${ProjName}/STM32F439ZITX_FLASH.ld} || true || NonSecure ||  || secure_nsclib.o ||  || None || " valueType="string"/>
 							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="com.st.stm32cube.ide.mcu.gnu.managedbuild.targetplatform.1207112332" isAbstract="false" osList="all" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.targetplatform"/>
 							<builder buildPath="${workspace_loc:/CanIf_AppDemo}/Release" id="com.st.stm32cube.ide.mcu.gnu.managedbuild.builder.1400262033" managedBuildOn="true" name="Gnu Make Builder.Release" parallelBuildOn="true" parallelizationNumber="optimal" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.builder"/>
 							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.assembler.1241254502" name="MCU GCC Assembler" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.assembler">
@@ -149,10 +153,12 @@
 									<listOptionValue builtIn="false" value="../Drivers/CMSIS/Device/ST/STM32F4xx/Include"/>
 									<listOptionValue builtIn="false" value="../Drivers/CMSIS/Include"/>
 									<listOptionValue builtIn="false" value="../CanIf_AppDemo/App"/>
-									<listOptionValue builtIn="false" value="../CanIf_AppDemo/Target/BSW/CanIF"/>
+									<listOptionValue builtIn="false" value="../CanIf_AppDemo/Target/BSW/Can"/>
+									<listOptionValue builtIn="false" value="../CanIf_AppDemo/Target/BSW/CanIf"/>
 									<listOptionValue builtIn="false" value="../CanIf_AppDemo/Target/general"/>
-									<listOptionValue builtIn="false" value="../Drivers/BSP/TM_Engineering_board/ComIf"/>
+									<listOptionValue builtIn="false" value="../Drivers/BSP/TM_Engineering_board/Can"/>
 									<listOptionValue builtIn="false" value="../Drivers/BSP/TM_Engineering_board/general"/>
+									<listOptionValue builtIn="false" value="../Drivers/BSP/TM_Engineering_board/ComIf"/>
 									<listOptionValue builtIn="false" value="../Drivers/BSP/TM_Engineering_board/CanIf"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c.1785979047" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c"/>
@@ -171,10 +177,12 @@
 									<listOptionValue builtIn="false" value="../Drivers/CMSIS/Device/ST/STM32F4xx/Include"/>
 									<listOptionValue builtIn="false" value="../Drivers/CMSIS/Include"/>
 									<listOptionValue builtIn="false" value="../CanIf_AppDemo/App"/>
-									<listOptionValue builtIn="false" value="../CanIf_AppDemo/Target/BSW/CanIF"/>
+									<listOptionValue builtIn="false" value="../CanIf_AppDemo/Target/BSW/Can"/>
+									<listOptionValue builtIn="false" value="../CanIf_AppDemo/Target/BSW/CanIf"/>
 									<listOptionValue builtIn="false" value="../CanIf_AppDemo/Target/general"/>
-									<listOptionValue builtIn="false" value="../Drivers/BSP/TM_Engineering_board/ComIf"/>
+									<listOptionValue builtIn="false" value="../Drivers/BSP/TM_Engineering_board/Can"/>
 									<listOptionValue builtIn="false" value="../Drivers/BSP/TM_Engineering_board/general"/>
+									<listOptionValue builtIn="false" value="../Drivers/BSP/TM_Engineering_board/ComIf"/>
 									<listOptionValue builtIn="false" value="../Drivers/BSP/TM_Engineering_board/CanIf"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.input.cpp.660043967" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.input.cpp"/>
@@ -228,4 +236,5 @@
 			<autodiscovery enabled="false" problemReportingEnabled="true" selectedProfileId=""/>
 		</scannerConfigBuildInfo>
 	</storageModule>
+	<storageModule moduleId="refreshScope"/>
 </cproject>

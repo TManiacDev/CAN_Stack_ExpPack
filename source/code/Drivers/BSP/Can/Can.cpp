@@ -15,7 +15,7 @@
 #include "Can.h"
 
 /** To hold the callback function pointers of the CanIf module */
-extern P2VAR(ComIf, TM_CAN_VAR, AUTOMATIC) ptr2ComIf = NULL_PTR;
+P2VAR(ComIf, TM_CAN_VAR, AUTOMATIC) ptr2ComIf = NULL_PTR;
 
 Can::Can() : TME_VersionInfo{CAN_MODULE_ID, CAN_VERSION, CAN_PATCH_VERSION}
 {

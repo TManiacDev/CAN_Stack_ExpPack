@@ -56,16 +56,13 @@
  *  @{ */
 /** @brief  my ID */
 #define CAN_VENDOR_ID           TM_VENDOR_ID
-/** @brief  module id to see where the error is come from 
- *  @todo need a handling of warning: multi-character character constant [-Wmultichar] */
-#define CAN_MODULE_ID           ('CA')
-/** @brief we have only one version at start 
- *  @todo use a generated value  
- *  @todo need a handling of warning: multi-character character constant [-Wmultichar] */ 
-#define CAN_VERSION             ('${VersionLevel}${PatchLevel}')
-/** @brief no patching until now 
- *  @todo use a generated value */
-#define CAN_PATCH_VERSION       ('${SubPatch}')
+/** @brief  module id to see where the error is come from */
+#define CAN_MODULE_ID           (*(uint16_t*)"CA")
+/** @brief To see the version and patch level we save it on ASCII */ 
+#define CAN_VERSION             (*(uint16_t*)"${VersionLevel}${PatchLevel}")
+/** @brief To see the sub patch level we save it on ASCII 
+ *  @details There are two signs available: 0-99 */
+#define CAN_PATCH_VERSION       (*(uint16_t*)"${SubPatch}")
 /** @} */ // end of grouping TM_Can_Driver
 
 /*******************************/

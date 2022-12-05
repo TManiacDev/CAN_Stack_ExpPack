@@ -52,14 +52,14 @@ Std_ReturnType TME_VersionInfo::GetVersionInfo( CONST(uint32_t,AUTOMATIC) Buffer
 {
   if (BufferLength >= 4*sizeof(uint16_t) )
   {
-    Ptr2Buffer[0] = (uint8_t)(Vendor_ID >> 8);
-    Ptr2Buffer[1] = (uint8_t)(Vendor_ID );
-    Ptr2Buffer[2] = (uint8_t)(Module_ID >> 8);
-    Ptr2Buffer[3] = (uint8_t)(Module_ID );
-    Ptr2Buffer[4] = (uint8_t)(Version_ID >> 8);
-    Ptr2Buffer[5] = (uint8_t)(Version_ID);
-    Ptr2Buffer[6] = (uint8_t)(PatchVersion_ID >> 8);
-    Ptr2Buffer[7] = (uint8_t)(PatchVersion_ID );
+    Ptr2Buffer[0] = (uint8_t)( Vendor_ID );
+    Ptr2Buffer[1] = (uint8_t)( Vendor_ID >> 8 );
+    Ptr2Buffer[2] = (uint8_t)( Module_ID );
+    Ptr2Buffer[3] = (uint8_t)( Module_ID >> 8 );
+    Ptr2Buffer[4] = (uint8_t)( Version_ID );
+    Ptr2Buffer[5] = (uint8_t)( Version_ID >> 8);
+    Ptr2Buffer[6] = (uint8_t)( PatchVersion_ID );
+    Ptr2Buffer[7] = (uint8_t)( PatchVersion_ID >> 8 );
     return E_OK;
   }
   else return E_NOT_OK;

@@ -69,9 +69,9 @@
     </RefMode>
     <RefMode Abstract="true" Name="BoardOoSupportJjCanIf">
         <ConfigForMode>BoardOoSupportJjCanIf</ConfigForMode>
-        <Parameter Name="CanIfCcBoardOoSupportJjgeneralJjCommon"/>
-        <Parameter Name="CanIfCcBoardOoSupportJjComIfJjCommon"/>
-        <Parameter Name="CanIfCcBoardOoSupportJjCanIfJjCan"/>
+        <Parameter Name="CanIfCcBoardOoSupportJjgeneral"/>
+        <Parameter Name="CanIfCcBoardOoSupportJjComIf"/>
+        <Parameter Name="CanIfCcBoardOoSupportJjCanIf"/>
         <Parameter Added="true" Name="CANIF_RXPDU_LIST"/>
         <Parameter Added="true" Name="CANIF_RXID_LIST"/>
         <Parameter Added="true" Name="CANIF_RXMASK_LIST"/>
@@ -192,7 +192,9 @@
         <PossibleValue Comment="DISABLE" Value="DISABLE"/>
         <PossibleValue Comment="Application demo to show the usage of the plain CanIf Class" Semaphore="SEMDemoApplicationsCcDeviceJjApplicationJjCanIfIiAppDemo" Value="CanIfIiAppDemo"/>
         <PossibleValue Comment="To play on the sandbox" Semaphore="SEMDemoApplicationsCcDeviceJjApplicationJjSandbox" Value="Sandbox"/>
+        <Condition Diagnostic="We need this in the CanIf_DemoApp" Expression="CONDITIONIihasCanIfClass=true"/>
     </RefParameter>
+    <RefParameter Comment="Device Application" DefaultValue="disable" Group="Software component selection" Name="DemoApplicationsCcDeviceJjApplication" TabName="DeviceJjDemoApplications" Type="list" Visible="false"/>
     <RefParameter Comment="This is the virtual API class for all CanDrv implementations" DefaultValue="false" Group="Software component selection" Name="CanDrvCcBoardOoSupportJjCanDrvIiAPIclass" TabName="BoardOoSupportJjCanDrv" Type="boolean" Visible="false">
         <PossibleValue Comment="ENABLE" Semaphore="SEMCanDrvCcBoardOoSupportJjCanDrvIiAPIclass" Value="true"/>
         <PossibleValue Comment="DISABLE" Value="false"/>
@@ -215,18 +217,18 @@
         <Condition Diagnostic="We must lock the FDCAN against bxCAN" Expression="CONDITIONIihasNoBxCan=true"/>
     </RefParameter>
     <RefParameter Comment="The FDCAN controller has two channels.&#10;We will see if we use more instances or subgroups" DefaultValue="false" Group="Software component selection" Name="CanDrvCcBoardOoSupportJjFDCAN" TabName="BoardOoSupportJjCanDrv" Type="boolean" Visible="false"/>
-    <RefParameter Comment="platform independancy files" DefaultValue="false" Group="Software component selection" Name="CanIfCcBoardOoSupportJjgeneralJjCommon" TabName="BoardOoSupportJjCanIf" Type="boolean" Visible="false">
-        <PossibleValue Comment="ENABLE" Semaphore="SEMCanIfCcBoardOoSupportJjgeneralJjCommon" Value="true"/>
+    <RefParameter Comment="platform independancy files" DefaultValue="false" Group="Software component selection" Name="CanIfCcBoardOoSupportJjgeneral" TabName="BoardOoSupportJjCanIf" Type="boolean" Visible="false">
+        <PossibleValue Comment="ENABLE" Semaphore="SEMCanIfCcBoardOoSupportJjgeneral" Value="true"/>
         <PossibleValue Comment="DISABLE" Value="false"/>
     </RefParameter>
-    <RefParameter Comment="Abstract communication controller class" DefaultValue="false" Group="Software component selection" Name="CanIfCcBoardOoSupportJjComIfJjCommon" TabName="BoardOoSupportJjCanIf" Type="boolean" Visible="false">
-        <PossibleValue Comment="ENABLE" Semaphore="SEMCanIfCcBoardOoSupportJjComIfJjCommon" Value="true"/>
+    <RefParameter Comment="Abstract communication controller class" DefaultValue="false" Group="Software component selection" Name="CanIfCcBoardOoSupportJjComIf" TabName="BoardOoSupportJjCanIf" Type="boolean" Visible="false">
+        <PossibleValue Comment="ENABLE" Semaphore="SEMCanIfCcBoardOoSupportJjComIf" Value="true"/>
         <PossibleValue Comment="DISABLE" Value="false"/>
         <Condition Diagnostic="compiler and platform specific files" Expression="CONDITIONIihasComStackGeneral=true"/>
     </RefParameter>
-    <RefParameter Comment="Abstract communication controller class" DefaultValue="false" Group="Software component selection" Name="CanIfCcBoardOoSupportJjComIfJjCommon" TabName="BoardOoSupportJjCanIf" Type="boolean" Visible="false"/>
-    <RefParameter Comment="Use this as platform indepetend abstraction layer" DefaultValue="false" Group="Software component selection" Name="CanIfCcBoardOoSupportJjCanIfJjCan" TabName="BoardOoSupportJjCanIf" Type="boolean" Visible="false">
-        <PossibleValue Comment="ENABLE" Semaphore="SEMCanIfCcBoardOoSupportJjCanIfJjCan" Value="true"/>
+    <RefParameter Comment="Abstract communication controller class" DefaultValue="false" Group="Software component selection" Name="CanIfCcBoardOoSupportJjComIf" TabName="BoardOoSupportJjCanIf" Type="boolean" Visible="false"/>
+    <RefParameter Comment="Use this as platform indepetend abstraction layer" DefaultValue="false" Group="Software component selection" Name="CanIfCcBoardOoSupportJjCanIf" TabName="BoardOoSupportJjCanIf" Type="boolean" Visible="false">
+        <PossibleValue Comment="ENABLE" Semaphore="SEMCanIfCcBoardOoSupportJjCanIf" Value="true"/>
         <PossibleValue Comment="DISABLE" Value="false"/>
     </RefParameter>
     <RefParameter Comment="To hold the additional pages" DefaultValue="false" Group="Software component selection" Name="SourceCodeDocuCcUtilityJjDoxyPages" TabName="UtilityJjSourceCodeDocu" Type="boolean" Visible="false">
@@ -259,6 +261,7 @@
     </RefParameter>
     <RefParameter Comment="Condition Iihas Can Master" DefaultValue="true" Name="CONDITIONIihasCanMaster" Type="boolean" Visible="false"/>
     <RefParameter Comment="Condition Iihas No Fd Can" DefaultValue="true" Name="CONDITIONIihasNoFdCan" Type="boolean" Visible="false"/>
+    <RefParameter Comment="Condition Iihas Can If Class" DefaultValue="true" Name="CONDITIONIihasCanIfClass" Type="boolean" Visible="false"/>
     <RefParameter Comment="Condition Iihas Can Drv Ii Api" DefaultValue="true" Name="CONDITIONIihasCanDrvIiAPI" Type="boolean" Visible="false"/>
     <RefParameter Comment="Condition Iihas Ft2p0 Ii Protocol" DefaultValue="true" Name="CONDITIONIihasFT2p0IiProtocol" Type="boolean" Visible="false"/>
     <RefParameter Comment="Condition Iihas Com If Class" DefaultValue="true" Name="CONDITIONIihasComIfClass" Type="boolean" Visible="false"/>
@@ -360,7 +363,7 @@ The remaining hardware filter can be used by the bxCAN Slave</Description>
     <RefParameter Added="true" Comment="List the assigned N-PDU" DefaultValue="Target1,Target2" Group="TX PDU Configuration" Name="CANIF_TX_TARGETPDU_LIST" TabName="CAN Interface" Type="stringRW">
         <Description>You must name the PDUs of the upper layer without the upper layer name prefix</Description>
     </RefParameter>
-    <RefParameter Added="true" Comment="Auto Retransmission" DefaultValue="false" Group="bxCAN Slave Startup" Name="CAN2_STARTUP_AUTO_RETRANSMISSION" TabName="CAN Driver" Type="boolean">
+    <RefParameter Added="true" Comment="Auto Retransmission" DefaultValue="true" Group="bxCAN Slave Startup" Name="CAN2_STARTUP_AUTO_RETRANSMISSION" TabName="CAN Driver" Type="boolean">
         <PossibleValue Comment="true" Value="true"/>
         <PossibleValue Comment="false" Value="false"/>
     </RefParameter>
@@ -438,7 +441,7 @@ Maybe use short M or S</Description>
         <PossibleValue Comment="true" Value="true"/>
         <PossibleValue Comment="false" Value="false"/>
     </RefParameter>
-    <RefParameter Added="true" Comment="Auto Retransmission" DefaultValue="false" Group="bxCAN Master Startup" Name="CAN1_STARTUP_AUTO_RETRANSMISSION" TabName="CAN Driver" Type="boolean">
+    <RefParameter Added="true" Comment="Auto Retransmission" DefaultValue="true" Group="bxCAN Master Startup" Name="CAN1_STARTUP_AUTO_RETRANSMISSION" TabName="CAN Driver" Type="boolean">
         <PossibleValue Comment="true" Value="true"/>
         <PossibleValue Comment="false" Value="false"/>
     </RefParameter>

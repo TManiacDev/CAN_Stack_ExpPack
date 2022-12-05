@@ -4,7 +4,7 @@
   * Description        : This file provides code for the configuration
   *                      of the App/CanIf_AppDemo.cpp instances.
   *
-  * Last updated       : Nov 8, 2022  6:56:51 PM
+  * Last updated       : Dec 5, 2022  12:48:09 PM
   *
   ******************************************************************************
   * @attention
@@ -55,6 +55,7 @@ uint32_t processUsage = 0;
 
 ComStack_CanMsgHeader msgHeader = {{0x1ff, 0, 0, 0}, 8, 0 , 0x0 };
 uint8_t data[8] = {0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x04, 0x80};
+uint8_t Versiondata[8] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 CanIf_PduInfoType myTestPdu = { data, 8 };
 
 /* USER CODE END PV */
@@ -82,6 +83,8 @@ void MX_CanIf_AppDemo_Init(void)
     // try it later
   }
 
+  canInterface.GetVersionInfo(8, Versiondata);
+
 /* USER CODE BEGIN MX_CanIf_AppDemo_Init 1 */
 
 /* USER CODE END MX_CanIf_AppDemo_Init 1 */
@@ -107,7 +110,7 @@ void MX_CanIf_AppDemo_Process(void)
     LED_RED_TOGGLE;
 
     // send via known CAN message header:
-    canInterface.Transmit( msgHeader,data);
+    canInterface.Transmit( msgHeader,Versiondata);
 
     // to lock against multiple call
     processUsage++;
@@ -116,7 +119,7 @@ void MX_CanIf_AppDemo_Process(void)
   if ( ( processTick == 600 ) && ( processUsage == 1 ) )
   {
     // send with known PDU name (better way):
-    canInterface.Transmit(CanIf_Tx_Name2, &myTestPdu);
+    canInterface.Transmit(CanIf_Tx_Name1, &myTestPdu);
 
     // to lock against multiple call
     processUsage++;

@@ -24,11 +24,12 @@
 
 /* imported types */
 #include "EcuNames_Cfg.h"
-#include "Can_Cfg.h"
+#include "Can.h"
 #include "CanIf_Cfg.h"
 #include "ComIf.h"
 
 #include <CanIf_Compiler_Cfg.h>
+
 /** @} */ // end of grouping TM_CanIf_Main
 
 /* ===================== Development Error Tracer (DET)  ========== */
@@ -48,6 +49,8 @@ enum class CanIf_DevError
 {
   /** @brief Module initialization has failed */
   E_INIT_FAILED = 0x04,
+  /** @brief need some more error codes */
+  E_SETUP_FAILED
 };
 /** @} */ // end of grouping TM_DET_CANIF_NAMES
 
@@ -62,7 +65,7 @@ enum class CanIf_DevError
 #endif // ( CANIF_DEV_ERROR_DETECT == STD_ON )
 /** @} */ // end of grouping TM_DET_REPORT
 
-#include "CanIf_Switch.h"
+//#include "CanIf_Switch.h"
 
  /* ===================== Can Interface definition  ========== */
 
@@ -96,25 +99,44 @@ enum class CanIfStates
 
 /** @} */ // end of grouping TM_CanIf_Main
 
-/** @brief remapping of the HAL CAN Header to the Header used inside this implementation
- *  @remark this function should be used only and immediately on received message
- *
- *  @param[in] rev2HAL_Header  reference to the HAL header with data inside
- *  @param[out] rev2CanIfHeader reference where the data should be copied
- *  @return    E_NOT_OK if one pointer is NULL_PTR*/
-Std_ReturnType HalHeaderToCanIfHeader(
-    REF2CONST(CAN_RxHeaderTypeDef,AUTOMATIC)  rev2HAL_Header,
-    REF2VAR(ComStack_CanMsgHeader, AUTOMATIC)  rev2CanIfHeader );
+/* ****** struct defines ************ */
+/** @addtogroup TM_CanIf_Types
+ *  @{ */
+/** The type to handle PDUs on the CanIf  */
+typedef struct
+{
+  /** CanIf can handle only byte like data */
+  P2VAR(uint8_t,AUTOMATIC,AUTOSAR_COMSTACKDATA) SduDataPtr;
+  /** count of the data bytes.
+   *
+   *  This will be max 8 on normal CAN and 64 on CAN-FD */
+  PduLengthType SduLength;
+}CanIf_PduInfoType;
+/** @} */ // end of grouping TM_CanIf_Types
 
-/** @brief remapping of the CAN Header to the HAL Header used by the STM HAL
- *  @remark this function should be used only and immediately before transmit a message
- *
- *  @param[in] rev2CanIfHeader  pointer to the header with data inside
- *  @param[out] rev2HAL_Header pointer where the data should be copied
- *  @return    E_NOT_OK if one pointer is NULL_PTR*/
-Std_ReturnType CanIfHeaderToHalHeader(
-    REF2CONST(ComStack_CanMsgHeader, AUTOMATIC)  rev2CanIfHeader,
-    REF2VAR(CAN_RxHeaderTypeDef,AUTOMATIC)  rev2HAL_Header );
+/** @addtogroup TM_CanIf_RxPduCfg
+ *  @{ */
+
+/** @brief to hold the configuration of a RxPdu */
+typedef struct
+{
+  /** @brief name of this L-PDU */
+  VAR(uint32_t, AUTOMATIC) L_PDU_Name;
+  /** @brief The base Id */
+  VAR(ComStack_CanIdType, AUTOMATIC) CanId;
+  /** @brief Mask to select dynamic Id bits */
+  VAR(ComStack_CanIdType, AUTOMATIC) IdMask;
+  /** @brief ??? */
+  VAR(uint32_t, AUTOMATIC) MsgLength;
+  /** @brief name the used hardware */
+  VAR(ECU_CanController, AUTOMATIC ) InstanceName;
+  /** @brief name of the upper layer N-PDU */
+  VAR(tm_PduIDType, AUTOMATIC) N_PDU_Name;
+  /** @brief name the upper layer */
+  VAR(CanIf_UpperLayerType, AUTOMATIC ) ULName;
+
+}CanIf_RxPduCfgType;
+/** @} */ // end of grouping TM_CanIf_RxPduCfg
 
 /** @brief the class to work on the CAN controller interface
  *  @details
@@ -125,7 +147,7 @@ Std_ReturnType CanIfHeaderToHalHeader(
  *
  *  @todo es braucht eine Absicherung auf nur ein Objekt */
 class CanIf
-    : TME_VersionInfo,
+    : public TME_VersionInfo,
       public ComIf
 {
 public:
@@ -250,84 +272,24 @@ public:
 
 /** @} */ // end of grouping TM_CanIf_Func
 
-
   /** @brief task function to push the tx message from software buffer to tx mailbox */
   void TxTask(void);
 
-
- // CAN_HandleTypeDef* GetHardwareHandle(uint8_t Channel)
-  //{
-  //  return &bxCanHdl[Channel];
-  //};
+  /** The service CanIf_RxIndication() is implemented in CanIf and called by CanDrv after a CAN L-PDU has been received. */
+  void RxIndication(
+      CONST( ECU_CanController, AUTOMATIC) Controller,
+      REF2CONST( ComStack_CanMsgHeader, AUTOMATIC) CanMsgHeader,
+      REF2CONST( ComStack_PduInfoType, AUTOMATIC) PduInfo );
 
 private:
-
-  /** @brief to find a free CAN hardware filter
-   *  @details STM hasn't a function like this in the HAL.<br>
-   *  We find a free hardware filter and returns the filter bank to use the filter.<br>
-   *  We returns the filter number to use it on fast selection in IRQ routine.<br>
-   *  The filter mode is used to search for mask or identifier filter.
-   *  If searching for identifier filter we returns also if there is a FR2 is empty
-   *
-   *  @param[out] ptr2FilterBankNumber returns the number of the first free filter bank
-   *  @param[out] ptr2FilterNumber     returns the filter number according to the previous filter configuration
-   *  @param[in,out] ptr2FilterMode    selects the search for Mask filter (aka deactivated filter) or Identifier Filter.
-   *                                   on Identifier Filter search it returns if the FR1 register is already in use
-   *  @returns
-   *  - E_OK      ...........  we found an unused filter
-   *  - E_NOT_OK  ...........  we can't find an unused filter */
-  Std_ReturnType FindFreeFilter(
-      P2VAR(uint8_t, AUTOMATIC, AUTOMATIC) ptr2FilterBankNumber,
-      P2VAR(uint8_t, AUTOMATIC, AUTOMATIC) ptr2FilterNumber,
-      P2VAR(uint8_t, AUTOMATIC, AUTOMATIC) ptr2FilterMode);
-
-  /** @brief configure a free hardware filter using bit masking
-   *  @details set hardware filter
-   *
-   *  @attention
-   *  This isn't the same like inside STM register access.
-   *  But the function manages the correct use for STM HAL
-   *  - bit 31 is IDE
-   *  - bit 30 is RTR
-   *
-   *  @param[in] Controller   select the controller where the filter should be applied
-   *  @param[in] FilterId     the selected filter bits
-   *  @param[in] FilterMask   the filter mask to select valid filter bits
-   *  @return                 E_OK if the filter is applied, E_NOT_OK no hardware filter free */
-  Std_ReturnType SetFilterByBitmask(
-      VAR(ECU_CanController, AUTOMATIC) Controller,
-      VAR(ComStack_CanIdType, AUTOMATIC) FilterId,
-      VAR(ComStack_CanIdType, AUTOMATIC) FilterMask);
-
-  /** @brief configure a free hardware filter using single CAN Id filtering
-   *  @details set hardware filter
-   *
-   *  @param[in] Controller   select the controller where the filter should be applied
-   *  @param[in] FilterId     the selected filter bits
-   *  @return                 E_OK if the filter is applied, E_NOT_OK no hardware filter free */
-  int SetFilterByCanId(
-     VAR(ECU_CanController, AUTOMATIC) Controller,
-     VAR(ComStack_CanIdType, AUTOMATIC) FilterId );
-
-  /** @brief change the 32bit format to use with STM Registers
-   *  @details we use the unified CanIf_CanIdSelectType for easy remapping
-   *
-   *  this function or the union can be changed to match register on other controller
-   *
-   *  @param[in] CanId should be a CanIf formated CanId
-   *  @return CanId in STM Register format */
-  uint32_t CanIdToHalFormat(
-      VAR(ComStack_CanIdType, AUTOMATIC) CanId);
 
   /** we have a simple state machine inside */
   CanIfStates state = CanIfStates::PreInit;
 
   /** @brief we need a handle to hold the information for the bxCAN controller
    *  @todo there are STM controller with three CAN controller too!!! */
-  CAN_HandleTypeDef bxCanHdl[2];
+  //CAN_HandleTypeDef bxCanHdl[2];
 
-  /** a semi static place to bring messages from buffer to hardware */
-  CAN_TxMessage canTxBufferMirror;
 
   /** @brief We create a list with CAN message headers for fast access sorted by the CanIf_txPduIdType
    *
@@ -340,5 +302,11 @@ private:
    *  @details on rx we can use the the ComStack type (in contrast to STM HAL type)
    * on pre compiled linking that could be on FLASH */
   VAR(ComStack_CanMsgHeader, AUTOMATIC) rxHeaderList[CANIF_RXPDU_COUNT];
+
+  /** @brief to hold the CanDrv(s)*/
+  CONSTP2VAR(Can, AUTOMATIC,AUTOMATIC) ptr2CanDriver;
+
+  /** @brief this list will hold the pointer to the upper layers in same order like the rxHeaderList */
+  P2VAR(CanIfUpperLayer, AUTOMATIC,AUTOMATIC) p2UpperLayerList[CANIF_RXPDU_COUNT];
 };
 #endif /* CANIF_H_ */

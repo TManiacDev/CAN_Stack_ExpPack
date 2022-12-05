@@ -70,15 +70,20 @@ First step to publish it.</release>
             <description>Check selected API class for a CanDrv</description>
             <require Cbundle="CanDrv" Cgroup="CanDrv_APIclass"/>
         </condition>
+        <condition id="hasCanIfClass">
+            <description>We need this in the CanIf_DemoApp</description>
+            <require Cbundle="CanIf" Cgroup="CanIf"/>
+        </condition>
     </conditions>
     <components>
         <bundle Cbundle="DemoApplications" Cclass="Device" Cversion="0.1.0">
             <description>Bundle of applications</description>
             <doc>readme.txt</doc>
-            <component Cgroup="Application" Cvariant="CanIf_AppDemo" condition="hasCanMaster" maxInstances="1">
+            <component Cgroup="Application" Cvariant="CanIf_AppDemo" condition="hasCanIfClass" maxInstances="1">
                 <description>Application demo to show the usage of the plain CanIf Class</description>
                 <files>
-                    <file category="doc" name="Docu/Tutorial_01_CanIf_AppDemo.pdf"/>
+                    <file category="doc" name="Docu/Tutorial_01_CanIf_AppDemo_de.pdf" public="false"/>
+                    <file category="doc" name="Docu/Tutorial_01_CanIf_AppDemo_eng.pdf" public="false"/>
                 </files>
             </component>
             <component Cgroup="Application" Cvariant="Sandbox" maxInstances="1">
@@ -118,7 +123,7 @@ We will see if we use more instances or subgroups</description>
         <bundle Cbundle="CanIf" Cclass="Board Support" Cversion="0.1.0">
             <description>Interface for abstraction of the CAN controller hardware</description>
             <doc>readme.txt</doc>
-            <component Cgroup="general" Csub="Common" maxInstances="1">
+            <component Cgroup="general" maxInstances="1">
                 <description>platform independancy files</description>
                 <files>
                     <file category="header" name="Drivers/BSP/general/TM_Compiler.h"/>
@@ -130,7 +135,7 @@ We will see if we use more instances or subgroups</description>
                     <file category="header" name="Drivers/BSP/general/TMEVersionInfo.h"/>
                 </files>
             </component>
-            <component Cgroup="ComIf" Csub="Common" condition="hasComStackGeneral" maxInstances="1">
+            <component Cgroup="ComIf" condition="hasComStackGeneral" maxInstances="1">
                 <description>Abstract communication controller class</description>
                 <files>
                     <file category="sourceCpp" name="Drivers/BSP/ComIf/ComIf.cpp"/>
@@ -138,7 +143,7 @@ We will see if we use more instances or subgroups</description>
                     <file category="header" name="Drivers/BSP/ComIf/ComIf_Compiler_Cfg.h"/>
                 </files>
             </component>
-            <component Cgroup="CanIf" Csub="Can" condition="hasComIfAndCanDrv" maxInstances="1">
+            <component Cgroup="CanIf" condition="hasComIfAndCanDrv" maxInstances="1">
                 <description>Use this as platform indepetend abstraction layer</description>
                 <files>
                     <file category="sourceCpp" name="Drivers/BSP/CanIf/CanIf.cpp"/>
@@ -172,6 +177,9 @@ So we must do the copy handmade :-(</description>
                     <file category="image" name="Utilities/DoxyPages/pictures/overview.svg"/>
                     <file category="image" name="Utilities/DoxyPages/pictures/DependenciesButton.png"/>
                     <file category="image" name="Utilities/DoxyPages/pictures/DetailsButton.png"/>
+                    <file category="image" name="Utilities/DoxyPages/pictures/InfoCenterButton.png"/>
+                    <file category="image" name="Utilities/DoxyPages/pictures/CodeGeneratorButton.png"/>
+                    <file category="image" name="Utilities/DoxyPages/pictures/DebuggerPlayButton.png"/>
                     <file category="image" name="Utilities/DoxyPages/pictures/general_P00_nucleo_board.jpg"/>
                 </files>
             </component>
@@ -179,7 +187,8 @@ So we must do the copy handmade :-(</description>
                 <description>Docu files for tutorial 01</description>
                 <files>
                     <file category="header" name="Utilities/T01_CanIf_AppDemo/Doxy_Page_T01_CanIf_AppDemo.h"/>
-                    <file category="doc" name="Utilities/T01_CanIf_AppDemo/Tutorial_01_CanIf_AppDemo.pdf"/>
+                    <file category="doc" name="Utilities/T01_CanIf_AppDemo/Tutorial_01_CanIf_AppDemo_de.pdf" public="false"/>
+                    <file category="doc" name="Utilities/T01_CanIf_AppDemo/Tutorial_01_CanIf_AppDemo_eng.pdf" public="false"/>
                     <file category="other" name="Utilities/T01_CanIf_AppDemo/pictures/T01_P00_select_workspace.png"/>
                     <file category="other" name="Utilities/T01_CanIf_AppDemo/pictures/T01_P01_start_new_project.png"/>
                     <file category="other" name="Utilities/T01_CanIf_AppDemo/pictures/T01_P02_select_board.png"/>
@@ -210,6 +219,11 @@ So we must do the copy handmade :-(</description>
                     <file category="other" name="Utilities/T01_CanIf_AppDemo/pictures/T01_P22_file_generation.png"/>
                     <file category="other" name="Utilities/T01_CanIf_AppDemo/pictures/T01_P23_file_generation_done.png"/>
                     <file category="other" name="Utilities/T01_CanIf_AppDemo/pictures/T01_P24_multiple_definition.png"/>
+                    <file category="other" name="Utilities/T01_CanIf_AppDemo/pictures/T01_P25_deactivate_mx_can.png"/>
+                    <file category="other" name="Utilities/T01_CanIf_AppDemo/pictures/T01_P26_launch_debug.png"/>
+                    <file category="other" name="Utilities/T01_CanIf_AppDemo/pictures/T01_P27_launch_debug_window.png"/>
+                    <file category="other" name="Utilities/T01_CanIf_AppDemo/pictures/T01_P28_debug_beginn.png"/>
+                    <file category="other" name="Utilities/T01_CanIf_AppDemo/pictures/T01_P29_data_transmission.png"/>
                 </files>
             </component>
         </bundle>
