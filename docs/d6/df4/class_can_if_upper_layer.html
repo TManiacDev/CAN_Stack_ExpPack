@@ -89,15 +89,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0e7a83b5984f26eeefac934223a8a8cf"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="../../d0/dcc/_t_m___std___types_8h.html#a998b1392c75c4079d9ebcf00f506abfd">Std_ReturnType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/df4/class_can_if_upper_layer.html#a0e7a83b5984f26eeefac934223a8a8cf">RxIndication</a> (<a class="el" href="../../dd/d4d/_t_m___com_stack___types_8h.html#a6034cd4ab5216664dab0a1f9710a82b5">ComStack_PduType</a> rxPduId, const <a class="el" href="../../d2/da8/struct_com_stack___can_message_type.html">ComStack_CanMessageType</a> *ptr2Sdu)</td></tr>
 <tr class="memdesc:a0e7a83b5984f26eeefac934223a8a8cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">virtual function declaration to have an indication function in all upper layer classes  <a href="../../d6/df4/class_can_if_upper_layer.html#a0e7a83b5984f26eeefac934223a8a8cf">More...</a><br /></td></tr>
 <tr class="separator:a0e7a83b5984f26eeefac934223a8a8cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78f103af71fa2f5dcfab7539e90c02fa"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="../../d0/dcc/_t_m___std___types_8h.html#a998b1392c75c4079d9ebcf00f506abfd">Std_ReturnType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/df4/class_can_if_upper_layer.html#a78f103af71fa2f5dcfab7539e90c02fa">RxIndication</a> (<a class="el" href="../../dd/d4d/_t_m___com_stack___types_8h.html#a6034cd4ab5216664dab0a1f9710a82b5">ComStack_PduType</a> rxPduId, <a class="el" href="../../de/d2a/_t_m___compiler_8h.html#a4aae075cd720aee043ae21cd4438f391">REF2CONST</a>(<a class="el" href="../../d5/d65/struct_com_stack___can_msg_header.html">ComStack_CanMsgHeader</a>, <a class="el" href="../../de/d2a/_t_m___compiler_8h.html#a3851a1a8ddec9eacd2e30a8a19bb8cc8">AUTOMATIC</a>) CanMsgHeader, <a class="el" href="../../de/d2a/_t_m___compiler_8h.html#a4aae075cd720aee043ae21cd4438f391">REF2CONST</a>(<a class="el" href="../../d7/d36/struct_com_stack___pdu_info_type.html">ComStack_PduInfoType</a>, <a class="el" href="../../de/d2a/_t_m___compiler_8h.html#a3851a1a8ddec9eacd2e30a8a19bb8cc8">AUTOMATIC</a>) PduInfo)</td></tr>
+<tr class="memdesc:a78f103af71fa2f5dcfab7539e90c02fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">virtual function declaration to have an indication function in all upper layer classes  <a href="../../d6/df4/class_can_if_upper_layer.html#a78f103af71fa2f5dcfab7539e90c02fa">More...</a><br /></td></tr>
+<tr class="separator:a78f103af71fa2f5dcfab7539e90c02fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>a class with the standard interface of the upper transport layer classes</p>
-<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000023">Todo:</a></b></dt><dd>maybe we should bring this to a template </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000032">Todo:</a></b></dt><dd>maybe we should bring this to a template </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="../../df/df9/_can_if_upper_layer_8h_source.html#l00055">55</a> of file <a class="el" href="../../df/df9/_can_if_upper_layer_8h_source.html">CanIfUpperLayer.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a0e7a83b5984f26eeefac934223a8a8cf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0e7a83b5984f26eeefac934223a8a8cf">&#9670;&nbsp;</a></span>RxIndication()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e7a83b5984f26eeefac934223a8a8cf">&#9670;&nbsp;</a></span>RxIndication() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -144,6 +147,73 @@ Public Member Functions</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="../../df/df9/_can_if_upper_layer_8h_source.html#l00063">63</a> of file <a class="el" href="../../df/df9/_can_if_upper_layer_8h_source.html">CanIfUpperLayer.h</a>.</p>
 
 <p class="reference">References <a class="el" href="../../d0/dcc/_t_m___std___types_8h_source.html#l00045">E_NOT_OK</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d6/d3e/_can_if_upper_layer_8cpp_source.html#l00027">RxIndication()</a>, and <a class="el" href="../../d3/d5a/_can_if_8cpp_source.html#l00232">CanIf::RxIndication()</a>.</p>
+
+</div>
+</div>
+<a id="a78f103af71fa2f5dcfab7539e90c02fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78f103af71fa2f5dcfab7539e90c02fa">&#9670;&nbsp;</a></span>RxIndication() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d0/dcc/_t_m___std___types_8h.html#a998b1392c75c4079d9ebcf00f506abfd">Std_ReturnType</a> CanIfUpperLayer::RxIndication </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../dd/d4d/_t_m___com_stack___types_8h.html#a6034cd4ab5216664dab0a1f9710a82b5">ComStack_PduType</a>&#160;</td>
+          <td class="paramname"><em>rxPduId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../de/d2a/_t_m___compiler_8h.html#a4aae075cd720aee043ae21cd4438f391">REF2CONST</a>(<a class="el" href="../../d5/d65/struct_com_stack___can_msg_header.html">ComStack_CanMsgHeader</a>, <a class="el" href="../../de/d2a/_t_m___compiler_8h.html#a3851a1a8ddec9eacd2e30a8a19bb8cc8">AUTOMATIC</a>)&#160;</td>
+          <td class="paramname"><em>CanMsgHeader</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../de/d2a/_t_m___compiler_8h.html#a4aae075cd720aee043ae21cd4438f391">REF2CONST</a>(<a class="el" href="../../d7/d36/struct_com_stack___pdu_info_type.html">ComStack_PduInfoType</a>, <a class="el" href="../../de/d2a/_t_m___compiler_8h.html#a3851a1a8ddec9eacd2e30a8a19bb8cc8">AUTOMATIC</a>)&#160;</td>
+          <td class="paramname"><em>PduInfo</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>virtual function declaration to have an indication function in all upper layer classes </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">rxPduId</td><td>naming the incoming message </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">CanMsgHeader</td><td>reference to the CanMsgHeader </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">PduInfo</td><td>reference to the data unit </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d6/d3e/_can_if_upper_layer_8cpp_source.html#l00027">27</a> of file <a class="el" href="../../d6/d3e/_can_if_upper_layer_8cpp_source.html">CanIfUpperLayer.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="../../de/d2a/_t_m___compiler_8h_source.html#l00029">AUTOMATIC</a>, <a class="el" href="../../d0/dcc/_t_m___std___types_8h_source.html#l00045">E_NOT_OK</a>, <a class="el" href="../../df/df9/_can_if_upper_layer_8h_source.html#l00063">RxIndication()</a>, and <a class="el" href="../../de/d2a/_t_m___compiler_8h_source.html#l00099">VAR</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="../../d6/df4/class_can_if_upper_layer_a78f103af71fa2f5dcfab7539e90c02fa_cgraph.png" border="0" usemap="#d6/df4/class_can_if_upper_layer_a78f103af71fa2f5dcfab7539e90c02fa_cgraph" alt=""/></div>
+<map name="d6/df4/class_can_if_upper_layer_a78f103af71fa2f5dcfab7539e90c02fa_cgraph" id="d6/df4/class_can_if_upper_layer_a78f103af71fa2f5dcfab7539e90c02fa_cgraph">
+<area shape="rect" title="virtual function declaration to have an indication function in all upper layer classes" alt="" coords="5,5,201,32"/>
+<area shape="rect" href="../../d6/df4/class_can_if_upper_layer.html#a0e7a83b5984f26eeefac934223a8a8cf" title="virtual function declaration to have an indication function in all upper layer classes" alt="" coords="249,5,445,32"/>
+</map>
+</div>
 
 </div>
 </div>

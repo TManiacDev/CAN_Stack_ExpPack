@@ -121,6 +121,9 @@ virtual <a class="el" href="../../dd/d4d/_t_m___com_stack___types_8h.html#a6034c
 <tr class="memitem:a68d72d4154202e1776d08b9b4fbac958"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="../../d0/dcc/_t_m___std___types_8h.html#a998b1392c75c4079d9ebcf00f506abfd">Std_ReturnType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/db1/class_com_if.html#a68d72d4154202e1776d08b9b4fbac958">ConnectUpperLayerIndication</a> (<a class="el" href="../../dd/d4d/_t_m___com_stack___types_8h.html#a6034cd4ab5216664dab0a1f9710a82b5">ComStack_PduType</a> rxPduId, const <a class="el" href="../../d6/df4/class_can_if_upper_layer.html">CanIfUpperLayer</a> *p2UpperLayerObject)=0</td></tr>
 <tr class="memdesc:a68d72d4154202e1776d08b9b4fbac958"><td class="mdescLeft">&#160;</td><td class="mdescRight">we need to know the connected upper layer object for rx indication  <a href="../../db/db1/class_com_if.html#a68d72d4154202e1776d08b9b4fbac958">More...</a><br /></td></tr>
 <tr class="separator:a68d72d4154202e1776d08b9b4fbac958"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c71195daba6aa47c158887c4863e4cd"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/db1/class_com_if.html#a5c71195daba6aa47c158887c4863e4cd">RxIndication</a> (ECU_CanController Controller, <a class="el" href="../../de/d2a/_t_m___compiler_8h.html#a4aae075cd720aee043ae21cd4438f391">REF2CONST</a>(<a class="el" href="../../d5/d65/struct_com_stack___can_msg_header.html">ComStack_CanMsgHeader</a>, <a class="el" href="../../de/d2a/_t_m___compiler_8h.html#a3851a1a8ddec9eacd2e30a8a19bb8cc8">AUTOMATIC</a>) CanMsgHeader, <a class="el" href="../../de/d2a/_t_m___compiler_8h.html#a4aae075cd720aee043ae21cd4438f391">REF2CONST</a>(<a class="el" href="../../d7/d36/struct_com_stack___pdu_info_type.html">ComStack_PduInfoType</a>, <a class="el" href="../../de/d2a/_t_m___compiler_8h.html#a3851a1a8ddec9eacd2e30a8a19bb8cc8">AUTOMATIC</a>) PduInfo)=0</td></tr>
+<tr class="memdesc:a5c71195daba6aa47c158887c4863e4cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">There is a RxIndication function on every <a class="el" href="../../db/db1/class_com_if.html" title="the base class to hold a unique interface to all communication controller interface types">ComIf</a> class.  <a href="../../db/db1/class_com_if.html#a5c71195daba6aa47c158887c4863e4cd">More...</a><br /></td></tr>
+<tr class="separator:a5c71195daba6aa47c158887c4863e4cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -268,6 +271,53 @@ const <a class="el" href="../../db/db1/class_com_if.html#aa1a10fcd64f26017297edc
 
 </div>
 </div>
+<a id="a5c71195daba6aa47c158887c4863e4cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c71195daba6aa47c158887c4863e4cd">&#9670;&nbsp;</a></span>RxIndication()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void ComIf::RxIndication </td>
+          <td>(</td>
+          <td class="paramtype">ECU_CanController&#160;</td>
+          <td class="paramname"><em>Controller</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../de/d2a/_t_m___compiler_8h.html#a4aae075cd720aee043ae21cd4438f391">REF2CONST</a>(<a class="el" href="../../d5/d65/struct_com_stack___can_msg_header.html">ComStack_CanMsgHeader</a>, <a class="el" href="../../de/d2a/_t_m___compiler_8h.html#a3851a1a8ddec9eacd2e30a8a19bb8cc8">AUTOMATIC</a>)&#160;</td>
+          <td class="paramname"><em>CanMsgHeader</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../de/d2a/_t_m___compiler_8h.html#a4aae075cd720aee043ae21cd4438f391">REF2CONST</a>(<a class="el" href="../../d7/d36/struct_com_stack___pdu_info_type.html">ComStack_PduInfoType</a>, <a class="el" href="../../de/d2a/_t_m___compiler_8h.html#a3851a1a8ddec9eacd2e30a8a19bb8cc8">AUTOMATIC</a>)&#160;</td>
+          <td class="paramname"><em>PduInfo</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>There is a RxIndication function on every <a class="el" href="../../db/db1/class_com_if.html" title="the base class to hold a unique interface to all communication controller interface types">ComIf</a> class. </p>
+<p>The service CanIf_RxIndication() is implemented in <a class="el" href="../../d0/d88/class_can_if.html" title="the class to work on the CAN controller interface">CanIf</a> and called by CanDrv after a CAN L-PDU has been received. </p>
+
+<p>Implemented in <a class="el" href="../../d0/d88/class_can_if.html#ab111d7f05c607656bfd4dbd7164d2edf">CanIf</a>.</p>
+
+</div>
+</div>
 <a id="ab950dd739a98898297a0358cf51ee263"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab950dd739a98898297a0358cf51ee263">&#9670;&nbsp;</a></span>Transmit()</h2>
 
@@ -313,7 +363,7 @@ const <a class="el" href="../../db/db1/class_com_if.html#aa1a10fcd64f26017297edc
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Std_ReturnType</dd></dl>
-<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000024">Todo:</a></b></dt><dd>we should rework to select the CAN Channel by using PDU IDs </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000033">Todo:</a></b></dt><dd>we should rework to select the CAN Channel by using PDU IDs </dd></dl>
 
 <p>Implemented in <a class="el" href="../../db/d0a/group___t_m___can_if___func.html#ga23dedfd9324e6d2ef2df8136c0bd473c">CanIf</a>.</p>
 

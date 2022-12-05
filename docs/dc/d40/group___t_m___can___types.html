@@ -65,9 +65,10 @@ $(document).ready(function(){initNavTree('dc/d40/group___t_m___can___types.html'
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#define-members">Macros</a> &#124;
-<a href="#typedef-members">Typedefs</a>  </div>
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#enum-members">Enumerations</a>  </div>
   <div class="headertitle">
-<div class="title">Type definitions for CAN Module<div class="ingroups"><a class="el" href="../../d7/d90/group___t_m___can.html">CAN Module</a></div></div>  </div>
+<div class="title">Type definitions for CAN Module<div class="ingroups"><a class="el" href="../../d1/d53/group___t_m___can___module.html">CAN Module</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -78,7 +79,7 @@ Collaboration diagram for Type definitions for CAN Module:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../dc/d40/group___t_m___can___types.png" border="0" usemap="#dc_2d40_2group______t__m______can______types" alt=""/></div>
 <map name="dc_2d40_2group______t__m______can______types" id="dc_2d40_2group______t__m______can______types">
-<area shape="rect" href="../../d7/d90/group___t_m___can.html" title="to work with the STM HAL" alt="" coords="5,13,100,38"/>
+<area shape="rect" href="../../d1/d53/group___t_m___can___module.html" title="to work with the STM HAL" alt="" coords="5,13,100,38"/>
 <area shape="rect" title="to handle hardware module access" alt="" coords="148,5,279,45"/>
 </map>
 </div>
@@ -88,24 +89,40 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d5d/structt_c_a_n___bitrate_config.html">tCAN_BitrateConfig</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">structure to hold the timing configuration of the bitrates  <a href="../../da/d5d/structt_c_a_n___bitrate_config.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d51/struct_can_if_callback_type.html">CanIfCallbackType</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dc8/structbx_can___std_can_id_type.html">bxCan_StdCanIdType</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">bxCAN specific standard CanId type  <a href="../../d3/dc8/structbx_can___std_can_id_type.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d20/structbx_can___ext_can_id_type.html">bxCan_ExtCanIdType</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">bxCAN specific extended CanId type  <a href="../../d8/d20/structbx_can___ext_can_id_type.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">union &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/ded/unionbx_can___id_select_type.html">bxCan_IdSelectType</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">to unify to handle the CAN Id formats  <a href="../../df/ded/unionbx_can___id_select_type.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d12/structbx_can___rx_message_type.html">bxCan_RxMessageType</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">this is a test structure to hold data and header for a rx message  <a href="../../dc/d12/structbx_can___rx_message_type.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d56/structbx_can___tx_message_type.html">bxCan_TxMessageType</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">this is a test structure to hold data and header for a tx message  <a href="../../de/d56/structbx_can___tx_message_type.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/da2/structbx_can___rx_sw_buffer_type.html">bxCan_RxSwBufferType</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">a simple structure to handle a software rx fifo  <a href="../../d0/da2/structbx_can___rx_sw_buffer_type.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:ga7352d7f155776f4fb4ebf040851389e6"><td class="memItemLeft" align="right" valign="top"><a id="ga7352d7f155776f4fb4ebf040851389e6"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d40/group___t_m___can___types.html#ga7352d7f155776f4fb4ebf040851389e6">CANIF_NO_RTR</a>&#160;&#160;&#160;0</td></tr>
-<tr class="memdesc:ga7352d7f155776f4fb4ebf040851389e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">no RTR bit set <br /></td></tr>
+<tr class="memitem:ga7352d7f155776f4fb4ebf040851389e6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d40/group___t_m___can___types.html#ga7352d7f155776f4fb4ebf040851389e6">CANIF_NO_RTR</a>&#160;&#160;&#160;0</td></tr>
+<tr class="memdesc:ga7352d7f155776f4fb4ebf040851389e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">no RTR bit set  <a href="../../dc/d40/group___t_m___can___types.html#ga7352d7f155776f4fb4ebf040851389e6">More...</a><br /></td></tr>
 <tr class="separator:ga7352d7f155776f4fb4ebf040851389e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga6f8aa81c82b5494bfaf4d09a4ed38009"><td class="memItemLeft" align="right" valign="top"><a id="ga6f8aa81c82b5494bfaf4d09a4ed38009"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d40/group___t_m___can___types.html#ga6f8aa81c82b5494bfaf4d09a4ed38009">CANIF_USE_RTR</a>&#160;&#160;&#160;1</td></tr>
-<tr class="memdesc:ga6f8aa81c82b5494bfaf4d09a4ed38009"><td class="mdescLeft">&#160;</td><td class="mdescRight">RTR bit set. <br /></td></tr>
+<tr class="memitem:ga6f8aa81c82b5494bfaf4d09a4ed38009"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d40/group___t_m___can___types.html#ga6f8aa81c82b5494bfaf4d09a4ed38009">CANIF_USE_RTR</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memdesc:ga6f8aa81c82b5494bfaf4d09a4ed38009"><td class="mdescLeft">&#160;</td><td class="mdescRight">RTR bit set.  <a href="../../dc/d40/group___t_m___can___types.html#ga6f8aa81c82b5494bfaf4d09a4ed38009">More...</a><br /></td></tr>
 <tr class="separator:ga6f8aa81c82b5494bfaf4d09a4ed38009"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaab150f3fecc66f6601cd9bad846f43eb"><td class="memItemLeft" align="right" valign="top"><a id="gaab150f3fecc66f6601cd9bad846f43eb"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d40/group___t_m___can___types.html#gaab150f3fecc66f6601cd9bad846f43eb">CANIF_STDID</a>&#160;&#160;&#160;0</td></tr>
-<tr class="memdesc:gaab150f3fecc66f6601cd9bad846f43eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">use standard CAN ID <br /></td></tr>
+<tr class="memitem:gaab150f3fecc66f6601cd9bad846f43eb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d40/group___t_m___can___types.html#gaab150f3fecc66f6601cd9bad846f43eb">CANIF_STDID</a>&#160;&#160;&#160;0</td></tr>
+<tr class="memdesc:gaab150f3fecc66f6601cd9bad846f43eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">use standard CAN ID  <a href="../../dc/d40/group___t_m___can___types.html#gaab150f3fecc66f6601cd9bad846f43eb">More...</a><br /></td></tr>
 <tr class="separator:gaab150f3fecc66f6601cd9bad846f43eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga6021131e64787aac72fbf947ebe27912"><td class="memItemLeft" align="right" valign="top"><a id="ga6021131e64787aac72fbf947ebe27912"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d40/group___t_m___can___types.html#ga6021131e64787aac72fbf947ebe27912">CANIF_EXTID</a>&#160;&#160;&#160;1</td></tr>
-<tr class="memdesc:ga6021131e64787aac72fbf947ebe27912"><td class="mdescLeft">&#160;</td><td class="mdescRight">use extended CAN ID <br /></td></tr>
+<tr class="memitem:ga6021131e64787aac72fbf947ebe27912"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d40/group___t_m___can___types.html#ga6021131e64787aac72fbf947ebe27912">CANIF_EXTID</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memdesc:ga6021131e64787aac72fbf947ebe27912"><td class="mdescLeft">&#160;</td><td class="mdescRight">use extended CAN ID  <a href="../../dc/d40/group___t_m___can___types.html#ga6021131e64787aac72fbf947ebe27912">More...</a><br /></td></tr>
 <tr class="separator:ga6021131e64787aac72fbf947ebe27912"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
@@ -114,9 +131,200 @@ Typedefs</h2></td></tr>
 typedef struct <a class="el" href="../../da/d5d/structt_c_a_n___bitrate_config.html">tCAN_BitrateConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d40/group___t_m___can___types.html#ga0186711b47581a271bcf8b8bdf86eac5">CAN_BitrateConfig</a></td></tr>
 <tr class="memdesc:ga0186711b47581a271bcf8b8bdf86eac5"><td class="mdescLeft">&#160;</td><td class="mdescRight">structure to hold the timing configuration of the bitrates <br /></td></tr>
 <tr class="separator:ga0186711b47581a271bcf8b8bdf86eac5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:ga43dacfd0a7bdf92b36a6326de1b562ba"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d40/group___t_m___can___types.html#ga43dacfd0a7bdf92b36a6326de1b562ba">bxCan_RxMessageStateType</a> { <br />
+&#160;&#160;<a class="el" href="../../dc/d40/group___t_m___can___types.html#gga43dacfd0a7bdf92b36a6326de1b562baa105e450f4cfbd64f8b73c969d5a5d54b">bxCan_RxMessageStateType::RxMessage_free</a>, 
+<a class="el" href="../../dc/d40/group___t_m___can___types.html#gga43dacfd0a7bdf92b36a6326de1b562baa22249aa8608e6b8c0898500160238c85">bxCan_RxMessageStateType::RxMessage_write</a>, 
+<a class="el" href="../../dc/d40/group___t_m___can___types.html#gga43dacfd0a7bdf92b36a6326de1b562baa71b2d3432c51cf9a4d9db5a8c6cc90b7">bxCan_RxMessageStateType::RxMessage_rdy2rd</a>, 
+<a class="el" href="../../dc/d40/group___t_m___can___types.html#gga43dacfd0a7bdf92b36a6326de1b562baa5c2b7e378c65acada39ca598d56e77f6">bxCan_RxMessageStateType::RxMessage_read</a>, 
+<br />
+&#160;&#160;<a class="el" href="../../dc/d40/group___t_m___can___types.html#gga43dacfd0a7bdf92b36a6326de1b562baa580dd40e8c6eaa31946c43b7126a15f3">bxCan_RxMessageStateType::RxMessage_rxok</a>, 
+<a class="el" href="../../dc/d40/group___t_m___can___types.html#gga43dacfd0a7bdf92b36a6326de1b562baaee71a170af88299cb051fbb432762924">bxCan_RxMessageStateType::RxMessage_rxerr</a>, 
+<a class="el" href="../../dc/d40/group___t_m___can___types.html#gga43dacfd0a7bdf92b36a6326de1b562baa185d0ffc5bf1bc386c9666cdf4f125ae">bxCan_RxMessageStateType::RxMessage_unkown</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:ga43dacfd0a7bdf92b36a6326de1b562ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">the handling of rx buffer needs some states of the buffered message  <a href="../../dc/d40/group___t_m___can___types.html#ga43dacfd0a7bdf92b36a6326de1b562ba">More...</a><br /></td></tr>
+<tr class="separator:ga43dacfd0a7bdf92b36a6326de1b562ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4ddba3e8ea14c19776d55da5846756b8"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d40/group___t_m___can___types.html#ga4ddba3e8ea14c19776d55da5846756b8">bxCan_TxMessageStateType</a> { <br />
+&#160;&#160;<a class="el" href="../../dc/d40/group___t_m___can___types.html#gga4ddba3e8ea14c19776d55da5846756b8abb6317e1497065e2d0120f628f6eb6cc">bxCan_TxMessageStateType::TxMessage_free</a>, 
+<a class="el" href="../../dc/d40/group___t_m___can___types.html#gga4ddba3e8ea14c19776d55da5846756b8a4493bea1f4047b25825202b12eae1e91">bxCan_TxMessageStateType::TxMessage_write</a>, 
+<a class="el" href="../../dc/d40/group___t_m___can___types.html#gga4ddba3e8ea14c19776d55da5846756b8a49d43f471ca5162474caae112187759c">bxCan_TxMessageStateType::TxMessage_rdy2tx</a>, 
+<a class="el" href="../../dc/d40/group___t_m___can___types.html#gga4ddba3e8ea14c19776d55da5846756b8a3fd69b774160d8c774a573e6b5290b4f">bxCan_TxMessageStateType::TxMessage_transmit</a>, 
+<br />
+&#160;&#160;<a class="el" href="../../dc/d40/group___t_m___can___types.html#gga4ddba3e8ea14c19776d55da5846756b8a5df1690812676d7c6921f87ee5f0a0a8">bxCan_TxMessageStateType::TxMessage_txok</a>, 
+<a class="el" href="../../dc/d40/group___t_m___can___types.html#gga4ddba3e8ea14c19776d55da5846756b8abfd13fcd808510241c995a43d8538b57">bxCan_TxMessageStateType::TxMessage_txerr</a>, 
+<a class="el" href="../../dc/d40/group___t_m___can___types.html#gga4ddba3e8ea14c19776d55da5846756b8a8387b00655505da1a36bcaf94c6151b9">bxCan_TxMessageStateType::TxMessage_unkown</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:ga4ddba3e8ea14c19776d55da5846756b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">the handling of tx buffer needs some states of the buffered message  <a href="../../dc/d40/group___t_m___can___types.html#ga4ddba3e8ea14c19776d55da5846756b8">More...</a><br /></td></tr>
+<tr class="separator:ga4ddba3e8ea14c19776d55da5846756b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>to handle hardware module access </p>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="ga6021131e64787aac72fbf947ebe27912"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6021131e64787aac72fbf947ebe27912">&#9670;&nbsp;</a></span>CANIF_EXTID</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CANIF_EXTID&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>use extended CAN ID </p>
+<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000007">Todo:</a></b></dt><dd>need refactor from CANIF_xx to CAN_xx </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d0/df9/_can_8h_source.html#l00089">89</a> of file <a class="el" href="../../d0/df9/_can_8h_source.html">Can.h</a>.</p>
+
+</div>
+</div>
+<a id="ga7352d7f155776f4fb4ebf040851389e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7352d7f155776f4fb4ebf040851389e6">&#9670;&nbsp;</a></span>CANIF_NO_RTR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CANIF_NO_RTR&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>no RTR bit set </p>
+<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000004">Todo:</a></b></dt><dd>need refactor from CANIF_xx to CAN_xx </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d0/df9/_can_8h_source.html#l00077">77</a> of file <a class="el" href="../../d0/df9/_can_8h_source.html">Can.h</a>.</p>
+
+</div>
+</div>
+<a id="gaab150f3fecc66f6601cd9bad846f43eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaab150f3fecc66f6601cd9bad846f43eb">&#9670;&nbsp;</a></span>CANIF_STDID</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CANIF_STDID&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>use standard CAN ID </p>
+<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000006">Todo:</a></b></dt><dd>need refactor from CANIF_xx to CAN_xx </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d0/df9/_can_8h_source.html#l00085">85</a> of file <a class="el" href="../../d0/df9/_can_8h_source.html">Can.h</a>.</p>
+
+</div>
+</div>
+<a id="ga6f8aa81c82b5494bfaf4d09a4ed38009"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6f8aa81c82b5494bfaf4d09a4ed38009">&#9670;&nbsp;</a></span>CANIF_USE_RTR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CANIF_USE_RTR&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>RTR bit set. </p>
+<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000005">Todo:</a></b></dt><dd>need refactor from CANIF_xx to CAN_xx </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d0/df9/_can_8h_source.html#l00081">81</a> of file <a class="el" href="../../d0/df9/_can_8h_source.html">Can.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="ga43dacfd0a7bdf92b36a6326de1b562ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga43dacfd0a7bdf92b36a6326de1b562ba">&#9670;&nbsp;</a></span>bxCan_RxMessageStateType</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="../../dc/d40/group___t_m___can___types.html#ga43dacfd0a7bdf92b36a6326de1b562ba">bxCan_RxMessageStateType</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>the handling of rx buffer needs some states of the buffered message </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="gga43dacfd0a7bdf92b36a6326de1b562baa105e450f4cfbd64f8b73c969d5a5d54b"></a>RxMessage_free&#160;</td><td class="fielddoc"><p>the Rx Message is free for use </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga43dacfd0a7bdf92b36a6326de1b562baa22249aa8608e6b8c0898500160238c85"></a>RxMessage_write&#160;</td><td class="fielddoc"><p>the Rx Message is blocked to write </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga43dacfd0a7bdf92b36a6326de1b562baa71b2d3432c51cf9a4d9db5a8c6cc90b7"></a>RxMessage_rdy2rd&#160;</td><td class="fielddoc"><p>the Rx Message is ready for transmit </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga43dacfd0a7bdf92b36a6326de1b562baa5c2b7e378c65acada39ca598d56e77f6"></a>RxMessage_read&#160;</td><td class="fielddoc"><p>the Rx Message is blocked for transmit </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga43dacfd0a7bdf92b36a6326de1b562baa580dd40e8c6eaa31946c43b7126a15f3"></a>RxMessage_rxok&#160;</td><td class="fielddoc"><p>if the upper layer needs a callback we can handle a ok transmit </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga43dacfd0a7bdf92b36a6326de1b562baaee71a170af88299cb051fbb432762924"></a>RxMessage_rxerr&#160;</td><td class="fielddoc"><p>if the upper layer needs a callback we can handle a failed transmit </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga43dacfd0a7bdf92b36a6326de1b562baa185d0ffc5bf1bc386c9666cdf4f125ae"></a>RxMessage_unkown&#160;</td><td class="fielddoc"><p>maybe we handle internal errors </p>
+</td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="../../df/d0c/_can_drv__bx_c_a_n_8h_source.html#l00025">25</a> of file <a class="el" href="../../df/d0c/_can_drv__bx_c_a_n_8h_source.html">CanDrv_bxCAN.h</a>.</p>
+
+</div>
+</div>
+<a id="ga4ddba3e8ea14c19776d55da5846756b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4ddba3e8ea14c19776d55da5846756b8">&#9670;&nbsp;</a></span>bxCan_TxMessageStateType</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="../../dc/d40/group___t_m___can___types.html#ga4ddba3e8ea14c19776d55da5846756b8">bxCan_TxMessageStateType</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>the handling of tx buffer needs some states of the buffered message </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="gga4ddba3e8ea14c19776d55da5846756b8abb6317e1497065e2d0120f628f6eb6cc"></a>TxMessage_free&#160;</td><td class="fielddoc"><p>the Tx Message is free for use </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga4ddba3e8ea14c19776d55da5846756b8a4493bea1f4047b25825202b12eae1e91"></a>TxMessage_write&#160;</td><td class="fielddoc"><p>the Tx Message is blocked to write </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga4ddba3e8ea14c19776d55da5846756b8a49d43f471ca5162474caae112187759c"></a>TxMessage_rdy2tx&#160;</td><td class="fielddoc"><p>the Tx Message is ready for transmit </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga4ddba3e8ea14c19776d55da5846756b8a3fd69b774160d8c774a573e6b5290b4f"></a>TxMessage_transmit&#160;</td><td class="fielddoc"><p>the Tx Message is blocked for transmit </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga4ddba3e8ea14c19776d55da5846756b8a5df1690812676d7c6921f87ee5f0a0a8"></a>TxMessage_txok&#160;</td><td class="fielddoc"><p>if the upper layer needs a callback we can handle a ok transmit </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga4ddba3e8ea14c19776d55da5846756b8abfd13fcd808510241c995a43d8538b57"></a>TxMessage_txerr&#160;</td><td class="fielddoc"><p>if the upper layer needs a callback we can handle a failed transmit </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga4ddba3e8ea14c19776d55da5846756b8a8387b00655505da1a36bcaf94c6151b9"></a>TxMessage_unkown&#160;</td><td class="fielddoc"><p>maybe we handle internal errors </p>
+</td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="../../df/d0c/_can_drv__bx_c_a_n_8h_source.html#l00044">44</a> of file <a class="el" href="../../df/d0c/_can_drv__bx_c_a_n_8h_source.html">CanDrv_bxCAN.h</a>.</p>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

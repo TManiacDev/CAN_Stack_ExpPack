@@ -1,4 +1,5 @@
 <map id="CanIf::Transmit" name="CanIf::Transmit">
 <area shape="rect" id="node1" title="Requests transmission of a PDU using the Tx software Buffer." alt="" coords="5,5,115,32"/>
 <area shape="rect" id="node2" href="$db/d0a/group___t_m___can_if___func.html#ga9b738780c7f103ad66c2b24cf3805134" title="Requests transmission of a PDU using the Tx software Buffer." alt="" coords="163,5,272,32"/>
+<area shape="rect" id="node3" href="$d5/d0a/class_can.html#a550014a0982c559e59a84712f82367ca" title="The API to write a message to tx FIFO." alt="" coords="320,5,404,32"/>
 </map>

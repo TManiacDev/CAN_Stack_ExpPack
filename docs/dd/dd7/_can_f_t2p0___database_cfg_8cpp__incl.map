@@ -1,14 +1,4 @@
 <map id="E:/Embedded_SourceCode/STM32IDE_ws/NucleoCanDev/Middlewares/Third_Party/TM_Engineering_DataExchange_Fueltech/FTCAN2p0/CanFT2p0_DatabaseCfg.cpp" name="E:/Embedded_SourceCode/STM32IDE_ws/NucleoCanDev/Middlewares/Third_Party/TM_Engineering_DataExchange_Fueltech/FTCAN2p0/CanFT2p0_DatabaseCfg.cpp">
-<area shape="rect" id="node1" title=" " alt="" coords="307,5,518,105"/>
-<area shape="rect" id="node2" href="$d2/dba/_can_f_t2p0___cfg_8h_source.html" title=" " alt="" coords="353,153,472,180"/>
-<area shape="rect" id="node3" href="$d0/dcc/_t_m___std___types_8h.html" title=" " alt="" coords="170,303,287,329"/>
-<area shape="rect" id="node9" href="$d8/dd3/_ecu_names___cfg_8h_source.html" title=" " alt="" coords="266,228,389,255"/>
-<area shape="rect" id="node11" href="$dd/d78/_can_f_t2p0___database_cfg_8h.html" title=" " alt="" coords="413,228,586,255"/>
-<area shape="rect" id="node12" href="$d8/dca/_can_f_t2p0___fixed_names_8h_source.html" title=" " alt="" coords="611,228,783,255"/>
-<area shape="rect" id="node4" href="$d8/dd7/_t_m___platform___types_8h.html" title=" " alt="" coords="79,377,227,404"/>
-<area shape="rect" id="node7" href="$de/d2a/_t_m___compiler_8h.html" title=" " alt="" coords="251,377,361,404"/>
-<area shape="rect" id="node5" title=" " alt="" coords="5,452,71,479"/>
-<area shape="rect" id="node6" title=" " alt="" coords="95,452,213,479"/>
-<area shape="rect" id="node8" href="$d5/d39/_t_m___compiler___cfg_8h.html" title=" " alt="" coords="239,452,373,479"/>
-<area shape="rect" id="node10" title=" " alt="" coords="311,303,373,329"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,5,216,105"/>
+<area shape="rect" id="node2" title=" " alt="" coords="51,153,170,180"/>
 </map>

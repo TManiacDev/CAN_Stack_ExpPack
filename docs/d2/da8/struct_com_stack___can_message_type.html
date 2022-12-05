@@ -87,28 +87,28 @@ Collaboration diagram for ComStack_CanMessageType:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a477653ec17cac0270f5075fccd8b09e2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d5/d65/struct_com_stack___can_msg_header.html">ComStack_CanMsgHeader</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/da8/struct_com_stack___can_message_type.html#a477653ec17cac0270f5075fccd8b09e2">CanIf_Header</a></td></tr>
-<tr class="memdesc:a477653ec17cac0270f5075fccd8b09e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">The header of the CAN message.  <a href="../../d2/da8/struct_com_stack___can_message_type.html#a477653ec17cac0270f5075fccd8b09e2">More...</a><br /></td></tr>
-<tr class="separator:a477653ec17cac0270f5075fccd8b09e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a3407615f16fcc520f54575fec85a6a"><td class="memItemLeft" align="right" valign="top"><a id="a6a3407615f16fcc520f54575fec85a6a"></a>
-uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/da8/struct_com_stack___can_message_type.html#a6a3407615f16fcc520f54575fec85a6a">Data</a> [8]</td></tr>
-<tr class="memdesc:a6a3407615f16fcc520f54575fec85a6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">CAN has 8 data bytes. <br /></td></tr>
-<tr class="separator:a6a3407615f16fcc520f54575fec85a6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeed41bd5b785893fe283eb7c127c6559"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d5/d65/struct_com_stack___can_msg_header.html">ComStack_CanMsgHeader</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/da8/struct_com_stack___can_message_type.html#aeed41bd5b785893fe283eb7c127c6559">CanMsgHeader</a></td></tr>
+<tr class="memdesc:aeed41bd5b785893fe283eb7c127c6559"><td class="mdescLeft">&#160;</td><td class="mdescRight">The header of the CAN message.  <a href="../../d2/da8/struct_com_stack___can_message_type.html#aeed41bd5b785893fe283eb7c127c6559">More...</a><br /></td></tr>
+<tr class="separator:aeed41bd5b785893fe283eb7c127c6559"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a478546b2d3ebc04bf3d6577214af7c1a"><td class="memItemLeft" align="right" valign="top"><a id="a478546b2d3ebc04bf3d6577214af7c1a"></a>
+const uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/da8/struct_com_stack___can_message_type.html#a478546b2d3ebc04bf3d6577214af7c1a">ptr2Data</a></td></tr>
+<tr class="memdesc:a478546b2d3ebc04bf3d6577214af7c1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">CAN has 8 data bytes. <br /></td></tr>
+<tr class="separator:a478546b2d3ebc04bf3d6577214af7c1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>this is a test structure to hold data and header for a rx message </p>
 <p>because of the filtermatch element inside the rx header we need two different buffer types :-( </p>
 
-<p class="definition">Definition at line <a class="el" href="../../dd/d4d/_t_m___com_stack___types_8h_source.html#l00071">71</a> of file <a class="el" href="../../dd/d4d/_t_m___com_stack___types_8h_source.html">TM_ComStack_Types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d4d/_t_m___com_stack___types_8h_source.html#l00072">72</a> of file <a class="el" href="../../dd/d4d/_t_m___com_stack___types_8h_source.html">TM_ComStack_Types.h</a>.</p>
 </div><h2 class="groupheader">Member Data Documentation</h2>
-<a id="a477653ec17cac0270f5075fccd8b09e2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a477653ec17cac0270f5075fccd8b09e2">&#9670;&nbsp;</a></span>CanIf_Header</h2>
+<a id="aeed41bd5b785893fe283eb7c127c6559"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeed41bd5b785893fe283eb7c127c6559">&#9670;&nbsp;</a></span>CanMsgHeader</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="../../d5/d65/struct_com_stack___can_msg_header.html">ComStack_CanMsgHeader</a> ComStack_CanMessageType::CanIf_Header</td>
+          <td class="memname"><a class="el" href="../../d5/d65/struct_com_stack___can_msg_header.html">ComStack_CanMsgHeader</a> ComStack_CanMessageType::CanMsgHeader</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -116,9 +116,9 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=".
 <p>The header of the CAN message. </p>
 <p>this is the public header used by inside my implementation </p>
 
-<p class="definition">Definition at line <a class="el" href="../../dd/d4d/_t_m___com_stack___types_8h_source.html#l00075">75</a> of file <a class="el" href="../../dd/d4d/_t_m___com_stack___types_8h_source.html">TM_ComStack_Types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/d4d/_t_m___com_stack___types_8h_source.html#l00076">76</a> of file <a class="el" href="../../dd/d4d/_t_m___com_stack___types_8h_source.html">TM_ComStack_Types.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d3/d5a/_can_if_8cpp_source.html#l00404">CanIf::Receive()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d3/d5a/_can_if_8cpp_source.html#l00210">CanIf::Transmit()</a>.</p>
 
 </div>
 </div>

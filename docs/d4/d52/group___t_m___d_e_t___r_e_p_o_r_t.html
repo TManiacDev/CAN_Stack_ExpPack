@@ -80,7 +80,10 @@ Collaboration diagram for Report function macros for the modules:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:ga3444163456f77ac69ffc89fe15c01bd1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d52/group___t_m___d_e_t___r_e_p_o_r_t.html#ga3444163456f77ac69ffc89fe15c01bd1">CANIF_DET_REPORTERROR</a>(ErrorId,  ApiId)&#160;&#160;&#160;Det_ReportError(<a class="el" href="../../d3/d86/group___t_m___can_if___main.html#ga273da582fa4fb57f121bcffe0fed4903">CANIF_MODULE_ID</a>, 0, (ApiId), (ErrorId))</td></tr>
+<tr class="memitem:ga4e9c62432c3044c9c4c35cf8ce12631a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d52/group___t_m___d_e_t___r_e_p_o_r_t.html#ga4e9c62432c3044c9c4c35cf8ce12631a">CAN_DET_REPORTERROR</a>(ErrorId,  ApiId)&#160;&#160;&#160;Det_ReportError(CAN_MODULE_ID, 0, (ApiId), (ErrorId))</td></tr>
+<tr class="memdesc:ga4e9c62432c3044c9c4c35cf8ce12631a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro to report dev errors from CAN interface module.  <a href="../../d4/d52/group___t_m___d_e_t___r_e_p_o_r_t.html#ga4e9c62432c3044c9c4c35cf8ce12631a">More...</a><br /></td></tr>
+<tr class="separator:ga4e9c62432c3044c9c4c35cf8ce12631a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3444163456f77ac69ffc89fe15c01bd1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d52/group___t_m___d_e_t___r_e_p_o_r_t.html#ga3444163456f77ac69ffc89fe15c01bd1">CANIF_DET_REPORTERROR</a>(ErrorId,  ApiId)&#160;&#160;&#160;Det_ReportError(CANIF_MODULE_ID, 0, (ApiId), (ErrorId))</td></tr>
 <tr class="memdesc:ga3444163456f77ac69ffc89fe15c01bd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro to report dev errors from CAN interface module.  <a href="../../d4/d52/group___t_m___d_e_t___r_e_p_o_r_t.html#ga3444163456f77ac69ffc89fe15c01bd1">More...</a><br /></td></tr>
 <tr class="separator:ga3444163456f77ac69ffc89fe15c01bd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga92cf71ee5737308932dc8daf45fe13b1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d52/group___t_m___d_e_t___r_e_p_o_r_t.html#ga92cf71ee5737308932dc8daf45fe13b1">COMIF_DET_REPORTERROR</a>(ErrorId,  ApiId)&#160;&#160;&#160;Det_ReportError(COMIF_MODULE_ID, 0, (ApiId), (ErrorId))</td></tr>
@@ -95,6 +98,39 @@ Macros</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="ga4e9c62432c3044c9c4c35cf8ce12631a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4e9c62432c3044c9c4c35cf8ce12631a">&#9670;&nbsp;</a></span>CAN_DET_REPORTERROR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CAN_DET_REPORTERROR</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">ErrorId, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">ApiId&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;Det_ReportError(CAN_MODULE_ID, 0, (ApiId), (ErrorId))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Macro to report dev errors from CAN interface module. </p>
+<p>We use an expansion macro for development error reporting </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d0/df9/_can_8h_source.html#l00064">64</a> of file <a class="el" href="../../d0/df9/_can_8h_source.html">Can.h</a>.</p>
+
+</div>
+</div>
 <a id="ga58aea7504fda31cf3387d80af2608ed8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga58aea7504fda31cf3387d80af2608ed8">&#9670;&nbsp;</a></span>CANFT2P0_DET_REPORTERROR</h2>
 
@@ -149,7 +185,7 @@ Macros</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;Det_ReportError(<a class="el" href="../../d3/d86/group___t_m___can_if___main.html#ga273da582fa4fb57f121bcffe0fed4903">CANIF_MODULE_ID</a>, 0, (ApiId), (ErrorId))</td>
+          <td></td><td>&#160;&#160;&#160;Det_ReportError(CANIF_MODULE_ID, 0, (ApiId), (ErrorId))</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -157,7 +193,7 @@ Macros</h2></td></tr>
 <p>Macro to report dev errors from CAN interface module. </p>
 <p>We use an expansion macro for development error reporting </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d3/d5a/_can_if_8h_source.html#l00059">59</a> of file <a class="el" href="../../d3/d5a/_can_if_8h_source.html">CanIf.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d3/d5a/_can_if_8h_source.html#l00062">62</a> of file <a class="el" href="../../d3/d5a/_can_if_8h_source.html">CanIf.h</a>.</p>
 
 </div>
 </div>

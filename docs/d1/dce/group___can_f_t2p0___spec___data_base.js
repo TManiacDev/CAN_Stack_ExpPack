@@ -1,16 +1,5 @@
 var group___can_f_t2p0___spec___data_base =
 [
-    [ "CanFT2p0_DBChannelType", "d3/d98/struct_can_f_t2p0___d_b_channel_type.html", [
-      [ "ChannelName", "d3/d98/struct_can_f_t2p0___d_b_channel_type.html#a5bf2cd261998ecc9d54eb2f1c5cd4427", null ],
-      [ "DataFieldId", "d3/d98/struct_can_f_t2p0___d_b_channel_type.html#ac451da02eb58b94798121bf27989e513", null ],
-      [ "MessageId", "d3/d98/struct_can_f_t2p0___d_b_channel_type.html#a36f3ccc91345f0ee7287f4029c6def55", null ]
-    ] ],
-    [ "CanFT2p0_DataBaseType", "df/d69/struct_can_f_t2p0___data_base_type.html", [
-      [ "ProductName", "df/d69/struct_can_f_t2p0___data_base_type.html#a5da563d402825067101ed9dc3bd386e4", null ],
-      [ "ProductTypeId", "df/d69/struct_can_f_t2p0___data_base_type.html#a698356085265445989de3a2a4109cf7c", null ],
-      [ "ReceiveChannels", "df/d69/struct_can_f_t2p0___data_base_type.html#a3cbad2e090fb64ef2dfc31560c209b8f", null ],
-      [ "TransmitChannels", "df/d69/struct_can_f_t2p0___data_base_type.html#a5b0dcfcb2c76faf6c1d0d9639479622a", null ]
-    ] ],
     [ "CanFT2p0_DB_ChannelNameType", "d1/dce/group___can_f_t2p0___spec___data_base.html#ga3564aebf63d5b75035b17e51366c2425", [
       [ "FT_Switchpanel_Data", "d1/dce/group___can_f_t2p0___spec___data_base.html#gga3564aebf63d5b75035b17e51366c2425a293e21a99e0e7c4dcb8e2b054a116751", null ],
       [ "FT_Switchpanel_Ctrl", "d1/dce/group___can_f_t2p0___spec___data_base.html#gga3564aebf63d5b75035b17e51366c2425adb9d5e1299fa3622f15fe0d53a3f8411", null ],

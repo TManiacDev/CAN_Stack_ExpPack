@@ -1,0 +1,6 @@
+<map id="bxCan_IdSelectType" name="bxCan_IdSelectType">
+<area shape="rect" id="node1" title="to unify to handle the CAN Id formats" alt="" coords="181,95,323,121"/>
+<area shape="rect" id="node2" href="$d8/d20/structbx_can___ext_can_id_type.html" title="bxCAN specific extended CanId type" alt="" coords="5,5,152,32"/>
+<area shape="rect" id="node3" href="$de/d22/struct_com_stack___can_id_type.html" title="to use the 32bit for extended CAN Id" alt="" coords="177,5,327,32"/>
+<area shape="rect" id="node4" href="$d3/dc8/structbx_can___std_can_id_type.html" title="bxCAN specific standard CanId type" alt="" coords="352,5,499,32"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="CAN driver" name="CAN driver">
+<area shape="rect" id="node1" href="$d1/d53/group___t_m___can___module.html" title="to work with the STM HAL" alt="" coords="5,5,100,31"/>
+<area shape="rect" id="node2" title="Driver classes to handle a specific CAN controller module." alt="" coords="148,5,231,31"/>
+</map>

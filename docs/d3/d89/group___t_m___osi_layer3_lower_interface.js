@@ -3,7 +3,8 @@ var group___t_m___osi_layer3_lower_interface =
     [ "CanIfUpperLayer", "d6/df4/class_can_if_upper_layer.html", [
       [ "CanIfUpperLayer", "d6/df4/class_can_if_upper_layer.html#acbdef5f3d8db7f0848e7e0d206d01eb4", null ],
       [ "~CanIfUpperLayer", "d6/df4/class_can_if_upper_layer.html#a8a764e18ab999cf0838a0ceaf15a5910", null ],
-      [ "RxIndication", "d6/df4/class_can_if_upper_layer.html#a0e7a83b5984f26eeefac934223a8a8cf", null ]
+      [ "RxIndication", "d6/df4/class_can_if_upper_layer.html#a0e7a83b5984f26eeefac934223a8a8cf", null ],
+      [ "RxIndication", "d6/df4/class_can_if_upper_layer.html#a78f103af71fa2f5dcfab7539e90c02fa", null ]
     ] ],
     [ "CanIf_UpperLayerType", "d3/d89/group___t_m___osi_layer3_lower_interface.html#ga9e9562e3c64dea55d05e8e8e9af08180", [
       [ "CanIfUL_undefined", "d3/d89/group___t_m___osi_layer3_lower_interface.html#gga9e9562e3c64dea55d05e8e8e9af08180a9a4cc68dd92a839f31a99778f5d0b4fc", null ],

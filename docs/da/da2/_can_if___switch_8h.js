@@ -2,12 +2,7 @@ var _can_if___switch_8h =
 [
     [ "tCAN_RxMessage", "db/d40/structt_c_a_n___rx_message.html", "db/d40/structt_c_a_n___rx_message" ],
     [ "CanIf_RxBufferType", "db/d5e/struct_can_if___rx_buffer_type.html", "db/d5e/struct_can_if___rx_buffer_type" ],
-    [ "CANIF_EXTID", "dc/d40/group___t_m___can___types.html#ga6021131e64787aac72fbf947ebe27912", null ],
     [ "CANIF_IS_CANID_EQUAL", "da/da2/_can_if___switch_8h.html#ae0e452dd0b0907c9700dc6fe2d50b5bd", null ],
-    [ "CANIF_NO_RTR", "dc/d40/group___t_m___can___types.html#ga7352d7f155776f4fb4ebf040851389e6", null ],
-    [ "CANIF_STDID", "dc/d40/group___t_m___can___types.html#gaab150f3fecc66f6601cd9bad846f43eb", null ],
-    [ "CANIF_USE_RTR", "dc/d40/group___t_m___can___types.html#ga6f8aa81c82b5494bfaf4d09a4ed38009", null ],
-    [ "CAN_BitrateConfig", "dc/d40/group___t_m___can___types.html#ga0186711b47581a271bcf8b8bdf86eac5", null ],
     [ "CAN_TxMessage", "df/df9/group___t_m___can_if___types.html#gab034ecff4a0bf6d67446c86c07946249", null ],
     [ "CanIf_MessageType", "da/da2/_can_if___switch_8h.html#adb16ae33a90ba564df0981ecc3a9b78c", null ],
     [ "CanIf_RxMessageStateType", "df/df9/group___t_m___can_if___types.html#gaff3f3b940bfe6523237fdac053b76532", [

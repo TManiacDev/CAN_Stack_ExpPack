@@ -1,8 +1,10 @@
 <map id="TME_VersionInfo" name="TME_VersionInfo">
-<area shape="rect" id="node1" title="to hold the version info" alt="" coords="169,5,289,32"/>
-<area shape="rect" id="node2" href="$d5/d4a/class_can_f_t2p0.html" title="a class to handle the Fueltech CAN FT2.0 protocol" alt="" coords="98,80,179,107"/>
-<area shape="rect" id="node5" href="$d0/d88/class_can_if.html" title="the class to work on the CAN controller interface" alt="" coords="204,80,255,107"/>
-<area shape="rect" id="node6" href="$d2/d79/class_iso_tp.html" title="a class to handle the IsoTp protocol" alt="" coords="279,80,332,107"/>
-<area shape="rect" id="node3" href="$d5/de1/class_can_f_t2p0_stream.html" title=" " alt="" coords="5,155,128,181"/>
-<area shape="rect" id="node4" href="$d8/dc4/class_f_t___switch_panel.html" title=" " alt="" coords="153,155,269,181"/>
+<area shape="rect" id="node1" title="to hold the version info" alt="" coords="187,5,307,32"/>
+<area shape="rect" id="node2" href="$d5/d0a/class_can.html" title="This pure virtual class holds the interface to work with derived driver classes." alt="" coords="65,80,110,107"/>
+<area shape="rect" id="node4" href="$d5/d4a/class_can_f_t2p0.html" title="a class to handle the Fueltech CAN FT2.0 protocol" alt="" coords="161,80,243,107"/>
+<area shape="rect" id="node7" href="$d0/d88/class_can_if.html" title="the class to work on the CAN controller interface" alt="" coords="267,80,318,107"/>
+<area shape="rect" id="node8" href="$d2/d79/class_iso_tp.html" title="a class to handle the IsoTp protocol" alt="" coords="342,80,395,107"/>
+<area shape="rect" id="node3" href="$de/d0f/class_can_drv__bx_c_a_n.html" title="driver class to work with the STM32 bxCAN controller module" alt="" coords="5,155,116,181"/>
+<area shape="rect" id="node5" href="$d5/de1/class_can_f_t2p0_stream.html" title=" " alt="" coords="141,155,263,181"/>
+<area shape="rect" id="node6" href="$d8/dc4/class_f_t___switch_panel.html" title=" " alt="" coords="288,155,404,181"/>
 </map>

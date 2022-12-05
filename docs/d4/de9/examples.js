@@ -18,32 +18,39 @@ var examples =
         [ "Auswahl der Module", "d3/d37/de_page__t01__can_if__app_demo.html#de_subsecSelectComp", null ]
       ] ],
       [ "Konfiguration der Module", "d3/d37/de_page__t01__can_if__app_demo.html#secConfigPack", [
-        [ "Hardware Settings", "d3/d37/de_page__t01__can_if__app_demo.html#de_subsecHWsettings", [
+        [ "CAN Driver", "d3/d37/de_page__t01__can_if__app_demo.html#de_subsecCanDrvSetting", [
           [ "Bitrate Generator", "d3/d37/de_page__t01__can_if__app_demo.html#autotoc_md2", null ],
-          [ "bxCAN Master Setup / bxCAN Slave Setup", "d3/d37/de_page__t01__can_if__app_demo.html#autotoc_md3", null ]
+          [ "bxCAN Master Setup / bxCAN Slave Setup", "d3/d37/de_page__t01__can_if__app_demo.html#autotoc_md3", null ],
+          [ "Software Message Buffer", "d3/d37/de_page__t01__can_if__app_demo.html#autotoc_md4", null ]
         ] ],
         [ "CAN Interface", "d3/d37/de_page__t01__can_if__app_demo.html#de_subsecCanInterface", [
-          [ "Parameter Settings", "d3/d37/de_page__t01__can_if__app_demo.html#autotoc_md4", null ],
           [ "RX/TX PDU Configuration", "d3/d37/de_page__t01__can_if__app_demo.html#autotoc_md5", [
-            [ "Name list of Interface L-PDUs", "d3/d37/de_page__t01__can_if__app_demo.html#autotoc_md6", null ],
-            [ "List of CAN Ids / List of CAN Id Masking", "d3/d37/de_page__t01__can_if__app_demo.html#autotoc_md7", null ],
-            [ "List of message length", "d3/d37/de_page__t01__can_if__app_demo.html#autotoc_md8", null ],
-            [ "List of CAN HW Controller", "d3/d37/de_page__t01__can_if__app_demo.html#autotoc_md9", null ],
-            [ "List of assigned N-PDU", "d3/d37/de_page__t01__can_if__app_demo.html#autotoc_md10", null ],
-            [ "List the assigned upper layer", "d3/d37/de_page__t01__can_if__app_demo.html#autotoc_md11", null ]
+            [ "Kurzbeschreibung", "d3/d37/de_page__t01__can_if__app_demo.html#autotoc_md6", null ],
+            [ "Name list of Interface L-PDUs", "d3/d37/de_page__t01__can_if__app_demo.html#autotoc_md7", null ],
+            [ "List of CAN Ids / List of CAN Id Masking", "d3/d37/de_page__t01__can_if__app_demo.html#autotoc_md8", null ],
+            [ "List of message length", "d3/d37/de_page__t01__can_if__app_demo.html#autotoc_md9", null ],
+            [ "List of CAN HW Controller", "d3/d37/de_page__t01__can_if__app_demo.html#autotoc_md10", null ],
+            [ "List of assigned N-PDU", "d3/d37/de_page__t01__can_if__app_demo.html#autotoc_md11", null ],
+            [ "List the assigned upper layer", "d3/d37/de_page__t01__can_if__app_demo.html#autotoc_md12", null ]
           ] ]
         ] ]
       ] ],
       [ "Den Code für das CanIf Modul generieren", "d3/d37/de_page__t01__can_if__app_demo.html#secFirstCodeGen", null ],
-      [ "Das ExpansionPack übernimmt Aufgaben aus der HAL", "d3/d37/de_page__t01__can_if__app_demo.html#de_HALvsPACK", [
-        [ "Diese Punkte muss ich noch ins Tutorial aufnehmen", "d3/d37/de_page__t01__can_if__app_demo.html#autotoc_md12", null ]
-      ] ],
+      [ "Das ExpansionPack übernimmt Aufgaben aus der HAL", "d3/d37/de_page__t01__can_if__app_demo.html#de_HALvsPACK", null ],
+      [ "Es wird Zeit für die Hardware", "d3/d37/de_page__t01__can_if__app_demo.html#de_FirstDebug", null ],
       [ "Was ist bei einem \"normalen\" Öffnen der IDE anders als beim ersten Start", "d3/d37/de_page__t01__can_if__app_demo.html#de_secRestartIDE", null ]
     ] ],
     [ "Tutorial 01: CanIf_AppDemo (english text)", "d0/d29/eng_page__t01__can_if__app_demo.html", [
       [ "How to integrate the Expansion Package to STM32CubeIDE", "d0/d29/eng_page__t01__can_if__app_demo.html#eng_secPackIntegration", [
         [ "Manage Software Packs", "d0/d29/eng_page__t01__can_if__app_demo.html#eng_subsecManagePack", null ],
         [ "Select the components coming with the pack", "d0/d29/eng_page__t01__can_if__app_demo.html#eng_subsecSelectComp", null ]
+      ] ],
+      [ "Module Configuration", "d0/d29/eng_page__t01__can_if__app_demo.html#eng_secConfigPack", [
+        [ "CAN Driver", "d0/d29/eng_page__t01__can_if__app_demo.html#eng_subsecCanDrvSetting", [
+          [ "Bitrate Generator", "d0/d29/eng_page__t01__can_if__app_demo.html#autotoc_md13", null ],
+          [ "bxCAN Master Setup / bxCAN Slave Setup", "d0/d29/eng_page__t01__can_if__app_demo.html#autotoc_md14", null ],
+          [ "Software Message Buffer", "d0/d29/eng_page__t01__can_if__app_demo.html#autotoc_md15", null ]
+        ] ]
       ] ]
     ] ]
 ];

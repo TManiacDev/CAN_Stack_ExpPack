@@ -76,21 +76,6 @@ $(document).ready(function(){initNavTree('da/da2/_can_if___switch_8h.html','../.
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d5d/structt_c_a_n___bitrate_config.html">tCAN_BitrateConfig</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">structure to hold the timing configuration of the bitrates  <a href="../../da/d5d/structt_c_a_n___bitrate_config.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d76/struct_can_controller_para_type.html">CanControllerParaType</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">to hold the handling parameters  <a href="../../dd/d76/struct_can_controller_para_type.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dc3/struct_can_controller_baudrate_config_type.html">CanControllerBaudrateConfigType</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configuration parameters for a baudrate setting.  <a href="../../d1/dc3/struct_can_controller_baudrate_config_type.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d61/struct_can_hw_filter_type.html">CanHwFilterType</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This container is only valid for HRHs and contains the configuration (parameters) of one hardware filter.  <a href="../../d1/d61/struct_can_hw_filter_type.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/dc1/struct_can_config_type.html">CanConfigType</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The structure of the overall configuration for the CAN.  <a href="../../d5/dc1/struct_can_config_type.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d76/structt_c_a_n___tx_message.html">tCAN_TxMessage</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">this is a test structure to hold data and header for a tx message  <a href="../../dd/d76/structt_c_a_n___tx_message.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -125,32 +110,11 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:ae0e452dd0b0907c9700dc6fe2d50b5bd"><td class="memItemLeft" align="right" valign="top"><a id="ae0e452dd0b0907c9700dc6fe2d50b5bd"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>CANIF_IS_CANID_EQUAL</b>(RequestCanId,  TestCanId)&#160;&#160;&#160;((RequestCanId.Id29bit==TestCanId.Id29bit)&amp;&amp;(RequestCanId.IDE==TestCanId.IDE)&amp;&amp;(RequestCanId.RTR==TestCanId.RTR))</td></tr>
+<tr class="memitem:ae0e452dd0b0907c9700dc6fe2d50b5bd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/da2/_can_if___switch_8h.html#ae0e452dd0b0907c9700dc6fe2d50b5bd">CANIF_IS_CANID_EQUAL</a>(RequestCanId,  TestCanId)&#160;&#160;&#160;((RequestCanId.Id29bit==TestCanId.Id29bit)&amp;&amp;(RequestCanId.IDE==TestCanId.IDE)&amp;&amp;(RequestCanId.RTR==TestCanId.RTR))</td></tr>
 <tr class="separator:ae0e452dd0b0907c9700dc6fe2d50b5bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7352d7f155776f4fb4ebf040851389e6"><td class="memItemLeft" align="right" valign="top">
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d40/group___t_m___can___types.html#ga7352d7f155776f4fb4ebf040851389e6">CANIF_NO_RTR</a>&#160;&#160;&#160;0</td></tr>
-<tr class="memdesc:ga7352d7f155776f4fb4ebf040851389e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">no RTR bit set <br /></td></tr>
-<tr class="separator:ga7352d7f155776f4fb4ebf040851389e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga6f8aa81c82b5494bfaf4d09a4ed38009"><td class="memItemLeft" align="right" valign="top">
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d40/group___t_m___can___types.html#ga6f8aa81c82b5494bfaf4d09a4ed38009">CANIF_USE_RTR</a>&#160;&#160;&#160;1</td></tr>
-<tr class="memdesc:ga6f8aa81c82b5494bfaf4d09a4ed38009"><td class="mdescLeft">&#160;</td><td class="mdescRight">RTR bit set. <br /></td></tr>
-<tr class="separator:ga6f8aa81c82b5494bfaf4d09a4ed38009"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaab150f3fecc66f6601cd9bad846f43eb"><td class="memItemLeft" align="right" valign="top">
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d40/group___t_m___can___types.html#gaab150f3fecc66f6601cd9bad846f43eb">CANIF_STDID</a>&#160;&#160;&#160;0</td></tr>
-<tr class="memdesc:gaab150f3fecc66f6601cd9bad846f43eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">use standard CAN ID <br /></td></tr>
-<tr class="separator:gaab150f3fecc66f6601cd9bad846f43eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga6021131e64787aac72fbf947ebe27912"><td class="memItemLeft" align="right" valign="top">
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d40/group___t_m___can___types.html#ga6021131e64787aac72fbf947ebe27912">CANIF_EXTID</a>&#160;&#160;&#160;1</td></tr>
-<tr class="memdesc:ga6021131e64787aac72fbf947ebe27912"><td class="mdescLeft">&#160;</td><td class="mdescRight">use extended CAN ID <br /></td></tr>
-<tr class="separator:ga6021131e64787aac72fbf947ebe27912"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:ga0186711b47581a271bcf8b8bdf86eac5"><td class="memItemLeft" align="right" valign="top">
-typedef struct <a class="el" href="../../da/d5d/structt_c_a_n___bitrate_config.html">tCAN_BitrateConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d40/group___t_m___can___types.html#ga0186711b47581a271bcf8b8bdf86eac5">CAN_BitrateConfig</a></td></tr>
-<tr class="memdesc:ga0186711b47581a271bcf8b8bdf86eac5"><td class="mdescLeft">&#160;</td><td class="mdescRight">structure to hold the timing configuration of the bitrates <br /></td></tr>
-<tr class="separator:ga0186711b47581a271bcf8b8bdf86eac5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gab034ecff4a0bf6d67446c86c07946249"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="../../dd/d76/structt_c_a_n___tx_message.html">tCAN_TxMessage</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/df9/group___t_m___can_if___types.html#gab034ecff4a0bf6d67446c86c07946249">CAN_TxMessage</a></td></tr>
 <tr class="memdesc:gab034ecff4a0bf6d67446c86c07946249"><td class="mdescLeft">&#160;</td><td class="mdescRight">this is a test structure to hold data and header for a tx message  <a href="../../df/df9/group___t_m___can_if___types.html#gab034ecff4a0bf6d67446c86c07946249">More...</a><br /></td></tr>
 <tr class="separator:gab034ecff4a0bf6d67446c86c07946249"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -194,7 +158,39 @@ Enumerations</h2></td></tr>
 <dl class="section version"><dt>Version</dt><dd></dd></dl>
 
 <p class="definition">Definition in file <a class="el" href="../../da/da2/_can_if___switch_8h_source.html">CanIf_Switch.h</a>.</p>
-</div><h2 class="groupheader">Typedef Documentation</h2>
+</div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="ae0e452dd0b0907c9700dc6fe2d50b5bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0e452dd0b0907c9700dc6fe2d50b5bd">&#9670;&nbsp;</a></span>CANIF_IS_CANID_EQUAL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CANIF_IS_CANID_EQUAL</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">RequestCanId, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">TestCanId&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;((RequestCanId.Id29bit==TestCanId.Id29bit)&amp;&amp;(RequestCanId.IDE==TestCanId.IDE)&amp;&amp;(RequestCanId.RTR==TestCanId.RTR))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>just to test equal IDs </p>
+
+<p class="definition">Definition at line <a class="el" href="../../da/da2/_can_if___switch_8h_source.html#l00020">20</a> of file <a class="el" href="../../da/da2/_can_if___switch_8h_source.html">CanIf_Switch.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Typedef Documentation</h2>
 <a id="adb16ae33a90ba564df0981ecc3a9b78c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adb16ae33a90ba564df0981ecc3a9b78c">&#9670;&nbsp;</a></span>CanIf_MessageType</h2>
 

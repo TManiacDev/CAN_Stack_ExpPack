@@ -1,0 +1,5 @@
+<map id="CanDrv_bxCAN::SetFilterByBitmask" name="CanDrv_bxCAN::SetFilterByBitmask">
+<area shape="rect" id="node1" title="configure a free hardware filter using bit masking" alt="" coords="5,35,189,76"/>
+<area shape="rect" id="node2" href="$de/d0f/class_can_drv__bx_c_a_n.html#a735b866778b20b8966773d68e1cde862" title="change the 32bit format to use with STM Registers" alt="" coords="241,5,432,47"/>
+<area shape="rect" id="node3" href="$de/d0f/class_can_drv__bx_c_a_n.html#a36583f3bb17c1f9de736e67bcc6d9790" title="to find a free CAN hardware filter" alt="" coords="237,71,436,98"/>
+</map>

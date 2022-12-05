@@ -1,8 +1,9 @@
 <map id="CanIf" name="CanIf">
-<area shape="rect" id="node1" title="the class to work on the CAN controller interface" alt="" coords="209,184,260,211"/>
-<area shape="rect" id="node2" href="$da/d43/class_t_m_e___version_info.html" title="to hold the version info" alt="" coords="5,95,125,121"/>
-<area shape="rect" id="node3" href="$db/db1/class_com_if.html" title="the base class to hold a unique interface to all communication controller interface types" alt="" coords="150,95,205,121"/>
-<area shape="rect" id="node4" href="$dd/d76/structt_c_a_n___tx_message.html" title="this is a test structure to hold data and header for a tx message" alt="" coords="229,95,355,121"/>
-<area shape="rect" id="node5" href="$d5/d65/struct_com_stack___can_msg_header.html" title="upper layer can use a smaller CAN message header" alt="" coords="380,95,559,121"/>
-<area shape="rect" id="node6" href="$de/d22/struct_com_stack___can_id_type.html" title="to use the 32bit for extended CAN Id" alt="" coords="394,5,545,32"/>
+<area shape="rect" id="node1" title="the class to work on the CAN controller interface" alt="" coords="177,184,228,211"/>
+<area shape="rect" id="node2" href="$da/d43/class_t_m_e___version_info.html" title="to hold the version info" alt="" coords="5,5,125,32"/>
+<area shape="rect" id="node6" href="$d5/d0a/class_can.html" title="This pure virtual class holds the interface to work with derived driver classes." alt="" coords="85,95,131,121"/>
+<area shape="rect" id="node3" href="$db/db1/class_com_if.html" title="the base class to hold a unique interface to all communication controller interface types" alt="" coords="169,95,223,121"/>
+<area shape="rect" id="node4" href="$d5/d65/struct_com_stack___can_msg_header.html" title="upper layer can use a smaller CAN message header" alt="" coords="248,95,427,121"/>
+<area shape="rect" id="node5" href="$de/d22/struct_com_stack___can_id_type.html" title="to use the 32bit for extended CAN Id" alt="" coords="262,5,413,32"/>
+<area shape="rect" id="node7" href="$d6/df4/class_can_if_upper_layer.html" title=" " alt="" coords="451,95,568,121"/>
 </map>

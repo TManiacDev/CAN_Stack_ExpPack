@@ -1,4 +1,5 @@
 <map id="CanFT2p0::TxIndication" name="CanFT2p0::TxIndication">
 <area shape="rect" id="node1" title="overwrite the function prototype supported by the CanIfUpperLayer class" alt="" coords="5,5,164,32"/>
 <area shape="rect" id="node2" href="$db/d0a/group___t_m___can_if___func.html#ga9b738780c7f103ad66c2b24cf3805134" title="Requests transmission of a PDU using the Tx software Buffer." alt="" coords="212,5,321,32"/>
+<area shape="rect" id="node3" href="$d5/d0a/class_can.html#a550014a0982c559e59a84712f82367ca" title="The API to write a message to tx FIFO." alt="" coords="369,5,453,32"/>
 </map>

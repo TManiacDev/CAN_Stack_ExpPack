@@ -1,0 +1,6 @@
+<map id="bxCan_RxSwBufferType" name="bxCan_RxSwBufferType">
+<area shape="rect" id="node1" title="a simple structure to handle a software rx fifo" alt="" coords="14,273,175,300"/>
+<area shape="rect" id="node2" href="$dc/d12/structbx_can___rx_message_type.html" title="this is a test structure to hold data and header for a rx message" alt="" coords="13,184,176,211"/>
+<area shape="rect" id="node3" href="$d5/d65/struct_com_stack___can_msg_header.html" title="upper layer can use a smaller CAN message header" alt="" coords="5,95,184,121"/>
+<area shape="rect" id="node4" href="$de/d22/struct_com_stack___can_id_type.html" title="to use the 32bit for extended CAN Id" alt="" coords="19,5,170,32"/>
+</map>
