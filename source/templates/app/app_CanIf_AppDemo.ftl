@@ -57,6 +57,7 @@ uint32_t processUsage = 0;
 
 ComStack_CanMsgHeader msgHeader = {{0x1ff, 0, 0, 0}, 8, 0 , 0x0 };
 uint8_t data[8] = {0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x04, 0x80};
+uint8_t Versiondata[8] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 CanIf_PduInfoType myTestPdu = { data, 8 };
 
 /* USER CODE END PV */
@@ -85,6 +86,8 @@ void ${fctName}(void)
     // try it later
   }
   
+  canInterface.GetVersionInfo(8, Versiondata);
+  
 /* USER CODE BEGIN ${fctName} 1 */
 
 /* USER CODE END ${fctName} 1 */
@@ -112,7 +115,7 @@ void ${fctProcessName}(void)
     LED_RED_TOGGLE;
 
     // send via known CAN message header:
-    canInterface.Transmit( msgHeader,data);
+    canInterface.Transmit( msgHeader,Versiondata);
 
     // to lock against multiple call
     processUsage++;

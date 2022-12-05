@@ -1,13 +1,13 @@
 /**
   ******************************************************************************
   * @section CanIF_CFG_C Code generation
-  * File Name          : ./CanIf_Cfg.cpp
+  * File Name          : CanIf_Cfg.cpp
   * Description        : This file provides code for the configuration
   *                      of the CanIf_Cfg.cpp instances.
   *
-  * MiddleWare name    : TM_Engineering.CAN_Stack.0.1.0
+  * MiddleWare name    : TM_Engineering.CAN_Stack.0.2.1
   * MiddleWare version :
-  * Last updated       : Nov 8, 2022  6:56:52 PM
+  * Last updated       : Dec 5, 2022  12:48:10 PM
   *
   ******************************************************************************
   * @attention
@@ -46,14 +46,14 @@
  *  - Name of the upper layer N-PDU
  *  - name of upper layer
  *
- *  @sa CanIf_PduIdType */
+ *  @warning the struct must have the same order like CanIf_RxPduIdType */
 /* ->->-> we have a valid Rx Pdu List */
 EXTERN_CONST( CanIf_RxPduCfgType, TM_CANIF_CONFIG_DATA ) MyTest_RxPduConfig[] =
 {
   {  /* 0 */
     .L_PDU_Name = CanIf_Rx_Name1,
-    .CanId = { 123, _UNUSED_VAR_, CANIF_NO_RTR, CANIF_STDID },
-    .IdMask = { 0, _UNUSED_VAR_, CANIF_NO_RTR, CANIF_STDID },
+    .CanId = { 0x123, _UNUSED_VAR_, CANIF_NO_RTR, CANIF_STDID },
+    .IdMask = { 0x0, _UNUSED_VAR_, CANIF_NO_RTR, CANIF_STDID },
     .MsgLength = 8,
     .InstanceName = CanMasterController,
     .N_PDU_Name = CanUndefUl_Rx_Target1,
@@ -61,8 +61,8 @@ EXTERN_CONST( CanIf_RxPduCfgType, TM_CANIF_CONFIG_DATA ) MyTest_RxPduConfig[] =
   },
     {  /* 1 */
     .L_PDU_Name = CanIf_Rx_Name2,
-    .CanId = { 0xAFFE, _UNUSED_VAR_, CANIF_NO_RTR, CANIF_EXTID },
-    .IdMask = { 0, _UNUSED_VAR_, CANIF_NO_RTR, CANIF_EXTID },
+    .CanId = { 12345678, _UNUSED_VAR_, CANIF_NO_RTR, CANIF_EXTID },
+    .IdMask = { 0x0, _UNUSED_VAR_, CANIF_NO_RTR, CANIF_EXTID },
     .MsgLength = 8,
     .InstanceName = CanMasterController,
     .N_PDU_Name = CanUndefUl_Rx_Target2,
@@ -93,7 +93,7 @@ EXTERN_CONST( CanIf_RxPduCfgType, TM_CANIF_CONFIG_DATA ) MyTest_RxPduConfig[] =
  *  - Name of the upper layer N-PDU
  *  - name of upper layer
  *
- *  @sa CanIf_PduIdType */
+ *  @warning the struct must have the same order like CanIf_TxPduIdType */
 /* ->->-> we have a valid Tx Pdu List */
 EXTERN_CONST( CanIf_RxPduCfgType, TM_CANIF_CONFIG_DATA ) MyTest_TxPduConfig[] =
 {
@@ -111,7 +111,7 @@ EXTERN_CONST( CanIf_RxPduCfgType, TM_CANIF_CONFIG_DATA ) MyTest_TxPduConfig[] =
     .CanId = { 0x1F2F3F4F, _UNUSED_VAR_, CANIF_NO_RTR, CANIF_EXTID },
     .IdMask = { 0x1F2F3F4F, _UNUSED_VAR_, CANIF_NO_RTR, CANIF_EXTID },
     .MsgLength = 8,
-    .InstanceName = CanSlaveController,
+    .InstanceName = CanMasterController,
     .N_PDU_Name = CanUndefUl_Tx_Target2,
     .ULName = CanIfUL_undefined
   },

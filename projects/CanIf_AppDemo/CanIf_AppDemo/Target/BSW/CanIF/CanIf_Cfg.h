@@ -1,13 +1,13 @@
 /**
   ******************************************************************************
   * @section CanIF_CFG_H Code generation
-  * File Name          : ./CanIf_Cfg.h
+  * File Name          : CanIf_Cfg.h
   * Description        : This file provides code for the configuration
   *                      of the CanIf_Cfg.h instances.
   *
-  * MiddleWare name    : TM_Engineering.CAN_Stack.0.1.0
-  * MiddleWare version :  / 0.1.0
-  * Last updated       : Nov 8, 2022  6:56:52 PM
+  * MiddleWare name    : TM_Engineering.CAN_Stack.0.2.1
+  * MiddleWare version :  / 0.2.1
+  * Last updated       : Dec 5, 2022  12:48:10 PM
   *
   ******************************************************************************
   * @attention
@@ -37,25 +37,18 @@
 /** @addtogroup TM_CanIf_Main
  *  @{ */
 
-#ifdef __cplusplus
 #include "TMEVersionInfo.h"
-#endif
 
 /** @brief  my ID */
 #define CANIF_VENDOR_ID           TM_VENDOR_ID
 /** @brief  module id to see where the error is come from */
-#define CANIF_MODULE_ID           (0x60)
-/** @brief we have only one version at start
- *  todo use a generated value */
-#define CANIF_VERSION             (0)
-/** @brief no patching until now
- *  todo use a generated value */
-#define CANIF_PATCH_VERSION       (1)
+#define CANIF_MODULE_ID           (*(uint16_t*)"CI")
+/** @brief To see the version and patch level we save it on ASCII */
+#define CANIF_VERSION             (*(uint16_t*)"02")
+/** @brief To see the sub patch level we save it on ASCII
+ *  @details There are two signs available: 0-99 */
+#define CANIF_PATCH_VERSION       (*(uint16_t*)"1")
 /** @} */ // end of grouping TM_CanIf_Main
-
-#ifdef __cplusplus
- extern "C" {
-#endif
 
 /*******************************/
 
@@ -63,12 +56,6 @@
  *  @{ */
 
       /* extract RxUpperLayerList undef,undef /./ undef,undef /./ undef undef */
-
-/** ----------  Size of TX buffer -----------*/
-#define CANIF_TX_BUFFER_SIZE      16
-
-/** ----------  Size of RX buffer -----------*/
-#define CANIF_RX_BUFFER_SIZE      16
 
       /* extract TxUpperLayerList undef,undef /./ undef,undef /./ undef undef */
 
@@ -85,9 +72,6 @@
 
 /* USER CODE END CanIf_Cfg__h 1 */
 
-#ifdef __cplusplus
-}
-#endif
 #endif /*__ CANIF_CFG__H__ */
 
 /*******************  (C) TManiac Engineering  *******************/

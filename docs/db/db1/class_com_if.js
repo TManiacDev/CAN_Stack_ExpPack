@@ -14,6 +14,7 @@ var class_com_if =
     [ "GetIfRxPduName", "db/db1/class_com_if.html#afb637b15d4949c8811ebf940de129c78", null ],
     [ "GetIfTxPduName", "db/db1/class_com_if.html#a56b1973a85147465d8ac7330ec6994ba", null ],
     [ "Receive", "db/db1/class_com_if.html#abe48967011cf212aaf33f4f875125007", null ],
+    [ "RxIndication", "db/db1/class_com_if.html#a5c71195daba6aa47c158887c4863e4cd", null ],
     [ "Transmit", "db/db1/class_com_if.html#ab950dd739a98898297a0358cf51ee263", null ],
     [ "connectedComInterface", "db/db1/class_com_if.html#a91c2b750bc98ea6550d8b437e2d8b74f", null ]
 ];

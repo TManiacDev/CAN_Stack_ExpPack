@@ -57,25 +57,18 @@
 /** @addtogroup TM_CanIf_Main
  *  @{ */
  
-#ifdef __cplusplus
 #include "TMEVersionInfo.h"
-#endif
  
 /** @brief  my ID */
 #define CANIF_VENDOR_ID           TM_VENDOR_ID
 /** @brief  module id to see where the error is come from */
-#define CANIF_MODULE_ID           (0x60)
-/** @brief we have only one version at start 
- *  todo use a generated value */
-#define CANIF_VERSION             (${VersionLevel})
-/** @brief no patching until now 
- *  todo use a generated value */
-#define CANIF_PATCH_VERSION       (${PatchLevel})
+#define CANIF_MODULE_ID           (*(uint16_t*)"CI")
+/** @brief To see the version and patch level we save it on ASCII */ 
+#define CANIF_VERSION             (*(uint16_t*)"${VersionLevel}${PatchLevel}")
+/** @brief To see the sub patch level we save it on ASCII 
+ *  @details There are two signs available: 0-99 */
+#define CANIF_PATCH_VERSION       (*(uint16_t*)"${SubPatch}")
 /** @} */ // end of grouping TM_CanIf_Main
-
-#ifdef __cplusplus
- extern "C" {
-#endif
 
 /*******************************/
 [#-- SWIPdatas is a list of SWIPconfigModel --]  
@@ -171,10 +164,6 @@ extern ${variable.value} ${variable.name};
 /* USER CODE END ${dashedFileNamed} ${UserCodeCounter} */
   [#assign UserCodeCounter++]
 
-
-#ifdef __cplusplus
-}
-#endif
 #endif /*__ ${inclusion_protection}__ */
 
 /*******************  (C) TManiac Engineering  *******************/

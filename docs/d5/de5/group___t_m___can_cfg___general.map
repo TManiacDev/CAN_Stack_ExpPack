@@ -1,4 +1,4 @@
 <map id="general behavior" name="general behavior">
-<area shape="rect" id="node1" title="General behavior of the CAN Module." alt="" coords="200,13,315,38"/>
+<area shape="rect" id="node1" title=" " alt="" coords="200,13,315,38"/>
 <area shape="rect" id="node2" href="$df/d57/group___t_m___can_cfg.html" title="configuration for hardware dependencies" alt="" coords="5,5,152,45"/>
 </map>

@@ -74,37 +74,28 @@ $(document).ready(function(){initNavTree('d2/dc3/_can_if___compiler___cfg_8h_sou
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#ifndef BSP_TM_ENGINEERING_BOARD_CANIF_CANIF_COMPILER_CFG_H_</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#define BSP_TM_ENGINEERING_BOARD_CANIF_CANIF_COMPILER_CFG_H_</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="../../d2/dc3/_can_if___compiler___cfg_8h.html#a5fab4d49eed972509a96b1a26874c273">   20</a></span>&#160;<span class="preprocessor">#define TM_CAN_USER_VAR     __attribute__((section(&quot;.tm_data_can_var_preinit&quot;)))</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="../../d2/dc3/_can_if___compiler___cfg_8h.html#ac6206696d9d9aa4e843d9c73c09ee0f0">   22</a></span>&#160;<span class="preprocessor">#define TM_CAN_CONFIG_DATA  __attribute__((section(&quot;.tm_driver_config_can&quot;)))</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="../../d2/dc3/_can_if___compiler___cfg_8h.html#a58225a14e0f1e8764a03866284f74ecb">   24</a></span>&#160;<span class="preprocessor">#define TM_CAN_CODE         __attribute__((section(&quot;.tm_driver_code_can&quot;)))</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="../../d2/dc3/_can_if___compiler___cfg_8h.html#ac124f5bce130e163910d67b45bf1fedb">   24</a></span>&#160;<span class="preprocessor">#define TM_CANIF_CODE        __attribute__((section(&quot;.tm_driver_code_canif&quot;)))</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#define TM_CANIF_ISR_CODE      __attribute__((section(&quot;.tm_driver_isr_canif&quot;)))</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="../../d2/dc3/_can_if___compiler___cfg_8h.html#ac124f5bce130e163910d67b45bf1fedb">   34</a></span>&#160;<span class="preprocessor">#define TM_CANIF_CODE        __attribute__((section(&quot;.tm_driver_code_canif&quot;)))</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#define TM_CANIF_ISR_CODE      __attribute__((section(&quot;.tm_driver_isr_canif&quot;)))</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="../../d2/dc3/_can_if___compiler___cfg_8h.html#aa19a9fc78c561ec11e2929d52a149122">   39</a></span>&#160;<span class="preprocessor">#define TM_CANIF_CONFIG_DATA        __attribute__((section(&quot;.tm_driver_config_canif&quot;)))</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="../../d2/dc3/_can_if___compiler___cfg_8h.html#a91bf43b8b3489ea24606c7ea7e2cd9ee">   42</a></span>&#160;<span class="preprocessor">#define TM_CANIF_VAR              __attribute__((section(&quot;.tm_data_canif_var_preinit&quot;)))</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="../../d2/dc3/_can_if___compiler___cfg_8h.html#a17859a03f7ee691ae26092c52093c9d6">   45</a></span>&#160;<span class="preprocessor">#define CANIF_VAR_NOINIT    STD_VAR_NOINIT </span><span class="comment">/* empty */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="../../d2/dc3/_can_if___compiler___cfg_8h.html#ae263dcd28fae422a5770bcb5a8c5f28f">   48</a></span>&#160;<span class="preprocessor">#define CANIF_VAR_POWERON_INIT  STD_VAR_POWERON_INIT </span><span class="comment">/* empty */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="../../d2/dc3/_can_if___compiler___cfg_8h.html#a9961f0666a2b2d86916e01d7a617451f">   51</a></span>&#160;<span class="preprocessor">#define CANIF_VAR_FAST  STD_VAR_FAST </span><span class="comment">/* empty */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="../../d2/dc3/_can_if___compiler___cfg_8h.html#aa19a9fc78c561ec11e2929d52a149122">   29</a></span>&#160;<span class="preprocessor">#define TM_CANIF_CONFIG_DATA        __attribute__((section(&quot;.tm_driver_config_canif&quot;)))</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="../../d2/dc3/_can_if___compiler___cfg_8h.html#a91bf43b8b3489ea24606c7ea7e2cd9ee">   32</a></span>&#160;<span class="preprocessor">#define TM_CANIF_VAR              __attribute__((section(&quot;.tm_data_canif_var_preinit&quot;)))</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="../../d2/dc3/_can_if___compiler___cfg_8h.html#a17859a03f7ee691ae26092c52093c9d6">   35</a></span>&#160;<span class="preprocessor">#define CANIF_VAR_NOINIT    STD_VAR_NOINIT </span><span class="comment">/* empty */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="../../d2/dc3/_can_if___compiler___cfg_8h.html#ae263dcd28fae422a5770bcb5a8c5f28f">   38</a></span>&#160;<span class="preprocessor">#define CANIF_VAR_POWERON_INIT  STD_VAR_POWERON_INIT </span><span class="comment">/* empty */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="../../d2/dc3/_can_if___compiler___cfg_8h.html#a9961f0666a2b2d86916e01d7a617451f">   41</a></span>&#160;<span class="preprocessor">#define CANIF_VAR_FAST  STD_VAR_FAST </span><span class="comment">/* empty */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="../../d2/dc3/_can_if___compiler___cfg_8h.html#a0ac5900998d73206579a784fea4b7a88">   44</a></span>&#160;<span class="preprocessor">#define CANIF_APPL_CODE STD_APPL_CODE </span><span class="comment">/* empty */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="../../d2/dc3/_can_if___compiler___cfg_8h.html#ae07e1ed90762f63b79843461e82cd4fe">   47</a></span>&#160;<span class="preprocessor">#define CANIF_APPL_CONST    STD_APPL_CONST </span><span class="comment">/* empty */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="../../d2/dc3/_can_if___compiler___cfg_8h.html#a1320fcad7238f56ec2754b49e9441299">   50</a></span>&#160;<span class="preprocessor">#define CANIF_APPL_DATA STD_APPL_DATA </span><span class="comment">/* empty */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="../../d2/dc3/_can_if___compiler___cfg_8h.html#a0ac5900998d73206579a784fea4b7a88">   54</a></span>&#160;<span class="preprocessor">#define CANIF_APPL_CODE STD_APPL_CODE </span><span class="comment">/* empty */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="../../d2/dc3/_can_if___compiler___cfg_8h.html#ae07e1ed90762f63b79843461e82cd4fe">   57</a></span>&#160;<span class="preprocessor">#define CANIF_APPL_CONST    STD_APPL_CONST </span><span class="comment">/* empty */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="../../d2/dc3/_can_if___compiler___cfg_8h.html#a1320fcad7238f56ec2754b49e9441299">   60</a></span>&#160;<span class="preprocessor">#define CANIF_APPL_DATA STD_APPL_DATA </span><span class="comment">/* empty */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* BSP_TM_ENGINEERING_BOARD_CANIF_CANIF_COMPILER_CFG_H_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* BSP_TM_ENGINEERING_BOARD_CANIF_CANIF_COMPILER_CFG_H_ */</span><span class="preprocessor"></span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

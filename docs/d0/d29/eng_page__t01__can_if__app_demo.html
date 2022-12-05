@@ -71,6 +71,13 @@ $(document).ready(function(){initNavTree('d0/d29/eng_page__t01__can_if__app_demo
 <li class="level2"><a href="#eng_subsecSelectComp">Select the components coming with the pack</a></li>
 </ul>
 </li>
+<li class="level1"><a href="#eng_secConfigPack">Module Configuration</a><ul><li class="level2"><a href="#eng_subsecCanDrvSetting">CAN Driver</a><ul><li class="level3"><a href="#autotoc_md13">Bitrate Generator</a></li>
+<li class="level3"><a href="#autotoc_md14">bxCAN Master Setup / bxCAN Slave Setup</a></li>
+<li class="level3"><a href="#autotoc_md15">Software Message Buffer</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </div>
 <div class="textblock"><p>coming soon (who want to do this?) It should be the same es in <a class="el" href="../../d3/d37/de_page__t01__can_if__app_demo.html">German</a> <br  />
@@ -117,29 +124,108 @@ Select the Demo Application</div></div>
 <div class="caption">
 Bundle warnings and Info</div></div>
 <p> With a click in the <img src="../../DetailsButton.png" alt="" class="inline" title="(i) button"/> button (like the biscuit/red arrow in the picture) you can find more details to the bundle or component. Here is some text to explain the waring(s): "This component has unresolved dependencies". So we know there must be some more components to use this one. The next line says: "There are solutions within this pack". There must be an other component inside our pack. We don't need an other pack. <br  />
- The <img src="../../DependenciesButton.png" alt="" class="inline" title="chain button"/> button (like green/red arrow) will show you the needed dependencies. So, the <code>DemoApplication</code> needs a component named <code>CanIf/Can</code>.</p>
+ The <img src="../../DependenciesButton.png" alt="" class="inline" title="chain button"/> button (like green/red arrow) will show you the needed dependencies. So, the <code>DemoApplication</code> needs a component named <code>bxCAN/Master</code>.</p>
 <p>You can choose your way to select the other components. The "Component Dependencies" view gives you some shortcuts</p><ul>
-<li>you can manual select every with a click on the scare in the "Selection" column</li>
+<li>you can manual select every with a click on the square in the "Selection" column</li>
 <li>you can click on "Select" button to do the same like above</li>
-<li>you can click on "Show" button to find were to select like the first point</li>
+<li>you can click on "Show" button to find where to select like the first point</li>
 <li>you can click on "Resolve" button to do the same like the second point but includes all other dependencies</li>
 </ul>
 <p>After all you should have selected the following components and get green checkmark for solved dependencies</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
-<th class="markdownTableHeadNone">component  </th><th class="markdownTableHeadNone">content   </th></tr>
+<th class="markdownTableHeadNone">Bundle  </th><th class="markdownTableHeadNone">Module  </th><th class="markdownTableHeadNone">Content   </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">general / Common  </td><td class="markdownTableBodyNone">The component includes compiler dependencies and runtime version management   </td></tr>
+<td class="markdownTableBodyNone" rowspan="2">CanDrv  </td><td class="markdownTableBodyNone">CanDrv_APIclass  </td><td class="markdownTableBodyNone">This module contains a virtual class <a class="el" href="../../d5/d0a/class_can.html" title="This pure virtual class holds the interface to work with derived driver classes.">Can</a> which describes the API for all compatible CanDrv   </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><a class="el" href="../../db/db1/class_com_if.html" title="the base class to hold a unique interface to all communication controller interface types">ComIf</a> / Common  </td><td class="markdownTableBodyNone">This component includes a virtual C++ class to abstract communication interfaces like the AUTOSAR idea.   </td></tr>
+<td class="markdownTableBodyNone">bxCAN / Master  </td><td class="markdownTableBodyNone">Here is the <a class="el" href="../../de/d0f/class_can_drv__bx_c_a_n.html" title="driver class to work with the STM32 bxCAN controller module">CanDrv_bxCAN</a> for the STM bxCAN Controller. We need in the tutorial the Master controller only   </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">bxCan_Master / Can  </td><td class="markdownTableBodyNone">This is the derived interface class to give an abstraction of the bxCAN Master controller   </td></tr>
+<td class="markdownTableBodyNone" rowspan="3"><a class="el" href="../../d0/d88/class_can_if.html" title="the class to work on the CAN controller interface">CanIf</a>  </td><td class="markdownTableBodyNone">general  </td><td class="markdownTableBodyNone">The component includes compiler dependencies and runtime version management   </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><a class="el" href="../../db/db1/class_com_if.html" title="the base class to hold a unique interface to all communication controller interface types">ComIf</a>  </td><td class="markdownTableBodyNone">This component includes a virtual C++ class to abstract communication interfaces like the AUTOSAR idea.   </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><a class="el" href="../../d0/d88/class_can_if.html" title="the class to work on the CAN controller interface">CanIf</a>  </td><td class="markdownTableBodyNone">This is the derived interface class for communication on the CAN   </td></tr>
 </table>
 <div class="image">
 <img src="../../T01_P18_select_modules.png" alt="" width="80%"/>
 <div class="caption">
 Select needed modules</div></div>
-<p>Now you can close the "Software Pack Component Selector". </p>
+<p>Now you can close the "Software Pack Component Selector".</p>
+<h6></h6>
+<h1><a class="anchor" id="eng_secConfigPack"></a>
+Module Configuration</h1>
+<p>Back in the <code>CanIf_AppDemo.ioc</code> viewer you can find on the left column a new point named "Software Packs". Here will be listed all ExpansionPacks you have selected in the previous window. So you can see the <code>TM_Engineering.CAN_Stack</code> at this time. If you select it, there will be created a second column with to sections. On the top there is the c Mode Section. Here you can activate and deactivate the modules. On activation of a mode there will appear the configuration tab(s) on the lower section.</p>
+<h2><a class="anchor" id="eng_subsecCanDrvSetting"></a>
+CAN Driver</h2>
+<p>The CAN Driver tab contains the configuration parameters for the access to the CAN bus.</p>
+<div class="image">
+<img src="../../T01_P19_config_modules.png" alt="" width="80%"/>
+<div class="caption">
+Config the Hardware Settings of the CanDrv module</div></div>
+<p> If you need some more help you can select the (i) button at the upper right side in the tab. It will give you some more information about the selected parameter.</p>
+<h3><a class="anchor" id="autotoc_md13"></a>
+Bitrate Generator</h3>
+<p>The "Bitrate Generator" is inside the code generation ftl file. It will calculate the needed timing parameters like <code>SeqmentTime1</code>, <code>SeqmentTime2</code> or <code>SyncJumpWidth</code>. This calcualtion based on the <code>APB1</code> clock which drives the CAN controller. </p><dl class="section remark"><dt>Remarks</dt><dd>Today there is no support on switching the clock during run time!!!</dd></dl>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Parameter  </th><th class="markdownTableHeadNone">Beschreibung   </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">List of Bitrates  </td><td class="markdownTableBodyNone">Give comma seperated list with bitrate values <br  />
+This values are selectable inside the startup configuration and can be switched during runtime<br  />
+   </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Bittiming Sample Point  </td><td class="markdownTableBodyNone">Sample Point can be given as a percent value (50%-100%) or as a float value (0.5 - 1.0)   </td></tr>
+</table>
+<h3><a class="anchor" id="autotoc_md14"></a>
+bxCAN Master Setup / bxCAN Slave Setup</h3>
+<p>This are the startup parameter for th bxCAN Master controller or the bxCAN Slve controller, if activated.</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Parameter  </th><th class="markdownTableHeadNone">Value Type  </th><th class="markdownTableHeadNone">Beschreibung   </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Initial Bitrate  </td><td class="markdownTableBodyNone">[Number, Integer]  </td><td class="markdownTableBodyNone">select a value you have defined in the "Bitrate Generator"   </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone" rowspan="4">Controller Mode  </td><td class="markdownTableBodyNone">Normal  </td><td class="markdownTableBodyNone">Standard. The controller works as normal CAN device   </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Loopback  </td><td class="markdownTableBodyNone">This is an internal loopback of CAN-Tx und CAN-Rx lines. So it doesn't needs a second CAN device for testing.   </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Silent  </td><td class="markdownTableBodyNone">The controller don't do the arbitration.   </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Silent &amp; Loopback  </td><td class="markdownTableBodyNone">combines the two above   </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Time Triggered Mode  </td><td class="markdownTableBodyNone">true / false  </td><td class="markdownTableBodyNone">Time triggered communication mode   </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone" rowspan="3">Auto Bus off  </td><td class="markdownTableBodyNone">true  </td><td class="markdownTableBodyNone">The Bus-Off state is left automatically by hardware once 128 occurrences of 11 recessive bits have been monitored.   </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">false  </td><td class="markdownTableBodyNone">The Bus-Off state is left on software request, once 128 occurrences of 11 recessive bits have been monitored and the software has first set and cleared the INRQ bit of the CAN_MCR register.   </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">-  </td><td class="markdownTableBodyNone">For more information see the CAN-Error Management   </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone" rowspan="2">Auto Wake up  </td><td class="markdownTableBodyNone">true  </td><td class="markdownTableBodyNone">The Sleep mode is left automatically by hardware on CAN message detection   </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">false  </td><td class="markdownTableBodyNone">The Sleep mode is left on software request by clearing the SLEEP bit of the CAN_MCR register   </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone" rowspan="3">Auto Retransmission  </td><td class="markdownTableBodyNone">true  </td><td class="markdownTableBodyNone">The CAN hardware will automatically retransmit the message until it has been successfully transmitted according to the CAN standard.   </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">false  </td><td class="markdownTableBodyNone">A message will be transmitted only once, independently of the transmission result (successful, error or arbitration lost)   </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><dl class="section attention"><dt>Attention</dt><dd></dd></dl>
+</td><td class="markdownTableBodyNone">This value is inverted to the Bit 4 NART: No automatic retransmission of the bxCAN controller. The inversion is done inside the HAL Init function.   </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone" rowspan="2">Receive FIFO Locked  </td><td class="markdownTableBodyNone">true  </td><td class="markdownTableBodyNone">Receive FIFO locked against overrun. Once a receive FIFO is full the next incoming message will be discarde   </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">false  </td><td class="markdownTableBodyNone">Receive FIFO not locked on overrun. Once a receive FIFO is full the next incoming message will overwrite the previous one.   </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone" rowspan="2">time based priority on transmission  </td><td class="markdownTableBodyNone">true  </td><td class="markdownTableBodyNone">Priority driven by the request order (chronologically)   </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">false  </td><td class="markdownTableBodyNone">Priority driven by the identifier of the message   </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">CAN Hardware filter  </td><td class="markdownTableBodyNone">[Number, Integer]  </td><td class="markdownTableBodyNone">This gives the maximum count of used hardware filters for use on the bxCAN Master.<br  />
+ The bxCAN has 28 filter banks. The remaining filters will be used by the bxCAN Slave   </td></tr>
+</table>
+<h3><a class="anchor" id="autotoc_md15"></a>
+Software Message Buffer</h3>
+<p>The bxCAN controller has only a three message sized receive FIFO and three transmit mailboxes So we have configurable software buffers in the CanDrv. The size of this buffers will be given with this two values </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

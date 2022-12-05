@@ -1,0 +1,5 @@
+<map id="CanDrv_bxCAN" name="CanDrv_bxCAN">
+<area shape="rect" id="node1" title="driver class to work with the STM32 bxCAN controller module" alt="" coords="10,155,121,181"/>
+<area shape="rect" id="node2" href="$d5/d0a/class_can.html" title="This pure virtual class holds the interface to work with derived driver classes." alt="" coords="43,80,88,107"/>
+<area shape="rect" id="node3" href="$da/d43/class_t_m_e___version_info.html" title="to hold the version info" alt="" coords="5,5,125,32"/>
+</map>

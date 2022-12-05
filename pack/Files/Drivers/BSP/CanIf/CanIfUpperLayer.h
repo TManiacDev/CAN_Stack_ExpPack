@@ -63,6 +63,15 @@ public:
   virtual  FUNC(Std_ReturnType, AUTOMATIC) RxIndication(
       CONST(ComStack_PduType, AUTOMATIC) rxPduId,
       P2VAR(ComStack_CanMessageType, AUTOMATIC, AUTOMATIC) ptr2Sdu) { return E_NOT_OK; } ;
+
+  /** @brief virtual function declaration to have an indication function in all upper layer classes
+   *  @param[in] rxPduId  naming the incoming message
+   *  @param[in] CanMsgHeader  reference to the CanMsgHeader
+   *  @param[in] PduInfo reference to the data unit */
+  virtual  FUNC(Std_ReturnType, AUTOMATIC) RxIndication(
+      CONST(ComStack_PduType, AUTOMATIC) rxPduId,
+      REF2CONST( ComStack_CanMsgHeader, AUTOMATIC) CanMsgHeader,
+      REF2CONST( ComStack_PduInfoType, AUTOMATIC) PduInfo ) ;
 };
 
 /** @} */ // end of grouping TM_OsiLayer3LowerInterface

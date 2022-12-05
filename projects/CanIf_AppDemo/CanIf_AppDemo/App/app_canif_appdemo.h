@@ -1,10 +1,10 @@
 /**
   ******************************************************************************
-  * File Name          : TM_Engineering.CAN_Stack.0.1.0
+  * File Name          : TM_Engineering.CAN_Stack.0.2.1
   * Description        : This file provides code for the configuration
-  *                      of the TM_Engineering.CAN_Stack.0.1.0 instances.
+  *                      of the TM_Engineering.CAN_Stack.0.2.1 instances.
   *
-  * Last updated       : Nov 8, 2022  6:56:51 PM
+  * Last updated       : Dec 5, 2022  12:48:08 PM
   *
   ******************************************************************************
   * @attention
@@ -20,8 +20,8 @@
   */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __TM_ENGINEERING__CAN_STACK__0__1__0__
-#define __TM_ENGINEERING__CAN_STACK__0__1__0__
+#ifndef __TM_ENGINEERING__CAN_STACK__0__2__1__
+#define __TM_ENGINEERING__CAN_STACK__0__2__1__
 
 #ifdef __cplusplus
 extern "C" {
@@ -48,7 +48,7 @@ void MX_CanIf_AppDemo_Process(void);
 #ifdef __cplusplus
 }
 #endif
-#endif /*__ TM_ENGINEERING__CAN_STACK__0__1__0 */
+#endif /*__ TM_ENGINEERING__CAN_STACK__0__2__1 */
 
 /*******************  (C) TManiac Engineering  *******************/
 /*******************         END OF FILE       *******************/

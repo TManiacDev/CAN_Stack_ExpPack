@@ -80,55 +80,103 @@ Inheritance diagram for TME_VersionInfo:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d4/de6/class_t_m_e___version_info__inherit__graph.png" border="0" usemap="#_t_m_e___version_info_inherit__map" alt="Inheritance graph"/></div>
 <map name="_t_m_e___version_info_inherit__map" id="_t_m_e___version_info_inherit__map">
-<area shape="rect" title="to hold the version info" alt="" coords="169,5,289,32"/>
-<area shape="rect" href="../../d5/d4a/class_can_f_t2p0.html" title="a class to handle the Fueltech CAN FT2.0 protocol" alt="" coords="98,80,179,107"/>
-<area shape="rect" href="../../d0/d88/class_can_if.html" title="the class to work on the CAN controller interface" alt="" coords="204,80,255,107"/>
-<area shape="rect" href="../../d2/d79/class_iso_tp.html" title="a class to handle the IsoTp protocol" alt="" coords="279,80,332,107"/>
-<area shape="rect" href="../../d5/de1/class_can_f_t2p0_stream.html" title=" " alt="" coords="5,155,128,181"/>
-<area shape="rect" href="../../d8/dc4/class_f_t___switch_panel.html" title=" " alt="" coords="153,155,269,181"/>
+<area shape="rect" title="to hold the version info" alt="" coords="187,5,307,32"/>
+<area shape="rect" href="../../d5/d0a/class_can.html" title="This pure virtual class holds the interface to work with derived driver classes." alt="" coords="65,80,110,107"/>
+<area shape="rect" href="../../d5/d4a/class_can_f_t2p0.html" title="a class to handle the Fueltech CAN FT2.0 protocol" alt="" coords="161,80,243,107"/>
+<area shape="rect" href="../../d0/d88/class_can_if.html" title="the class to work on the CAN controller interface" alt="" coords="267,80,318,107"/>
+<area shape="rect" href="../../d2/d79/class_iso_tp.html" title="a class to handle the IsoTp protocol" alt="" coords="342,80,395,107"/>
+<area shape="rect" href="../../de/d0f/class_can_drv__bx_c_a_n.html" title="driver class to work with the STM32 bxCAN controller module" alt="" coords="5,155,116,181"/>
+<area shape="rect" href="../../d5/de1/class_can_f_t2p0_stream.html" title=" " alt="" coords="141,155,263,181"/>
+<area shape="rect" href="../../d8/dc4/class_f_t___switch_panel.html" title=" " alt="" coords="288,155,404,181"/>
 </map>
 <center><span class="legend">[<a target="top" href="../../graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:acb62b276b5a2fa91641b20e7b9d13b9a"><td class="memItemLeft" align="right" valign="top"><a id="acb62b276b5a2fa91641b20e7b9d13b9a"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d43/class_t_m_e___version_info.html#acb62b276b5a2fa91641b20e7b9d13b9a">TME_VersionInfo</a> (uint8_t Module, uint8_t Version, uint8_t Patch)</td></tr>
-<tr class="memdesc:acb62b276b5a2fa91641b20e7b9d13b9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor to set version Ids <br /></td></tr>
-<tr class="separator:acb62b276b5a2fa91641b20e7b9d13b9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a341b69e1b80b6b81f0a3c00bed9b0df4"><td class="memItemLeft" align="right" valign="top"><a id="a341b69e1b80b6b81f0a3c00bed9b0df4"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d43/class_t_m_e___version_info.html#a341b69e1b80b6b81f0a3c00bed9b0df4">TME_VersionInfo</a> (uint8_t Vendor, uint8_t Module, uint8_t Version, uint8_t Patch)</td></tr>
-<tr class="memdesc:a341b69e1b80b6b81f0a3c00bed9b0df4"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor to set version Ids including the vendor <br /></td></tr>
-<tr class="separator:a341b69e1b80b6b81f0a3c00bed9b0df4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13ae62a29f9165f31c4464bf21883a01"><td class="memItemLeft" align="right" valign="top"><a id="a13ae62a29f9165f31c4464bf21883a01"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d43/class_t_m_e___version_info.html#a13ae62a29f9165f31c4464bf21883a01">TME_VersionInfo</a> (uint16_t Module, uint16_t Version, uint16_t Patch)</td></tr>
+<tr class="memdesc:a13ae62a29f9165f31c4464bf21883a01"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor to set version Ids <br /></td></tr>
+<tr class="separator:a13ae62a29f9165f31c4464bf21883a01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afff261f390392f1cdcbe74a695ab1c9b"><td class="memItemLeft" align="right" valign="top"><a id="afff261f390392f1cdcbe74a695ab1c9b"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d43/class_t_m_e___version_info.html#afff261f390392f1cdcbe74a695ab1c9b">TME_VersionInfo</a> (uint16_t Vendor, uint16_t Module, uint16_t Version, uint16_t Patch)</td></tr>
+<tr class="memdesc:afff261f390392f1cdcbe74a695ab1c9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor to set version Ids including the vendor <br /></td></tr>
+<tr class="separator:afff261f390392f1cdcbe74a695ab1c9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adb7344a5a93be66a8a3666b44071626b"><td class="memItemLeft" align="right" valign="top"><a id="adb7344a5a93be66a8a3666b44071626b"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d43/class_t_m_e___version_info.html#adb7344a5a93be66a8a3666b44071626b">TME_VersionInfo</a> (const <a class="el" href="../../da/d43/class_t_m_e___version_info.html">TME_VersionInfo</a> &amp;other)</td></tr>
 <tr class="memdesc:adb7344a5a93be66a8a3666b44071626b"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy constructor <br /></td></tr>
 <tr class="separator:adb7344a5a93be66a8a3666b44071626b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac71c41b50bda04d49b6b5d71511d964"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d0/dcc/_t_m___std___types_8h.html#a998b1392c75c4079d9ebcf00f506abfd">Std_ReturnType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d43/class_t_m_e___version_info.html#aac71c41b50bda04d49b6b5d71511d964">GetVersionInfo</a> (uint32_t BufferLength, const uint8_t *Ptr2Buffer)</td></tr>
+<tr class="memdesc:aac71c41b50bda04d49b6b5d71511d964"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies the VersionIinfo to a 8byte buffer.  <a href="../../da/d43/class_t_m_e___version_info.html#aac71c41b50bda04d49b6b5d71511d964">More...</a><br /></td></tr>
+<tr class="separator:aac71c41b50bda04d49b6b5d71511d964"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a7adcbba76cc417283e6f4b1394daabfb"><td class="memItemLeft" align="right" valign="top"><a id="a7adcbba76cc417283e6f4b1394daabfb"></a>
-uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d43/class_t_m_e___version_info.html#a7adcbba76cc417283e6f4b1394daabfb">Vendor_ID</a> = (0x54)</td></tr>
-<tr class="memdesc:a7adcbba76cc417283e6f4b1394daabfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">my ID <br /></td></tr>
-<tr class="separator:a7adcbba76cc417283e6f4b1394daabfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4008dbcb0be6ddb76674809853f23b87"><td class="memItemLeft" align="right" valign="top"><a id="a4008dbcb0be6ddb76674809853f23b87"></a>
-uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d43/class_t_m_e___version_info.html#a4008dbcb0be6ddb76674809853f23b87">Module_ID</a> = (0x00)</td></tr>
-<tr class="memdesc:a4008dbcb0be6ddb76674809853f23b87"><td class="mdescLeft">&#160;</td><td class="mdescRight">module id to see where the error is come from <br /></td></tr>
-<tr class="separator:a4008dbcb0be6ddb76674809853f23b87"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab34d935249a8076cc4b5edb4379e30f9"><td class="memItemLeft" align="right" valign="top"><a id="ab34d935249a8076cc4b5edb4379e30f9"></a>
-uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d43/class_t_m_e___version_info.html#ab34d935249a8076cc4b5edb4379e30f9">Version_ID</a> = (0x00)</td></tr>
-<tr class="memdesc:ab34d935249a8076cc4b5edb4379e30f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">we have only one version at start <br /></td></tr>
-<tr class="separator:ab34d935249a8076cc4b5edb4379e30f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a97ca73f1d3385e11010db0e1c0b65115"><td class="memItemLeft" align="right" valign="top"><a id="a97ca73f1d3385e11010db0e1c0b65115"></a>
-uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d43/class_t_m_e___version_info.html#a97ca73f1d3385e11010db0e1c0b65115">PatchVersion_ID</a> = (0x00)</td></tr>
-<tr class="memdesc:a97ca73f1d3385e11010db0e1c0b65115"><td class="mdescLeft">&#160;</td><td class="mdescRight">no patching until now <br /></td></tr>
-<tr class="separator:a97ca73f1d3385e11010db0e1c0b65115"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6079b0db062672bf140ad2411000e7ef"><td class="memItemLeft" align="right" valign="top"><a id="a6079b0db062672bf140ad2411000e7ef"></a>
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d43/class_t_m_e___version_info.html#a6079b0db062672bf140ad2411000e7ef">Vendor_ID</a> = (*(uint16_t*)&quot;TM&quot;)</td></tr>
+<tr class="memdesc:a6079b0db062672bf140ad2411000e7ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">my ID <br /></td></tr>
+<tr class="separator:a6079b0db062672bf140ad2411000e7ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf3e2ffb947f3acee33137ea669d5925"><td class="memItemLeft" align="right" valign="top"><a id="adf3e2ffb947f3acee33137ea669d5925"></a>
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d43/class_t_m_e___version_info.html#adf3e2ffb947f3acee33137ea669d5925">Module_ID</a> = (0x00)</td></tr>
+<tr class="memdesc:adf3e2ffb947f3acee33137ea669d5925"><td class="mdescLeft">&#160;</td><td class="mdescRight">module id to see where the error is come from <br /></td></tr>
+<tr class="separator:adf3e2ffb947f3acee33137ea669d5925"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71056568de372e4e3598044843e9689a"><td class="memItemLeft" align="right" valign="top"><a id="a71056568de372e4e3598044843e9689a"></a>
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d43/class_t_m_e___version_info.html#a71056568de372e4e3598044843e9689a">Version_ID</a> = (0x00)</td></tr>
+<tr class="memdesc:a71056568de372e4e3598044843e9689a"><td class="mdescLeft">&#160;</td><td class="mdescRight">we have only one version at start <br /></td></tr>
+<tr class="separator:a71056568de372e4e3598044843e9689a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d6063a34859aa91eb53714d9559882c"><td class="memItemLeft" align="right" valign="top"><a id="a0d6063a34859aa91eb53714d9559882c"></a>
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d43/class_t_m_e___version_info.html#a0d6063a34859aa91eb53714d9559882c">PatchVersion_ID</a> = (0x00)</td></tr>
+<tr class="memdesc:a0d6063a34859aa91eb53714d9559882c"><td class="mdescLeft">&#160;</td><td class="mdescRight">no patching until now <br /></td></tr>
+<tr class="separator:a0d6063a34859aa91eb53714d9559882c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>to hold the version info </p>
 <p>maybe we should add a copy constructor </p>
 
 <p class="definition">Definition at line <a class="el" href="../../de/d8b/_t_m_e_version_info_8h_source.html#l00024">24</a> of file <a class="el" href="../../de/d8b/_t_m_e_version_info_8h_source.html">TMEVersionInfo.h</a>.</p>
-</div><hr/>The documentation for this class was generated from the following files:<ul>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="aac71c41b50bda04d49b6b5d71511d964"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac71c41b50bda04d49b6b5d71511d964">&#9670;&nbsp;</a></span>GetVersionInfo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d0/dcc/_t_m___std___types_8h.html#a998b1392c75c4079d9ebcf00f506abfd">Std_ReturnType</a> TME_VersionInfo::GetVersionInfo </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>BufferLength</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>Ptr2Buffer</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Copies the VersionIinfo to a 8byte buffer. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">BufferLength</td><td>should be 8 at minimum </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">pointer</td><td>where the VersionInfo should be </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>E_NOT_OK if buffer is to small </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d5/d20/_t_m_e_version_info_8cpp_source.html#l00051">51</a> of file <a class="el" href="../../d5/d20/_t_m_e_version_info_8cpp_source.html">TMEVersionInfo.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="../../d0/dcc/_t_m___std___types_8h_source.html#l00045">E_NOT_OK</a>, <a class="el" href="../../d0/dcc/_t_m___std___types_8h_source.html#l00039">E_OK</a>, <a class="el" href="../../de/d8b/_t_m_e_version_info_8h_source.html#l00051">Module_ID</a>, <a class="el" href="../../de/d8b/_t_m_e_version_info_8h_source.html#l00055">PatchVersion_ID</a>, <a class="el" href="../../de/d8b/_t_m_e_version_info_8h_source.html#l00049">Vendor_ID</a>, and <a class="el" href="../../de/d8b/_t_m_e_version_info_8h_source.html#l00053">Version_ID</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>E:/Embedded_SourceCode/STM32IDE_ws/NucleoCanDev/Drivers/BSP/TM_Engineering_board/general/<a class="el" href="../../de/d8b/_t_m_e_version_info_8h_source.html">TMEVersionInfo.h</a></li>
 <li>E:/Embedded_SourceCode/STM32IDE_ws/NucleoCanDev/Drivers/BSP/TM_Engineering_board/general/<a class="el" href="../../d5/d20/_t_m_e_version_info_8cpp_source.html">TMEVersionInfo.cpp</a></li>
 </ul>

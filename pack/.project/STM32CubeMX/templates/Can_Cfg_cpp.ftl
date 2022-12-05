@@ -40,7 +40,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include <vector>
-#include "CanIf.h"
+#include "Can.h"
 
 /* private Includes -----------------------------------------------------------*/
 /* USER CODE BEGIN ${dashedFileNamed} ${UserCodeCounter} */
@@ -238,7 +238,12 @@ extern ${variable.value} ${variable.name};
     
 	[/#list]
   
-/** @brief the list of configured CAN controllers */
+/** @brief the list of configured CAN controllers
+ * 
+ *  @details this vector is used to load the configuration for all listed CAN controller 
+ * 
+ *  @todo evaluiere was besser zu nutzen ist. Die Vector-Liste hier oder das enum im EcuNames_cfg.h 
+ *  vielleicht wäre eine EcuNames_cfg.cpp mit solchen Listen auch der Weg */ 
 extern const std::vector<ECU_CanController> controllerList
 {
   ECU_CanController::CanMasterController,
@@ -401,7 +406,7 @@ CONST( CAN_FilterTypeDef, TM_CAN_CONFIG_DATA) CanNucleoFilterSet[] =
 
 /** @brief This is the configuration for the STM Nulceo144 board 
  *  @todo we need a generic way */
-EXTERN_CONST( CanConfigType, TM_CAN_CONFIG_DATA) Can_NucleoConfig =
+EXTERN_CONST( CanConfigType, TM_CAN_CONFIG_DATA) Can_DefaultConfig =
 {
   NucleoBaudrateConfig,
   CanNucleoParaSet,

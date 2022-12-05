@@ -1,0 +1,4 @@
+<map id="CanDrv_bxCAN::Init" name="CanDrv_bxCAN::Init">
+<area shape="rect" id="node1" title="Init function for the bxCAN." alt="" coords="5,5,141,32"/>
+<area shape="rect" id="node2" href="$d5/d0a/class_can.html#aa1df1b2285d8560aec78a5a98e208eb9" title="To get the the software module state." alt="" coords="189,5,312,32"/>
+</map>

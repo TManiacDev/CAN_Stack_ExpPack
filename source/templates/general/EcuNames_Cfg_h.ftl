@@ -60,7 +60,18 @@
 /* USER CODE END ${dashedFileNamed} ${UserCodeCounter} */
   [#assign UserCodeCounter++]
 
-/*******************************/
+/* ***************************** */
+
+/** @brief Names for the hardware CAN controller 
+  * @todo we need a generic way for this */
+typedef enum
+{
+  CanMasterController,    ///< ST named the first controller Master because of the "Master configuration"
+  CanSlaveController,     ///< ST named the second controller Slave because of fewer configuration
+  NBROF_CanController     ///< for error handling we create a name at last
+}ECU_CanController;
+
+/* ***************************** */
 [#-- SWIPdatas is a list of SWIPconfigModel --]  
 [#list SWIPdatas as SWIP]  
 [#assign instName = SWIP.ipName]   

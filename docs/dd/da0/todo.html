@@ -67,86 +67,94 @@ $(document).ready(function(){initNavTree('dd/da0/todo.html','../../');});
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><dl class="reflist">
-<dt>Member <a class="el" href="../../df/df9/group___t_m___can_if___types.html#gab034ecff4a0bf6d67446c86c07946249">CAN_TxMessage</a>  </dt>
-<dd><p class="startdd"><a class="anchor" id="_todo000020"></a>ich muss mich noch entscheiden wie ich den notwendigen CAN Controller auswähle</p><ul>
+<dt>Member <a class="el" href="../../d5/d13/_can_drv__bx_c_a_n_8cpp.html#a3128214310d4d78dd8c4fe76a6d227b5">bxCan_canRxBuffer</a>  </dt>
+<dd><a class="anchor" id="_todo000011"></a>bring the buffers to save class  </dd>
+<dt>Member <a class="el" href="../../dc/d12/structbx_can___rx_message_type.html#a49d83a116215f2ab257204ebe3b29528">bxCan_RxMessageType::HAL_Header</a>  </dt>
+<dd><a class="anchor" id="_todo000021"></a>it will be at the end of the struct, maybe we hide this with a casted type  </dd>
+<dt>Class <a class="el" href="../../de/d56/structbx_can___tx_message_type.html">bxCan_TxMessageType</a>  </dt>
+<dd><p class="startdd"><a class="anchor" id="_todo000019"></a>ich muss mich noch entscheiden wie ich den notwendigen CAN Controller auswähle</p><ul>
 <li>entweder zwei Buffer</li>
 <li>oder die Message weiß wohin sie muss</li>
 <li>was ist wenn eine Nachricht auf beide Controller muss</li>
 </ul>
-<p class="enddd"><a class="anchor" id="_todo000021"></a>nur das CAN Module (aka HAL) darf CAN Message bedienen, aber mein State gehört in das Interface  </p>
-</dd>
-<dt>Member <a class="el" href="../../df/df9/group___t_m___can_if___types.html#gab034ecff4a0bf6d67446c86c07946249">CAN_TxMessage</a>  </dt>
-<dd><p class="startdd"><a class="anchor" id="_todo000020"></a>ich muss mich noch entscheiden wie ich den notwendigen CAN Controller auswähle</p><ul>
-<li>entweder zwei Buffer</li>
-<li>oder die Message weiß wohin sie muss</li>
-<li>was ist wenn eine Nachricht auf beide Controller muss</li>
-</ul>
-<p class="enddd"><a class="anchor" id="_todo000021"></a>nur das CAN Module (aka HAL) darf CAN Message bedienen, aber mein State gehört in das Interface  </p>
+<p class="enddd"><a class="anchor" id="_todo000020"></a>nur das CAN Module (aka HAL) darf CAN Message bedienen, aber mein State gehört in das Interface  </p>
 </dd>
 <dt>Class <a class="el" href="../../d1/dc3/struct_can_controller_baudrate_config_type.html">CanControllerBaudrateConfigType</a>  </dt>
-<dd><a class="anchor" id="_todo000019"></a>we should add a picture to explain the bit segments  </dd>
+<dd><a class="anchor" id="_todo000008"></a>we should add a picture to explain the bit segments  </dd>
+<dt>Member <a class="el" href="../../de/d0f/class_can_drv__bx_c_a_n.html#a57c11870102a5217214a2b286215e56d">CanDrv_bxCAN::canTxBuffer</a>  [CAN_TX_SW_BUFFER_SIZE]</dt>
+<dd><a class="anchor" id="_todo000022"></a>bring the buffers to save class  </dd>
+<dt>Member <a class="el" href="../../de/d0f/class_can_drv__bx_c_a_n.html#a36583f3bb17c1f9de736e67bcc6d9790">CanDrv_bxCAN::FindFreeFilter</a>  (const uint8_t *ptr2FilterBankNumber, const uint8_t *ptr2FilterNumber, const uint8_t *ptr2FilterMode)</dt>
+<dd><p class="startdd"><a class="anchor" id="_todo000015"></a>we need to clean up the filter number CAN1_USED_RX_HW_FILTER </p>
+<p class="enddd"><a class="anchor" id="_todo000016"></a> we need a readable implementation for the "second identifier filter bit" inside ptr2FilterMode  </p>
+</dd>
+<dt>Member <a class="el" href="../../de/d0f/class_can_drv__bx_c_a_n.html#a8f9b55b2a4fa421adecab9c1d4a44768">CanDrv_bxCAN::Init</a>  (const <a class="el" href="../../d5/dc1/struct_can_config_type.html" title="The structure of the overall configuration for the CAN.">CanConfigType</a> *ptr2Config=NULL_PTR, const <a class="el" href="../../db/db1/class_com_if.html" title="the base class to hold a unique interface to all communication controller interface types">ComIf</a> *ptr2ComIfObject=NULL_PTR)</dt>
+<dd><a class="anchor" id="_todo000012"></a>we need a generic mode for IRQ activation  </dd>
+<dt>Member <a class="el" href="../../de/d0f/class_can_drv__bx_c_a_n.html#a3e3fbdf1ead96a21c017a7d82a8d066f">CanDrv_bxCAN::SetControllerMode</a>  (ECU_CanController Controller, CanControllerStates Transition)</dt>
+<dd><a class="anchor" id="_todo000013"></a>maybe we add the possibility to call the function with Controller == ECU_CanController::NBROF_CanController  </dd>
+<dt>Member <a class="el" href="../../de/d0f/class_can_drv__bx_c_a_n.html#a001a5731167fae2df8b440f82897d088">CanDrv_bxCAN::SetFilterByBitmask</a>  (ECU_CanController Controller, <a class="el" href="../../de/d22/struct_com_stack___can_id_type.html" title="to use the 32bit for extended CAN Id">ComStack_CanIdType</a> FilterId, <a class="el" href="../../de/d22/struct_com_stack___can_id_type.html" title="to use the 32bit for extended CAN Id">ComStack_CanIdType</a> FilterMask)</dt>
+<dd><a class="anchor" id="_todo000017"></a>we need a handling to select different Rx Fifo  </dd>
+<dt>Member <a class="el" href="../../de/d0f/class_can_drv__bx_c_a_n.html#a4accebe5f685576f98e916bf82a01cd4">CanDrv_bxCAN::SetFilterByCanId</a>  (ECU_CanController Controller, <a class="el" href="../../de/d22/struct_com_stack___can_id_type.html" title="to use the 32bit for extended CAN Id">ComStack_CanIdType</a> FilterId)</dt>
+<dd><a class="anchor" id="_todo000018"></a>we need a handling to select different Rx Fifo  </dd>
+<dt>Member <a class="el" href="../../de/d0f/class_can_drv__bx_c_a_n.html#a7a37480c258608538355fe1d99cf665a">CanDrv_bxCAN::TxTask</a>  (void)</dt>
+<dd><a class="anchor" id="_todo000014"></a>the Tx Task need handling to transmit to other CAN controller then the bxCanMaster  </dd>
 <dt>Member <a class="el" href="../../d5/d4a/class_can_f_t2p0.html#adb79dd79c032000db953e654457089c7">CanFT2p0::GetRxPduName</a>  (void)</dt>
-<dd><a class="anchor" id="_todo000034"></a>we should add a virtual function to the <a class="el" href="../../d6/df4/class_can_if_upper_layer.html">CanIfUpperLayer</a> class  </dd>
-<dt>Member <a class="el" href="../../d7/de2/struct_can_f_t2p0___channel_config_type.html#a609f09067fea9057e9c9a1a1ebdd78de">CanFT2p0_ChannelConfigType::Pdu</a>  [CANFT_RXPDU_COUNT]</dt>
-<dd><a class="anchor" id="_todo000027"></a>ich brauch ein passendes define für die maximale Anzahl  </dd>
+<dd><a class="anchor" id="_todo000040"></a>we should add a virtual function to the <a class="el" href="../../d6/df4/class_can_if_upper_layer.html">CanIfUpperLayer</a> class  </dd>
 <dt>Member <a class="el" href="../../de/d7a/group___can_f_t2p0___data_i_ds.html#ga1d083d584614117d7cec8a03b51be1ed">CanFT2p0_DataName</a>  </dt>
-<dd><a class="anchor" id="_todo000036"></a>we need a way to do this) </dd>
+<dd><a class="anchor" id="_todo000042"></a>we need a way to do this) </dd>
 <dt>Module <a class="el" href="../../db/dc5/group___can_f_t2p0___i_d___types.html">CanFT2p0_ID_Types</a>  </dt>
-<dd><p class="startdd"><a class="anchor" id="_todo000033"></a>we should change this defines to a union struct handling</p>
+<dd><p class="startdd"><a class="anchor" id="_todo000039"></a>we should change this defines to a union struct handling</p>
 <p class="enddd"></p>
 </dd>
 <dt>Class <a class="el" href="../../d0/d88/class_can_if.html">CanIf</a>  </dt>
-<dd><a class="anchor" id="_todo000015"></a>es braucht eine Absicherung auf nur ein Objekt  </dd>
-<dt>Member <a class="el" href="../../d0/d88/class_can_if.html#a544d66ab93895a79d57473dd5388eea1">CanIf::bxCanHdl</a>  [2]</dt>
-<dd><a class="anchor" id="_todo000018"></a>there are STM controller with three CAN controller too!!!  </dd>
-<dt>Member <a class="el" href="../../d0/d88/class_can_if.html#a5191e6da6723030adc9e16b27546cfa5">CanIf::FindFreeFilter</a>  (const uint8_t *ptr2FilterBankNumber, const uint8_t *ptr2FilterNumber, const uint8_t *ptr2FilterMode)</dt>
-<dd><a class="anchor" id="_todo000012"></a> we need a readable implementation for the "second identifier filter bit" inside ptr2FilterMode  </dd>
+<dd><a class="anchor" id="_todo000028"></a>es braucht eine Absicherung auf nur ein Objekt  </dd>
 <dt>Member <a class="el" href="../../db/d0a/group___t_m___can_if___func.html#gabc547b94aa9bc2325da04095ebb49edc">CanIf::Init</a>  (void)</dt>
-<dd><p class="startdd"><a class="anchor" id="_todo000007"></a>we need a generic mode for IRQ activation </p>
-<p class="enddd"><a class="anchor" id="_todo000008"></a>MyTest_RxPduConfig[InitPdu].N_PDU_Name --&gt;&gt; muss noch zu geordnet werden !!!  </p>
+<dd><a class="anchor" id="_todo000023"></a>MyTest_RxPduConfig[InitPdu].N_PDU_Name --&gt;&gt; muss noch zu geordnet werden !!!  </dd>
+<dt>Member <a class="el" href="../../db/d0a/group___t_m___can_if___func.html#ga4878f2a8cfa5c88e7f389e0aea652692">CanIf::Receive</a>  (<a class="el" href="../../de/d2a/_t_m___compiler_8h.html#aa9a6327c45717d66546d9222127c6201">REF2VAR(ComStack_CanMsgHeader, AUTOMATIC)</a> msgHeader, const uint8_t *ptr2Data)</dt>
+<dd><p class="startdd"><a class="anchor" id="_todo000024"></a>this is a fix not save implementation </p>
+<p class="enddd"><a class="anchor" id="_todo000025"></a>we need some work here -&gt; <a class="el" href="../../db/d0a/group___t_m___can_if___func.html#ga6b6faa51ed2dc5386ccaa4c6894fc732" title="poll the RxBuffer for a message">CanIf::Receive</a>( <a class="el" href="../../de/d2a/_t_m___compiler_8h.html#aa9a6327c45717d66546d9222127c6201">REF2VAR(ComStack_CanMsgHeader, AUTOMATIC )</a> msgHeader, <a class="el" href="../../de/d2a/_t_m___compiler_8h.html#a5c6ccc28154ea2a7874ba567a352e009">P2VAR(uint8_t, AUTOMATIC, AUTOMATIC)</a> ptr2Data ) <br  />
+  </p>
 </dd>
 <dt>Member <a class="el" href="../../db/d0a/group___t_m___can_if___func.html#ga6b6faa51ed2dc5386ccaa4c6894fc732">CanIf::Receive</a>  (CanIf_RxPduIdType rxPduId, const <a class="el" href="../../dd/d54/struct_can_if___pdu_info_type.html">CanIf_PduInfoType</a> *ptr2PduInfo)</dt>
-<dd><a class="anchor" id="_todo000010"></a>this is a fix not save implementation  </dd>
-<dt>Member <a class="el" href="../../db/d0a/group___t_m___can_if___func.html#ga4878f2a8cfa5c88e7f389e0aea652692">CanIf::Receive</a>  (<a class="el" href="../../de/d2a/_t_m___compiler_8h.html#aa9a6327c45717d66546d9222127c6201">REF2VAR(ComStack_CanMsgHeader, AUTOMATIC)</a> msgHeader, const uint8_t *ptr2Data)</dt>
-<dd><a class="anchor" id="_todo000009"></a>this is a fix not save implementation  </dd>
-<dt>Member <a class="el" href="../../d0/d88/class_can_if.html#a316f1534150463336cf3c9cc0a9d50ba">CanIf::SetFilterByBitmask</a>  (ECU_CanController Controller, <a class="el" href="../../de/d22/struct_com_stack___can_id_type.html" title="to use the 32bit for extended CAN Id">ComStack_CanIdType</a> FilterId, <a class="el" href="../../de/d22/struct_com_stack___can_id_type.html" title="to use the 32bit for extended CAN Id">ComStack_CanIdType</a> FilterMask)</dt>
-<dd><a class="anchor" id="_todo000013"></a>we need a handling to select different Rx Fifo  </dd>
-<dt>Member <a class="el" href="../../d0/d88/class_can_if.html#ab4dcac06d3eec530c2b273707e574447">CanIf::SetFilterByCanId</a>  (ECU_CanController Controller, <a class="el" href="../../de/d22/struct_com_stack___can_id_type.html" title="to use the 32bit for extended CAN Id">ComStack_CanIdType</a> FilterId)</dt>
-<dd><a class="anchor" id="_todo000014"></a>we need a handling to select different Rx Fifo  </dd>
+<dd><p class="startdd"><a class="anchor" id="_todo000026"></a>this is a fix not save implementation </p>
+<p class="enddd"><a class="anchor" id="_todo000027"></a>we need some work here -&gt; <a class="el" href="../../db/d0a/group___t_m___can_if___func.html#ga6b6faa51ed2dc5386ccaa4c6894fc732" title="poll the RxBuffer for a message">CanIf::Receive</a>( <a class="el" href="../../de/d2a/_t_m___compiler_8h.html#a976d68445c3d7763a2d3c4ece1d0af05">CONST(CanIf_RxPduIdType,AUTOMATIC)</a> rxPduId, <a class="el" href="../../de/d2a/_t_m___compiler_8h.html#a5c6ccc28154ea2a7874ba567a352e009">P2VAR(CanIf_PduInfoType, AUTOMATIC, AUTOMATIC)</a> ptr2PduInfo)  </p>
+</dd>
 <dt>Member <a class="el" href="../../db/d0a/group___t_m___can_if___func.html#ga23dedfd9324e6d2ef2df8136c0bd473c">CanIf::Transmit</a>  (ComStack_PduType txPduId, const <a class="el" href="../../d7/d36/struct_com_stack___pdu_info_type.html" title="The type to handle PDUs on the ComStack.">ComStack_PduInfoType</a> *ptr2PduInfo)</dt>
-<dd><a class="anchor" id="_todo000017"></a>we should rework to select the CAN Channel by using PDU IDs  </dd>
+<dd><a class="anchor" id="_todo000030"></a>we should rework to select the CAN Channel by using PDU IDs  </dd>
 <dt>Member <a class="el" href="../../db/d0a/group___t_m___can_if___func.html#ga9b738780c7f103ad66c2b24cf3805134">CanIf::Transmit</a>  (CanIf_TxPduIdType txPduId, const <a class="el" href="../../dd/d54/struct_can_if___pdu_info_type.html">CanIf_PduInfoType</a> *ptr2PduInfo)</dt>
-<dd><a class="anchor" id="_todo000016"></a>we should rework to select the CAN Channel by using PDU IDs  </dd>
-<dt>Member <a class="el" href="../../d0/d88/class_can_if.html#a3590424a0f79bebd2b1c00469229756c">CanIf::TxTask</a>  (void)</dt>
-<dd><a class="anchor" id="_todo000011"></a>the Tx Task need handling to transmit to other CAN controller then the bxCanMaster  </dd>
+<dd><a class="anchor" id="_todo000029"></a>we should rework to select the CAN Channel by using PDU IDs  </dd>
+<dt>Member <a class="el" href="../../d0/d88/class_can_if.html#aacdc5a59eb6386a4723cf41844e80155">CanIf::txHeaderList</a>  [CANIF_TXPDU_COUNT]</dt>
+<dd><a class="anchor" id="_todo000031"></a>there are STM controller with three CAN controller too!!!  </dd>
+<dt>Member <a class="el" href="../../dc/d40/group___t_m___can___types.html#ga6021131e64787aac72fbf947ebe27912">CANIF_EXTID</a>  </dt>
+<dd><a class="anchor" id="_todo000007"></a>need refactor from CANIF_xx to CAN_xx  </dd>
+<dt>Member <a class="el" href="../../dc/d40/group___t_m___can___types.html#ga7352d7f155776f4fb4ebf040851389e6">CANIF_NO_RTR</a>  </dt>
+<dd><a class="anchor" id="_todo000004"></a>need refactor from CANIF_xx to CAN_xx  </dd>
+<dt>Member <a class="el" href="../../dc/d40/group___t_m___can___types.html#gaab150f3fecc66f6601cd9bad846f43eb">CANIF_STDID</a>  </dt>
+<dd><a class="anchor" id="_todo000006"></a>need refactor from CANIF_xx to CAN_xx  </dd>
+<dt>Member <a class="el" href="../../dc/d40/group___t_m___can___types.html#ga6f8aa81c82b5494bfaf4d09a4ed38009">CANIF_USE_RTR</a>  </dt>
+<dd><a class="anchor" id="_todo000005"></a>need refactor from CANIF_xx to CAN_xx  </dd>
 <dt>Class <a class="el" href="../../d6/df4/class_can_if_upper_layer.html">CanIfUpperLayer</a>  </dt>
-<dd><a class="anchor" id="_todo000023"></a>maybe we should bring this to a template  </dd>
-<dt>Member <a class="el" href="../../d9/dd8/group___t_m___can_cfg___config_set.html#gafa5c61ea52c1d9b0977944defd4248fd">CanNucleoFilterSet</a>  []</dt>
-<dd><a class="anchor" id="_todo000025"></a>we need a nice generic way  </dd>
-<dt>Member <a class="el" href="../../d3/d5a/_can_if_8cpp.html#a0d85e7055c0d224ada29474746b1fc39">canRxBuffer</a>  </dt>
-<dd><a class="anchor" id="_todo000006"></a>bring the buffers to save class  </dd>
+<dd><a class="anchor" id="_todo000032"></a>maybe we should bring this to a template  </dd>
 <dt>Member <a class="el" href="../../db/db1/class_com_if.html#ab950dd739a98898297a0358cf51ee263">ComIf::Transmit</a>  (ComStack_PduType txPduId, const <a class="el" href="../../d7/d36/struct_com_stack___pdu_info_type.html" title="The type to handle PDUs on the ComStack.">ComStack_PduInfoType</a> *ptr2PduInfo)=0</dt>
-<dd><a class="anchor" id="_todo000024"></a>we should rework to select the CAN Channel by using PDU IDs  </dd>
-<dt>Member <a class="el" href="../../d3/d5a/_can_if_8cpp.html#a030b02bbbc7931554c760e416542c044">controllerList</a>  </dt>
-<dd><a class="anchor" id="_todo000004"></a>das sollte auch extern sein: extern const ECU_CanController controllerList[];  </dd>
-<dt>Member <a class="el" href="../../d9/dd8/group___t_m___can_cfg___config_set.html#ga5a333822d38d34c429df971f3a27b326">EXTERN_CONST</a>  (<a class="el" href="../../d5/dc1/struct_can_config_type.html" title="The structure of the overall configuration for the CAN.">CanConfigType</a>, TM_CAN_CONFIG_DATA) Can_NucleoConfig</dt>
-<dd><a class="anchor" id="_todo000026"></a>we need a generic way  </dd>
+<dd><a class="anchor" id="_todo000033"></a>we should rework to select the CAN Channel by using PDU IDs  </dd>
+<dt>Member <a class="el" href="../../d5/d13/_can_drv__bx_c_a_n_8cpp.html#ae18374e4e02f697e62b6c366a5298c55">EXTERN_CONST</a>  (std::vector&lt; ECU_CanController &gt;, AUTOMATIC) controllerList</dt>
+<dd><a class="anchor" id="_todo000010"></a>das sollte auch extern sein: extern const ECU_CanController controllerList[];  </dd>
 <dt>Member <a class="el" href="../../d2/d79/class_iso_tp.html#a04375fdbb2693f48dd414f1503a9ed00">IsoTp::GetRxPduName</a>  (void)</dt>
-<dd><p class="startdd"><a class="anchor" id="_todo000030"></a>we should add a virtual function to the <a class="el" href="../../d6/df4/class_can_if_upper_layer.html">CanIfUpperLayer</a> class </p>
-<p class="enddd"><a class="anchor" id="_todo000028"></a>we should add a virtual function to the <a class="el" href="../../d6/df4/class_can_if_upper_layer.html">CanIfUpperLayer</a> class  </p>
+<dd><p class="startdd"><a class="anchor" id="_todo000036"></a>we should add a virtual function to the <a class="el" href="../../d6/df4/class_can_if_upper_layer.html">CanIfUpperLayer</a> class </p>
+<p class="enddd"><a class="anchor" id="_todo000034"></a>we should add a virtual function to the <a class="el" href="../../d6/df4/class_can_if_upper_layer.html">CanIfUpperLayer</a> class  </p>
 </dd>
 <dt>Member <a class="el" href="../../d2/d79/class_iso_tp.html#a25c70319431da8f061f9f69acf92a968">IsoTp::GetTxPduName</a>  (void)</dt>
-<dd><p class="startdd"><a class="anchor" id="_todo000031"></a>we should add a virtual function to the <a class="el" href="../../d6/df4/class_can_if_upper_layer.html">CanIfUpperLayer</a> class </p>
-<p class="enddd"><a class="anchor" id="_todo000029"></a>we should add a virtual function to the <a class="el" href="../../d6/df4/class_can_if_upper_layer.html">CanIfUpperLayer</a> class  </p>
+<dd><p class="startdd"><a class="anchor" id="_todo000037"></a>we should add a virtual function to the <a class="el" href="../../d6/df4/class_can_if_upper_layer.html">CanIfUpperLayer</a> class </p>
+<p class="enddd"><a class="anchor" id="_todo000035"></a>we should add a virtual function to the <a class="el" href="../../d6/df4/class_can_if_upper_layer.html">CanIfUpperLayer</a> class  </p>
 </dd>
 <dt>Member <a class="el" href="../../d1/db3/group___t_m___iso_t_p___types.html#gafc10d41962f90ad59416d6fa318a6663">IsoTP_StatesType</a>  </dt>
-<dd><a class="anchor" id="_todo000032"></a>maybe we bring a standard type to Std_types.h  </dd>
+<dd><a class="anchor" id="_todo000038"></a>maybe we bring a standard type to Std_types.h  </dd>
 <dt>Member <a class="el" href="../../de/d2a/_t_m___compiler_8h.html#a530f11a96e508d171d28564c8dc20942">NULL_PTR</a>  </dt>
 <dd><a class="anchor" id="_todo000002"></a>check NULL_PTR definition  </dd>
+<dt>Member <a class="el" href="../../d4/d68/group___t_m___can___driver.html#ga930096a351f4e28fdf5ee41bcabff820">ptr2ComIf</a>  </dt>
+<dd><a class="anchor" id="_todo000009"></a>we should bring this inside the CanDrv object, we need it outside because of use in ISR <br  />
+  </dd>
 <dt>Member <a class="el" href="../../d1/dce/group___can_f_t2p0___spec___data_base.html#gac974426943e66203fd7f64c2cd71fc0b">RS601_Fueltech_DB</a>  []</dt>
-<dd><a class="anchor" id="_todo000035"></a>the specification of the ECU (today the FT500) is not ready to use  </dd>
-<dt>Member <a class="el" href="../../db/d40/structt_c_a_n___rx_message.html#a1f8c245f024965ef0966ecbb68acdee2">tCAN_RxMessage::HAL_Header</a>  </dt>
-<dd><a class="anchor" id="_todo000022"></a>it will be at the end of the struct, maybe we hide this with a casted type  </dd>
+<dd><a class="anchor" id="_todo000041"></a>the specification of the ECU (today the FT500) is not ready to use  </dd>
 <dt>Member <a class="el" href="../../d8/dd7/_t_m___platform___types_8h.html#a081216c9424689d0e3ec4b779b60f397">tm_boolean</a>  </dt>
 <dd><a class="anchor" id="_todo000003"></a>there is a boolean definition, AUTOSAR need pointer access  </dd>
 <dt>Page <a class="el" href="../../d3/d37/de_page__t01__can_if__app_demo.html">Tutorial 01: CanIf_AppDemo</a>  </dt>

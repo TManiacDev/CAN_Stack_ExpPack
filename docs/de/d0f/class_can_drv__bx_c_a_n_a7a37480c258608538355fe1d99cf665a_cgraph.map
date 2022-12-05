@@ -1,0 +1,4 @@
+<map id="CanDrv_bxCAN::TxTask" name="CanDrv_bxCAN::TxTask">
+<area shape="rect" id="node1" title="task function to push the tx message from software buffer to tx mailbox" alt="" coords="5,5,167,32"/>
+<area shape="rect" id="node2" href="$d5/d0a/class_can.html#aa1df1b2285d8560aec78a5a98e208eb9" title="To get the the software module state." alt="" coords="215,5,337,32"/>
+</map>

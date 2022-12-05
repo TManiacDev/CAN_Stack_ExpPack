@@ -266,7 +266,7 @@ public:
   FUNC(Std_ReturnType, AUTOMATIC) RxIndication(
       CONST(ComStack_PduType, AUTOMATIC) rxPduId,
       P2VAR(ComStack_CanMessageType, AUTOMATIC, AUTOMATIC) ptr2Sdu);
-#define TM_ISOTP_RXINDICATION_ID      (0xF2)
+  #define TM_ISOTP_RXINDICATION_ID      (0xF2)
 
   /**
   @brief to handle the protocol

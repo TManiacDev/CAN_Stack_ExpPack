@@ -1,6 +1,6 @@
 <map id="Configuration for CAN Hardware Module" name="Configuration for CAN Hardware Module">
 <area shape="rect" id="node1" href="$d9/dd8/group___t_m___can_cfg___config_set.html" title="Collection of the configuration parameters of hardware relevant elements. &#160;Access via pointer." alt="" coords="343,5,496,45"/>
-<area shape="rect" id="node2" href="$d7/d90/group___t_m___can.html" title="to work with the STM HAL" alt="" coords="5,42,100,67"/>
+<area shape="rect" id="node2" href="$d1/d53/group___t_m___can___module.html" title="to work with the STM HAL" alt="" coords="5,42,100,67"/>
 <area shape="rect" id="node4" title="configuration for hardware dependencies" alt="" coords="148,35,295,75"/>
-<area shape="rect" id="node3" href="$d5/de5/group___t_m___can_cfg___general.html" title="General behavior of the CAN Module." alt="" coords="362,70,477,95"/>
+<area shape="rect" id="node3" href="$d5/de5/group___t_m___can_cfg___general.html" title=" " alt="" coords="362,70,477,95"/>
 </map>

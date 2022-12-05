@@ -15,16 +15,6 @@
 #ifndef BSP_TM_ENGINEERING_BOARD_CANIF_CANIF_COMPILER_CFG_H_
 #define BSP_TM_ENGINEERING_BOARD_CANIF_CANIF_COMPILER_CFG_H_
 
-
-/** to place the runtime variables of the CAN on memory */
-#define TM_CAN_USER_VAR     __attribute__((section(".tm_data_can_var_preinit")))
-/** to place the configuration data of the CAN on memory */
-#define TM_CAN_CONFIG_DATA  __attribute__((section(".tm_driver_config_can")))
-/** to place the code of the CAN on memory */
-#define TM_CAN_CODE         __attribute__((section(".tm_driver_code_can")))
-
-
-
 /** @file
 This area musst be extended with implementiation of every new modul
 */

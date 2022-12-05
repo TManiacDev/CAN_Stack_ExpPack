@@ -652,8 +652,8 @@ FUNC(Std_ReturnType, TM_ISOTP_CODE) IsoTp::RxIndication(
     if ( ( ptr2Sdu != NULL_PTR ) &&
          (rxPduId < IsoTP_Rx_unknownPdu ) )
     {
-      if ( ( ptr2Sdu->CanIf_Header.DLC <2 ) ||
-           ( ptr2Sdu->CanIf_Header.DLC >8 ) )
+      if ( ( ptr2Sdu->CanMsgHeader.DLC <2 ) ||
+           ( ptr2Sdu->CanMsgHeader.DLC >8 ) )
       {
         //returnValue = NON_STD_RET_VALUE(IsoTp_ReturnErrorType::RET_E_LENGTH);
         returnValue = E_NOT_OK;
@@ -661,15 +661,15 @@ FUNC(Std_ReturnType, TM_ISOTP_CODE) IsoTp::RxIndication(
       else
       {
 #if ( ISOTP_DECODE_LEVEL == DECODE_ON_INTERRUPT )
-        CanIsoTP_8ByteData * msg = (CanIsoTP_8ByteData *)ptr2Sdu->Data;
+        CanIsoTP_8ByteData * msg = (CanIsoTP_8ByteData *)ptr2Sdu->ptr2Data;
         switch (msg->as.common.type)
         {
 /* ####### Flow Control Frame ##### */
           case (IsoTP_FrameType::IsoTP_FlowControl):
           {
-            if ( ptr2Sdu->CanIf_Header.DLC >= 3 )
+            if ( ptr2Sdu->CanMsgHeader.DLC >= 3 )
             {
-              returnValue = ReceiveFlowControl((CanIsoTP_8ByteData*)ptr2Sdu->Data);
+              returnValue = ReceiveFlowControl((CanIsoTP_8ByteData*)ptr2Sdu->ptr2Data);
               // may be do error handling on development
 #if ( ISOTP_DEV_ERROR_DETECT == STD_ON )
               if ( returnValue != E_OK ) ISOTP_DET_REPORTERROR(ISOTP_E_INVALID_FRAME, TM_ISOTP_RXINDICATION_ID);
@@ -691,7 +691,7 @@ FUNC(Std_ReturnType, TM_ISOTP_CODE) IsoTp::RxIndication(
 /* ####### Single Frame ##### */
           case (IsoTP_FrameType::IsoTP_SingleFrame):
           {
-            returnValue = ReceiveSingleFrame((CanIsoTP_8ByteData*)ptr2Sdu->Data);
+            returnValue = ReceiveSingleFrame((CanIsoTP_8ByteData*)ptr2Sdu->ptr2Data);
             if ( returnValue == E_OK )
             {
               objectHandle.FlowControl.ProtocolStatus = IsoTP_RxTxStatus::IsoTP_ReceiveFull;
@@ -701,7 +701,7 @@ FUNC(Std_ReturnType, TM_ISOTP_CODE) IsoTp::RxIndication(
 /* ####### First Segment Frame ##### */
           case (IsoTP_FrameType::IsoTP_FirstFrame):
           {
-            returnValue = ReceiveFirstFrame((CanIsoTP_8ByteData*)ptr2Sdu->Data);
+            returnValue = ReceiveFirstFrame((CanIsoTP_8ByteData*)ptr2Sdu->ptr2Data);
             if ( returnValue == E_OK )
             {
               /** @warning this should removed from CAN Rx Interrupt !!!!
@@ -720,7 +720,7 @@ FUNC(Std_ReturnType, TM_ISOTP_CODE) IsoTp::RxIndication(
 /* ####### Consecutive Segment Frame ##### */
           case (IsoTP_FrameType::IsoTP_ConsecutiveFrame):
           {
-            returnValue = ReceiveConsecutiveFrame((CanIsoTP_8ByteData*)ptr2Sdu->Data, ptr2Sdu->CanIf_Header.DLC - 1);
+            returnValue = ReceiveConsecutiveFrame((CanIsoTP_8ByteData*)ptr2Sdu->ptr2Data, ptr2Sdu->CanMsgHeader.DLC - 1);
             if ( returnValue == NON_STD_RET_VALUE(IsoTp_ReturnErrorType::RET_LAST_OK) )
             {
               /** @warning this should removed from CAN Rx Interrupt !!!!
@@ -753,7 +753,6 @@ FUNC(Std_ReturnType, TM_ISOTP_CODE) IsoTp::RxIndication(
   }
   return returnValue;
 }
-
 
 /* #### helper functions #### */
 

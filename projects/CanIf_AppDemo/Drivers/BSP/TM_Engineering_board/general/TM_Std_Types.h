@@ -24,7 +24,7 @@
 #include "TM_Compiler.h"
 
 /** @brief we us the 'T' for the vendor Id ;-) */
-#define TM_VENDOR_ID           (0x54)    /* hex: 'T' */
+#define TM_VENDOR_ID           (*(uint16_t*)"TM")    /* hex: 'TM' */
 
 /** Standard return type for functions */
 typedef tm_sint16 Std_ReturnType; /* E_OK and E_NOT_OK */
@@ -63,6 +63,10 @@ typedef tm_sint16 Std_ReturnType; /* E_OK and E_NOT_OK */
 /** @brief to hide unused parts in unions, structs and so on */
 #define _UNUSED_VAR_  0
 
+#ifdef __cplusplus
+#include "TMEVersionInfo.h"
+#else
+
 /** @brief structure for access on version info on runtime */
 typedef struct
 {
@@ -77,6 +81,8 @@ typedef struct
 	/** @brief patch version */
 	tm_uint8	sw_patch_version;
 } TM_VersionInfoType;
+
+#endif // end of __cplusplus
 
 #endif /* STD_TYPES_H */
 
