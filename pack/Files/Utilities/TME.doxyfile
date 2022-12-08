@@ -832,7 +832,7 @@ WARN_LOGFILE           =
 # spaces. See also FILE_PATTERNS and EXTENSION_MAPPING
 # Note: If this tag is empty the current directory is searched.
 
-INPUT                  = ./DoxyPages ./T01_CanIf_AppDemo ./DoxyPages/pictures ../../Drivers/BSP/TM_Engineering_board/general ../../Drivers/BSP/TM_Engineering_board/Can ../../Drivers/BSP/TM_Engineering_board/CanIf ../../Drivers/BSP/TM_Engineering_board/ComIf ../../FT500_Read/Target ../../Middlewares/Third_Party/TM_Engineering_DataExchange_Common/IsoTP ../../Middlewares/Third_Party/TME_DataExchange/UDS ../../Middlewares/Third_Party/TM_Engineering_DataExchange_Fueltech/FTCAN2p0 ../../Middlewares/Third_Party/TM_Engineering_DataExchange_Fueltech/FTSwitchPanel ../../Middlewares/Third_Party/TM_Engineering_DataExchange_Fueltech/FuelTechEcu
+INPUT                  = ./DoxyPages ./T01_CanIf_AppDemo ./DoxyPages/pictures ../../Drivers/BSP/TM_Engineering_board/general ../../Drivers/BSP/TM_Engineering_board/Can ../../Drivers/BSP/TM_Engineering_board/CanIf ../../Drivers/BSP/TM_Engineering_board/ComIf ../../Middlewares/Third_Party/TM_Engineering_DataExchange_Common/IsoTP ../../Middlewares/Third_Party/TM_Engineering_DataExchange_Common/UDS ../../Middlewares/Third_Party/TM_Engineering_DataExchange_Fueltech/FTCAN2p0 ../../Middlewares/Third_Party/TM_Engineering_DataExchange_Fueltech/FTSwitchPanel ../../Middlewares/Third_Party/TM_Engineering_DataExchange_Fueltech/FuelTechEcu ../../Sandbox/Target/general ../../Sandbox/Target/BSW/Can ../../Sandbox/Target/BSW/CanIf ../../Sandbox/Target/Middleware/DataExchange_Common ../../Sandbox/Target/Middleware/DataExchange_Fueltech
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses
@@ -969,7 +969,7 @@ EXAMPLE_RECURSIVE      = NO
 # that contain images that are to be included in the documentation (see the
 # \image command).
 
-IMAGE_PATH             = ./ pictures ../DoxyPages/pictures ../T01_CanIf_AppDemo/pictures 
+IMAGE_PATH             = ./ pictures ../DoxyPages/pictures ../T01_CanIf_AppDemo/pictures
 
 # The INPUT_FILTER tag can be used to specify a program that doxygen should
 # invoke to filter for each input file. Doxygen will invoke the filter program
@@ -2197,7 +2197,9 @@ PREDEFINED             = "FUNC(rettype, memclass)=rettype" \
                          "CONST(type, memclass)=type" \
                          "P2CONST(type, memclass, target)=const type*" \
                          "CONSTP2VAR(type, memclass, target)=type* const" \
-                         "P2VAR(type, memclass, target)=const type*"
+                         "P2VAR(type, memclass, target)=const type*" \
+                         "REF2CONST(rettype, memclass)=const rettype&" \
+                         "REF2VAR(rettype, memclass)=rettype&"
 
 # If the MACRO_EXPANSION and EXPAND_ONLY_PREDEF tags are set to YES then this
 # tag can be used to specify a list of macro names that should be expanded. The

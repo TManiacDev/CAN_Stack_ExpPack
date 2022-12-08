@@ -253,6 +253,7 @@ private:
    *  - E_OK      ...........  we found an unused filter
    *  - E_NOT_OK  ...........  we can't find an unused filter */
   Std_ReturnType FindFreeFilter(
+      VAR(ECU_CanController, AUTOMATIC) Controller,
       P2VAR(uint8_t, AUTOMATIC, AUTOMATIC) ptr2FilterBankNumber,
       P2VAR(uint8_t, AUTOMATIC, AUTOMATIC) ptr2FilterNumber,
       P2VAR(uint8_t, AUTOMATIC, AUTOMATIC) ptr2FilterMode);

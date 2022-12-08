@@ -25,11 +25,13 @@
 /** name the return errors*/
 enum class IsoTp_ReturnErrorType
 {
+  /** Today we return that the data will copied later */
+  RET_CALL_OF_COPY = 2,
   /** return with a undefined error */
   RET_ERROR         = E_NOT_OK,
   /** return with an ok */
   RET_OK            = E_OK,
-  /** last accepted frame befor overflow */
+  /** last accepted frame before overflow */
   RET_LAST_OK       = -1,
   /** return while the function is already in progress */
   RET_E_INPROGRESS  = -2,

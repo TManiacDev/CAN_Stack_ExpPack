@@ -117,7 +117,7 @@ FUNC(Std_ReturnType, TM_CAN_CODE) CanDrv_bxCAN::Init(
 
         /*## -2- Activate CAN RX notification #######################################*/
         /** @todo we need a generic mode for IRQ activation */
-        if (HAL_CAN_ActivateNotification(&bxCanHdl[CanMasterController], CAN_IT_RX_FIFO0_MSG_PENDING) != HAL_OK)
+        if (HAL_CAN_ActivateNotification(&bxCanHdl[initController], CAN_IT_RX_FIFO0_MSG_PENDING) != HAL_OK)
         {
           /* Notification Error */
           CAN_DET_REPORTERROR(E_INIT_FAILED, CAN_INIT_ID);
@@ -239,39 +239,40 @@ FUNC(void, TM_CAN_CODE) CanDrv_bxCAN::TxTask(void)
     for (txBufferpos = 0; txBufferpos < CAN_TX_SW_BUFFER_SIZE; txBufferpos++ )
     {
       /** @todo the Tx Task need handling to transmit to other CAN controller then the bxCanMaster */
-      if ( HAL_CAN_GetTxMailboxesFreeLevel(&bxCanHdl[CanMasterController]) > 0 )
+
+      switch ( canTxBuffer[txBufferpos].State)
       {
-        switch ( canTxBuffer[txBufferpos].State)
-        {
-          case bxCan_TxMessageStateType::TxMessage_rdy2tx:
-            // we block for transmit
+        case bxCan_TxMessageStateType::TxMessage_rdy2tx:
+          // we block for transmit
+          if ( HAL_CAN_GetTxMailboxesFreeLevel(&bxCanHdl[canTxBuffer[txBufferpos].Controller]) > 0 )
+          {
             canTxBuffer[txBufferpos].State = bxCan_TxMessageStateType::TxMessage_transmit;
 
             // give the message via HAL to the CAN Controller
-            if ( HAL_CAN_AddTxMessage(&bxCanHdl[CanMasterController], &canTxBuffer[txBufferpos].Header, canTxBuffer[txBufferpos].Data, &canTxBuffer[txBufferpos].Mailbox) != HAL_OK)
+            if ( HAL_CAN_AddTxMessage(&bxCanHdl[canTxBuffer[txBufferpos].Controller], &canTxBuffer[txBufferpos].Header, canTxBuffer[txBufferpos].Data, &canTxBuffer[txBufferpos].Mailbox) != HAL_OK)
             {
               canTxBuffer[txBufferpos].State = bxCan_TxMessageStateType::TxMessage_txerr;
               Error_Handler();
             }
-            break;
-          case bxCan_TxMessageStateType::TxMessage_transmit:
-            if ( !(HAL_CAN_IsTxMessagePending(&bxCanHdl[CanMasterController], canTxBuffer[txBufferpos].Mailbox)) )
-            {
-              canTxBuffer[txBufferpos].State = bxCan_TxMessageStateType::TxMessage_txok;
-            }
-            break;
-          case bxCan_TxMessageStateType::TxMessage_txok:
-            if ( 1  ) // maybe we want to wait until clear up the mailbox
-            {
-              canTxBuffer[txBufferpos].Mailbox = 0;
-              canTxBuffer[txBufferpos].Header = {0};
-              canTxBuffer[txBufferpos].State = bxCan_TxMessageStateType::TxMessage_free;
-            }
-            break;
-          default:
-            // nothing to do
-            break;
-        }
+          }
+          break;
+        case bxCan_TxMessageStateType::TxMessage_transmit:
+          if ( !(HAL_CAN_IsTxMessagePending(&bxCanHdl[canTxBuffer[txBufferpos].Controller], canTxBuffer[txBufferpos].Mailbox)) )
+          {
+            canTxBuffer[txBufferpos].State = bxCan_TxMessageStateType::TxMessage_txok;
+          }
+          break;
+        case bxCan_TxMessageStateType::TxMessage_txok:
+          if ( 1  ) // maybe we want to wait until clear up the mailbox
+          {
+            canTxBuffer[txBufferpos].Mailbox = 0;
+            canTxBuffer[txBufferpos].Header = {0};
+            canTxBuffer[txBufferpos].State = bxCan_TxMessageStateType::TxMessage_free;
+          }
+          break;
+        default:
+          // nothing to do
+          break;
       }
     }
   }
@@ -279,6 +280,7 @@ FUNC(void, TM_CAN_CODE) CanDrv_bxCAN::TxTask(void)
 
 /* to find a free CAN hardware filter */
 FUNC(Std_ReturnType, TM_CAN_CODE) CanDrv_bxCAN::FindFreeFilter(
+    VAR(ECU_CanController, AUTOMATIC)    Controller,
     P2VAR(uint8_t, AUTOMATIC, AUTOMATIC) ptr2FilterBankNumber,
     P2VAR(uint8_t, AUTOMATIC, AUTOMATIC) ptr2FilterNumber,
     P2VAR(uint8_t, AUTOMATIC, AUTOMATIC) ptr2FilterMode)
@@ -290,13 +292,21 @@ FUNC(Std_ReturnType, TM_CAN_CODE) CanDrv_bxCAN::FindFreeFilter(
 
   /* the STM HAL library has no function to find a free hardware filter
    * we test only for active filter */
-  uint8_t testBank = 0;
   uint8_t foundBank = FALSE;
   uint8_t filterCounter = 0;
   uint8_t filterIncrement = 0;
 
+  uint8_t endFilterBank = CAN1_USED_RX_HW_FILTER;
+
+  if ( Controller == ECU_CanController::CanSlaveController )
+  {
+    filterCounter = CAN1_USED_RX_HW_FILTER;
+    endFilterBank = CAN1_USED_RX_HW_FILTER + CAN2_USED_RX_HW_FILTER;
+  }
+
+  uint8_t testBank = filterCounter;
   /** @todo we need to clean up the filter number CAN1_USED_RX_HW_FILTER */
-  while ((filterCounter < CAN1_USED_RX_HW_FILTER) && (foundBank == FALSE ))
+  while ((filterCounter < endFilterBank) && (foundBank == FALSE ))
   {
     foundBank = 0x1 & ~(filterBankRegValue>>testBank);
     if ( (0x1 & (filterModeRegValue>>testBank)) == CAN_FILTERMODE_IDLIST)
@@ -350,8 +360,14 @@ FUNC(Std_ReturnType, TM_CAN_CODE) CanDrv_bxCAN::SetFilterByBitmask(
   uint8_t TempBank = 0;
   uint8_t TempNumber = 0;
   uint8_t TempMode = CAN_FILTERMODE_IDMASK;
-  if ( FindFreeFilter(&TempBank, &TempNumber, &TempMode) == E_OK )
+  if ( FindFreeFilter(Controller, &TempBank, &TempNumber, &TempMode) == E_OK )
   {
+    //
+//    if ( Controller == ECU_CanController::CanSlaveController )
+//    {
+//      TempBank += CAN1_USED_RX_HW_FILTER;
+//    }
+    //
     sFilterConfig.FilterBank = TempBank;
 
     if ( (TempMode & 0x80) == 0x80 )
@@ -369,7 +385,8 @@ FUNC(Std_ReturnType, TM_CAN_CODE) CanDrv_bxCAN::SetFilterByBitmask(
   /** @todo we need a handling to select different Rx Fifo */
     sFilterConfig.FilterFIFOAssignment = CAN_RX_FIFO0;
     sFilterConfig.FilterActivation = ENABLE;
-    if (HAL_CAN_ConfigFilter(&bxCanHdl[CanMasterController], &sFilterConfig) != HAL_OK)
+    sFilterConfig.SlaveStartFilterBank = CAN1_USED_RX_HW_FILTER;
+    if (HAL_CAN_ConfigFilter(&bxCanHdl[Controller], &sFilterConfig) != HAL_OK)
     {
       /* Filter configuration Error */
       Error_Handler();
@@ -393,8 +410,14 @@ FUNC(Std_ReturnType, TM_CAN_CODE) CanDrv_bxCAN::SetFilterByCanId(
   uint8_t TempBank = 0;
   uint8_t TempNumber = 0;
   uint8_t TempMode = CAN_FILTERMODE_IDLIST;
-  if ( FindFreeFilter(&TempBank, &TempNumber, &TempMode) == E_OK )
+  if ( FindFreeFilter(Controller, &TempBank, &TempNumber, &TempMode) == E_OK )
   {
+//    //
+//    if ( Controller == ECU_CanController::CanSlaveController )
+//    {
+//      TempBank += CAN1_USED_RX_HW_FILTER;
+//    }
+//    //
     sFilterConfig.FilterBank = TempBank;
     if ( (TempMode & 0x80) == 0x80 ) // the FindFreeFilter() func sets this bit to show second filter on bank
     {
@@ -416,8 +439,8 @@ FUNC(Std_ReturnType, TM_CAN_CODE) CanDrv_bxCAN::SetFilterByCanId(
     /** @todo we need a handling to select different Rx Fifo */
     sFilterConfig.FilterFIFOAssignment = CAN_RX_FIFO0;
     sFilterConfig.FilterActivation = ENABLE;
-    sFilterConfig.SlaveStartFilterBank = 20;
-    if (HAL_CAN_ConfigFilter(&bxCanHdl[CanMasterController], &sFilterConfig) != HAL_OK)
+    sFilterConfig.SlaveStartFilterBank = CAN1_USED_RX_HW_FILTER;
+    if (HAL_CAN_ConfigFilter(&bxCanHdl[Controller], &sFilterConfig) != HAL_OK)
     {
       /* Filter configuration Error */
       Error_Handler();
@@ -432,7 +455,7 @@ FUNC(Std_ReturnType, TM_CAN_CODE) CanDrv_bxCAN::SetFilterByCanId(
 FUNC(uint32_t, TM_CAN_CODE) CanDrv_bxCAN::CanIdToStmRegisterFormat(
     VAR(ComStack_CanIdType, AUTOMATIC) CanId)
 {
-  bxCan_IdSelectType CatchBits;
+  bxCan_IdSelectType CatchBits = {.common = 0};
   if (CanId.IDE == TRUE )
   {
     CatchBits.stm_ExtId.Id29bit = CanId.Id29bit;
@@ -493,14 +516,18 @@ ISR_FUNC( TM_CAN_ISR_CODE) HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *
 
     if ( ptr2ComIf != NULL_PTR )
     {
-      ComStack_PduInfoType PduInfo{ bxCan_canRxBuffer.ptr2MsgBuffer[bxCan_canRxBuffer.BufWrPos].Data, bxCan_canRxBuffer.ptr2MsgBuffer[bxCan_canRxBuffer.BufWrPos].CanMsgHeader.DLC };
+      ComStack_PduInfoType PduInfo{ bxCan_canRxBuffer.ptr2MsgBuffer[bxCan_canRxBuffer.BufWrPos].Data,
+                                    bxCan_canRxBuffer.ptr2MsgBuffer[bxCan_canRxBuffer.BufWrPos].CanMsgHeader.DLC,
+                                    (uint32_t*)&bxCan_canRxBuffer.ptr2MsgBuffer[bxCan_canRxBuffer.BufWrPos].CanMsgHeader };
       if ( hcan->Instance == CAN1 )
       {
-        ptr2ComIf->RxIndication(ECU_CanController::CanMasterController, bxCan_canRxBuffer.ptr2MsgBuffer[bxCan_canRxBuffer.BufWrPos].CanMsgHeader, PduInfo);
+        ptr2ComIf->RxIndication(ECU_CanController::CanMasterController, PduInfo);
+        HAL_GPIO_TogglePin(LD1_GPIO_Port, LD1_Pin);
       }
       if ( hcan->Instance == CAN2 )
       {
-        ptr2ComIf->RxIndication(ECU_CanController::CanSlaveController, bxCan_canRxBuffer.ptr2MsgBuffer[bxCan_canRxBuffer.BufWrPos].CanMsgHeader, PduInfo);
+        ptr2ComIf->RxIndication(ECU_CanController::CanSlaveController, PduInfo);
+        HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
       }
     }
   }

@@ -31,13 +31,13 @@
   */
 [/#list] [#-- end of SWIPdatas as SWIP --]
 
-[#assign s = name]
-[#assign dashedFileNamed = s?replace(".","__")]
-[#assign toto = dashedFileNamed?replace("/","__")]
-[#assign dashReplace = toto?replace("-","_")]
-[#assign inclusion_protection = dashReplace?upper_case]
-
-
+[#assign s = fileName]
+[#if s?contains("/")]
+  [#assign s = s?keep_after_last("/")]
+[/#if]
+[#assign dashReplace = s?replace(".","_")]
+[#assign dashedFileNamed = dashReplace?replace("-","_")]
+[#assign inclusion_protection = dashedFileNamed?upper_case]
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __${inclusion_protection}__

@@ -17,7 +17,8 @@
 
 #include "TM_Std_Types.h"
 
-/** the unified type to use PduNames as numbers */
+/** the unified type to use PduNames as numbers
+ *  @todo rename ComStack_PduType to ComStack_PduNameType */
 typedef uint32_t ComStack_PduType;
 
 /** @brief generic value for a invalid PDU name */
@@ -92,5 +93,8 @@ typedef struct
    *
    *  This will be max 8 on normal CAN and 64 on CAN-FD */
   PduLengthType SduLength;
+  /** This is an undefined pointer to the meta data (it must be casted for use)
+   *  @todo we need a smooth way to do this */
+  P2VAR(uint32_t, AUTOMATIC, AUTOMATIC) ptr2MetaData;
 }ComStack_PduInfoType;
 #endif /* _TM_COMSTACK_TYPES_H_ */

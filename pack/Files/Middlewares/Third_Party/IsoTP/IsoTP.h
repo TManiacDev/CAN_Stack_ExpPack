@@ -5,7 +5,7 @@
 
 /**
  * @file
- * CanIsoTP.h
+ * IsoTP.h
 
  * @author TManiac
  * @date 30.03.2022
@@ -20,24 +20,17 @@
 
 /** @addtogroup TM_IsoTP
  *  @{
- *  CanIsoTP.h */
-
-/* Imported types */
-#include "IsoTP_Names.h"
-#include "IsoTP_Cfg.h"
-#include "TMEVersionInfo.h"
-#include "ComIf.h"
-
-/** @brief  my ID */
-#define ISOTP_VENDOR_ID           TM_VENDOR_ID
-/** @brief  module id to see where the error is come from */
-#define ISOTP_MODULE_ID           (0xF2)
-/** @brief we have only one version at start */
-#define ISOTP_VERSION             (0x01)
-/** @brief no patching until now */
-#define ISOTP_PATCH_VERSION       (0x01)
+ *  IsoTP.h */
 
 /** @} */ // end of TM_IsoTP grouping
+
+/* Imported types */
+#include "TMEVersionInfo.h"
+#include "IsoTP_Names.h"
+#include "IsoTP_Cfg.h"
+#include "ComIf.h"
+
+#include "Uds.h"
 
 /* ===================== Development Error Tracer (DET)  ========== */
 
@@ -80,6 +73,7 @@ enum class IsoTp_DevError
   ISOTP_E_INVALID_RX_ID = 0x40,
 
   /* private error types */
+  /** we have a buffer overrun inside the IsoTp */
   ISOTP_E_BUFFER_OVERRUN = 0xF0,
 
   /** error on decode a frame */
@@ -90,7 +84,7 @@ enum class IsoTp_DevError
   /** @brief this is just a place holder */
   ISOTP_E_UNDEFINED = 0xFF
 };
-/** @} */ // end of grouping TM_DET_CANISOTP_NAMES
+/** @} */ // end of grouping TM_DET_ISOTP_NAMES
 
 /** @addtogroup TM_DET_REPORT
  *  @{ */
@@ -107,31 +101,95 @@ enum class IsoTp_DevError
 
 /* ==================End Development Error Tracer (DET)  ==========*/
 
+/** @addtogroup TM_IsoTP_CfgTypes
+ *  @{ */
+
+/** @brief This are addressing format types defined by the ISO
+ *
+ *  I need them to understand the work */
+enum class IsoTp_AddressingFormatTypes
+{
+  /** A unique CAN identifier is assigned to each combination of N_SA, N_TA, N_TAtype and Mtype.
+   *  N_PCI and N_Data are filed in the CAN frame data field. */
+  NormalAddressing,
+  /** This should be like normal but what is extended? CanID or addressing style like in mixed? */
+  ExtendedAddressing,
+  /** A unique CAN identifier is assigned to each combination of N_SA, N_TA, N_TAtype.
+   *  N_AE is placed in the first data byte of the CAN frame data field.
+   *  N_PCI and N_Data are placed in the remaining bytes of the CAN frame data field. */
+  Mixed11bitAddressing,
+  /**   */
+  NormalFixedAddressing,
+  /** This should be the same like with 11bit CanID */
+  Mixed29bitAddressing
+};
+
+/** @brief There are two types of addressing */
+enum class IsoTp_AddressingType
+{
+  /** In the transport layer, functional addressing refers to N-SDU, of which parameter
+      N_TAtype (which is an extension to the N_TA parameter [14] used to encode the
+      communication model) has the value functional.
+      This means the N-SDU is used in 1 to n communications. Thus with the CAN
+      protocol, functional addressing will only be supported for Single Frame
+      communication.
+      In terms of application, functional addressing is used by the external (or internal)
+      tester if it does not know the physical address of an ECU that should respond to a
+      service request or if the functionality of the ECU is implemented as a distributed
+      server over several ECUs. When functional addressing is used, the communication
+      is a communication broadcast from the external tester to one or more ECUs (1 to n
+      communication).
+      Use cases are (for example) broadcasting messages, such as “ECUReset” or
+      “CommunicationControl”
+      OBD communication will always be performed as part of functional addressing.
+   */
+  FunctionalAddressing,
+  /** In the transport layer, physical addressing refers to N-SDU, of which parameter
+      N_TAtype (which is an extension of the N_TA parameter [14] used to encode the
+      communication model) has the value physical.
+      This means the N-SDU is used in 1 to 1 communication, thus physical addressing
+      will be supported for all types of network layer messages.
+      In terms of application, physical addressing is used by the external (or internal)
+      tester if it knows the physical address of an ECU that should respond to a service
+      request. When physical addressing is used, a point to point communication takes
+      place (1 to 1 communication).
+      Use cases are (for example) messages, such as “ReadDataByIdentifier” or
+      “InputOutputControlByIdentifier”
+   */
+  PhysicalAddressing
+};
+
+/** @} */ // end of grouping TM_IsoTP_CfgTypes
+
 /** @addtogroup TM_IsoTP_Types
  *  @{ */
 
-/** @to hold the static data of the object */
+/** @brief to hold the static data of the object */
 struct IsoTp_ObjectConfig
 {
   /** @brief to know the rx PDU name */
-  VAR(IsoTP_RxPduType, AUTOMATIC) rxPduName;
+  VAR(IsoTP_RxPduIdType, AUTOMATIC) rxPduName;
   /** @brief to know the tx PDU name */
-  VAR(IsoTP_TxPduType, AUTOMATIC) txPduName;
+  VAR(IsoTP_TxPduIdType, AUTOMATIC) txPduName;
   /** @brief to hold the config to use
    *  @details the config defines timing and flow control */
   P2CONST(IsoTP_ConfigType, AUTOMATIC, AUTOMATIC) ptr2Config;
-  /** hold the connection to the communication controller interface */
+  /** hold the connection to the communication controller interface
+   *  @todo we should move this to Reference style */
   P2VAR(ComIf, AUTOMATIC, AUTOMATIC) p2ControllerInterface;
+  /** we will link to a UDS object
+   *  @todo we should move this to Reference style */
+  P2VAR(UnifiedDiagnosticService, AUTOMATIC, AUTOMATIC) p2PduReceiver;
 };
-
 /**
+ *
  * @brief to control the flow
  */
 typedef struct
 {
   /** extends the state machine */
   VAR(IsoTP_RxTxStatus, AUTOMATIC) ProtocolStatus;
-  /** */
+  /** result */
   VAR(IsoTP_ProtocolResultType, AUTOMATIC)  ProtocolResult;
   /** number of accepted bytes in the next block */
   VAR(uint32_t, AUTOMATIC)    RemainingBlockSize;
@@ -143,9 +201,11 @@ typedef struct
   VAR(uint16_t, AUTOMATIC) SeqNumber;
   /** current offset during transmit or receive */
   VAR(uint16_t, AUTOMATIC) DataOffset;
-  /** */
+  /** Block ssize timer */
   VAR(uint32_t, AUTOMATIC) bsTimer;
+  /** segmentation timeout timer */
   VAR(uint32_t, AUTOMATIC) stTimer;
+  /** timer for consecutive receive timeout */
   VAR(uint32_t, AUTOMATIC) crTimer;
   /** @brief to know the rx PDU name used by the ComIf*/
   VAR(ComStack_PduType, AUTOMATIC) rxIfPduName;
@@ -156,7 +216,10 @@ typedef struct
 /** struct to hold a const size number and a pointer to writable memory */
 typedef struct
 {
+  /** received number of bytes */
   VAR(uint32_t, AUTOMATIC) DataReceivedSize;
+  /** to know the remaining number of bytes of the linked buffer */
+  VAR(uint32_t,AUTOMATIC) RemainingBufferSize;
   /** to know the size of the linked buffer */
   CONST(uint32_t,AUTOMATIC) DataBufferSize;
   /** the rx data need write access */
@@ -215,14 +278,16 @@ typedef struct
  *  - we must response on functional (0x7DF/0x18DB33F1) and physical addressing (0x7E0, 0x7E1... / 0x18DAXXF1 )
  *  - every time response is on physical addressing (*/
 class IsoTp
-    : TME_VersionInfo,
+    : public TME_VersionInfo,
       public CanIfUpperLayer
 {
 
 public:
+  /** Standard constructor */
   IsoTp();
   /** @brief constructor with connection to a communication controller interface */
   IsoTp(CONST(IsoTp_ObjectConfig, AUTOMATIC) initConfig);
+  /** Standard destructor */
   virtual ~IsoTp();
 
   /** @brief This function initializes the object according the background configuration.
@@ -242,11 +307,11 @@ public:
 
   /** @brief Get the name of the linked rx PDU
    *  @todo we should add a virtual function to the CanIfUpperLayer class */
-  FUNC(IsoTP_RxPduType, AUTOMATIC) GetRxPduName(void);
+  FUNC(IsoTP_RxPduIdType, AUTOMATIC) GetRxPduName(void);
 
   /** @brief Get the name of the linked rx PDU
    *  @todo we should add a virtual function to the CanIfUpperLayer class */
-  FUNC(IsoTP_TxPduType, AUTOMATIC) GetTxPduName(void);
+  FUNC(IsoTP_TxPduIdType, AUTOMATIC) GetTxPduName(void);
 
   /** @brief to get the module state */
   FUNC(IsoTP_StatesType, AUTOMATIC) GetState( void );
@@ -262,10 +327,11 @@ public:
   /** @brief overwrite the function prototype supported by the CanIfUpperLayer class
    *
    *  @param[in] rxPduId  naming the incoming message
-   *  @param[in] ptr2Sdu  pointer to the data unit */
+   *  @param[in] ref2Pdu  reference to the data unit */
   FUNC(Std_ReturnType, AUTOMATIC) RxIndication(
       CONST(ComStack_PduType, AUTOMATIC) rxPduId,
-      P2VAR(ComStack_CanMessageType, AUTOMATIC, AUTOMATIC) ptr2Sdu);
+      REF2CONST(ComStack_PduInfoType, AUTOMATIC) ref2Pdu);
+  /** @brief service ID of IsoTP::RxIndication() */
   #define TM_ISOTP_RXINDICATION_ID      (0xF2)
 
   /**
@@ -282,42 +348,69 @@ private:
 
   /** @brief initialize the object handle*/
   FUNC(Std_ReturnType, AUTOMATIC) InitHandle( void );
+  /** @brief service ID of IsoTP::InitHandle() */
 #define TM_ISOTP_INITHANDLE_ID          (0x5401)
 
   /* #### send functions #### */
 
   /** @brief the flow controll message will be send */
   FUNC(Std_ReturnType, AUTOMATIC) SendFlowControl( CONST(IsoTP_FlowStatus, AUTOMATIC ) FlowStatus );
+  /** @brief service ID of IsoTP::SendFlowControl() */
 #define TM_ISOTP_SEND_FLOWCONTROL_ID      (0x5410)
 
   /** @brief this function gives the data stored inside the IsoTp object to the communication controller interface */
   FUNC(Std_ReturnType, AUTOMATIC) SendSingleFrame( void );
+  /** @brief service ID of IsoTP::SendSingleFrame() */
 #define TM_ISOTP_SEND_SINGLEFRAME_ID      (0x5411)
 
   /** @brief this function gives the data stored inside the IsoTp object to the communication controller interface */
   FUNC(Std_ReturnType, AUTOMATIC) SendFirstFrame( void );
+  /** @brief service ID of IsoTP::SendFirstFrame() */
 #define TM_ISOTP_SEND_FIRSTFRAME_ID      (0x5412)
 
   /** @brief this function gives the data stored inside the IsoTp object to the communication controller interface */
   FUNC(Std_ReturnType, AUTOMATIC) SendConsecutiveFrame( void );
+  /** @brief service ID of IsoTP::SendConsecutiveFrame() */
 #define TM_ISOTP_SEND_CONSECUTIVE_ID      (0x5413)
 
   /* #### receive functions #### */
 
-  /** @brief do the work on a flow control message */
-  FUNC(Std_ReturnType, AUTOMATIC) ReceiveFlowControl( P2CONST(CanIsoTP_8ByteData ,AUTOMATIC, AUTOMATIC) ptr2FlowControlFrame );
+  /** @brief do the work on a flow control message
+   *  @param[in] rxPduId  naming the incoming message
+   *  @param[in] ref2Pdu  reference to the data unit (this is the full CAN data including the protocol information) */
+  FUNC(Std_ReturnType, AUTOMATIC) ReceiveFlowControl(
+      CONST(IsoTP_RxPduIdType, AUTOMATIC) rxPduId,
+      REF2CONST(ComStack_PduInfoType, AUTOMATIC) ref2Pdu);
+  /** @brief service ID of IsoTP::ReceiveFlowControl() */
 #define TM_ISOTP_RECEIVE_FLOWCONTROL_ID      (0x5420)
 
-  /** @brief do the work on a received single frame message */
-  FUNC(Std_ReturnType, AUTOMATIC) ReceiveSingleFrame( P2CONST(CanIsoTP_8ByteData ,AUTOMATIC, AUTOMATIC) ptr2SingleFrame );
+  /** @brief do the extended work on a received single frame message
+   *
+   *  This is to call the PDU router in the AUTOSAR style
+   *  @param[in] rxPduId  naming the incoming message
+   *  @param[in] ref2Pdu  reference to the data unit (this is the full CAN data including the protocol information) */
+  FUNC(Std_ReturnType, AUTOMATIC) ReceiveSingleFrame(
+      CONST(IsoTP_RxPduIdType, AUTOMATIC) rxPduId,
+      REF2CONST(ComStack_PduInfoType, AUTOMATIC) ref2Pdu);
+  /** @brief service ID of IsoTP::ReceiveSingleFrame() */
 #define TM_ISOTP_RECEIVE_SINGLEFRAME_ID      (0x5421)
 
-  /** @brief do the work on a received first frame message */
-  FUNC(Std_ReturnType, AUTOMATIC) ReceiveFirstFrame( P2CONST(CanIsoTP_8ByteData ,AUTOMATIC, AUTOMATIC) ptr2FirstFrame );
+  /** @brief do the work on a received first frame message
+   *  @param[in] rxPduId  naming the incoming message
+   *  @param[in] ref2Pdu  reference to the data unit (this is the full CAN data including the protocol information) */
+  FUNC(Std_ReturnType, AUTOMATIC) ReceiveFirstFrame(
+      CONST(IsoTP_RxPduIdType, AUTOMATIC) rxPduId,
+      REF2CONST(ComStack_PduInfoType, AUTOMATIC) ref2Pdu);
+  /** @brief service ID of IsoTP::ReceiveFirstFrame() */
 #define TM_ISOTP_RECEIVE_FIRSTFRAME      (0x5422)
 
-  /** @brief do the work on a received consecutive frame message */
-  FUNC(Std_ReturnType, AUTOMATIC) ReceiveConsecutiveFrame( P2CONST(CanIsoTP_8ByteData ,AUTOMATIC, AUTOMATIC) ptr2ConsFrame, CONST(uint8_t, AUTOMATIC) len );
+  /** @brief do the work on a received consecutive frame message
+   *  @param[in] rxPduId  naming the incoming message
+   *  @param[in] ref2Pdu  reference to the data unit (this is the full CAN data including the protocol information) */
+  FUNC(Std_ReturnType, AUTOMATIC) ReceiveConsecutiveFrame(
+      CONST(IsoTP_RxPduIdType, AUTOMATIC) rxPduId,
+      REF2CONST(ComStack_PduInfoType, AUTOMATIC) ref2Pdu);
+  /** @brief service ID of IsoTP::ReceiveConsecutiveFrame() */
 #define TM_ISOTP_RECEIVE_CONSECUTIVE_ID      (0x5423)
 
   /* #### other functions #### */
@@ -336,10 +429,11 @@ private:
   /** @brief to handle the object lifetime */
   VAR(IsoTP_HandlingType, AUTOMATIC) objectHandle = { .ModuleState = IsoTP_StatesType::IsoTP_OFF } ;
   /** @brief to hold the object configuration */
-  CONST(IsoTp_ObjectConfig, AUTOMATIC) objectConfig = { .rxPduName = IsoTP_Rx_unknownPdu,
-                                                        .txPduName = IsoTP_Tx_unknownPdu,
+  CONST(IsoTp_ObjectConfig, AUTOMATIC) objectConfig = { .rxPduName = IsoTP_RxPduIdType::IsoTP_Rx_unknownPdu,
+                                                        .txPduName = IsoTP_TxPduIdType::IsoTP_Tx_unknownPdu,
                                                         .ptr2Config = &IsoTP_DefaultConfig,
                                                         .p2ControllerInterface = NULL_PTR,
+                                                        .p2PduReceiver = NULL_PTR,
                                                       };
 };
 /** @} */ // end of TM_IsoTP grouping

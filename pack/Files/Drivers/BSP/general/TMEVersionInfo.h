@@ -35,7 +35,7 @@ public:
 
   /** @brief Copies the VersionIinfo to a 8byte buffer
    *  @param[in] BufferLength should be 8 at minimum
-   *  @param[out] pointer where the VersionInfo should be
+   *  @param[out] Ptr2Buffer pointer where the VersionInfo should be
    *  @return E_NOT_OK if buffer is to small */
   Std_ReturnType GetVersionInfo(CONST(uint32_t,AUTOMATIC) BufferLength, P2VAR(uint8_t, AUTOMATIC, AUTOMATIC) Ptr2Buffer );
 

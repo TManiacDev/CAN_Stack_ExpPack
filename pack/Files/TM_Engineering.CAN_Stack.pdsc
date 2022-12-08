@@ -10,6 +10,8 @@ The generation of the MX-function and ISR-callback function normaly generated fo
     <license>license.txt</license>
     <supportContact>engineer@tmaniac.de</supportContact>
     <releases>
+        <release date="2022-12-05" version="0.2.2">Start work on UDS protocol
+Maybe do some adjustment on IsoTP</release>
         <release date="2022-11-23" version="0.2.1">The Can and CanDrv_bxCAN classes are ready to use
 Adding this modules to the configuration</release>
         <release date="2022-11-19" version="0.2.0">AUTOSAR like we bring controller depending code to Can/CanDrv classes and remove them from CanIf Class</release>
@@ -73,6 +75,10 @@ First step to publish it.</release>
         <condition id="hasCanIfClass">
             <description>We need this in the CanIf_DemoApp</description>
             <require Cbundle="CanIf" Cgroup="CanIf"/>
+        </condition>
+        <condition id="hasIsoTp">
+            <description>the UDS needed Ist TP</description>
+            <require Cbundle="Common" Cgroup="IsoTp"/>
         </condition>
     </conditions>
     <components>
@@ -238,6 +244,15 @@ So we must do the copy handmade :-(</description>
                     <file category="header" name="Middlewares/Third_Party/IsoTP/IsoTP_Compiler_Cfg.h"/>
                     <file category="header" name="Middlewares/Third_Party/IsoTP/IsoTP_Doxy.h"/>
                     <file category="header" name="Middlewares/Third_Party/IsoTP/IsoTP_Names.h"/>
+                </files>
+            </component>
+            <component Cgroup="UDS" condition="hasIsoTp" maxInstances="1">
+                <description>To hold the UDS protocol</description>
+                <files>
+                    <file category="sourceCpp" name="Middlewares/Third_Party/UDS/Uds.cpp"/>
+                    <file category="header" name="Middlewares/Third_Party/UDS/Uds.h"/>
+                    <file category="header" name="Middlewares/Third_Party/UDS/Uds_Compiler_Cfg.h"/>
+                    <file category="header" name="Middlewares/Third_Party/UDS/Uds_Doxy.h"/>
                 </files>
             </component>
         </bundle>

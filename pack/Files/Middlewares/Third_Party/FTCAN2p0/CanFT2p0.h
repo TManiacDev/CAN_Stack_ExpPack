@@ -468,7 +468,7 @@ private:
   VAR(CanFT2p0_TxPduType, AUTOMATIC) TxPduInfo[CANFT_TXPDU_COUNT];
 
   P2VAR(CanIf, AUTOMATIC, AUTOMATIC) p2CanIf  = nullptr;
-  CONST(CanIf_RxPduIdType, AUTOMATIC) rxPduName = CanIf_Rx_unknownPdu;
+  CONST(CanIf_RxPduIdType, AUTOMATIC) rxPduName = CanIf_RxPduIdType::CanIf_Rx_unknownPdu;
 };
 
 /** @} */ // end of CanFT2p0 grouping

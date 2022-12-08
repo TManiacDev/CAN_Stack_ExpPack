@@ -26,7 +26,12 @@
   */
 [/#list] [#-- end of SWIPdatas as SWIP --]
   
-[#assign dashedFileNamed = fileName?replace(".","_")]
+[#assign s = fileName]
+[#if s?contains("/")]
+  [#assign s = s?keep_after_last("/")]
+[/#if]
+[#assign dashReplace = s?replace(".","_")]
+[#assign dashedFileNamed = dashReplace?replace("-","_")]
 [#assign UserCodeCounter = 0]
 
 [#-- SWIPdatas is a list of SWIPconfigModel --]

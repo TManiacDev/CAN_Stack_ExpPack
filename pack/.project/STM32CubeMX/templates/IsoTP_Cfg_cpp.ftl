@@ -3,41 +3,41 @@
 [#assign aDate = aDateTime?date]
 [#assign aTime = aDateTime?time]
 [#assign extractDebug_FTL = 1]
+[#-- SWIPdatas is a list of SWIPconfigModel --]  
+[#list SWIPdatas as SWIP]
+  [#assign instName = SWIP.ipName]
+  [#assign fileName = SWIP.fileName]
+  [#assign version = SWIP.version]
 /**
   ******************************************************************************
   * @section CanIsoTP_CFG_C Code generation
-  * File Name          : ${name}
+  * File Name          : ${fileName}
   * Description        : This file provides code for the configuration
   *                      of the ${name} instances.
   *
   * Last updated       : ${aDate}  ${aTime}
   *
   ******************************************************************************
-[@common.optinclude name=mxTmpFolder+"/license.tmp"/][#-- include License text --]
+  [@common.optinclude name=mxTmpFolder+"/license.tmp"/][#-- include License text --]
   ******************************************************************************
   *
-
-[#-- SWIPdatas is a list of SWIPconfigModel --]  
-[#list SWIPdatas as SWIP]
-  [#assign instName = SWIP.ipName]
-  [#assign fileName = SWIP.fileName]
-  [#assign version = SWIP.version]
-
-	* MiddleWare name : ${instName}
-	* MiddleWare fileName : ${fileName}
-	* MiddleWare version : ${version}
-
-[/#list] [#-- end of  SWIPdatas as SWIP --]
-
+  * MiddleWare name : ${instName}
+  * MiddleWare fileName : ${fileName}
+  * MiddleWare version : ${version}
   *
   */
-  
-  [#assign s = name]
-  [#assign to = s?keep_after_last("/")]
-  [#assign dashedFileNamed = to?replace(".","_")]
+[/#list] [#-- end of  SWIPdatas as SWIP --]
+
+[#assign s = fileName]
+[#if s?contains("/")]
+  [#assign s = s?keep_after_last("/")]
+[/#if]
+[#assign dashReplace = s?replace(".","_")]
+[#assign dashedFileNamed = dashReplace?replace("-","_")]
+[#assign inclusion_protection = dashedFileNamed?upper_case]
   [#assign UserCodeCounter = 0]
 
-[#-- SWIPdatas is a list of SWIPconfigModel --]  
+[#-- SWIPdatas is a list of SWIPconfigModel --]
 [#list SWIPdatas as SWIP]
 /* Includes ------------------------------------------------------------------*/
   [#if includes??]
@@ -61,7 +61,7 @@
 	[#list SWIP.defines as definition]
   
       [#assign List = definition.value]
-      [#assign _ListC = List?replace(","," ")]  
+      [#assign _ListC = List?replace(","," ")]
       [#assign _List_ = _ListC?replace("|"," ")]  
       
   [#switch definition.name ]  

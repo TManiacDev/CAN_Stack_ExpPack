@@ -24,10 +24,13 @@
   */
 [/#list] [#-- end of SWIPdatas as SWIP --] 
   
-  [#assign s = fileName]
-  [#assign to = s?keep_after_last("/")]
-  [#assign dashedFileNamed = to?replace(".","_")]
-  [#assign UserCodeCounter = 0]
+[#assign s = fileName]
+[#if s?contains("/")]
+  [#assign s = s?keep_after_last("/")]
+[/#if]
+[#assign dashReplace = s?replace(".","_")]
+[#assign dashedFileNamed = dashReplace?replace("-","_")]
+[#assign UserCodeCounter = 0]
 
 [#-- Global variables --]
 [#assign CanIf_Prefix = "CanIf"]
@@ -36,6 +39,7 @@
 [#assign CanNM_Prefix = "CanNM"]
 [#assign CanTSync_Prefix = "CanTSync"]
 [#assign Xcp_Prefix = "CanXcp"]
+[#assign strPduIdType = "PduIdType" ]
 
 [#-- SWIPdatas is a list of SWIPconfigModel --]  
 [#list SWIPdatas as SWIP]
@@ -567,20 +571,23 @@
 [#-- function to create the PDU enum used in source code --]
 [#function GetNPduName N_PduString N_PduUlString RxTx]
   [#switch N_PduUlString]
+    [#case CanIf_Prefix]
+      [#assign RetName = CanIf_Prefix + "_" + RxTx + strPduIdType + "::" + CanIf_Prefix + "_" + RxTx + "_" + N_PduString ]
+      [#break]
     [#case "CanNM"]
-      [#assign RetName = CanNM_Prefix + "_" + RxTx + "_" + N_PduString ]
+      [#assign RetName = CanNM_Prefix + "_" + RxTx + strPduIdType + "::" + CanNM_Prefix + "_" + RxTx + "_" + N_PduString ]
       [#break]
     [#case "CanTP"]
-      [#assign RetName = IsoTp_Prefix + "_" + RxTx + "_" + N_PduString ]
+      [#assign RetName = IsoTp_Prefix + "_" + RxTx + strPduIdType + "::" + IsoTp_Prefix + "_" + RxTx + "_" + N_PduString ]
       [#break]
     [#case "CanTSync"]
-      [#assign RetName = CanTSync_Prefix + "_" + RxTx + "_" + N_PduString ]
+      [#assign RetName = CanTSync_Prefix + "_" + RxTx + strPduIdType + "::" + CanTSync_Prefix + "_" + RxTx + "_" + N_PduString ]
       [#break]
     [#case "XCP"]
-      [#assign RetName = Xcp_Prefix + "_" + RxTx + "_" + N_PduString ]
+      [#assign RetName = Xcp_Prefix + "_" + RxTx + strPduIdType + "::" + Xcp_Prefix + "_" + RxTx + "_" + N_PduString ]
       [#break]
     [#case "FT2p0"]
-      [#assign RetName = FTCAN2p0_Prefix + "_" + RxTx + "_" + N_PduString ]
+      [#assign RetName = FTCAN2p0_Prefix + "_" + RxTx + strPduIdType + "::" + FTCAN2p0_Prefix + "_" + RxTx + "_" + N_PduString ]
       [#break]
     [#default]
       [#assign RetName = "CanUndefUl_" + RxTx + "_" + N_PduString ]
@@ -614,12 +621,12 @@ EXTERN_CONST( CanIf_RxPduCfgType, TM_CANIF_CONFIG_DATA ) MyTest_RxPduConfig[] =
   [#list RxPduNameList as RxPDU ]
   [#assign RxIndex = RxPduNameList?seq_index_of(RxPDU)]
   {  /* ${RxIndex} */
-    .L_PDU_Name = ${CanIf_Prefix}_Rx_${RxPDU},
+    .L_PDU_Name = ${GetNPduName(RxPDU, CanIf_Prefix, "Rx")}, /* ${CanIf_Prefix}_Rx_${RxPDU} */
     .CanId = { ${GetMessageId(RxIdList[RxIndex])}, _UNUSED_VAR_, CANIF_NO_RTR, ${GetMessageType(RxIdList[RxIndex])} },
     .IdMask = { ${GetMessageId(RxMaskList[RxIndex])}, _UNUSED_VAR_, CANIF_NO_RTR, ${GetMessageType(RxMaskList[RxIndex])} },
     .MsgLength = ${RxLengthList[RxIndex]},
     .InstanceName = ${GetControllerName(RxControllerList[RxIndex])},
-    .N_PDU_Name = ${GetNPduName(RxTargetPduNameList[RxIndex], RxUpperLayerList[RxIndex], "Rx")},
+    .N_PDU_Name = (ComStack_PduType)${GetNPduName(RxTargetPduNameList[RxIndex], RxUpperLayerList[RxIndex], "Rx")},
     [#if RxUpperLayerList[RxIndex]?starts_with("u")]
     .ULName = CanIfUL_undefined
     [#else]
@@ -629,7 +636,7 @@ EXTERN_CONST( CanIf_RxPduCfgType, TM_CANIF_CONFIG_DATA ) MyTest_RxPduConfig[] =
   [/#list] [#-- end of RxPduNameList as PDU --]
 /* USER CODE BEGIN ${dashedFileNamed} ${UserCodeCounter} */
   {
-    .L_PDU_Name = L_PDU_Dummy_for_Test,
+    .L_PDU_Name = (CanIf_RxPduIdType)L_PDU_Dummy_for_Test,
     .CanId = { 0x123456, _UNUSED_VAR_, CANIF_NO_RTR, CANIF_EXTID },
     .IdMask = { 0x0, _UNUSED_VAR_, CANIF_NO_RTR, CANIF_EXTID },
     .MsgLength = 8,
@@ -660,17 +667,17 @@ EXTERN_CONST( CanIf_RxPduCfgType, TM_CANIF_CONFIG_DATA ) MyTest_RxPduConfig[] =
  *  @warning the struct must have the same order like CanIf_TxPduIdType */
 [#if TxPduTestReturn?? && TxPduTestReturn == "passed" ]
 /* ->->-> we have a valid Tx Pdu List */
-EXTERN_CONST( CanIf_RxPduCfgType, TM_CANIF_CONFIG_DATA ) MyTest_TxPduConfig[] =
+EXTERN_CONST( CanIf_TxPduCfgType, TM_CANIF_CONFIG_DATA ) MyTest_TxPduConfig[] =
 {
   [#list TxPduNameList as TxPDU ]
   [#assign TxIndex = TxPduNameList?seq_index_of(TxPDU)]  
   { /* ${TxIndex} */
-    .L_PDU_Name = ${CanIf_Prefix}_Tx_${TxPDU},
+    .L_PDU_Name = ${GetNPduName(TxPDU, CanIf_Prefix, "Tx")}, /* ${CanIf_Prefix}_Tx_${TxPDU} */
     .CanId = { ${GetMessageId(TxIdList[TxIndex])}, _UNUSED_VAR_, CANIF_NO_RTR, ${GetMessageType(TxIdList[TxIndex])} },
     .IdMask = { ${GetMessageId(TxMaskList[TxIndex])}, _UNUSED_VAR_, CANIF_NO_RTR, ${GetMessageType(TxMaskList[TxIndex])} },
     .MsgLength = ${TxLengthList[TxIndex]},
     .InstanceName = ${GetControllerName(TxControllerList[TxIndex])},
-    .N_PDU_Name = ${GetNPduName(TxTargetPduNameList[TxIndex], TxUpperLayerList[TxIndex], "Tx")},
+    .N_PDU_Name = (ComStack_PduType)${GetNPduName(TxTargetPduNameList[TxIndex], TxUpperLayerList[TxIndex], "Tx")},
     [#if TxUpperLayerList[TxIndex]?starts_with("u")]
     .ULName = CanIfUL_undefined
     [#else]
@@ -680,7 +687,7 @@ EXTERN_CONST( CanIf_RxPduCfgType, TM_CANIF_CONFIG_DATA ) MyTest_TxPduConfig[] =
   [/#list] [#-- end of TxPduNameList as PDU --]
 /* USER CODE BEGIN ${dashedFileNamed} ${UserCodeCounter} */
   {
-    .L_PDU_Name = L_PDU_Dummy_for_Test,
+    .L_PDU_Name = (CanIf_TxPduIdType)L_PDU_Dummy_for_Test,
     .CanId = { 0x0, _UNUSED_VAR_, CANIF_NO_RTR, CANIF_STDID },
     .IdMask = { 0x0, _UNUSED_VAR_, CANIF_NO_RTR, CANIF_STDID },
     .MsgLength = 8,

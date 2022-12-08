@@ -108,9 +108,6 @@ typedef void*               tm_VoidPtr;
 /** used const void pointer */
 typedef const void*         tm_ConstVoidPtr;
 
-/** a general type for PDU Ids */
-typedef uint32_t            tm_PduIDType;
-
 /** just to use it on init */
 #define INVALID_PDUID       (0xF0F0F0F0)
 

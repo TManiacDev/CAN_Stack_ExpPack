@@ -52,10 +52,10 @@ private:
 
   /* we need this here to config */
   CanFT2p0Stream rxStream[USED_RX_STREAMS] = {
-      CanFT2p0Stream(p2ControllerIf, CanIf_Rx_CanFT_FT500_0FF),
-      CanFT2p0Stream(p2ControllerIf, CanIf_Rx_CanFT_FT500_1FF),
-      CanFT2p0Stream(p2ControllerIf, CanIf_Rx_CanFT_FT500_2FF),
-      CanFT2p0Stream(p2ControllerIf, CanIf_Rx_CanFT_FT500_3FF) };
+      CanFT2p0Stream(p2ControllerIf, CanIf_RxPduIdType::CanIf_Rx_CanFT_FT500_0FF),
+      CanFT2p0Stream(p2ControllerIf, CanIf_RxPduIdType::CanIf_Rx_CanFT_FT500_1FF),
+      CanFT2p0Stream(p2ControllerIf, CanIf_RxPduIdType::CanIf_Rx_CanFT_FT500_2FF),
+      CanFT2p0Stream(p2ControllerIf, CanIf_RxPduIdType::CanIf_Rx_CanFT_FT500_3FF) };
 
   // das hier funktioniert nicht. Warum???
   //std::vector<CanFT2p0Stream> rxStreamList

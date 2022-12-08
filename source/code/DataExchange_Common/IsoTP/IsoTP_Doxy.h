@@ -5,15 +5,15 @@
 
 /**
  * @file
- * CanIsoTP_Doxy.h
+ * IsoTP_Doxy.h
 
  * @author TManiac
  * @date Apr 3, 2022
  * @version 
  *
  */
-#ifndef _CANISOTP_DOXY_H_
-#define _CANISOTP_DOXY_H_
+#ifndef _ISOTP_DOXY_H_
+#define _ISOTP_DOXY_H_
 
 /*
  * das hier ist das Network Layer
@@ -29,7 +29,7 @@
  */
 
 /***************************************/
-/***********CAN ISO TP module **********/
+/*********** ISO TP module **********/
 /** @defgroup TM_IsoTP ISO Transport Protocol Transport Layer
  *  @brief configuration of the CAN ISO TP module
  *  @details
@@ -49,6 +49,18 @@
  *  | N_TA | Network Target Address (see ISO 15765-2). It might already contain the N_TAtype(physical/function) in case of ExtendedAddressing  | - |
  *  | N_TAtype | Network Target Address type (see ISO 15765-2)| - |
  *  |  @link abrev Standardabkürzungen @endlink |||
+ *
+ *  | N_PDU name                    | CAN<br>2.0 | CAN<br>FD | N_PCI bytes |||||||||
+ *  | ----------                    | :----: | :----: | ----- | ----- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
+ *  | Byte usage                    | ...... ......  || Byte #0      || Byte #1       | Byte #2       | Byte #3       | Byte #4       | Byte #5       | Byte #6       | Byte #7 ... |
+ *  | Bit usage                     | ^      | ^      | 7 - 4 | 3 - 1 | ^             | ^             | ^             | ^             | ^             | ^             | ^ |
+ *  | ++++++++++                    | ++++++++++     || +++++++++++++|| +++++++++++++ | +++++++++++++ | +++++++++++++ | +++++++++++++ | +++++++++++++ | +++++++++++++ | +++++++++++++ |
+ *  | SingleFrame (SF)<br>DL <= 8   | yes | yes       | 0x0   | SF_DL | [unused/padding]      |||||||
+ *  | SingleFrame (SF)<br>DL > 8    | no  | yes       | 0x00         || SF_DL         | [unused]      ||||||
+ *  | FirstFrame (FF)<br>DL <= 4095 | yes | yes       | 0x1   | FF_DL                || [data]        | [data]      | [data]      | [data]      | [data]      | [data]      |
+ *  | FirstFrame (FF)<br>DL >  4095 | yes | yes       | 0x1   | 0x000                || FF_DL         ||||| [data] |
+ *  | ConsecutiveFrame (CF)         | yes | yes       | 0x2   | SN   | [data]         | [data]        | [data]      | [data]      | [data]      | [data]      | [data]      |
+ *  | FlowControl (FC)              | yes | yes       | 0x3   | FS   | BS             | STmin         | [unused/padding] |||||
  */
 
 /** @addtogroup TM_IsoTP
@@ -59,6 +71,10 @@
     /** @defgroup TM_IsoTP_Types Type definitions for ISO TP Layer Module
      *  @brief there are no special public types then the configuration
      *         all types defined in the COM stack */
+
+    /** @defgroup TM_IsoTP_CfgTypes Type definitions for configuration of the ISO TP Layer Module
+     *  @brief This types hold the configuration parameters
+     *         see also all types defined in the COM stack */
 
     /** @defgroup TM_IsoTP_Func Function definitions for CAN ISO TP Layer Module */
 
@@ -134,7 +150,7 @@
  *  @{ */
 /** @} */ // end of grouping TM_IsoTP_Cfg_TxNSdu
 
-#endif /* _CANISOTP_DOXY_H_ */
+#endif /* _ISOTP_DOXY_H_ */
 
 /*******************  (C) TManiac Engineering  *******************/
 /*******************         END OF FILE       *******************/

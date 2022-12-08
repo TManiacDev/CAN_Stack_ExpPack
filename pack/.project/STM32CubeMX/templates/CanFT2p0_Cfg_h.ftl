@@ -25,30 +25,29 @@
   */
 [/#list] [#-- end of SWIPdatas as SWIP --]
 
-[#assign s = name]
-[#assign to = s?replace(".","__")]
-[#assign toto = to?replace("/","__")]
-[#assign dashReplace = toto?replace("-","_")]
-[#assign inclusion_protection = dashReplace?upper_case]
-
+[#assign s = fileName]
+[#if s?contains("/")]
+  [#assign s = s?keep_after_last("/")]
+[/#if]
+[#assign dashReplace = s?replace(".","_")]
+[#assign dashedFileNamed = dashReplace?replace("-","_")]
+[#assign inclusion_protection = dashedFileNamed?upper_case]
+[#assign UserCodeCounter = 0]
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __${inclusion_protection}__
 #define __${inclusion_protection}__
 
 /* Imported types */
-#include "TM_Std_types.h"
+#include "TM_ComStack_Types.h" 
 #include "EcuNames_Cfg.h"
 #include "CanFT2p0_DatabaseCfg.h" 
 #include "CanFT2p0_FixedNames.h"
 
 /* private Includes -----------------------------------------------------------*/
-/* USER CODE BEGIN CanFT2p0_Cfg_h 0 */
+/* USER CODE BEGIN ${dashedFileNamed} ${UserCodeCounter} */
 
-/* USER CODE END CanFT2p0_Cfg_h 0 */
-
-#ifdef __cplusplus
- extern "C" {
-#endif
+/* USER CODE END ${dashedFileNamed} ${UserCodeCounter} */
+  [#assign UserCodeCounter++]
 
 /** @addtogroup CanFT2p0_Cfg
  *  @{ */
@@ -98,7 +97,7 @@ typedef struct
   /** Die Anzahl zu reservierender DatenPackete */ 
   VAR(uint32_t, AUTOMATIC) DataCount; 
   /// @todo ich brauch ein passendes define für die maximale Anzahl
-  VAR(tm_PduIDType, AUTOMATIC) Pdu[CANFT_RXPDU_COUNT];
+  VAR(ComStack_PduType, AUTOMATIC) Pdu[CANFT_RXPDU_COUNT];
 }CanFT2p0_ChannelConfigType;
 
 /** @brief Configuration of the Fueltech communication object
@@ -182,15 +181,13 @@ extern const CanFT2p0_CfgType RS601_FT_Config;
 /** @} */
 
 /* private Includes -----------------------------------------------------------*/
-/* USER CODE BEGIN CanFT2p0_Cfg_h 1 */
+/* USER CODE BEGIN ${dashedFileNamed} ${UserCodeCounter} */
 
-/* USER CODE END CanFT2p0_Cfg_h 1 */
+/* USER CODE END ${dashedFileNamed} ${UserCodeCounter} */
+  [#assign UserCodeCounter++]
 
 /** @} */ // end of grouping CanFT2p0_Cfg
 
-#ifdef __cplusplus
-}
-#endif
 #endif /* __ ${inclusion_protection}__ */
 
 /*******************  (C) TManiac Engineering  *******************/

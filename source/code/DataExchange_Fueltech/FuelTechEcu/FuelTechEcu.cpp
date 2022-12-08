@@ -38,7 +38,7 @@ Std_ReturnType FuelTechEcu::Init(void)
 
   for (uint8_t streamIndex = 0; streamIndex < USED_RX_STREAMS; streamIndex++ )
   {
-    if ( p2ControllerIf->ConnectUpperLayerIndication( rxStream[streamIndex].GetRxPduName(), &rxStream[streamIndex] ) == E_OK )
+    if ( p2ControllerIf->ConnectUpperLayerIndication( (ComStack_PduType)rxStream[streamIndex].GetRxPduName(), &rxStream[streamIndex] ) == E_OK )
     {
       // do some thing on success
       rxStream[streamIndex].Init();

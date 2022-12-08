@@ -31,11 +31,13 @@
   */
 [/#list] [#-- end of SWIPdatas as SWIP --] 
   
-[#assign s = name]
-[#assign dashedFileNamed = s?replace(".","__")]
-[#assign toto = dashedFileNamed?replace("/","__")]
-[#assign dashReplace = toto?replace("-","_")]
-[#assign inclusion_protection = dashReplace?upper_case]
+[#assign s = fileName]
+[#if s?contains("/")]
+  [#assign s = s?keep_after_last("/")]
+[/#if]
+[#assign dashReplace = s?replace(".","_")]
+[#assign dashedFileNamed = dashReplace?replace("-","_")]
+[#assign inclusion_protection = dashedFileNamed?upper_case]
 
 /* Define to prevent recursive inclusion ------------------------------------- */
 #ifndef __${inclusion_protection}__
@@ -104,6 +106,12 @@ extern ${variable.value} ${variable.name};
       [#assign _List_ = _BitrateList_?word_list]
       [#-- extract Bitrate list --]
       [#break]
+    [#case "CAN1_USED_RX_HW_FILTER"]
+        [#assign bxCAN1_hwFilterCount = definition.value?number]
+      [#break]
+    [#case "CAN2_USED_RX_HW_FILTER"]
+        [#assign bxCAN2_hwFilterCount = definition.value?number]
+      [#break]
   [#default]
   [#if definition.comments??]
 /** ----------  ${definition.comments} -----------*/
@@ -116,6 +124,25 @@ extern ${variable.value} ${variable.name};
 	[/#list]
 [/#if]
 [/#list]
+
+[#assign bxCAN_MaxHwFilterCount = 28 ]
+/** @brief max count of hardware filter for the bxCAN Master    
+    configuration value "${bxCAN1_hwFilterCount}"
+[#if bxCAN1_hwFilterCount > bxCAN_MaxHwFilterCount]  
+    @warning hardware filter count of bxCAN master is limited to max ${bxCAN_MaxHwFilterCount}. 
+    There are no filter for the slave possible.
+[#assign bxCAN1_hwFilterCount = bxCAN_MaxHwFilterCount]
+[/#if]  */
+#define CAN1_USED_RX_HW_FILTER    ${bxCAN1_hwFilterCount}
+
+/** @brief max count of hardware filter for the bxCAN Slave 
+    configuration value "${bxCAN2_hwFilterCount}" 
+[#if (bxCAN1_hwFilterCount + bxCAN2_hwFilterCount) > bxCAN_MaxHwFilterCount]
+[#assign bxCAN2_hwFilterCount = bxCAN_MaxHwFilterCount - bxCAN1_hwFilterCount]
+    @warning hardware filter count of bxCAN is limited to max ${bxCAN_MaxHwFilterCount}.
+    With ${bxCAN1_hwFilterCount} filter on Master there are ${bxCAN2_hwFilterCount} filter for the slave possible
+[/#if]  */
+#define CAN2_USED_RX_HW_FILTER    ${bxCAN2_hwFilterCount}
 
 /** @brief this is just to catch un used configuration */
 #define UNKNOWN 0

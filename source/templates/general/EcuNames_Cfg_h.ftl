@@ -26,10 +26,12 @@
 [/#list] [#-- end of SWIPdatas as SWIP --] 
 
 [#assign s = fileName]
-[#assign dashedFileNamed = s?replace(".","__")]
-[#assign toto = dashedFileNamed?replace("/","__")]
-[#assign dashReplace = toto?replace("-","_")]
-[#assign inclusion_protection = dashReplace?upper_case]
+[#if s?contains("/")]
+  [#assign s = s?keep_after_last("/")]
+[/#if]
+[#assign dashReplace = s?replace(".","_")]
+[#assign dashedFileNamed = dashReplace?replace("-","_")]
+[#assign inclusion_protection = dashedFileNamed?upper_case]
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __${inclusion_protection}__
 #define __${inclusion_protection}__
@@ -39,23 +41,24 @@
 #include "main.h"
 #include "TM_Std_types.h"
 
-#ifdef __cplusplus
- extern "C" {
-#endif
-
 /* private Includes -----------------------------------------------------------*/
-/* USER CODE BEGIN ${dashedFileNamed} ${UserCodeCounter} */
 
 /** @brief this enum shows the naming conventions of used PDU names */
  typedef enum 
  {  
-   N_PDU_Dummy_for_Test, 
+   N_PDU_Dummy_for_Test = 0x80, 
    L_PDU_Dummy_for_Test, 
    CanUndefUl_Rx_Target1, 
    CanUndefUl_Rx_Target2, 
    CanUndefUl_Tx_Target1,
    CanUndefUl_Tx_Target2   
+/* USER CODE BEGIN ${dashedFileNamed} ${UserCodeCounter} */
+
+/* USER CODE END ${dashedFileNamed} ${UserCodeCounter} */
+  [#assign UserCodeCounter++]
  }CanUL_PDU_for_Test; 
+ 
+/* USER CODE BEGIN ${dashedFileNamed} ${UserCodeCounter} */
  
 /* USER CODE END ${dashedFileNamed} ${UserCodeCounter} */
   [#assign UserCodeCounter++]
@@ -91,6 +94,7 @@ extern ${variable.value} ${variable.name};
 [#assign CanNM_Prefix = "CanNM"]
 [#assign CanTSync_Prefix = "CanTSync"]
 [#assign Xcp_Prefix = "CanXcp"]
+[#assign strPduIdType = "PduIdType" ]
 
 [#assign FTEcuUse = "-"]
 [#assign FTPanelUse = "-"]
@@ -135,7 +139,7 @@ extern ${variable.value} ${variable.name};
       [#assign IsoTp_RxPduNameList = _NameList_?word_list]
       [#-- extract IF PDU list --]
 /** @brief to use generic names for the PDUs */
-typedef enum
+enum class ${IsoTp_Prefix}_Rx${strPduIdType}
 {
   [#list IsoTp_RxPduNameList as word] 
     [#assign PduName = word]
@@ -147,12 +151,12 @@ typedef enum
 
 /* USER CODE END ${IsoTp_Prefix}_User_RxPDUs 0 */
   ${IsoTp_Prefix}_Rx_unknownPdu
-}${IsoTp_Prefix}_RxPduType;
+};
 
 /* USER CODE BEGIN ${IsoTp_Prefix}_User_RxPDUs 1 */
 
 /** @brief number of user defined RxPdu-Names 
-    @details This define must be edit if added User_RxPDUs to the enum ${IsoTp_Prefix}_RxPduIdType */
+    @details This define must be edit if added User_RxPDUs to the enum ${IsoTp_Prefix}_${strPduIdType} */
 #define ${IsoTp_Prefix?upper_case}_RXPDU_USERCOUNT  0
 
 /* USER CODE END ${IsoTp_Prefix}_User_RxPDUs 1 */
@@ -175,7 +179,7 @@ typedef enum
       [#assign IsoTp_TxPduNameList = _NameList_?word_list]
       [#-- extract IF PDU list --]
 /** @brief to use generic names for the PDUs */
-typedef enum
+enum class ${IsoTp_Prefix}_Tx${strPduIdType}
 {
   [#list IsoTp_TxPduNameList as word] 
     [#assign PduName = word]
@@ -187,12 +191,12 @@ typedef enum
 
 /* USER CODE END ${IsoTp_Prefix}_User_TxPDUs 0 */
   ${IsoTp_Prefix}_Tx_unknownPdu
-}${IsoTp_Prefix}_TxPduType;
+};
 
 /* USER CODE BEGIN ${IsoTp_Prefix}_User_TxPDUs 1 */
 
 /** @brief number of user defined RxPdu-Names
-    @details This define must be edit if added User_TxPDUs to the enum ${IsoTp_Prefix}_TxPduIdType */
+    @details This define must be edit if added User_TxPDUs to the enum ${IsoTp_Prefix}_${strPduIdType} */
 #define ${IsoTp_Prefix?upper_case}_TXPDU_USERCOUNT  0
 
 /* USER CODE END ${IsoTp_Prefix}_User_TxPDUs 1 */
@@ -342,7 +346,7 @@ typedef enum
 /* USER CODE END ${FTCAN2p0_Prefix}_User_RxPDUs 0 */
   [#assign UserCodeCounter++]
   ${FTCAN2p0_Prefix}_Rx_unknownPdu
-}${FTCAN2p0_Prefix}_RxPduIdType;
+}${FTCAN2p0_Prefix}_Rx${strPduIdType};
 
 /* USER CODE BEGIN ${FTCAN2p0_Prefix}_User_RxPDUs 1 */
 
@@ -373,7 +377,7 @@ typedef enum
 /* USER CODE END ${FTCAN2p0_Prefix}_User_TxPDUs 0 */
   [#assign UserCodeCounter++]
   ${FTCAN2p0_Prefix}_Tx_unknownPdu
-}${FTCAN2p0_Prefix}_TxPduIdType;
+}${FTCAN2p0_Prefix}_Tx${strPduIdType};
 
 /* USER CODE BEGIN ${FTCAN2p0_Prefix}_User_TxPDUs 1 */
 
@@ -400,7 +404,7 @@ typedef enum
  *  @{ */
  
 /** @brief to use generic names for the PDUs */
-typedef enum
+enum class ${CanIf_Prefix}_Rx${strPduIdType}
 {
   [#list CanIfRxPduNameList as word] 
     [#assign PduName = word]
@@ -411,7 +415,7 @@ typedef enum
 
 /* USER CODE END ${CanIf_Prefix}_User_RxPDUs 0 */
   ${CanIf_Prefix}_Rx_unknownPdu
-}${CanIf_Prefix}_RxPduIdType;
+};
 
 /* USER CODE BEGIN ${CanIf_Prefix}_User_RxPDUs 1 */
 
@@ -432,7 +436,7 @@ typedef enum
 /** @addtogroup TM_CanIfCfg
  *  @{ */
 /** @brief to use generic names for the PDUs */
-typedef enum
+enum class ${CanIf_Prefix}_Tx${strPduIdType}
 {
   [#list CanIfTxPduNameList as word] 
     [#assign PduName = word]
@@ -443,7 +447,7 @@ typedef enum
 
 /* USER CODE END ${CanIf_Prefix}_User_TxPDUs 0 */
   ${CanIf_Prefix}_Tx_unknownPdu
-}${CanIf_Prefix}_TxPduIdType;
+};
 
 /* USER CODE BEGIN ${CanIf_Prefix}_User_TxPDUs 1 */
 
@@ -466,10 +470,6 @@ typedef enum
 /* USER CODE END ${dashedFileNamed} ${UserCodeCounter} */
   [#assign UserCodeCounter++]
 
-
-#ifdef __cplusplus
-}
-#endif
 #endif /*__ ${inclusion_protection}__ */
 
 /*******************  (C) TManiac Engineering  *******************/

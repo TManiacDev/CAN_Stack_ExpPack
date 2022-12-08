@@ -135,7 +135,6 @@ public:
    *  @details The service CanIf_RxIndication() is implemented in CanIf and called by CanDrv after a CAN L-PDU has been received. */
   virtual void RxIndication(
       CONST( ECU_CanController, AUTOMATIC) Controller,
-      REF2CONST( ComStack_CanMsgHeader, AUTOMATIC) CanMsgHeader,
       REF2CONST( ComStack_PduInfoType, AUTOMATIC) PduInfo ) = 0;
 
 private:

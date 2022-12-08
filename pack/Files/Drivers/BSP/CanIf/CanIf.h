@@ -121,7 +121,7 @@ typedef struct
 typedef struct
 {
   /** @brief name of this L-PDU */
-  VAR(uint32_t, AUTOMATIC) L_PDU_Name;
+  VAR(CanIf_RxPduIdType, AUTOMATIC) L_PDU_Name;
   /** @brief The base Id */
   VAR(ComStack_CanIdType, AUTOMATIC) CanId;
   /** @brief Mask to select dynamic Id bits */
@@ -131,11 +131,31 @@ typedef struct
   /** @brief name the used hardware */
   VAR(ECU_CanController, AUTOMATIC ) InstanceName;
   /** @brief name of the upper layer N-PDU */
-  VAR(tm_PduIDType, AUTOMATIC) N_PDU_Name;
+  VAR(ComStack_PduType, AUTOMATIC) N_PDU_Name;
   /** @brief name the upper layer */
   VAR(CanIf_UpperLayerType, AUTOMATIC ) ULName;
 
 }CanIf_RxPduCfgType;
+
+/** @brief to hold the configuration of a RxPdu */
+typedef struct
+{
+  /** @brief name of this L-PDU */
+  VAR(CanIf_TxPduIdType, AUTOMATIC) L_PDU_Name;
+  /** @brief The base Id */
+  VAR(ComStack_CanIdType, AUTOMATIC) CanId;
+  /** @brief Mask to select dynamic Id bits */
+  VAR(ComStack_CanIdType, AUTOMATIC) IdMask;
+  /** @brief ??? */
+  VAR(uint32_t, AUTOMATIC) MsgLength;
+  /** @brief name the used hardware */
+  VAR(ECU_CanController, AUTOMATIC ) InstanceName;
+  /** @brief name of the upper layer N-PDU */
+  VAR(ComStack_PduType, AUTOMATIC) N_PDU_Name;
+  /** @brief name the upper layer */
+  VAR(CanIf_UpperLayerType, AUTOMATIC ) ULName;
+
+}CanIf_TxPduCfgType;
 /** @} */ // end of grouping TM_CanIf_RxPduCfg
 
 /** @brief the class to work on the CAN controller interface
@@ -278,7 +298,6 @@ public:
   /** The service CanIf_RxIndication() is implemented in CanIf and called by CanDrv after a CAN L-PDU has been received. */
   void RxIndication(
       CONST( ECU_CanController, AUTOMATIC) Controller,
-      REF2CONST( ComStack_CanMsgHeader, AUTOMATIC) CanMsgHeader,
       REF2CONST( ComStack_PduInfoType, AUTOMATIC) PduInfo );
 
 private:

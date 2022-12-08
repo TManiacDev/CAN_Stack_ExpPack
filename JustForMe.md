@@ -3,9 +3,14 @@ This are points that I will remember myself, so it will be in German
 
 Wo stehe ich | Was muss noch | Bemerkung
 ------------ | ------------- | ---------
-Vermischung von CanIf und CanDrv | Wir brauchen CanDrv für bxCAN und FDCAN | oder man erzeugt zwei CanIf Klassen -> mit der Version 0.2.x bxCAN als CanDrv
+Die History in der Doxy-Page hängt hinter her | Da ist die letzte Version 0.1.0 | Ich muss dran denken diese mit zu ziehen.
+IsoTP_Cfg ist noch ein Dummy | Benötige ich im UDS | VersionsInfo steht noch in IsoTP.h -> muss ins Cfg
+UDS | kommt jetzt | Ideen?
+Vermischung von CanIf und CanDrv | Wir brauchen CanDrv für bxCAN und FDCAN | mit der Version 0.2.x bxCAN als CanDrv
 bxCAN mit der Nutzung von weak Funktionen | Überarbeitung zur Nutzung der Funktionspointer in der HAL | Project Manager -> Advanced Settings -> Register Callback
 stm32h7xx_hal_conf.h wird für beide Cores unterschiedlich erzeugt | - | Auch die Darstellung des #define  USE_HAL_FDCAN_REGISTER_CALLBACKS ist in der IDE(C-View) nicht gegeben. Es wird aber richtig compiliert.
+
+**Achtung: Wird irgendetwas an den USER CODE sections in den Freemarker Templates geändert, so kommt es vor das Inhalt der Sections beim Code generieren gelöscht wird**
 
 ## Zum Umbau auf CanDrv
 ### Ziel
@@ -23,10 +28,15 @@ Entkoppeln des CanIf
 + **Board Part** Module bxCAN wird erweitert um alle CAN Controller Treiber zu enthalten
 + **Mode Conditions** nutzen um die Konfigurationen entsprechend de Treibers bereit zu stellen
 
+### Feature Requests für bxCAN
++ Die Anzahl der Filterbänke für Master und Slave werden konfiguriert. Das könnte man dynamisch lösen.
++ Die Function HAL_CAN_ConfigFilter() ist schrecklich -> evtl wäre eine Entkopplung der HAL der Weg
+
 ## Was fehlt im IsoTP
 + aktuell ist feste Zuordnung auf bxCAN Master mit CanID 0x7EF
 + Anwendung mit UDS und OBD
 + langfristig sollte **DataExchange Common** einen anderen Namen bekommen (vielleicht **DataExchange OBD**?)
++ Das Template muss die VersionsInfo mit erzeugen
 
 ### minimum FlowControl 
 Antwort auf 0x7DF:

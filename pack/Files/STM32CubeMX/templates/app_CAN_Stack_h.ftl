@@ -15,12 +15,10 @@
   ******************************************************************************
   */
 
-
-[#assign s = name]
-[#assign to = s?replace(".","__")]
-[#assign toto = to?replace("/","__")]
-[#assign dashReplace = toto?replace("-","_")]
-[#assign inclusion_protection = dashReplace?upper_case]
+[#assign s = fctProcessName?keep_before_last("_")]
+[#assign dashedFileNamed = s?replace("-","_")]
+[#assign inclusion_protection = dashedFileNamed?upper_case]
+[#assign UserCodeCounter = 0]
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __${inclusion_protection}__
 #define __${inclusion_protection}__
@@ -30,9 +28,10 @@ extern "C" {
 #endif
 
 /* private Includes -----------------------------------------------------------*/
-/* USER CODE BEGIN app_include 0 */
+/* USER CODE BEGIN ${dashedFileNamed} ${UserCodeCounter} */
 
-/* USER CODE END app_include 0 */
+/* USER CODE END ${dashedFileNamed} ${UserCodeCounter} */
+  [#assign UserCodeCounter++]
 
 #define LED_GREEN_TOGGLE   HAL_GPIO_TogglePin(LD1_GPIO_Port, LD1_Pin)
 #define LED_BLUE_TOGGLE    HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin)
@@ -47,9 +46,10 @@ void ${fctProcessName}(void);
 void ${MX_secFctName + "_Task2"}(void);
 [/#if]
 /* private function -----------------------------------------------------------*/
-/* USER CODE BEGIN app_func 0 */
+/* USER CODE BEGIN ${dashedFileNamed} ${UserCodeCounter} */
 
-/* USER CODE END app_func 0 */
+/* USER CODE END ${dashedFileNamed} ${UserCodeCounter} */
+  [#assign UserCodeCounter++]
 
 #ifdef __cplusplus
 }

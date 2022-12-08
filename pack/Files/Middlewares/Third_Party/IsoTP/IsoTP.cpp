@@ -18,16 +18,10 @@
 
 #include <IsoTP_Compiler_cfg.h>
 /* private Includes -----------------------------------------------------------*/
-/* USER CODE BEGIN CanFT2p0TL_include 0 */
 
-/* USER CODE END CanFT2p0TL_include 0 */
+#if ( ISOTP_DEV_ERROR_DETECT == STD_ON )
 
-#if ( CANISOTP_DEV_ERROR_DETECT == STD_ON )
-
-#endif // ( CANFT2P0TL_DEV_ERROR_DETECT == STD_ON )
-
-#define CANISOTP_RXINDICATION  (0x1)
-#define CANISOTP_RXDATACOPY    ((0x1) << 16 )
+#endif // ( ISOTP_DEV_ERROR_DETECT == STD_ON )
 
 CONST(IsoTP_ConfigType, TM_ISOTP_CONST) IsoTP_DefaultConfig =
 {
@@ -64,8 +58,8 @@ FUNC(Std_ReturnType, AUTOMATIC) IsoTp::Init( CONST(IsoTP_RxTxStatus, AUTOMATIC) 
   Std_ReturnType returnValue = E_NOT_OK;
   if ( objectHandle.ModuleState == IsoTP_StatesType::IsoTP_OFF )
   {
-    objectHandle.FlowControl.rxIfPduName = objectConfig.p2ControllerInterface->GetIfRxPduName(CanIfUL_CanTP, objectConfig.rxPduName);
-    objectHandle.FlowControl.txIfPduName = objectConfig.p2ControllerInterface->GetIfTxPduName(CanIfUL_CanTP, objectConfig.txPduName);
+    objectHandle.FlowControl.rxIfPduName = objectConfig.p2ControllerInterface->GetIfRxPduName(CanIfUL_CanTP, (ComStack_PduType)objectConfig.rxPduName);
+    objectHandle.FlowControl.txIfPduName = objectConfig.p2ControllerInterface->GetIfTxPduName(CanIfUL_CanTP, (ComStack_PduType)objectConfig.txPduName);
     if ( ( objectHandle.FlowControl.rxIfPduName != ComStack_InvalidPdu ) &&
         ( objectHandle.FlowControl.txIfPduName != ComStack_InvalidPdu ) )
     {
@@ -85,11 +79,11 @@ FUNC(IsoTP_StatesType, TM_ISOTP_CODE) IsoTp::GetState( void ) { return objectHan
 
 /*  @brief Get the name of the linked rx PDU */
 /** @todo we should add a virtual function to the CanIfUpperLayer class */
-FUNC( IsoTP_RxPduType, TM_ISOTP_CODE ) IsoTp::GetRxPduName(void) { return objectConfig.rxPduName; }
+FUNC( IsoTP_RxPduIdType, TM_ISOTP_CODE ) IsoTp::GetRxPduName(void) { return objectConfig.rxPduName; }
 
 /*  @brief Get the name of the linked rx PDU */
 /** @todo we should add a virtual function to the CanIfUpperLayer class */
-FUNC( IsoTP_TxPduType, TM_ISOTP_CODE ) IsoTp::GetTxPduName(void) { return objectConfig.txPduName; }
+FUNC( IsoTP_TxPduIdType, TM_ISOTP_CODE ) IsoTp::GetTxPduName(void) { return objectConfig.txPduName; }
 
 FUNC(Std_ReturnType, TM_ISOTP_CODE) IsoTp::InitHandle( void )
 {
@@ -138,10 +132,6 @@ FUNC(Std_ReturnType, AUTOMATIC) IsoTp::Init(
   objectHandle.ModuleState = IsoTP_StatesType::IsoTP_ON;
   returnValue = E_OK;
 
-/* USER CODE BEGIN CanFT2p0TL_Init 2 */
-
-/* USER CODE END CanFT2p0TL_Init 2 */
-//
 return returnValue;
 }
 
@@ -343,7 +333,6 @@ FUNC(Std_ReturnType, AUTOMATIC)  IsoTp::SendConsecutiveFrame( void )
       {
 
       }
-
     }
   }
   return returnValue;
@@ -351,10 +340,12 @@ FUNC(Std_ReturnType, AUTOMATIC)  IsoTp::SendConsecutiveFrame( void )
 
 /* ##### receive functions ##### */
 
-FUNC(Std_ReturnType, TM_ISOTP_CODE) IsoTp::ReceiveFlowControl( P2CONST(CanIsoTP_8ByteData, AUTOMATIC, AUTOMATIC) ptr2FlowControlFrame )
+FUNC(Std_ReturnType, TM_ISOTP_CODE) IsoTp::ReceiveFlowControl(
+    CONST(IsoTP_RxPduIdType, AUTOMATIC) rxPduId,
+    REF2CONST(ComStack_PduInfoType, AUTOMATIC) ref2Pdu)
 {
   Std_ReturnType returnValue = E_NOT_OK;
-
+  P2CONST(CanIsoTP_8ByteData, AUTOMATIC, AUTOMATIC) ptr2FlowControlFrame = (CanIsoTP_8ByteData*)ref2Pdu.SduDataPtr;
   /* handle fc frame only when sending in progress  */
   if ( objectHandle.FlowControl.ProtocolStatus == IsoTP_RxTxStatus::IsoTP_SendInProgress)
   {
@@ -415,9 +406,12 @@ FUNC(Std_ReturnType, TM_ISOTP_CODE) IsoTp::ReceiveFlowControl( P2CONST(CanIsoTP_
   return returnValue;
 }
 
-FUNC(Std_ReturnType, TM_ISOTP_CODE) IsoTp::ReceiveSingleFrame( P2CONST(CanIsoTP_8ByteData ,AUTOMATIC, AUTOMATIC) ptr2SingleFrame )
+FUNC(Std_ReturnType, TM_ISOTP_CODE) IsoTp::ReceiveSingleFrame(
+    CONST(IsoTP_RxPduIdType, AUTOMATIC) rxPduId,
+    REF2CONST(ComStack_PduInfoType, AUTOMATIC) ref2Pdu)
 {
   Std_ReturnType returnValue = E_NOT_OK;
+  P2CONST(CanIsoTP_8ByteData, AUTOMATIC, AUTOMATIC) ptr2SingleFrame = (CanIsoTP_8ByteData*)ref2Pdu.SduDataPtr;
   if ( objectHandle.FlowControl.ProtocolStatus == IsoTP_RxTxStatus::IsoTP_ReceiveInProgress)
   {
     objectHandle.FlowControl.ProtocolResult = IsoTP_ProtocolResultType::RESULT_UNEXP_PDU;
@@ -427,27 +421,65 @@ FUNC(Std_ReturnType, TM_ISOTP_CODE) IsoTp::ReceiveSingleFrame( P2CONST(CanIsoTP_
   {
     objectHandle.FlowControl.ProtocolResult = IsoTP_ProtocolResultType::RESULT_OK;
 
-    if ( objectHandle.p2RxBuffer != NULL_PTR )
+    if ( ( ptr2SingleFrame->as.single_frame.SF_DL > 0) )
     {
-      if ( ( ptr2SingleFrame->as.single_frame.SF_DL > 0) )
+      if ( objectHandle.p2RxBuffer != NULL_PTR )
       {
         objectHandle.p2RxBuffer->DataReceivedSize = ptr2SingleFrame->as.single_frame.SF_DL;
-        (void) memcpy(objectHandle.p2RxBuffer->p2RxData, ptr2SingleFrame->as.single_frame.data, objectHandle.p2RxBuffer->DataReceivedSize );
+        if ( objectHandle.p2RxBuffer->p2RxData != NULL_PTR )
+        {
+          (void) memcpy(objectHandle.p2RxBuffer->p2RxData, ptr2SingleFrame->as.single_frame.data, objectHandle.p2RxBuffer->DataReceivedSize );
+        }
+        else
+        {
+          /* call PduRouter::StartOfReception() */
+          /* we need :
+           * - UDS-PDU (I-PDU) name
+           * - pduInfoType struct with
+           * - TpSduLength -> this is inside the first byte in CAN2.0 and inside the second byte on CAN FD */
+          if ( objectConfig.p2PduReceiver != NULL_PTR )
+          {
+            /* ab hier sollte ref2Pdu.SduDataPtr auf die reinen Nutzdaten zeigen */
+            CONST(ComStack_PduInfoType, AUTOMATIC) TpPdu =
+            {
+                .SduDataPtr = &ref2Pdu.SduDataPtr[1],
+                .SduLength = ref2Pdu.SduLength -1,
+                .ptr2MetaData = ref2Pdu.ptr2MetaData
+            };
+            if ( objectConfig.p2PduReceiver->StartOfReception(Uds_RxPduType::Uds_Rx_PduName1, TpPdu, TpPdu.SduLength, &(objectHandle.p2RxBuffer->RemainingBufferSize)) == BufReq_ReturnType::BUFREQ_OK)
+            {
+#if ( ISOTP_DECODE_LEVEL == DECODE_ON_INTERRUPT )
+              objectConfig.p2PduReceiver->CopyRxData(Uds_RxPduType::Uds_Rx_PduName1, TpPdu, &(objectHandle.p2RxBuffer->RemainingBufferSize));
+#else
+              /* handle data copy in task */
+              returnValue = NON_STD_RET_VALUE(IsoTp_ReturnErrorType::RET_CALL_OF_COPY);
+#endif
+            }
+          }/* ( objectConfig.p2PduReceiver != NULL_PTR ) */
+
+        }
         returnValue = E_OK;
         objectHandle.FlowControl.ProtocolStatus = IsoTP_RxTxStatus::IsoTP_ReceiveFull; // why to full and not Idle ???
-      }
-      else
-      {
-        returnValue = NON_STD_RET_VALUE(IsoTp_ReturnErrorType::RET_E_LENGTH);
-      }
+      } /* ### end of ( objectHandle.p2RxBuffer != NULL_PTR ) ### */
     }
+    else /* ptr2SingleFrame->as.single_frame.SF_DL */
+    {
+#if (ISOTP_SUPPORT_CAN_FD == STD_ON )
+      /* @note this will be happen on CAN FD  */
+#else
+      returnValue = NON_STD_RET_VALUE(IsoTp_ReturnErrorType::RET_E_LENGTH);
+#endif
+    } /* ptr2SingleFrame->as.single_frame.SF_DL */
   }
   return returnValue;
 }
 
-FUNC(Std_ReturnType, TM_ISOTP_CODE) IsoTp::ReceiveFirstFrame( P2CONST(CanIsoTP_8ByteData ,AUTOMATIC, AUTOMATIC) ptr2FirstFrame )
+FUNC(Std_ReturnType, TM_ISOTP_CODE) IsoTp::ReceiveFirstFrame(
+    CONST(IsoTP_RxPduIdType, AUTOMATIC) rxPduId,
+    REF2CONST(ComStack_PduInfoType, AUTOMATIC) ref2Pdu)
 {
   Std_ReturnType returnValue = E_NOT_OK;
+  P2CONST(CanIsoTP_8ByteData ,AUTOMATIC, AUTOMATIC) ptr2FirstFrame = (CanIsoTP_8ByteData*)ref2Pdu.SduDataPtr;
   if ( objectHandle.FlowControl.ProtocolStatus == IsoTP_RxTxStatus::IsoTP_ReceiveInProgress)
   {
     objectHandle.FlowControl.ProtocolResult = IsoTP_ProtocolResultType::RESULT_UNEXP_PDU;
@@ -456,11 +488,11 @@ FUNC(Std_ReturnType, TM_ISOTP_CODE) IsoTp::ReceiveFirstFrame( P2CONST(CanIsoTP_8
   else
   {
     objectHandle.FlowControl.ProtocolResult = IsoTP_ProtocolResultType::RESULT_OK;
+    uint16_t payloadSize = ptr2FirstFrame->as.first_frame.FF_DL_low;
+    payloadSize += ( ptr2FirstFrame->as.first_frame.FF_DL_high<<8 );
 
     if ( objectHandle.p2RxBuffer != NULL_PTR )
     {
-      uint16_t payloadSize = ptr2FirstFrame->as.first_frame.FF_DL_low;
-      payloadSize += ( ptr2FirstFrame->as.first_frame.FF_DL_high<<8 );
       if ( payloadSize > objectHandle.p2RxBuffer->DataBufferSize )
       {
         objectHandle.FlowControl.ProtocolStatus = IsoTP_RxTxStatus::IsoTP_ReceiveIdle;
@@ -478,7 +510,37 @@ FUNC(Std_ReturnType, TM_ISOTP_CODE) IsoTp::ReceiveFirstFrame( P2CONST(CanIsoTP_8
         }
         else
         {
-          (void) memcpy(objectHandle.p2RxBuffer->p2RxData, ptr2FirstFrame->as.first_frame.data, sizeof( ptr2FirstFrame->as.first_frame.data ) );
+          if ( objectHandle.p2RxBuffer->p2RxData != NULL_PTR )
+          {
+            (void) memcpy(objectHandle.p2RxBuffer->p2RxData, ptr2FirstFrame->as.first_frame.data, sizeof( ptr2FirstFrame->as.first_frame.data ) );
+          }
+          else /* ( objectHandle.p2RxBuffer->p2RxData != NULL_PTR ) */
+          {
+            /* call PduRouter::StartOfReception() */
+            /* we need :
+             * - UDS-PDU (I-PDU) name
+             * - pduInfoType struct with
+             * - TpSduLength -> this is inside the first byte in CAN2.0 and inside the second byte on CAN FD */
+            if ( objectConfig.p2PduReceiver != NULL_PTR )
+            {
+              /* ab hier sollte ref2Pdu.SduDataPtr auf die reinen Nutzdaten zeigen */
+              CONST(ComStack_PduInfoType, AUTOMATIC) TpPdu =
+              {
+                  .SduDataPtr = &ref2Pdu.SduDataPtr[2],
+                  .SduLength = ref2Pdu.SduLength -2,
+                  .ptr2MetaData = ref2Pdu.ptr2MetaData
+              };
+              if ( objectConfig.p2PduReceiver->StartOfReception(Uds_RxPduType::Uds_Rx_PduName1, TpPdu, payloadSize, &(objectHandle.p2RxBuffer->RemainingBufferSize)) == BufReq_ReturnType::BUFREQ_OK)
+              {
+#if ( ISOTP_DECODE_LEVEL == DECODE_ON_INTERRUPT )
+                objectConfig.p2PduReceiver->CopyRxData(Uds_RxPduType::Uds_Rx_PduName1, TpPdu, &(objectHandle.p2RxBuffer->RemainingBufferSize));
+#else
+                  /* handle data copy in task */
+                  returnValue = NON_STD_RET_VALUE(IsoTp_ReturnErrorType::RET_CALL_OF_COPY);
+#endif
+              }
+            }
+          } /* ### end of ( objectHandle.p2RxBuffer->p2RxData != NULL_PTR ) ### */
           objectHandle.p2RxBuffer->DataReceivedSize = payloadSize;
           objectHandle.FlowControl.DataOffset = sizeof(ptr2FirstFrame->as.first_frame.data);
           objectHandle.FlowControl.SeqNumber = 1;
@@ -489,16 +551,22 @@ FUNC(Std_ReturnType, TM_ISOTP_CODE) IsoTp::ReceiveFirstFrame( P2CONST(CanIsoTP_8
           returnValue = E_OK;
         }
       }
-
     }
-
+    else /*  ( objectHandle.p2RxBuffer != NULL_PTR ) */
+    {
+    }
   }
   return returnValue;
 }
 
-FUNC(Std_ReturnType, TM_ISOTP_CODE) IsoTp::ReceiveConsecutiveFrame( P2CONST(CanIsoTP_8ByteData ,AUTOMATIC, AUTOMATIC) ptr2ConsFrame, CONST(uint8_t, AUTOMATIC) len )
+FUNC(Std_ReturnType, TM_ISOTP_CODE) IsoTp::ReceiveConsecutiveFrame(
+    CONST(IsoTP_RxPduIdType, AUTOMATIC) rxPduId,
+    REF2CONST(ComStack_PduInfoType, AUTOMATIC) ref2Pdu)
 {
   Std_ReturnType returnValue = E_NOT_OK;
+  P2CONST(CanIsoTP_8ByteData ,AUTOMATIC, AUTOMATIC) ptr2ConsFrame = (CanIsoTP_8ByteData*)ref2Pdu.SduDataPtr;
+  CONST(uint8_t, AUTOMATIC) len = ref2Pdu.SduLength -1;
+
   /* handle consecutive frame only when receiving in progress  */
   if ( objectHandle.FlowControl.ProtocolStatus != IsoTP_RxTxStatus::IsoTP_ReceiveInProgress)
   {
@@ -531,7 +599,32 @@ FUNC(Std_ReturnType, TM_ISOTP_CODE) IsoTp::ReceiveConsecutiveFrame( P2CONST(CanI
       }
       else
       {
-        (void) memcpy(objectHandle.p2RxBuffer->p2RxData + objectHandle.FlowControl.DataOffset, ptr2ConsFrame->as.consecutive_frame.data, remaining_bytes );
+        if ( objectHandle.p2RxBuffer->p2RxData != NULL_PTR )
+        {
+          (void) memcpy(objectHandle.p2RxBuffer->p2RxData + objectHandle.FlowControl.DataOffset, ptr2ConsFrame->as.consecutive_frame.data, remaining_bytes );
+        }
+        else
+        {
+          if ( objectConfig.p2PduReceiver != NULL_PTR )
+          {
+            /* ab hier sollte ref2Pdu.SduDataPtr auf die reinen Nutzdaten zeigen */
+            CONST(ComStack_PduInfoType, AUTOMATIC) TpPdu =
+            {
+                .SduDataPtr = &ref2Pdu.SduDataPtr[1],
+                .SduLength = ref2Pdu.SduLength -1,
+                .ptr2MetaData = ref2Pdu.ptr2MetaData
+            };
+#if ( ISOTP_DECODE_LEVEL == DECODE_ON_INTERRUPT )
+            if (  objectConfig.p2PduReceiver->CopyRxData(Uds_RxPduType::Uds_Rx_PduName1, TpPdu, &(objectHandle.p2RxBuffer->RemainingBufferSize)) != BufReq_ReturnType::BUFREQ_OK)
+            {
+              /* do error handling */
+            }
+#else
+                  /* handle data copy in task */
+                  returnValue = NON_STD_RET_VALUE(IsoTp_ReturnErrorType::RET_CALL_OF_COPY);
+#endif
+          }
+        }
 
         objectHandle.FlowControl.DataOffset += remaining_bytes;
         if ( ++(objectHandle.FlowControl.SeqNumber) > 0x0F )
@@ -556,11 +649,8 @@ FUNC(Std_ReturnType, TM_ISOTP_CODE) IsoTp::ReceiveConsecutiveFrame( P2CONST(CanI
         }
         returnValue = E_OK;
       }
-    }
-
+    } /* ( objectHandle.p2RxBuffer != NULL_PTR ) */
   }
-
-
   return returnValue;
 }
 
@@ -577,57 +667,67 @@ FUNC(Std_ReturnType, TM_ISOTP_CODE) IsoTp::Task( void )
   }
   else
   {
-    if ( objectHandle.FlowControl.ProtocolStatus == IsoTP_RxTxStatus::IsoTP_SendInProgress )
+    switch (objectHandle.FlowControl.ProtocolStatus)
     {
-      /* send data if bs_remain is invalid or bs_remain large than zero */
-      if ( ( ISOTP_INVALID_BS == objectHandle.FlowControl.RemainingBlockSize || objectHandle.FlowControl.RemainingBlockSize > 0) )
+      case(IsoTP_RxTxStatus::IsoTP_SendInProgress):
       {
-        /* and if st_min is zero or go beyond interval time */
-        if ( objectHandle.FlowControl.MinSeparationTime == 0 ||
-            ( (objectHandle.FlowControl.MinSeparationTime != 0) && (IsoTpTimeAfter(GetMillisecond(), objectHandle.FlowControl.stTimer) ) )
-            )
+        /* send data if bs_remain is invalid or bs_remain large than zero */
+        if ( ( ISOTP_INVALID_BS == objectHandle.FlowControl.RemainingBlockSize || objectHandle.FlowControl.RemainingBlockSize > 0) )
         {
-          if ( SendConsecutiveFrame() == E_OK )
+          /* and if st_min is zero or go beyond interval time */
+          if ( objectHandle.FlowControl.MinSeparationTime == 0 ||
+              ( (objectHandle.FlowControl.MinSeparationTime != 0) && (IsoTpTimeAfter(GetMillisecond(), objectHandle.FlowControl.stTimer) ) )
+              )
           {
-            if (  ISOTP_INVALID_BS != objectHandle.FlowControl.RemainingBlockSize )
+            if ( SendConsecutiveFrame() == E_OK )
             {
-              objectHandle.FlowControl.RemainingBlockSize -= 1;
+              if (  ISOTP_INVALID_BS != objectHandle.FlowControl.RemainingBlockSize )
+              {
+                objectHandle.FlowControl.RemainingBlockSize -= 1;
+              }
+              objectHandle.FlowControl.bsTimer = GetMillisecond() + objectConfig.ptr2Config->maxResponseTimeout;
+              objectHandle.FlowControl.stTimer = GetMillisecond() + objectHandle.FlowControl.MinSeparationTime;
+              /* check if send finish */
+              if ( objectHandle.p2TxBuffer->DataBufferSize <= objectHandle.FlowControl.DataOffset )
+              {
+                objectHandle.FlowControl.ProtocolStatus = IsoTP_RxTxStatus::IsoTP_SendIdle;
+                objectHandle.FlowControl.ProtocolResult = IsoTP_ProtocolResultType::RESULT_OK;
+              }
             }
-            objectHandle.FlowControl.bsTimer = GetMillisecond() + objectConfig.ptr2Config->maxResponseTimeout;
-            objectHandle.FlowControl.stTimer = GetMillisecond() + objectHandle.FlowControl.MinSeparationTime;
-            /* check if send finish */
-            if ( objectHandle.p2TxBuffer->DataBufferSize <= objectHandle.FlowControl.DataOffset )
+            else
             {
-              objectHandle.FlowControl.ProtocolStatus = IsoTP_RxTxStatus::IsoTP_SendIdle;
-              objectHandle.FlowControl.ProtocolResult = IsoTP_ProtocolResultType::RESULT_OK;
+              objectHandle.FlowControl.ProtocolStatus = IsoTP_RxTxStatus::IsoTP_SendError;
             }
-          }
-          else
-          {
-            objectHandle.FlowControl.ProtocolStatus = IsoTP_RxTxStatus::IsoTP_SendError;
-          }
-        } // end of test the separation time
-      } // end of test the block size
+          } // end of test the separation time
+        } // end of test the block size
 
-      /* check timeout */
-      if (IsoTpTimeAfter(GetMillisecond(), objectHandle.FlowControl.bsTimer))
-      {
-        objectHandle.FlowControl.ProtocolStatus = IsoTP_RxTxStatus::IsoTP_SendError;
-        objectHandle.FlowControl.ProtocolResult = IsoTP_ProtocolResultType::RESULT_TIMEOUT_BS;
+        /* check timeout */
+        if (IsoTpTimeAfter(GetMillisecond(), objectHandle.FlowControl.bsTimer))
+        {
+          objectHandle.FlowControl.ProtocolStatus = IsoTP_RxTxStatus::IsoTP_SendError;
+          objectHandle.FlowControl.ProtocolResult = IsoTP_ProtocolResultType::RESULT_TIMEOUT_BS;
+        }
+        break;
       }
-    }
-
-    if ( objectHandle.FlowControl.ProtocolStatus == IsoTP_RxTxStatus::IsoTP_ReceiveInProgress )
-    {
-      /* check timeout */
-      if (IsoTpTimeAfter(GetMillisecond(), objectHandle.FlowControl.bsTimer))
+      case (IsoTP_RxTxStatus::IsoTP_SendError):
       {
-        objectHandle.FlowControl.ProtocolStatus = IsoTP_RxTxStatus::IsoTP_ReceiveIdle;
-        objectHandle.FlowControl.ProtocolResult = IsoTP_ProtocolResultType::RESULT_TIMEOUT_CR;
+        break;
       }
+      case (IsoTP_RxTxStatus::IsoTP_ReceiveInProgress):
+      {
+        /* check timeout */
+        if (IsoTpTimeAfter(GetMillisecond(), objectHandle.FlowControl.bsTimer))
+        {
+          objectHandle.FlowControl.ProtocolStatus = IsoTP_RxTxStatus::IsoTP_ReceiveIdle;
+          objectHandle.FlowControl.ProtocolResult = IsoTP_ProtocolResultType::RESULT_TIMEOUT_CR;
+        }
+        break;
+      }
+      default:
+      {
 
-    }
-
+      }
+    } /* ### end of switch (objectHandle.FlowControl.ProtocolStatus) ### */
 
   returnValue = E_OK;
   }
@@ -637,7 +737,7 @@ return returnValue;
 /* this function does the decoding on interrupt level */
 FUNC(Std_ReturnType, TM_ISOTP_CODE) IsoTp::RxIndication(
     CONST(ComStack_PduType, AUTOMATIC) rxPduId,
-    P2VAR(ComStack_CanMessageType, AUTOMATIC, AUTOMATIC) ptr2Sdu)
+    REF2CONST(ComStack_PduInfoType, AUTOMATIC) ref2Pdu)
 {
   Std_ReturnType returnValue = E_NOT_OK;
 
@@ -649,27 +749,25 @@ FUNC(Std_ReturnType, TM_ISOTP_CODE) IsoTp::RxIndication(
   }
   else
   {
-    if ( ( ptr2Sdu != NULL_PTR ) &&
-         (rxPduId < IsoTP_Rx_unknownPdu ) )
+    if (rxPduId < (ComStack_PduType)IsoTP_RxPduIdType::IsoTP_Rx_unknownPdu )
     {
-      if ( ( ptr2Sdu->CanMsgHeader.DLC <2 ) ||
-           ( ptr2Sdu->CanMsgHeader.DLC >8 ) )
+      if ( ( ref2Pdu.SduLength <2 ) ||
+           ( ref2Pdu.SduLength >8 ) )
       {
         //returnValue = NON_STD_RET_VALUE(IsoTp_ReturnErrorType::RET_E_LENGTH);
         returnValue = E_NOT_OK;
       }
       else
       {
-#if ( ISOTP_DECODE_LEVEL == DECODE_ON_INTERRUPT )
-        CanIsoTP_8ByteData * msg = (CanIsoTP_8ByteData *)ptr2Sdu->ptr2Data;
+        CanIsoTP_8ByteData * msg = (CanIsoTP_8ByteData *)ref2Pdu.SduDataPtr;
         switch (msg->as.common.type)
         {
 /* ####### Flow Control Frame ##### */
           case (IsoTP_FrameType::IsoTP_FlowControl):
           {
-            if ( ptr2Sdu->CanMsgHeader.DLC >= 3 )
+            if ( ref2Pdu.SduLength >= 3 ) /* move this inside the function */
             {
-              returnValue = ReceiveFlowControl((CanIsoTP_8ByteData*)ptr2Sdu->ptr2Data);
+              returnValue = ReceiveFlowControl((IsoTP_RxPduIdType)rxPduId, ref2Pdu);
               // may be do error handling on development
 #if ( ISOTP_DEV_ERROR_DETECT == STD_ON )
               if ( returnValue != E_OK ) ISOTP_DET_REPORTERROR(ISOTP_E_INVALID_FRAME, TM_ISOTP_RXINDICATION_ID);
@@ -691,7 +789,7 @@ FUNC(Std_ReturnType, TM_ISOTP_CODE) IsoTp::RxIndication(
 /* ####### Single Frame ##### */
           case (IsoTP_FrameType::IsoTP_SingleFrame):
           {
-            returnValue = ReceiveSingleFrame((CanIsoTP_8ByteData*)ptr2Sdu->ptr2Data);
+            returnValue = ReceiveSingleFrame((IsoTP_RxPduIdType)rxPduId, ref2Pdu);
             if ( returnValue == E_OK )
             {
               objectHandle.FlowControl.ProtocolStatus = IsoTP_RxTxStatus::IsoTP_ReceiveFull;
@@ -701,7 +799,7 @@ FUNC(Std_ReturnType, TM_ISOTP_CODE) IsoTp::RxIndication(
 /* ####### First Segment Frame ##### */
           case (IsoTP_FrameType::IsoTP_FirstFrame):
           {
-            returnValue = ReceiveFirstFrame((CanIsoTP_8ByteData*)ptr2Sdu->ptr2Data);
+            returnValue = ReceiveFirstFrame((IsoTP_RxPduIdType)rxPduId, ref2Pdu);
             if ( returnValue == E_OK )
             {
               /** @warning this should removed from CAN Rx Interrupt !!!!
@@ -720,7 +818,7 @@ FUNC(Std_ReturnType, TM_ISOTP_CODE) IsoTp::RxIndication(
 /* ####### Consecutive Segment Frame ##### */
           case (IsoTP_FrameType::IsoTP_ConsecutiveFrame):
           {
-            returnValue = ReceiveConsecutiveFrame((CanIsoTP_8ByteData*)ptr2Sdu->ptr2Data, ptr2Sdu->CanMsgHeader.DLC - 1);
+            returnValue = ReceiveConsecutiveFrame((IsoTP_RxPduIdType)rxPduId, ref2Pdu);
             if ( returnValue == NON_STD_RET_VALUE(IsoTp_ReturnErrorType::RET_LAST_OK) )
             {
               /** @warning this should removed from CAN Rx Interrupt !!!!
@@ -743,14 +841,11 @@ FUNC(Std_ReturnType, TM_ISOTP_CODE) IsoTp::RxIndication(
 #endif // ( ISOTP_DEV_ERROR_DETECT == STD_ON )
             break; // nothing to do
 
-        }
-/* ####### End Of Switch Frame Type ##### */
-      }
-#else
+        } /* ####### End Of Switch Frame Type ##### */
+      } /* #### End of length checking #### */
+    } /* #### end of unknown PDU naming check #### */
+  } /* #### end of state checking ### */
 
-#endif // ( ISOTP_DECODE_LEVEL == DECODE_ON_INTERRUPT )
-    }
-  }
   return returnValue;
 }
 

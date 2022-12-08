@@ -24,10 +24,13 @@
   */
 [/#list] [#-- end of SWIPdatas as SWIP --] 
   
-  [#assign s = name]
-  [#assign to = s?keep_after_last("/")]
-  [#assign dashedFileNamed = to?replace(".","_")]
-  [#assign UserCodeCounter = 0]
+[#assign s = fileName]
+[#if s?contains("/")]
+  [#assign s = s?keep_after_last("/")]
+[/#if]
+[#assign dashReplace = s?replace(".","_")]
+[#assign dashedFileNamed = dashReplace?replace("-","_")]
+[#assign UserCodeCounter = 0]
   
 [#-- SWIPdatas is a list of SWIPconfigModel --]  
 [#list SWIPdatas as SWIP]
@@ -133,6 +136,9 @@ extern ${variable.value} ${variable.name};
           [#assign bxCAN1_TxFifoPrio = "DISABLE"]
         [/#if]
         [#break]
+      [#case "CAN1_USED_RX_HW_FILTER"]
+          [#assign bxCAN1_hwFilterCount = definition.value?number]
+        [#break]
         
 [#-- bxCAN slave defines --]
       [#case "CAN2_STARTUP_MODE"]
@@ -184,6 +190,9 @@ extern ${variable.value} ${variable.name};
         [#else]
           [#assign bxCAN2_TxFifoPrio = "DISABLE"]
         [/#if]
+        [#break]
+      [#case "CAN2_USED_RX_HW_FILTER"]
+          [#assign bxCAN2_hwFilterCount = definition.value?number]
         [#break]
         
 [#-- Values for bit time calculation --]
@@ -237,7 +246,7 @@ extern ${variable.value} ${variable.name};
     [/#switch]
     
 	[/#list]
-  
+
 /** @brief the list of configured CAN controllers
  * 
  *  @details this vector is used to load the configuration for all listed CAN controller 

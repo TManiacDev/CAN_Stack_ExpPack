@@ -34,6 +34,11 @@ CanDrv_bxCAN myCanDrv_bxCan;
 
 #define LINK_TO_CANDRV &myCanDrv_bxCan
 
+/** names of the CAN controller configurations
+ *
+ * @todo das sollte auch extern sein: extern const ECU_CanController controllerList[];*/
+EXTERN_CONST( std::vector<ECU_CanController>, AUTOMATIC) controllerList;
+
 /** the enum switching operator is used only inside the CanIf */
 SYS_FUNC( TM_CANIF_CODE ) CanIfStates& operator++(CanIfStates& state)
 {
@@ -90,9 +95,14 @@ FUNC(Std_ReturnType, TM_CANIF_CODE) CanIf::Init(void)
     {
       CANIF_DET_REPORTERROR(CanIf_DevError::E_INIT_FAILED, CANIF_INIT_ID);
     }
-    if ( ptr2CanDriver->SetControllerMode(CanMasterController, CanControllerStates::CS_Started) != E_OK )
+
+    for (auto& startController : controllerList )
     {
-      CANIF_DET_REPORTERROR(CanIf_DevError::E_SETUP_FAILED, CANIF_INIT_ID);
+      if ( ptr2CanDriver->SetControllerMode(startController, CanControllerStates::CS_Started) != E_OK )
+      {
+        CANIF_DET_REPORTERROR(CanIf_DevError::E_SETUP_FAILED, CANIF_INIT_ID);
+      }
+
     }
     ++state;
     returnValue = E_OK;
@@ -114,7 +124,7 @@ FUNC(Std_ReturnType, TM_CANIF_CODE) CanIf::Init(void)
     returnValue = E_NOT_OK;
     // init the Tx-Path
 /*  @warning the struct hasn't the same order like CanIf_TxPduIdType */
-    for (ComStack_PduType InitPdu = 0; InitPdu < CanIf_Tx_unknownPdu; InitPdu++ )
+    for (ComStack_PduType InitPdu = 0; InitPdu < CANIF_TXPDU_COUNT; InitPdu++ )
     {
       if ( MyTest_TxPduConfig[InitPdu].CanId.IDE == CANIF_EXTID )
       {
@@ -132,7 +142,7 @@ FUNC(Std_ReturnType, TM_CANIF_CODE) CanIf::Init(void)
 
     // init rx path
     /*  @warning the struct hasn't the same order like CanIf_TxPduIdType */
-    for (ComStack_PduType InitPdu = 0; InitPdu < CanIf_Rx_unknownPdu; InitPdu++ )
+    for (ComStack_PduType InitPdu = 0; InitPdu < CANIF_RXPDU_COUNT; InitPdu++ )
     {
       if ( MyTest_RxPduConfig[InitPdu].IdMask.Id29bit > 0x0 )
       {
@@ -214,15 +224,15 @@ FUNC(Std_ReturnType, TM_CANIF_CODE) CanIf::Transmit(
   Std_ReturnType returnValue = E_NOT_OK;
   uint8_t* ptr2Data = ptr2PduInfo->SduDataPtr;
 
-  if ( txPduId < CanIf_Tx_unknownPdu )
+  if ( txPduId < CanIf_TxPduIdType::CanIf_Tx_unknownPdu )
   {
     if (state == CanIfStates::Ready )
     {
       ComStack_CanMessageType CanMsg;
-      CanMsg.CanMsgHeader.CanId = MyTest_TxPduConfig[txPduId].CanId;
+      CanMsg.CanMsgHeader.CanId = MyTest_TxPduConfig[(ComStack_PduType)txPduId].CanId;
       CanMsg.CanMsgHeader.DLC = ptr2PduInfo->SduLength;
       CanMsg.ptr2Data = ptr2Data;
-      returnValue = ptr2CanDriver->Write(CanMasterController, &CanMsg);
+      returnValue = ptr2CanDriver->Write(MyTest_TxPduConfig[(ComStack_PduType)txPduId].InstanceName, &CanMsg);
     }
   }
   return returnValue;
@@ -231,10 +241,10 @@ FUNC(Std_ReturnType, TM_CANIF_CODE) CanIf::Transmit(
 /* The service CanIf_RxIndication() is implemented in CanIf and called by CanDrv after a CAN L-PDU has been received. */
 FUNC(void, TM_CANIF_CODE) CanIf::RxIndication(
     CONST( ECU_CanController, AUTOMATIC) Controller,
-    REF2CONST( ComStack_CanMsgHeader, AUTOMATIC) CanMsgHeader,
     REF2CONST( ComStack_PduInfoType, AUTOMATIC) PduInfo )
 {
-  uint32_t filterIndex = CanMsgHeader.FilterMatchIndex;
+  P2CONST( ComStack_CanMsgHeader, AUTOMATIC, AUTOMATIC) CanMsgHeader = (ComStack_CanMsgHeader*)PduInfo.ptr2MetaData;
+  uint32_t filterIndex = CanMsgHeader->FilterMatchIndex;
   /* On L-PDU reception, the Can module shall call the RX indication callback function CanIf_RxIndication
    * with ID, Hoh,
    * abstract CanIf ControllerId in parameter Mailbox,
@@ -244,7 +254,7 @@ FUNC(void, TM_CANIF_CODE) CanIf::RxIndication(
 
   if ( ( p2UpperLayerList[filterIndex] != nullptr ) )
   {
-    p2UpperLayerList[filterIndex]->RxIndication(MyTest_RxPduConfig[filterIndex].N_PDU_Name, CanMsgHeader, PduInfo);
+    p2UpperLayerList[filterIndex]->RxIndication(MyTest_RxPduConfig[filterIndex].N_PDU_Name, PduInfo);
   }
 }
 
@@ -291,11 +301,11 @@ FUNC(ComStack_PduType, TM_CANIF_CODE) CanIf::GetIfRxPduName(
     CONST(ComStack_PduType, AUTOMATIC) rxPduId )
 {
   ComStack_PduType ifRxPduId = ComStack_InvalidPdu;
-  for (ComStack_PduType InitPdu = 0; InitPdu < CanIf_Rx_unknownPdu; InitPdu++ )
+  for (ComStack_PduType InitPdu = 0; InitPdu < CANIF_RXPDU_COUNT; InitPdu++ )
   {
     if ( (MyTest_RxPduConfig[InitPdu].N_PDU_Name == rxPduId ) && (MyTest_RxPduConfig[InitPdu].ULName == upperLayerName ) )
     {
-      ifRxPduId = MyTest_RxPduConfig[InitPdu].L_PDU_Name;
+      ifRxPduId = (ComStack_PduType)MyTest_RxPduConfig[InitPdu].L_PDU_Name;
     }
   }
   return ifRxPduId;
@@ -307,11 +317,11 @@ FUNC(ComStack_PduType, TM_CANIF_CODE) CanIf::GetIfTxPduName(
     CONST(ComStack_PduType, AUTOMATIC) txPduId )
 {
   ComStack_PduType ifTxPduId = ComStack_InvalidPdu;
-  for (ComStack_PduType InitPdu = 0; InitPdu < CanIf_Tx_unknownPdu; InitPdu++ )
+  for (ComStack_PduType InitPdu = 0; InitPdu < CANIF_TXPDU_COUNT; InitPdu++ )
   {
     if ( (MyTest_TxPduConfig[InitPdu].N_PDU_Name == txPduId ) && (MyTest_TxPduConfig[InitPdu].ULName == upperLayerName ) )
     {
-      ifTxPduId = MyTest_TxPduConfig[InitPdu].L_PDU_Name;
+      ifTxPduId = (ComStack_PduType)MyTest_TxPduConfig[InitPdu].L_PDU_Name;
     }
   }
   return ifTxPduId;

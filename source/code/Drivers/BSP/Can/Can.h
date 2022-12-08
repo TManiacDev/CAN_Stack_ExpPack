@@ -252,7 +252,7 @@ extern P2VAR(ComIf, TM_CAN_VAR, AUTOMATIC) ptr2ComIf;
  *
  * It will be managed like the AUTOSAR CAN-module  */
 class Can
-    : TME_VersionInfo
+    : public TME_VersionInfo
 {
 public:
   /** @brief Standard Constructor */
@@ -300,7 +300,7 @@ public:
   virtual Std_ReturnType SetControllerMode (
       ECU_CanController Controller,
       CanControllerStates Transition ) = 0;
-  /** @brief service ID of SetControllerMode*/
+  /** @brief service ID of Can::SetControllerMode() */
   #define CAN_SET_CONTROLLER_MODE_ID 0x03
 
   /** @brief The API to disable all interrupts of a controller
@@ -351,7 +351,7 @@ public:
 
   /** @brief The API to write a message to tx FIFO
    *  @param[in] Controller   select the controller for tx
-   *  @param[in] PduInfo      the CAN message to send */
+   *  @param[in] ptr2PduInfo      the CAN message to send */
   virtual Std_ReturnType Write(
       ECU_CanController Controller,
       P2CONST(ComStack_CanMessageType, AUTOMATIC,AUTOMATIC) ptr2PduInfo )
