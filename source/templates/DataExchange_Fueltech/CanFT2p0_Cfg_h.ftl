@@ -25,6 +25,7 @@
   */
 [/#list] [#-- end of SWIPdatas as SWIP --]
 
+[#assign Name_Prefix = "FT2p0"]
 [#assign s = fileName]
 [#if s?contains("/")]
   [#assign s = s?keep_after_last("/")]
@@ -97,7 +98,7 @@ typedef struct
   /** Die Anzahl zu reservierender DatenPackete */ 
   VAR(uint32_t, AUTOMATIC) DataCount; 
   /// @todo ich brauch ein passendes define für die maximale Anzahl
-  VAR(ComStack_PduType, AUTOMATIC) Pdu[CANFT_RXPDU_COUNT];
+  VAR(ComStack_PduType, AUTOMATIC) Pdu[${Name_Prefix?upper_case}_RXPDU_COUNT];
 }CanFT2p0_ChannelConfigType;
 
 /** @brief Configuration of the Fueltech communication object

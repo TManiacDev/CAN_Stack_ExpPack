@@ -36,7 +36,6 @@ Entkoppeln des CanIf
 + aktuell ist feste Zuordnung auf bxCAN Master mit CanID 0x7EF
 + Anwendung mit UDS und OBD
 + langfristig sollte **DataExchange Common** einen anderen Namen bekommen (vielleicht **DataExchange OBD**?)
-+ Das Template muss die VersionsInfo mit erzeugen
 
 ### minimum FlowControl 
 Antwort auf 0x7DF:

@@ -24,6 +24,8 @@ So be careful when you touching templates for code generation.
 * The "Sandbox" project is the project to develop the source code of the pack.  
 * the first project "CanIf_AppDemo shows how to integrate the ExpansionPack and how do basically configurations.
 
+If you want to use this ExpansionPack you can find this [German Tutorial](https://tmaniacdev.github.io/CAN_Stack_ExpPack/d3/d37/de_page__t01__can_if__app_demo.html) or hte same as [English Tutorial](https://tmaniacdev.github.io/CAN_Stack_ExpPack/d0/d29/eng_page__t01__can_if__app_demo.html).
+
 ## Source code documentation
 There will be also the doxygen generated [source code documentation](https://tmaniacdev.github.io/CAN_Stack_ExpPack/). This docu don't comes from the pack it self. You can build this docu inside a project using the ExpansionPack.  
 Besides the normal source code documentation it includes a detailed description in german language for usage and internal behavior. If somebody can add a multi language support to doxygen it would be nice.

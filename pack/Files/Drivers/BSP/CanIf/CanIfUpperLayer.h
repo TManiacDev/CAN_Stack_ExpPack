@@ -43,7 +43,9 @@ typedef enum
   /** @brief Extended Calibration Protocol */
   CanIfUL_XCP,
   /** @brief Fueltech FT2.0 protocol */
-  CanIfUL_FT2p0
+  CanIfUL_FT2p0,
+  /** @brief the international name of the ISO based TP */
+  CanIfUL_IsoTP
 }CanIf_UpperLayerType;
 
 /**

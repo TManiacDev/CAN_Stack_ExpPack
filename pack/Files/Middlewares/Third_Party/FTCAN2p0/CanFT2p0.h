@@ -342,7 +342,7 @@ typedef struct
  */
 typedef struct
 {
-  VAR(CanFT_TxPduIdType, AUTOMATIC) txPdu;
+  VAR(FT2p0_TxPduIdType, AUTOMATIC) txPdu;
   //TMhsQueue *RxQueue; @todo we should use a OS-Queue
   //TMhsEvent *Event;   @todo check of use the OS-Event
   uint32_t EventFlags;
@@ -364,7 +364,7 @@ typedef struct
  */
 typedef struct
 {
-  VAR(CanFT_RxPduIdType, AUTOMATIC) rxPdu;
+  VAR(FT2p0_RxPduIdType, AUTOMATIC) rxPdu;
   //TMhsQueue *RxQueue; @todo we should use a OS-Queue
   //TMhsEvent *Event;   @todo check of use the OS-Event
   uint32_t EventFlags;
@@ -464,8 +464,8 @@ private:
 
   VAR(CanFT2p0_HandlingType, AUTOMATIC) Handle;
   VAR(CanFT2p0_ObjectHdlType, AUTOMATIC) ObjectHandle[CANFT_OBJECT_COUNT];
-  VAR(CanFT2p0_RxPduType, AUTOMATIC) RxPduInfo[CANFT_RXPDU_COUNT];
-  VAR(CanFT2p0_TxPduType, AUTOMATIC) TxPduInfo[CANFT_TXPDU_COUNT];
+  VAR(CanFT2p0_RxPduType, AUTOMATIC) RxPduInfo[FT2P0_RXPDU_COUNT];
+  VAR(CanFT2p0_TxPduType, AUTOMATIC) TxPduInfo[FT2P0_TXPDU_COUNT];
 
   P2VAR(CanIf, AUTOMATIC, AUTOMATIC) p2CanIf  = nullptr;
   CONST(CanIf_RxPduIdType, AUTOMATIC) rxPduName = CanIf_RxPduIdType::CanIf_Rx_unknownPdu;

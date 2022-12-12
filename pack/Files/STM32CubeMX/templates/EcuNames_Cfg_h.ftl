@@ -3,6 +3,10 @@
 [#assign aDate = aDateTime?date]
 [#assign aTime = aDateTime?time]
 [#assign extractDebug_FTL = 0]
+[#-- disableUserCode: a whitespace will enable --]
+[#assign disableUserCode = " " ]
+[#-- #assign disableUserCode = "disable" --]
+[#-- Warning: this will erase all user code !!! --]
 [#assign fileName = ""]
 [#list SWIPdatas as SWIP]  
 [#assign instName = SWIP.ipName]   
@@ -24,6 +28,24 @@
   ******************************************************************************
   */
 [/#list] [#-- end of SWIPdatas as SWIP --] 
+
+[#assign pduMember = {"preFix" : "", "rxList": [], "txList" : [] }]
+[#assign pduMemberList = [] ]
+[#assign protocolMemberList =[]]
+[#assign protocolFiles_List = [ "MXTmpFiles/IsoTP_PduList.tmp",  "MXTmpFiles/CanFT_PduList.tmp" ]]
+[#list protocolFiles_List as protocolTemplate ] 
+  [#attempt]
+    [#-- add Iso TP pdu --]
+    [#import protocolTemplate as TPSnippet ]    
+/* import ${TPSnippet.GetPrefix()} : ${TPSnippet.lastGenerated} */
+    [#assign protocolImport = { "preFix" : TPSnippet.GetPrefix(), 
+                                "rxList": TPSnippet.GetRxList(), 
+                                "txList" : TPSnippet.GetTxList() }]
+    [#assign protocolMemberList += [protocolImport] ]
+  [#recover]
+/* can't find ${protocolTemplate} */
+  [/#attempt]
+[/#list]
 
 [#assign s = fileName]
 [#if s?contains("/")]
@@ -128,146 +150,7 @@ extern ${variable.value} ${variable.name};
       [#-- extract IF PDU list --]
 
       [#break]
-    [#case "ISOTP_PDU_RX_LIST"]
-    
-/** @addtogroup TM_IsoTP_Cfg
- *  @{ */
-      [#-- extract IF PDU list --]
-      [#assign NameList = definition.value]
-      [#assign _NameList_ = NameList?replace(","," ")]
       
-      [#assign IsoTp_RxPduNameList = _NameList_?word_list]
-      [#-- extract IF PDU list --]
-/** @brief to use generic names for the PDUs */
-enum class ${IsoTp_Prefix}_Rx${strPduIdType}
-{
-  [#list IsoTp_RxPduNameList as word] 
-    [#assign PduName = word]
-    [#assign CanIfRxPduNameList += ["MyTest" + "_" + PduName] ]
-  /** @brief symbolic name for ${PduName} */
-  ${IsoTp_Prefix}_Rx_${PduName},
-  [/#list]
-/* USER CODE BEGIN ${IsoTp_Prefix}_User_RxPDUs 0 */
-
-/* USER CODE END ${IsoTp_Prefix}_User_RxPDUs 0 */
-  ${IsoTp_Prefix}_Rx_unknownPdu
-};
-
-/* USER CODE BEGIN ${IsoTp_Prefix}_User_RxPDUs 1 */
-
-/** @brief number of user defined RxPdu-Names 
-    @details This define must be edit if added User_RxPDUs to the enum ${IsoTp_Prefix}_${strPduIdType} */
-#define ${IsoTp_Prefix?upper_case}_RXPDU_USERCOUNT  0
-
-/* USER CODE END ${IsoTp_Prefix}_User_RxPDUs 1 */
-
-/** @brief number of all RxPdu-Names 
- *  @details this will be used to define the used memory to handle the RxPdus */
-#define ${IsoTp_Prefix?upper_case}_RXPDU_COUNT ( ${IsoTp_RxPduNameList?size} + ${IsoTp_Prefix?upper_case}_RXPDU_USERCOUNT )
-
-/** @} */ // end of grouping TM_IsoTP_Cfg
-
-      [#break]
-    [#case "ISOTP_PDU_TX_LIST"]
-    
-/** @addtogroup TM_IsoTP_Cfg
- *  @{ */
-      [#-- extract IF PDU list --]
-      [#assign NameList = definition.value]
-      [#assign _NameList_ = NameList?replace(","," ")]
-      
-      [#assign IsoTp_TxPduNameList = _NameList_?word_list]
-      [#-- extract IF PDU list --]
-/** @brief to use generic names for the PDUs */
-enum class ${IsoTp_Prefix}_Tx${strPduIdType}
-{
-  [#list IsoTp_TxPduNameList as word] 
-    [#assign PduName = word]
-    [#assign CanIfTxPduNameList += ["MyTest" + "_" + PduName] ]
-  /** @brief symbolic name for ${PduName} */
-  ${IsoTp_Prefix}_Tx_${PduName},
-  [/#list]
-/* USER CODE BEGIN ${IsoTp_Prefix}_User_TxPDUs 0 */
-
-/* USER CODE END ${IsoTp_Prefix}_User_TxPDUs 0 */
-  ${IsoTp_Prefix}_Tx_unknownPdu
-};
-
-/* USER CODE BEGIN ${IsoTp_Prefix}_User_TxPDUs 1 */
-
-/** @brief number of user defined RxPdu-Names
-    @details This define must be edit if added User_TxPDUs to the enum ${IsoTp_Prefix}_${strPduIdType} */
-#define ${IsoTp_Prefix?upper_case}_TXPDU_USERCOUNT  0
-
-/* USER CODE END ${IsoTp_Prefix}_User_TxPDUs 1 */
-
-/** @brief number of all TxPdu-Names 
- *  @details this will be used to define the used memory to handle the TxPdus */
-#define ${IsoTp_Prefix?upper_case}_TXPDU_COUNT ( ${IsoTp_TxPduNameList?size} + ${IsoTp_Prefix?upper_case}_TXPDU_USERCOUNT )
-
-/** @} */ // end of grouping TM_IsoTP_Cfg
-
-      [#break]
-      
-[#-- handle the Fueltech FTCAN2.0 configuration --]      
-      [#case "FT_Ecu"]
-          [#if extractDebug_FTL > 0]
-        /* we need 
-        >> ${definition.name} #t#t ${definition.value}  */
-          [/#if] [#-- end of extractDebug_FTL --]
-        [#if definition.value != "unused" ]
-          [#assign FT_EcuType = definition.value]
-        [/#if] [#-- end of check for unsed device --]
-      [#break]
-      [#case "FT_ECU_StreamList"]
-        [#-- this is the first parameter and will be the last read so we use it to generate a trigger for output the collected configuration --]
-        [#assign FTConfigOk = "Ok"]
-          [#if extractDebug_FTL > 0]
-        /* we need 
-        >> ${definition.name} #t#t ${definition.value}  */
-          [/#if] [#-- end of extractDebug_FTL --]
-          [#assign _FT_EcuStreamListC = definition.value?replace(","," ")]  
-          [#assign _FT_EcuStreamList_ = _FT_EcuStreamListC?replace("|"," ")]  
-          [#assign FT_EcuStreamList = _FT_EcuStreamList_?word_list ]
-      [#break]
-      [#case "FT_SwitchPanel"]
-          [#if extractDebug_FTL > 0]
-        /* we need 
-        >> ${definition.name} #t#t ${definition.value} #t#t ${FTPanelUse} */
-          [/#if] [#-- end of extractDebug_FTL --]
-        [#if definition.value != "unused" ]
-          [#assign FT_SwPType = definition.value]
-        [/#if] [#-- end of check for unsed device --]
-      [#break]
-      [#case "FT_Nano"]
-      [#case "FT_Device"]
-          [#if extractDebug_FTL > 0]
-        /* we need 
-        >> ${definition.name} #t#t ${definition.value} */
-          [/#if] [#-- end of extractDebug_FTL --]          
-          [#if definition.value != "unused" ]
-          /* there is a config for FT Device ${definition.value} */
-            [#assign FT_DeviceType = definition.value]
-            [#assign FT_DeviceId = "Why"]
-          [/#if] [#-- end of check for unsed device --]
-      [#break]
-      [#case "FT_SwitchPanel_RW"]
-          [#if extractDebug_FTL > 0]
-        /* we need 
-        >> ${definition.name} #t#t ${definition.value}  */
-          [/#if] [#-- end of extractDebug_FTL --]
-        [#assign FTPanelUse = definition.value]
-      [#break]
-      [#case "FT_Nano_RW"]
-      [#case "FT_Device_RW"]
-          [#if extractDebug_FTL > 0]
-        /* we need 
-        >> ${definition.name} #t#t ${definition.value}  */
-          [/#if] [#-- end of extractDebug_FTL --]
-        [#assign FTDeviceUse = definition.value]
-      [#break]
-[#-- end of handle the Fueltech FTCAN2.0 configuration --]  
-
   [#default]
   [#if definition.comments??]
 /** ----------  ${definition.comments} -----------*/
@@ -281,188 +164,206 @@ enum class ${IsoTp_Prefix}_Tx${strPduIdType}
 [/#if] [#-- end of  SWIP.defines?? --]
 [/#list] [#-- end of  SWIPdatas as SWIP --]
 
-[#-- add fueltech pdu --]
-[#if FT_DeviceType?? && FTDeviceUse??]
-  [#if FTDeviceUse == "UseDevice"]
-    [#if extractDebug_FTL > 0]
-  /* we add it to CanFT_RxPduType*/
-    [/#if] [#-- end of extractDebug_FTL --]
-    [#assign FT_RxList += [FT_DeviceType] ]
-    [#-- assign FT_TxList += [FT_DeviceType+"_Responce"] --]
-  [#else]
-    [#if extractDebug_FTL > 0]
-    /* we add it to CanFT_TxPduType*/
-    [/#if] [#-- end of extractDebug_FTL --]
-    [#assign FT_TxList += [FT_DeviceType] ]
-    [#assign FT_RxList += [FT_DeviceType+"_Responce"] ]
-  [/#if]
-[/#if] [#-- end of FT_DeviceType?? && FT_Device_Use?? --]
+[#-- ########################## --]
+[#-- end of extract definitions --]
+[#-- ########################## --]
 
-[#if FT_SwPType?? && FTPanelUse??]
-  [#if FTPanelUse == "UseDevice" ]
-    [#if extractDebug_FTL > 0]
-      /* we add it to CanFT_RxPduType*/
-    [/#if] [#-- end of extractDebug_FTL --]
-    [#assign FT_RxList += [ "SwitchPanel_" + FT_SwPType ] ]
-    [#assign FT_TxList += [ "SwitchPanel_" + FT_SwPType + "_Ctrl" ] ]
-  [#else]
-    [#if extractDebug_FTL > 0]
-    /* we add it to CanFT_TxPduType*/
-    [/#if] [#-- end of extractDebug_FTL --]
-    [#assign FT_TxList += [ "SwitchPanel_" + FT_SwPType ] ]
-    [#assign FT_RxList += [ "SwitchPanel_" + FT_SwPType + "_Ctrl" ] ]
-  [/#if] [#-- end of check for unsed device --]
-[/#if] [#-- end of FT_SwPType?? --]
-[#-- end of add fueltech pdu --]
-
-[#if FTConfigOk = "Ok"]
-[#-- we generate the code for the FTCAN outside because of multiple dependencies --] 
-[#if extractDebug_FTL > 0]
-/* we have a valid FT configuration */
-[/#if] [#-- end of extractDebug_FTL --]
-
-  [#if FT_EcuType?? && FT_EcuStreamList??] [#-- -we have an ecu config to add --]
-  [#if extractDebug_FTL > 0]
-  /* we have a FT Ecu configuration */
-  [/#if] [#-- end of extractDebug_FTL --]
-  
-    [#list FT_EcuStreamList as FT_EcuStreamName]
-      [#assign FT_RxList += [FT_EcuType + "_" + FT_EcuStreamName?keep_after_last("x") ] ]
-    [/#list] [#-- end of FT_EcuStreamList as FT_EcuStreamName --]
-  [/#if] [#-- end of adding FT Ecu config --]
-
-/** @addtogroup CanFT_Cfg
- *  @{ */
+[#list protocolMemberList as myMember ]
+[#assign myRxList = myMember.rxList ]
+[#assign rxItemCounter = 0]
+#t
+[#compress]
+/** @addtogroup TM_${myMember.preFix}_Cfg 
+#t#t@{ */
 /** @brief to use generic names for the PDUs */
-typedef enum
+enum class ${myMember.preFix}_Rx${strPduIdType}
 {
-  [#list FT_RxList as FT_RxPdu]
-  [#assign CanIfRxPduNameList += [FT_RxPdu] ]
-  /** @brief symbolic name for ${FT_RxPdu} */
-  ${FTCAN2p0_Prefix}_Rx_${FT_RxPdu},
+  [#list myRxList as rxItem ]
+  [#assign rxItemCounter += 1]
+[#attempt]
+#t/** @brief symbolic name for ${rxItem.name} */
+#t${myMember.preFix}_Rx_${rxItem.name},
+[#recover]
+/* ##################################### */
+/** there is an unsupported member config */
+#t#t#t${myMember.preFix}_Rx_Dummy_${rxItemCounter},
+/* ##################################### */
+[/#attempt]
   [/#list]
-/* USER CODE BEGIN ${FTCAN2p0_Prefix}_User_RxPDUs 0 */
-
-/* USER CODE END ${FTCAN2p0_Prefix}_User_RxPDUs 0 */
-  [#assign UserCodeCounter++]
-  ${FTCAN2p0_Prefix}_Rx_unknownPdu
-}${FTCAN2p0_Prefix}_Rx${strPduIdType};
-
-/* USER CODE BEGIN ${FTCAN2p0_Prefix}_User_RxPDUs 1 */
-
+/* USER${disableUserCode}CODE BEGIN ${myMember.preFix}_User_RxPDUs 0 */
+#t
+/* USER${disableUserCode}CODE END ${myMember.preFix}_User_RxPDUs 0 */
+    
+#t/** @brief symbolic name for unknownPdu */
+#t${myMember.preFix}_Rx_unknownPdu
+};
+#t
+/* USER${disableUserCode}CODE BEGIN ${myMember.preFix}_User_RxPDUs 1 */
+#t
 /** @brief number of user defined RxPdu-Names 
-    @details This define must be edit if added User_RxPDUs to the enum ${FTCAN2p0_Prefix}_RxPduIdType */
-#define ${FTCAN2p0_Prefix?upper_case}_RXPDU_USERCOUNT  0
-
-/* USER CODE END ${FTCAN2p0_Prefix}_User_RxPDUs 1 */
-
+#t#t@details This define must be edit if added User_RxPDUs to the enum ${myMember.preFix}_${strPduIdType} */
+#define ${myMember.preFix?upper_case}_RXPDU_USERCOUNT  0
+#t
+/* USER${disableUserCode}CODE END ${myMember.preFix}_User_RxPDUs 1 */
+#t
 /** @brief number of all RxPdu-Names 
- *  @details this will be used to define the used memory to handle the RxPdus */
-#define ${FTCAN2p0_Prefix?upper_case}_RXPDU_COUNT ( ${FT_RxList?size} + ${FTCAN2p0_Prefix?upper_case}_RXPDU_USERCOUNT )
-
-/** @} */ // end of grouping CanFT_Cfg
-
-/** @addtogroup CanFT_Cfg
- *  @{ */
+#t#t@details this will be used to define the used memory to handle the RxPdus */
+#define ${myMember.preFix?upper_case}_RXPDU_COUNT ( ${myRxList?size } + ${myMember.preFix?upper_case}_RXPDU_USERCOUNT )
+#t
+/** @} */ // end of grouping TM_${myMember.preFix}_Cfg
+#t
+[/#compress]
+#t
+[#assign myTxList = myMember.txList ]
+[#assign txItemCounter = 0]
+[#compress]
+/** @addtogroup TM_${myMember.preFix}_Cfg 
+#t#t@{ */
 /** @brief to use generic names for the PDUs */
-typedef enum
+enum class ${myMember.preFix}_Tx${strPduIdType}
 {
-  [#list FT_TxList as FT_TxPdu]
-  [#assign CanIfTxPduNameList += [FT_TxPdu] ]
-  /** @brief symbolic name for ${FT_TxPdu} */
-  ${FTCAN2p0_Prefix}_Tx_${FT_TxPdu},
+  [#list myTxList as txItem]
+  [#assign txItemCounter += 1]
+[#attempt]
+#t/** @brief symbolic name for ${txItem.name} */
+#t${myMember.preFix}_Tx_${txItem.name},
+[#recover]
+/* ##################################### */
+/** there is an unsupported member config */
+#t#t#t${myMember.preFix}_Tx_Dummy_${txItemCounter},
+/* ##################################### */
+[/#attempt]
   [/#list]
-/* USER CODE BEGIN ${FTCAN2p0_Prefix}_User_TxPDUs 0 */
-
-/* USER CODE END ${FTCAN2p0_Prefix}_User_TxPDUs 0 */
-  [#assign UserCodeCounter++]
-  ${FTCAN2p0_Prefix}_Tx_unknownPdu
-}${FTCAN2p0_Prefix}_Tx${strPduIdType};
-
-/* USER CODE BEGIN ${FTCAN2p0_Prefix}_User_TxPDUs 1 */
-
-/** @brief number of user defined TxPdu-Names 
-    @details This define must be edit if added User_RxPDUs to the enum ${FTCAN2p0_Prefix}_TxPduIdType */
-#define ${FTCAN2p0_Prefix?upper_case}_TXPDU_USERCOUNT  0
-
-/* USER CODE END ${FTCAN2p0_Prefix}_User_TxPDUs 1 */
-
+/* USER${disableUserCode}CODE BEGIN ${myMember.preFix}_User_RxPDUs 0 */
+#t
+/* USER${disableUserCode}CODE END ${myMember.preFix}_User_RxPDUs 0 */
+    
+#t/** @brief symbolic name for unknownPdu */
+#t${myMember.preFix}_Tx_unknownPdu 
+};
+#t
+/* USER${disableUserCode}CODE BEGIN ${myMember.preFix}_User_TxPDUs 1 */
+#t
+/** @brief number of user defined RxPdu-Names
+#t* @details This define must be edit if added User_TxPDUs to the enum ${myMember.preFix}_${strPduIdType} */
+#define ${myMember.preFix?upper_case}_TXPDU_USERCOUNT  0
+#t
+/* USER${disableUserCode}CODE END ${myMember.preFix}_User_TxPDUs 1 */
+#t
 /** @brief number of all TxPdu-Names 
- *  @details this will be used to define the used memory to handle the TxPdus */
-#define ${FTCAN2p0_Prefix?upper_case}_TXPDU_COUNT ( ${FT_TxList?size} + ${FTCAN2p0_Prefix?upper_case}_TXPDU_USERCOUNT )
+#t* @details this will be used to define the used memory to handle the TxPdus */
+#define ${myMember.preFix?upper_case}_TXPDU_COUNT ( ${myTxList?size } + ${myMember.preFix?upper_case}_TXPDU_USERCOUNT )
+#t
+/** @} */ // end of grouping TM_${myMember.preFix}_Cfg
+#t
+[/#compress]
+[/#list] [#-- end of protocolMemberList as myMember --]
 
-/** @} */ // end of grouping CanFT2p0_Cfg
-
-[#else]
-[#if extractDebug_FTL > 0]
-/* we haven#t a valid FT configuration */
-[/#if] [#-- end of extractDebug_FTL --]
-[/#if] [#-- end of FTConfigOk = "Ok" --]
-
-[#if CanIfRxPduNameList?? ]
+[#if CanIfRxPduNameList?? ][#compress]
 /** @addtogroup TM_CanIfCfg
- *  @{ */
+#t#t@{ */
  
 /** @brief to use generic names for the PDUs */
 enum class ${CanIf_Prefix}_Rx${strPduIdType}
 {
   [#list CanIfRxPduNameList as word] 
     [#assign PduName = word]
-  /** @brief symbolic name for ${PduName} */
-  ${CanIf_Prefix}_Rx_${PduName},
+#t/** @brief symbolic name for ${PduName} */
+#t${CanIf_Prefix}_Rx_${PduName},
   [/#list]
-/* USER CODE BEGIN ${CanIf_Prefix}_User_RxPDUs 0 */
-
-/* USER CODE END ${CanIf_Prefix}_User_RxPDUs 0 */
-  ${CanIf_Prefix}_Rx_unknownPdu
+#t/* V-----V----V----V-----V */
+#t/* add imported list items */
+  [#assign pduMemberCounter = 0]
+  [#if protocolMemberList?? ]
+    [#list protocolMemberList as protocolMember]
+      [#assign protocolRxList = protocolMember.rxList]
+      [#list protocolRxList as rxPdu]
+        [#assign pduMemberCounter += 1]
+[#attempt]
+#t/** @brief symbolic name for ${rxPdu.name}} */
+#t${CanIf_Prefix}_Rx_${rxPdu.name},
+[#recover]
+/* ##################################### */
+/* there is an unsupported member config */
+#t#t#tL_PDU_${protocolMember.preFix}_Rx_Dummy_${pduMemberCounter},
+/* ##################################### */
+[/#attempt]
+      [/#list] [#-- end of protocolRxList as rxPdu --]
+    [/#list] [#-- end of protocolMemberList as protocolMember--]
+  [/#if] [#-- end of protocolMemberList?? -> imported list items --]
+/* USER${disableUserCode}CODE BEGIN ${CanIf_Prefix}_User_RxPDUs 0 */
+#t
+/* USER${disableUserCode}CODE END ${CanIf_Prefix}_User_RxPDUs 0 */
+#t${CanIf_Prefix}_Rx_unknownPdu
 };
-
-/* USER CODE BEGIN ${CanIf_Prefix}_User_RxPDUs 1 */
-
+#t
+/* USER${disableUserCode}CODE BEGIN ${CanIf_Prefix}_User_RxPDUs 1 */
+#t
 /** @brief number of user defined RxPdu-Names 
-    @details This define must be edit if added User_RxPDUs to the enum ${CanIf_Prefix}_RxPduIdType */
+#t#t@details This define must be edit if added User_RxPDUs to the enum ${CanIf_Prefix}_RxPduIdType */
 #define ${CanIf_Prefix?upper_case}_RXPDU_USERCOUNT  0
-
-/* USER CODE END ${CanIf_Prefix}_User_RxPDUs 1 */
-
+#t
+/* USER${disableUserCode}CODE END ${CanIf_Prefix}_User_RxPDUs 1 */
+#t
 /** @brief number of all RxPdu-Names 
- *  @details this will be used to define the used memory to handle the RxPdus */
-#define ${CanIf_Prefix?upper_case}_RXPDU_COUNT ( ${CanIfRxPduNameList?size} + ${CanIf_Prefix?upper_case}_RXPDU_USERCOUNT )
-
+#t#t@details this will be used to define the used memory to handle the RxPdus */
+#define ${CanIf_Prefix?upper_case}_RXPDU_COUNT ( ${CanIfRxPduNameList?size + pduMemberCounter} + ${CanIf_Prefix?upper_case}_RXPDU_USERCOUNT )
+#t
 /** @} */ // end of grouping TM_CanIfCfg
-[/#if] [#-- end of CanIfRxPduNameList?? --]
+[/#compress][/#if] [#-- end of CanIfRxPduNameList?? --]
 
-[#if CanIfTxPduNameList??]
+[#if CanIfTxPduNameList??][#compress]
 /** @addtogroup TM_CanIfCfg
- *  @{ */
+#t#t@{ */
 /** @brief to use generic names for the PDUs */
 enum class ${CanIf_Prefix}_Tx${strPduIdType}
 {
   [#list CanIfTxPduNameList as word] 
     [#assign PduName = word]
-  /** @brief symbolic name for ${PduName} */
-  ${CanIf_Prefix}_Tx_${PduName},
+#t/** @brief symbolic name for ${PduName} */
+#t${CanIf_Prefix}_Tx_${PduName},
   [/#list]
-/* USER CODE BEGIN ${CanIf_Prefix}_User_TxPDUs 0 */
-
-/* USER CODE END ${CanIf_Prefix}_User_TxPDUs 0 */
-  ${CanIf_Prefix}_Tx_unknownPdu
+#t/* V-----V----V----V-----V */
+#t/* add imported list items */
+  [#assign pduMemberCounter = 0]
+  [#if protocolMemberList?? ]
+    [#list protocolMemberList as protocolMember]
+      [#assign protocolTxList = protocolMember.txList]
+      [#list protocolTxList as txPdu]
+        [#assign pduMemberCounter += 1]
+[#attempt]
+#t/** @brief symbolic name for ${txPdu.name}} */
+#t${CanIf_Prefix}_Tx_${txPdu.name},
+[#recover]
+/* ##################################### */
+/* there is an unsupported member config */
+#t#t#tL_PDU_${protocolMember.preFix}_Tx_Dummy_${pduMemberCounter},
+/* ##################################### */
+[/#attempt]
+      [/#list] [#-- end of protocolRxList as txPdu --]
+    [/#list] [#-- end of protocolMemberList as protocolMember--]
+  [/#if] [#-- end of protocolMemberList?? -> imported list items --]
+/* USER${disableUserCode}CODE BEGIN ${CanIf_Prefix}_User_TxPDUs 0 */
+#t
+/* USER${disableUserCode}CODE END ${CanIf_Prefix}_User_TxPDUs 0 */
+#t${CanIf_Prefix}_Tx_unknownPdu
 };
 
-/* USER CODE BEGIN ${CanIf_Prefix}_User_TxPDUs 1 */
-
+#t
+/* USER${disableUserCode}CODE BEGIN ${CanIf_Prefix}_User_TxPDUs 1 */
+#t
 /** @brief number of user defined RxPdu-Names
-    @details This define must be edit if added User_TxPDUs to the enum ${CanIf_Prefix}_TxPduIdType */
+#t#t@details This define must be edit if added User_TxPDUs to the enum ${CanIf_Prefix}_TxPduIdType */
 #define ${CanIf_Prefix?upper_case}_TXPDU_USERCOUNT  0
-
-/* USER CODE END ${CanIf_Prefix}_User_TxPDUs 1 */
-
+#t
+/* USER${disableUserCode}CODE END ${CanIf_Prefix}_User_TxPDUs 1 */
+#t
 /** @brief number of all TxPdu-Names 
- *  @details this will be used to define the used memory to handle the TxPdus */
-#define ${CanIf_Prefix?upper_case}_TXPDU_COUNT ( ${CanIfTxPduNameList?size} + ${CanIf_Prefix?upper_case}_TXPDU_USERCOUNT )
-
+#t#t@details this will be used to define the used memory to handle the TxPdus */
+#define ${CanIf_Prefix?upper_case}_TXPDU_COUNT ( ${CanIfTxPduNameList?size + pduMemberCounter} + ${CanIf_Prefix?upper_case}_TXPDU_USERCOUNT )
+#t
 /** @} */ // end of grouping TM_CanIfCfg
-[/#if] [#-- end of CanIfTxPduNameList?? --]
+[/#compress][/#if] [#-- end of CanIfTxPduNameList?? --]
 
 /* private names -----------------------------------------------------------*/
 /* USER CODE BEGIN ${dashedFileNamed} ${UserCodeCounter} */

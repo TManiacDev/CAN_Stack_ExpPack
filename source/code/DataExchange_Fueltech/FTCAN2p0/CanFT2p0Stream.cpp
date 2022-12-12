@@ -60,7 +60,7 @@ FUNC(Std_ReturnType, TM_CANFT_CODE) CanFT2p0Stream::RxIndication(
   else
   {
     if ( ( ptr2Sdu != NULL_PTR ) &&
-         (rxPduId < CanFT_Rx_unknownPdu ) )
+         (rxPduId < (ComStack_PduType)FT2p0_RxPduIdType::FT2p0_Rx_unknownPdu ) )
     {
       // first segmented message, we need a hard reset of segment counter:
       if ( ptr2Sdu->ptr2Data[0] == 0x0 )

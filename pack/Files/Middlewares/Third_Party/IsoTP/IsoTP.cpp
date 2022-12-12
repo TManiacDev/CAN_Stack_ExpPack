@@ -58,8 +58,8 @@ FUNC(Std_ReturnType, AUTOMATIC) IsoTp::Init( CONST(IsoTP_RxTxStatus, AUTOMATIC) 
   Std_ReturnType returnValue = E_NOT_OK;
   if ( objectHandle.ModuleState == IsoTP_StatesType::IsoTP_OFF )
   {
-    objectHandle.FlowControl.rxIfPduName = objectConfig.p2ControllerInterface->GetIfRxPduName(CanIfUL_CanTP, (ComStack_PduType)objectConfig.rxPduName);
-    objectHandle.FlowControl.txIfPduName = objectConfig.p2ControllerInterface->GetIfTxPduName(CanIfUL_CanTP, (ComStack_PduType)objectConfig.txPduName);
+    objectHandle.FlowControl.rxIfPduName = objectConfig.p2ControllerInterface->GetIfRxPduName(CanIfUL_IsoTP, (ComStack_PduType)objectConfig.rxPduName);
+    objectHandle.FlowControl.txIfPduName = objectConfig.p2ControllerInterface->GetIfTxPduName(CanIfUL_IsoTP, (ComStack_PduType)objectConfig.txPduName);
     if ( ( objectHandle.FlowControl.rxIfPduName != ComStack_InvalidPdu ) &&
         ( objectHandle.FlowControl.txIfPduName != ComStack_InvalidPdu ) )
     {

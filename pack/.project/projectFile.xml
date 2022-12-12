@@ -10,6 +10,8 @@ The generation of the MX-function and ISR-callback function normaly generated fo
     <license>Z:/GIT Repro/CAN_Stack_ExpPack/LICENSE::license.txt</license>
     <supportContact>engineer@tmaniac.de</supportContact>
     <releases>
+        <release date="2022-12-12" version="0.2.3">rework on ftl templates to use import on template
+this cases a little bit renaming</release>
         <release date="2022-12-05" version="0.2.2">Start work on UDS protocol
 Maybe do some adjustment on IsoTP</release>
         <release date="2022-11-23" version="0.2.1">The Can and CanDrv_bxCAN classes are ready to use

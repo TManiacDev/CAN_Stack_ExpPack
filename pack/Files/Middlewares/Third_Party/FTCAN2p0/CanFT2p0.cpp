@@ -91,7 +91,7 @@ FUNC(Std_ReturnType, TM_CANFT_CODE) CanFT2p0::RxIndication(
   else
   {
     if ( ( ptr2Sdu != NULL_PTR ) &&
-         (rxPduId < CanFT_Rx_unknownPdu ) )
+         (rxPduId < (ComStack_PduType)FT2p0_RxPduIdType::FT2p0_Rx_unknownPdu ) )
     {
       if ( READ_FLAG(RxPduInfo[rxPduId].EventFlags,CANFT2P0_RXDATACOPY) != CANFT2P0_RXDATACOPY)
       {

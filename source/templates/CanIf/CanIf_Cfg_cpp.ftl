@@ -32,6 +32,28 @@
 [#assign dashedFileNamed = dashReplace?replace("-","_")]
 [#assign UserCodeCounter = 0]
 
+[#-- to handle linked PDU names we import this listes --] 
+[#assign pduMember = {"preFix" : "", "rxList": [], "txList" : [] }]
+[#assign pduMemberList = [] ]
+[#assign protocolFiles_List = [ "MXTmpFiles/IsoTP_PduList.tmp",  "MXTmpFiles/CanFT_PduList.tmp" ]]
+[#list protocolFiles_List as protocolTemplate ] 
+  [#attempt]
+    [#-- add from template --]
+    [#import protocolTemplate as TPSnippet ]
+/* import ${TPSnippet.GetPrefix()} : ${TPSnippet.lastGenerated} */    
+  [#recover]
+/* can't find ${protocolTemplate} */
+  [/#attempt]
+  [#if TPSnippet??] [#-- we have a TPSnippet on successful template open --]
+    [#assign pduTp = {"preFix"    : TPSnippet.GetPrefix(),
+                      "rxList"    : TPSnippet.GetRxList(), 
+                      "txList"    : TPSnippet.GetTxList() }]
+    [#assign pduMemberList += [pduTp] ]
+  [/#if] [#-- TPSnippet?? --]
+[/#list]
+/* ${pduMemberList?size} */
+[#-- end of to handle linked PDU names we import this listes --] 
+
 [#-- Global variables --]
 [#assign CanIf_Prefix = "CanIf"]
 [#assign IsoTp_Prefix = "IsoTP"]
@@ -162,76 +184,22 @@
       [/#if] [#-- end of extractDebug_FTL --]
       [#break]
       
-[#-- extract FTCAN2.0 specific --]
-    [#case "FT_Ecu"]  
-      [#if definition.value != "unused" ]
-      /* there is a config for FT Ecu */    
-        [#assign FT_EcuType = definition.value]
-        [#assign FT_EcuId = "0x14001"]
-      [/#if] [#-- end of check for unsed device --]
-      [#break]
-    [#case "FT_ECU_StreamList"]
-      /* there is a config for FT Ecu Stream list*/
-        [#assign _FT_EcuStreamListC = definition.value?replace(","," ")]  
-        [#assign _FT_EcuStreamList_ = _FT_EcuStreamListC?replace("|"," ")]  
-        [#assign FT_EcuStreamList = _FT_EcuStreamList_?word_list ]              
-      [#break]
-    [#case "FT_Nano"]
-    [#case "FT_Device"]
-      [#if definition.value != "unused" ]
-      /* there is a config for FT Device ${definition.value} */
-        [#assign FT_DeviceType = definition.value]
-        [#assign FT_DeviceId = "Why"]
-        [#assign FT_DeviceCanId = "0x12000"]
-      [/#if] [#-- end of check for unsed device --]
-      [#break]
-    [#case "FT_Nano_RW"]
-    [#case "FT_Device_RW"]
-      [#assign FT_Device_Use = definition.value]
-          
-      [#break]      
-    [#case "FT_SwitchPanel"]
-      [#if definition.value != "unused" ]
-      /* there is a config for FT Panel */
-        [#assign FT_SwPType = definition.value]
-        [#switch FT_SwPType]
-          [#case "Mini4"]
-            [#assign FT_SwPId = "0x12208"]
-          [#break]
-          [#case "Mini5"]
-            [#assign FT_SwPId = "0x12210"]
-          [#break]
-          [#case "Mini8"]
-            [#assign FT_SwPId = "0x12218"]
-          [#break]
-          [#default]
-            [#assign FT_SwPId = "0x12200"]
-        [/#switch] [#-- end of FT_SwPType --]
-      [/#if] [#-- end of check for unsed device --]
-      [#break]
-    [#case "FT_SwitchPanel_RW"]
-      [#assign FT_Swp_Use = definition.value]
-      [#if FT_SwPType?? ]
-      [/#if] [#-- end of FT_SwPType?? --]
-      [#break]
-[#-- end of extract FTCAN2.0 specific --]
-
 [#-- handle the IsoTp configuration --]  
       [#case "ISOTP_PDU_RX_LIST"]
-        [#assign _IsoTp_RxPduListC = definition.value?replace(","," ")]
 [#if extractDebug_FTL > 0]
+        [#assign _IsoTp_RxPduListC = definition.value?replace(","," ")]
 /* ISOTP_PDU_RX_LIST is ${_IsoTp_RxPduListC} */
-[/#if] [#-- end of extractDebug_FTL --]
         [#assign _IsoTp_RxPduList_ = _IsoTp_RxPduListC?replace("|"," ")]
         [#assign IsoTp_RxPduList = _IsoTp_RxPduList_?word_list ]
+[/#if] [#-- end of extractDebug_FTL --]
       [#break]
       [#case "ISOTP_PDU_TX_LIST"]
-        [#assign _IsoTp_txPduListC = definition.value?replace(","," ")]
 [#if extractDebug_FTL > 0]
+        [#assign _IsoTp_txPduListC = definition.value?replace(","," ")]
 /* ISOTP_PDU_TX_LIST is ${_IsoTp_txPduListC} */
-[/#if] [#-- end of extractDebug_FTL --]
         [#assign _IsoTp_txPduList_ = _IsoTp_txPduListC?replace("|"," ")]
         [#assign IsoTp_TxPduList = _IsoTp_txPduList_?word_list ]
+[/#if] [#-- end of extractDebug_FTL --]
       [#break]
 [#-- end of handle the IsoTp configuration --]  
 
@@ -246,38 +214,6 @@
 [#if extractDebug_FTL > 0]
 /* ########################################################################## */
 [/#if] [#-- end of extractDebug_FTL --]
-
-[#-- add IsoTP pdu  --]
-[#if IsoTp_RxPduList?? ]
-[#if extractDebug_FTL > 0]
-// FTL Debug: add the IsoTp_RxPduList 
-[/#if] [#-- end of extractDebug_FTL --]
-  [#list IsoTp_RxPduList as IsoTp_RxPdu]
-    [#assign RxPduNameList += ["MyTest" + "_" + IsoTp_RxPdu ] ]
-    [#assign RxIdList += ["S:" + "0x7EF"] ]
-    [#assign RxMaskList += ["S:0x0"] ]
-    [#assign RxLengthList += ["8"] ]
-    [#assign RxControllerList += ["M"] ]
-    [#assign RxTargetPduNameList += [IsoTp_RxPdu ] ]
-    [#assign RxUpperLayerList += ["CanTP"] ]
-  [/#list] [#-- end of IsoTp_RxPduList as IsoTp_RxPdu --]
-[/#if] [#-- end of IsoTp_RxPduList?? --]
-
-[#if IsoTp_TxPduList?? ]
-[#if extractDebug_FTL > 0]
-// FTL Debug: add the IsoTp_TxPduList
-[/#if] [#-- end of extractDebug_FTL --]
-  [#list IsoTp_TxPduList as IsoTp_TxPdu]
-    [#assign TxPduNameList += ["MyTest" + "_" + IsoTp_TxPdu ] ]
-    [#assign TxIdList += ["S:" + "0x7DF"] ]
-    [#assign TxMaskList += ["S:0x0"] ]
-    [#assign TxLengthList += ["8"] ]
-    [#assign TxControllerList += ["M"] ]
-    [#assign TxTargetPduNameList += [IsoTp_TxPdu ] ]
-    [#assign TxUpperLayerList += ["CanTP"] ]
-  [/#list] [#-- end of IsoTp_TxPduList as IsoTp_TxPdu --]
-[/#if] [#-- end of IsoTp_TxPduList?? --]
-[#-- end of add IsoTP pdu --]
 
 [#-- add fueltech pdu --]
 [#if FT_DeviceType?? && FT_Device_Use??]
@@ -560,10 +496,15 @@
 
 [#-- function to extend the CAN controller name --]
 [#function GetControllerName NameString]
+  [#if NameString?starts_with("C") == true ]
+    [#-- we must do a extraction of the channel number from name --]
+    [#return "CanMasterController"]
+  [#else]
   [#if NameString?starts_with("M") != true ]
     [#return "CanSlaveController"]
   [#else]
     [#return "CanMasterController"]
+  [/#if]
   [/#if]
 [/#function]
 [#-- end of function to extend the CAN controller name --]
@@ -577,7 +518,10 @@
     [#case "CanNM"]
       [#assign RetName = CanNM_Prefix + "_" + RxTx + strPduIdType + "::" + CanNM_Prefix + "_" + RxTx + "_" + N_PduString ]
       [#break]
-    [#case "CanTP"]
+    [#case "CanTP"] [#-- this is the AUTOSAR name --]
+      [#assign RetName = IsoTp_Prefix + "_" + RxTx + strPduIdType + "::" + IsoTp_Prefix + "_" + RxTx + "_" + N_PduString ]
+      [#break]
+    [#case "IsoTP"] [#-- maybe we use the international name --]
       [#assign RetName = IsoTp_Prefix + "_" + RxTx + strPduIdType + "::" + IsoTp_Prefix + "_" + RxTx + "_" + N_PduString ]
       [#break]
     [#case "CanTSync"]
@@ -633,7 +577,44 @@ EXTERN_CONST( CanIf_RxPduCfgType, TM_CANIF_CONFIG_DATA ) MyTest_RxPduConfig[] =
     .ULName = CanIfUL_${RxUpperLayerList[RxIndex]}
     [/#if]
   },
-  [/#list] [#-- end of RxPduNameList as PDU --]
+  [/#list][#-- end of RxPduNameList as PDU --]
+#t/* V-----V----V----V-----V */
+#t/* add imported list items */
+  [#if pduMemberList?? ][#compress]
+    [#assign pduMemberCounter = 0]
+    [#list pduMemberList as pduMember]
+      [#assign RxList = pduMember.rxList]
+      [#list RxList as rxPdu]
+        [#assign pduMemberCounter += 1]
+#t{#t/* ${RxIndex+pduMemberCounter} */
+[#attempt]
+#t#t.L_PDU_Name = ${GetNPduName(rxPdu.name, CanIf_Prefix, "Rx")}, /* ${CanIf_Prefix}_Rx_${rxPdu.name} */
+#t#t.CanId = { ${GetMessageId(rxPdu.canId)}, _UNUSED_VAR_, CANIF_NO_RTR, ${GetMessageType(rxPdu.canId)} },
+#t#t.IdMask = { ${GetMessageId(rxPdu.maskId)}, _UNUSED_VAR_, CANIF_NO_RTR, ${GetMessageType(rxPdu.maskId)} },
+#t#t.MsgLength = ${rxPdu.length},
+#t#t.InstanceName = ${GetControllerName(rxPdu.controller)}, 
+#t#t.N_PDU_Name = (ComStack_PduType)${rxPdu.nPduName},
+    [#if pduMember.preFix?starts_with("u")]
+#t#t.ULName = CanIfUL_undefined
+    [#else]
+#t#t.ULName = CanIfUL_${pduMember.preFix}
+    [/#if]
+[#recover]
+/* ##################################### */
+/* there is an unsupported member config */
+[#if rxPdu.name??]
+#t#t.L_PDU_Name = (ComStack_PduType)${GetNPduName(rxPdu.name, CanIf_Prefix, "Rx")}, /* ${CanIf_Prefix}_Rx_${rxPdu.name} */
+[#else]
+[#assign genericUnkown = "L_PDU_" + pduMember.preFix + "_Rx_Dummy_" + (pduMemberCounter)]
+#t#t.L_PDU_Name = (ComStack_PduType)CanIf_RxPduIdType::${genericUnkown}
+[/#if]
+#t#t/* .InstanceName = we should disable the controller */
+/* ##################################### */
+[/#attempt]
+#t},
+      [/#list] [#-- end of RxList as rxPdu --]
+    [/#list]
+  [/#compress][/#if] [#-- pduMemberList?? -> imported list items --]
 /* USER CODE BEGIN ${dashedFileNamed} ${UserCodeCounter} */
   {
     .L_PDU_Name = (CanIf_RxPduIdType)L_PDU_Dummy_for_Test,
@@ -676,7 +657,7 @@ EXTERN_CONST( CanIf_TxPduCfgType, TM_CANIF_CONFIG_DATA ) MyTest_TxPduConfig[] =
     .CanId = { ${GetMessageId(TxIdList[TxIndex])}, _UNUSED_VAR_, CANIF_NO_RTR, ${GetMessageType(TxIdList[TxIndex])} },
     .IdMask = { ${GetMessageId(TxMaskList[TxIndex])}, _UNUSED_VAR_, CANIF_NO_RTR, ${GetMessageType(TxMaskList[TxIndex])} },
     .MsgLength = ${TxLengthList[TxIndex]},
-    .InstanceName = ${GetControllerName(TxControllerList[TxIndex])},
+    .InstanceName = ${GetControllerName(TxControllerList[TxIndex])}, 
     .N_PDU_Name = (ComStack_PduType)${GetNPduName(TxTargetPduNameList[TxIndex], TxUpperLayerList[TxIndex], "Tx")},
     [#if TxUpperLayerList[TxIndex]?starts_with("u")]
     .ULName = CanIfUL_undefined
@@ -684,7 +665,43 @@ EXTERN_CONST( CanIf_TxPduCfgType, TM_CANIF_CONFIG_DATA ) MyTest_TxPduConfig[] =
     .ULName = CanIfUL_${TxUpperLayerList[TxIndex]}
     [/#if]
   },
-  [/#list] [#-- end of TxPduNameList as PDU --]
+  [/#list][#-- end of TxPduNameList as PDU --]
+#t/* V-----V----V----V-----V */
+#t/* add imported list items */
+  [#if pduMemberList?? ][#compress]
+    [#assign pduMemberCounter = 0]
+    [#list pduMemberList as pduMember]
+      [#assign TxList = pduMember.txList]
+      [#list TxList as txPdu]
+        [#assign pduMemberCounter += 1]
+#t{#t/* ${TxIndex+pduMemberCounter} */
+[#attempt]
+#t#t.L_PDU_Name = ${GetNPduName(txPdu.name, CanIf_Prefix, "Tx")}, /* ${CanIf_Prefix}_Tx_${txPdu.name} */
+#t#t.CanId = { ${GetMessageId(txPdu.canId)}, _UNUSED_VAR_, CANIF_NO_RTR, ${GetMessageType(txPdu.canId)} },
+#t#t.IdMask = { ${GetMessageId(txPdu.maskId)}, _UNUSED_VAR_, CANIF_NO_RTR, ${GetMessageType(txPdu.maskId)} },
+#t#t.MsgLength = ${txPdu.length},
+#t#t.InstanceName = ${GetControllerName(txPdu.controller)}, 
+#t#t.N_PDU_Name = (ComStack_PduType)${txPdu.nPduName},
+    [#if pduMember.preFix?starts_with("u")]
+#t#t.ULName = CanIfUL_undefined
+    [#else]
+#t#t.ULName = CanIfUL_${pduMember.preFix}
+    [/#if]
+[#recover]
+/* ##################################### */
+/* there is an unsupported member config */
+[#if txPdu.name??]
+#t#t.L_PDU_Name = ${GetNPduName(txPdu.name, CanIf_Prefix, "Tx")}, /* ${CanIf_Prefix}_Tx_${txPdu.name} */
+[#else]
+[#assign genericUnkown = "L_PDU_" + pduMember.preFix + "_Tx_Dummy_" + (pduMemberCounter)]
+#t#t.L_PDU_Name = (ComStack_PduType)CanIf_TxPduIdType::${genericUnkown}
+[/#if]
+/* ##################################### */
+[/#attempt]
+#t},
+      [/#list]
+    [/#list]
+  [/#compress][/#if] [#-- pduMemberList?? -> imported list items --]
 /* USER CODE BEGIN ${dashedFileNamed} ${UserCodeCounter} */
   {
     .L_PDU_Name = (CanIf_TxPduIdType)L_PDU_Dummy_for_Test,
