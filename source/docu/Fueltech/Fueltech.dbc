@@ -1,0 +1,390 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_: Mini8ButtonPanel Old8ButtonPanel FT_ECU FT500 FT450_FT550_FT600 FT600
+VAL_TABLE_ ECU_Gear 6 "Sixth Gear" 5 "Fifth Gear" 4 "Fourth Gear" 3 "Third Gear" 2 "Second Gear" 1 "First Gear" 0 "Neutral" -1 "Reverse" -2 "Park" ;
+VAL_TABLE_ ECU_SwitchValue 1 "On" 0 "Off" ;
+VAL_TABLE_ ECU_Speed_Sensor_Unit 1 "Mph" 0 "km/h" ;
+VAL_TABLE_ ECU_Temp_Sensor_Unit 1 "°F" 0 "°C" ;
+VAL_TABLE_ ECU_Pressure_Sensor_Unit 2 "kPa" 1 "PSI" 0 "bar" ;
+VAL_TABLE_ ECU_O2_Sensor_Unit 255 "Undefined" 4 "AFR gasoline" 3 "AFR methanol" 2 "AFR ethanol" 1 "Lambda" 0 "Undefined" ;
+VAL_TABLE_ ECU_Launch_Mode 4 "2-Step" 3 "3-Step" 2 "Burnout Spool (Burnout & 2-Step)" 1 "Burnout" 0 "None (running)" ;
+VAL_TABLE_ PanelButtonState 1 "Pressed" 0 "Released" ;
+VAL_TABLE_ FTCAN_MeasureId 232 "Power level conf.f.ext. ignition" 154 "ECU Electro Fan" 152 "ECU Air Conditioning" 150 "ECU Cut" 148 "Burnout Signal" 146 "3-Step Signal" 144 "2-Step Signal" 142 "ECU Ignition Advance/Retard" 140 "ECU Injection Bank B Duty Cycle" 138 "ECU Injection Bank A Duty Cycle" 136 "ECU Injection Bank B Time" 134 "ECU Injection Bank A Time" 132 "ECU RPM" 130 "ECU Temperature Sensor Unit" 128 "ECU Pressure Sensor Unit" 126 "ECU Speed Sensor Unit" 124 "ECU O2 Sensor Unit" 122 "Exhaust EGT" 120 "Right bank EGT" 118 "Left bank EGT" 96 "Cylinder 8 EGT" 94 "Cylinder 7 EGT" 92 "Cylinder 6 EGT" 90 "Cylinder 5 EGT" 88 "Cylinder 4 EGT" 86 "Cylinder 3 EGT" 84 "Cylinder 2 EGT" 82 "Cylinder 1 EGT" 80 "Disabled EGT" 78 "Exhaust O2" 76 "Right bank O2" 74 "Left bank O2" 52 "Cylinder 8 O2" 50 "Cylinder 7 O2" 48 "Cylinder 6 O2" 46 "Cylinder 5 O2" 44 "Cylinder 4 O2" 42 "Cylinder 3 O2" 40 "Cylinder 2 O2" 38 "Cylinder 1 O2" 36 "Disabled O2" 34 "Gear" 32 "Driveshaft RPM" 30 "Right rear wheel speed" 28 "left rear wheel speed" 26 "Right front wheel speed" 24 "Left front wheel speed" 22 "Drag Speed" 20 "Traction Speed" 18 "ECU Battery Voltage" 16 "ECU Launch Mode" 14 "Water Pressure" 12 "Fuel Pressure" 10 "Oil Pressure" 8 "Engine Temperature" 6 "Air Temperature" 4 "MAP" 2 "TPS" 0 "Unknown" ;
+
+
+BO_ 2483032319 FT500_0FF_Stream: 8 FT500
+ SG_ FTCAN_0FF_PacketCounter M : 7|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_0FF_StreamSize m0 : 15|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_0FF_MeasureID_01 m0 : 31|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_0FF_MeasureValue_01 m0 : 47|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_0FF_MeasureID_02 m1 : 15|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_0FF_MeasureValue_02 m1 : 23|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_0FF_MeasureID_03 m1 : 39|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_0FF_MeasureValue_03 m1 : 55|16@0- (1,0) [0|0] "" Vector__XXX
+
+BO_ 2483032575 FT500_1FF_Stream: 8 FT500
+ SG_ FTCAN_1FF_PacketCounter M : 7|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_1FF_StreamSize m0 : 15|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_1FF_MeasureID_01 m0 : 31|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_1FF_MeasureValue_01 m0 : 47|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_1FF_MeasureID_02 m1 : 15|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_1FF_MeasureValue_02 m1 : 23|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_1FF_MeasureID_03 m1 : 39|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_1FF_MeasureValue_03 m1 : 55|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_1FF_MeasureID_04 m2 : 15|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_1FF_MeasureValue_04 m2 : 31|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_1FF_MeasureID_05 m2 : 47|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_1FF_MeasureValue_05 m2 : 63|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_1FF_MeasureValue_05B m3 : 15|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_1FF_MeasureID_06 m3 : 23|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_1FF_MeasureValue_06 m3 : 39|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_1FF_MeasureID_07 m3 : 55|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_1FF_MeasureValue_07 m4 : 15|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_1FF_MeasureID_08 m4 : 31|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_1FF_MeasureValue_08 m4 : 47|16@0- (1,0) [0|0] "" Vector__XXX
+
+BO_ 2483032831 FT500_2FF_Stream: 8 FT500
+ SG_ FTCAN_2FF_PacketCounter M : 7|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_2FF_StreamSize m0 : 15|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_2FF_MeasureID_01 m0 : 31|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_2FF_MeasureValue_01 m0 : 47|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_2FF_MeasureID_02 m1 : 15|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_2FF_MeasureValue_02 m1 : 23|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_2FF_MeasureID_03 m1 : 39|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_2FF_MeasureValue_03 m1 : 55|16@0- (1,0) [0|0] "" Vector__XXX
+
+BO_ 2483033087 FT500_3FF_Stream: 8 FT500
+ SG_ FTCAN_3FF_PacketCounter M : 7|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_3FF_StreamSize m0 : 15|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_3FF_MeasureID_01 m0 : 31|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_3FF_MeasureValue_01 m0 : 47|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_3FF_MeasureID_02 m1 : 15|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_3FF_MeasureValue_02 m1 : 23|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_3FF_MeasureID_03 m1 : 39|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_3FF_MeasureValue_03 m1 : 55|16@0- (1,0) [0|0] "" Vector__XXX
+
+BO_ 483032319 FT600_0FF_Stream: 8 FT600
+ SG_ FTCAN_0FF_PacketCounter M : 7|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_0FF_StreamSize m0 : 15|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_0FF_MeasureID_01 m0 : 31|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_0FF_MeasureValue_01 m0 : 47|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_0FF_MeasureID_02 m1 : 15|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_0FF_MeasureValue_02 m1 : 23|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_0FF_MeasureID_03 m1 : 39|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_0FF_MeasureValue_03 m1 : 55|16@0- (1,0) [0|0] "" Vector__XXX
+
+BO_ 483032575 FT600_1FF_Stream: 8 FT600
+ SG_ FTCAN_1FF_PacketCounter M : 7|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_1FF_StreamSize m0 : 15|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_1FF_MeasureID_01 m0 : 31|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_1FF_MeasureValue_01 m0 : 47|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_1FF_MeasureID_02 m1 : 15|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_1FF_MeasureValue_02 m1 : 23|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_1FF_MeasureID_03 m1 : 39|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_1FF_MeasureValue_03 m1 : 55|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_1FF_MeasureID_04 m2 : 15|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_1FF_MeasureValue_04 m2 : 31|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_1FF_MeasureID_05 m2 : 47|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_1FF_MeasureValue_05 m2 : 63|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_1FF_MeasureValue_05B m3 : 15|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_1FF_MeasureID_06 m3 : 23|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_1FF_MeasureValue_06 m3 : 39|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_1FF_MeasureID_07 m3 : 55|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_1FF_MeasureValue_07 m4 : 15|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_1FF_MeasureID_08 m4 : 31|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_1FF_MeasureValue_08 m4 : 47|16@0- (1,0) [0|0] "" Vector__XXX
+
+BO_ 483032831 FT600_2FF_Stream: 8 FT600
+ SG_ FTCAN_2FF_PacketCounter M : 7|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_2FF_StreamSize m0 : 15|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_2FF_MeasureID_01 m0 : 31|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_2FF_MeasureValue_01 m0 : 47|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_2FF_MeasureID_02 m1 : 15|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_2FF_MeasureValue_02 m1 : 23|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_2FF_MeasureID_03 m1 : 39|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_2FF_MeasureValue_03 m1 : 55|16@0- (1,0) [0|0] "" Vector__XXX
+
+BO_ 483033087 FT600_3FF_Stream: 8 FT600
+ SG_ FTCAN_3FF_PacketCounter M : 7|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_3FF_StreamSize m0 : 15|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_3FF_MeasureID_01 m0 : 31|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_3FF_MeasureValue_01 m0 : 47|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_3FF_MeasureID_02 m1 : 15|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_3FF_MeasureValue_02 m1 : 23|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_3FF_MeasureID_03 m1 : 39|16@0- (1,0) [0|0] "" Vector__XXX
+ SG_ FTCAN_3FF_MeasureValue_03 m1 : 55|16@0- (1,0) [0|0] "" Vector__XXX
+
+BO_ 2451604256 Mini8ButtonPanel: 8 Mini8ButtonPanel
+ SG_ SwitchPanel_Row_1_Light : 7|1@0- (1,0) [0|0] ""  FT_ECU
+ SG_ SwitchPanel_Row_1_Bright : 0|7@0- (1,0) [0|0] ""  FT_ECU
+ SG_ SwitchPanel_Row_2_Light : 15|1@0- (1,0) [0|0] ""  FT_ECU
+ SG_ SwitchPanel_Row_2_Bright : 8|7@0- (1,0) [0|0] ""  FT_ECU
+ SG_ SwitchPanel_Button_01_State : 16|1@0- (1,0) [0|0] ""  FT_ECU
+ SG_ SwitchPanel_Button_02_State : 17|1@0- (1,0) [0|0] ""  FT_ECU
+ SG_ SwitchPanel_Button_03_State : 18|1@0- (1,0) [0|0] ""  FT_ECU
+ SG_ SwitchPanel_Button_04_State : 19|1@0- (1,0) [0|0] ""  FT_ECU
+ SG_ SwitchPanel_Button_05_State : 24|1@0- (1,0) [0|0] ""  FT_ECU
+ SG_ SwitchPanel_Button_06_State : 25|1@0- (1,0) [0|0] ""  FT_ECU
+ SG_ SwitchPanel_Button_07_State : 26|1@0- (1,0) [0|0] ""  FT_ECU
+ SG_ SwitchPanel_Button_08_State : 27|1@0- (1,0) [0|0] ""  FT_ECU
+
+BO_ 2451604257 Mini8ButtonPanel_Ctrl: 8 FT_ECU
+ SG_ SwitchPanel_Row_1_LightCtrl : 7|1@0- (1,0) [0|0] ""  Mini8ButtonPanel
+ SG_ SwitchPanel_Row_1_BrightCtrl : 0|7@0- (1,0) [0|0] ""  Mini8ButtonPanel
+ SG_ SwitchPanel_Row_2_LightCtrl : 15|1@0- (1,0) [0|0] ""  Mini8ButtonPanel
+ SG_ SwitchPanel_Row_2_BrightCtrl : 8|7@0- (1,0) [0|0] ""  Mini8ButtonPanel
+ SG_ SwitchPanel_Button_01_Red : 16|1@0- (1,0) [0|0] ""  Mini8ButtonPanel
+ SG_ SwitchPanel_Button_02_Red : 17|1@0- (1,0) [0|0] ""  Mini8ButtonPanel
+ SG_ SwitchPanel_Button_03_Red : 18|1@0- (1,0) [0|0] ""  Mini8ButtonPanel
+ SG_ SwitchPanel_Button_04_Red : 19|1@0- (1,0) [0|0] ""  Mini8ButtonPanel
+ SG_ SwitchPanel_Button_05_Red : 24|1@0- (1,0) [0|0] ""  Mini8ButtonPanel
+ SG_ SwitchPanel_Button_06_Red : 25|1@0- (1,0) [0|0] ""  Mini8ButtonPanel
+ SG_ SwitchPanel_Button_07_Red : 26|1@0- (1,0) [0|0] ""  Mini8ButtonPanel
+ SG_ SwitchPanel_Button_08_Red : 27|1@0- (1,0) [0|0] ""  Mini8ButtonPanel
+ SG_ SwitchPanel_Button_01_Green : 32|1@0- (1,0) [0|0] ""  Mini8ButtonPanel
+ SG_ SwitchPanel_Button_02_Green : 33|1@0- (1,0) [0|0] ""  Mini8ButtonPanel
+ SG_ SwitchPanel_Button_03_Green : 34|1@0- (1,0) [0|0] ""  Mini8ButtonPanel
+ SG_ SwitchPanel_Button_04_Green : 35|1@0- (1,0) [0|0] ""  Mini8ButtonPanel
+ SG_ SwitchPanel_Button_05_Green : 40|1@0- (1,0) [0|0] ""  Mini8ButtonPanel
+ SG_ SwitchPanel_Button_06_Green : 41|1@0- (1,0) [0|0] ""  Mini8ButtonPanel
+ SG_ SwitchPanel_Button_07_Green : 42|1@0- (1,0) [0|0] ""  Mini8ButtonPanel
+ SG_ SwitchPanel_Button_08_Green : 43|1@0- (1,0) [0|0] ""  Mini8ButtonPanel
+ SG_ SwitchPanel_Button_01_Blue : 48|1@0- (1,0) [0|0] ""  Mini8ButtonPanel
+ SG_ SwitchPanel_Button_02_Blue : 49|1@0- (1,0) [0|0] ""  Mini8ButtonPanel
+ SG_ SwitchPanel_Button_03_Blue : 50|1@0- (1,0) [0|0] ""  Mini8ButtonPanel
+ SG_ SwitchPanel_Button_04_Blue : 51|1@0- (1,0) [0|0] ""  Mini8ButtonPanel
+ SG_ SwitchPanel_Button_05_Blue : 56|1@0- (1,0) [0|0] ""  Mini8ButtonPanel
+ SG_ SwitchPanel_Button_06_Blue : 57|1@0- (1,0) [0|0] ""  Mini8ButtonPanel
+ SG_ SwitchPanel_Button_07_Blue : 58|1@0- (1,0) [0|0] ""  Mini8ButtonPanel
+ SG_ SwitchPanel_Button_08_Blue : 59|1@0- (1,0) [0|0] ""  Mini8ButtonPanel
+
+BO_ 2451571488 Old8ButtonPanel: 8 Old8ButtonPanel
+ SG_ SwitchPanel_Row_1_Light : 7|1@0- (1,0) [0|0] ""  FT_ECU
+ SG_ SwitchPanel_Row_1_Bright : 0|7@0- (1,0) [0|0] ""  FT_ECU
+ SG_ SwitchPanel_Row_2_Light : 15|1@0- (1,0) [0|0] ""  FT_ECU
+ SG_ SwitchPanel_Row_2_Bright : 8|7@0- (1,0) [0|0] ""  FT_ECU
+ SG_ SwitchPanel_Button_01_State : 16|1@0- (1,0) [0|0] ""  FT_ECU
+ SG_ SwitchPanel_Button_02_State : 17|1@0- (1,0) [0|0] ""  FT_ECU
+ SG_ SwitchPanel_Button_03_State : 18|1@0- (1,0) [0|0] ""  FT_ECU
+ SG_ SwitchPanel_Button_04_State : 19|1@0- (1,0) [0|0] ""  FT_ECU
+ SG_ SwitchPanel_Button_05_State : 24|1@0- (1,0) [0|0] ""  FT_ECU
+ SG_ SwitchPanel_Button_06_State : 25|1@0- (1,0) [0|0] ""  FT_ECU
+ SG_ SwitchPanel_Button_07_State : 26|1@0- (1,0) [0|0] ""  FT_ECU
+ SG_ SwitchPanel_Button_08_State : 27|1@0- (1,0) [0|0] ""  FT_ECU
+
+BO_ 2451571489 Old8ButtonPanel_Ctrl: 8 FT_ECU
+ SG_ SwitchPanel_Row_1_LightCtrl : 7|1@0- (1,0) [0|0] ""  Old8ButtonPanel
+ SG_ SwitchPanel_Row_1_BrightCtrl : 0|7@0- (1,0) [0|0] ""  Old8ButtonPanel
+ SG_ SwitchPanel_Row_2_LightCtrl : 15|1@0- (1,0) [0|0] ""  Old8ButtonPanel
+ SG_ SwitchPanel_Row_2_BrightCtrl : 8|7@0- (1,0) [0|0] ""  Old8ButtonPanel
+ SG_ SwitchPanel_Button_01_Red : 16|1@0- (1,0) [0|0] ""  Old8ButtonPanel
+ SG_ SwitchPanel_Button_02_Red : 17|1@0- (1,0) [0|0] ""  Old8ButtonPanel
+ SG_ SwitchPanel_Button_03_Red : 18|1@0- (1,0) [0|0] ""  Old8ButtonPanel
+ SG_ SwitchPanel_Button_04_Red : 19|1@0- (1,0) [0|0] ""  Old8ButtonPanel
+ SG_ SwitchPanel_Button_05_Red : 24|1@0- (1,0) [0|0] ""  Old8ButtonPanel
+ SG_ SwitchPanel_Button_06_Red : 25|1@0- (1,0) [0|0] ""  Old8ButtonPanel
+ SG_ SwitchPanel_Button_07_Red : 26|1@0- (1,0) [0|0] ""  Old8ButtonPanel
+ SG_ SwitchPanel_Button_08_Red : 27|1@0- (1,0) [0|0] ""  Old8ButtonPanel
+ SG_ SwitchPanel_Button_01_Green : 32|1@0- (1,0) [0|0] ""  Old8ButtonPanel
+ SG_ SwitchPanel_Button_02_Green : 33|1@0- (1,0) [0|0] ""  Old8ButtonPanel
+ SG_ SwitchPanel_Button_03_Green : 34|1@0- (1,0) [0|0] ""  Old8ButtonPanel
+ SG_ SwitchPanel_Button_04_Green : 35|1@0- (1,0) [0|0] ""  Old8ButtonPanel
+ SG_ SwitchPanel_Button_05_Green : 40|1@0- (1,0) [0|0] ""  Old8ButtonPanel
+ SG_ SwitchPanel_Button_06_Green : 41|1@0- (1,0) [0|0] ""  Old8ButtonPanel
+ SG_ SwitchPanel_Button_07_Green : 42|1@0- (1,0) [0|0] ""  Old8ButtonPanel
+ SG_ SwitchPanel_Button_08_Green : 43|1@0- (1,0) [0|0] ""  Old8ButtonPanel
+ SG_ SwitchPanel_Button_01_Blue : 48|1@0- (1,0) [0|0] ""  Old8ButtonPanel
+ SG_ SwitchPanel_Button_02_Blue : 49|1@0- (1,0) [0|0] ""  Old8ButtonPanel
+ SG_ SwitchPanel_Button_03_Blue : 50|1@0- (1,0) [0|0] ""  Old8ButtonPanel
+ SG_ SwitchPanel_Button_04_Blue : 51|1@0- (1,0) [0|0] ""  Old8ButtonPanel
+ SG_ SwitchPanel_Button_05_Blue : 56|1@0- (1,0) [0|0] ""  Old8ButtonPanel
+ SG_ SwitchPanel_Button_06_Blue : 57|1@0- (1,0) [0|0] ""  Old8ButtonPanel
+ SG_ SwitchPanel_Button_07_Blue : 58|1@0- (1,0) [0|0] ""  Old8ButtonPanel
+ SG_ SwitchPanel_Button_08_Blue : 59|1@0- (1,0) [0|0] ""  Old8ButtonPanel
+
+BO_ 2483029504 Fix500_600: 8 FT500
+ SG_ FT500_Simple_TPS : 7|16@0+ (0.1,0) [0|100] "%" Vector__XXX
+ SG_ FT500_Simple_MAP : 23|16@0- (0.001,0) [-1|10] "Bar" Vector__XXX
+ SG_ FT500_Simple_IAT : 39|16@0- (0.1,0) [-50|1000] "°C" Vector__XXX
+ SG_ FT500_Simple_ECT : 55|16@0- (0.1,0) [-50|1000] "°C" Vector__XXX
+
+BO_ 2483029505 Fix500_601: 8 FT500
+ SG_ FT500_Simple_OilPressure : 7|16@0+ (0.001,0) [0|0] "Bar" Vector__XXX
+ SG_ FT500_Simple_FuelPressure : 23|16@0+ (0.001,0) [0|0] "Bar" Vector__XXX
+ SG_ FT500_Simple_WaterPressure : 39|16@0- (0.001,0) [0|0] "Bar" Vector__XXX
+ SG_ FT500_Simple_Gear : 55|16@0- (1,0) [0|0] "" Vector__XXX
+
+BO_ 2483029506 Fix500_602: 8 FT500
+ SG_ FT500_Simple_O2 : 7|16@0+ (0.001,0) [0.2|2] "Lambda" Vector__XXX
+ SG_ FT500_Simple_RPM : 23|16@0+ (1,0) [0|20000] "U/min" Vector__XXX
+ SG_ FT500_Simple_OilT : 39|16@0- (0.1,0) [0|0] "°C" Vector__XXX
+ SG_ FT500_Simple_PitLimit : 55|16@0- (1,0) [0|0] "" Vector__XXX
+
+BO_ 2483029507 Fix500_603: 8 FT500
+ SG_ FT500_Simple_WheelSpeedFR : 7|16@0+ (1,0) [0|0] "km/h" Vector__XXX
+ SG_ FT500_Simple_WheelSpeedFL : 23|16@0+ (1,0) [0|0] "km/h" Vector__XXX
+ SG_ FT500_Simple_WheelSpeedRR : 39|16@0+ (1,0) [0|0] "km/h" Vector__XXX
+ SG_ FT500_Simple_WheelSpeedRL : 55|16@0+ (1,0) [0|0] "km/h" Vector__XXX
+
+BO_ 2483029508 Fix500_604: 8 FT500
+ SG_ FT500_Simple_TractionCtrl_Slip : 7|16@0+ (1,0) [0|0] "km/h" Vector__XXX
+ SG_ FT500_Simple_TractionCtrl_Retard : 23|16@0+ (0.1,0) [0|0] "°" Vector__XXX
+ SG_ FT500_Simple_TractionCtrl_Cut : 39|16@0+ (1,0) [0|0] "%" Vector__XXX
+ SG_ FT500_Simple_Heading : 55|16@0- (1,0) [0|0] "" Vector__XXX
+
+BO_ 2483029509 Fix500_605: 8 FT500
+ SG_ FT500_Simple_ShockSensorFR : 7|16@0- (1,0) [0|0] "mm" Vector__XXX
+ SG_ FT500_Simple_ShockSensorFL : 23|16@0- (1,0) [0|0] "mm" Vector__XXX
+ SG_ FT500_Simple_ShockSensorRR : 39|16@0- (1,0) [0|0] "mm" Vector__XXX
+ SG_ FT500_Simple_ShockSensorRL : 55|16@0- (1,0) [0|0] "mm" Vector__XXX
+
+BO_ 2483029510 Fix500_606: 8 FT500
+ SG_ FT500_Simple_G_Force_Accel : 7|16@0- (0.001,0) [0|0] "km/h" Vector__XXX
+ SG_ FT500_Simple_G_Force_Lateral : 23|16@0- (0.001,0) [0|0] "km/h" Vector__XXX
+ SG_ FT500_Simple_YawRate_Frontal : 39|16@0- (0.001,0) [0|0] "km/h" Vector__XXX
+ SG_ FT500_Simple_YawRate_Lateral : 55|16@0- (0.001,0) [0|0] "km/h" Vector__XXX
+
+BO_ 2483029511 Fix500_607: 8 FT500
+ SG_ FT500_Simple_LambdaCorrection : 7|16@0+ (1,0) [0|0] "km/h" Vector__XXX
+ SG_ FT500_Simple_FuelFlowTotal : 23|16@0+ (0.01,0) [0|0] "l/min" Vector__XXX
+ SG_ FT500_Simple_Unknown_01 : 39|16@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ FT500_Simple_Unknown_02 : 55|16@0+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2483553792 Fix600_600: 8 FT450_FT550_FT600
+ SG_ FT600_Simple_TPS : 7|16@0+ (0.1,0) [0|100] "%" Vector__XXX
+ SG_ FT600_Simple_MAP : 23|16@0- (0.001,0) [-1|10] "Bar" Vector__XXX
+ SG_ FT600_Simple_IAT : 39|16@0- (0.1,0) [0|0] "°C" Vector__XXX
+ SG_ FT600_Simple_ECT : 41|16@0- (0.1,0) [-50|1000] "°C" Vector__XXX
+
+BO_ 2483553793 Fix600_601: 8 FT450_FT550_FT600
+ SG_ FT600_Simple_OilPressure : 7|16@0+ (0.001,0) [0|0] "Bar" Vector__XXX
+ SG_ FT600_Simple_FuelPressure : 23|16@0+ (0.001,0) [0|0] "Bar" Vector__XXX
+ SG_ FT600_Simple_WaterPressure : 39|16@0- (0.001,0) [0|0] "Bar" Vector__XXX
+ SG_ FT600_Simple_Gear : 42|16@0- (1,0) [0|0] "" Vector__XXX
+
+BO_ 2483553794 Fix600_602: 8 FT450_FT550_FT600
+ SG_ FT600_Simple_O2 : 7|16@0+ (0.001,0) [0.2|2] "Lambda" Vector__XXX
+ SG_ FT600_Simple_RPM : 23|16@0+ (1,0) [0|20000] "U/min" Vector__XXX
+ SG_ FT600_Simple_OilT : 39|16@0- (0.1,0) [0|0] "°C" Vector__XXX
+ SG_ FT600_Simple_PitLimit : 40|16@0- (1,0) [0|0] "" Vector__XXX
+
+BO_ 2483553795 Fix600_603: 8 FT450_FT550_FT600
+ SG_ FT600_Simple_WheelSpeedFR : 7|16@0+ (1,0) [0|0] "km/h" Vector__XXX
+ SG_ FT600_Simple_WheelSpeedFL : 23|16@0+ (1,0) [0|0] "km/h" Vector__XXX
+ SG_ FT600_Simple_WheelSpeedRR : 39|16@0+ (1,0) [0|0] "km/h" Vector__XXX
+ SG_ FT600_Simple_WheelSpeedRL : 55|16@0+ (1,0) [0|0] "km/h" Vector__XXX
+
+BO_ 2483553796 Fix600_604: 8 FT450_FT550_FT600
+ SG_ FT600_Simple_TractionCtrl_Slip : 7|16@0+ (1,0) [0|0] "km/h" Vector__XXX
+ SG_ FT600_Simple_TractionCtrl_Retard : 23|16@0+ (0.1,0) [0|0] "°" Vector__XXX
+ SG_ FT600_Simple_TractionCtrl_Cut : 39|16@0+ (1,0) [0|0] "%" Vector__XXX
+ SG_ FT600_Simple_Heading : 55|16@0- (1,0) [0|0] "" Vector__XXX
+
+BO_ 2483553797 Fix600_605: 8 FT450_FT550_FT600
+ SG_ FT600_Simple_ShockSensorFR : 7|16@0- (1,0) [0|0] "mm" Vector__XXX
+ SG_ FT600_Simple_ShockSensorFL : 23|16@0- (1,0) [0|0] "mm" Vector__XXX
+ SG_ FT600_Simple_ShockSensorRR : 39|16@0- (1,0) [0|0] "mm" Vector__XXX
+ SG_ FT600_Simple_ShockSensorRL : 55|16@0- (1,0) [0|0] "mm" Vector__XXX
+
+BO_ 2483553798 Fix600_606: 8 FT450_FT550_FT600
+ SG_ FT600_Simple_G_Force_Accel : 7|16@0- (0.001,0) [0|0] "km/h" Vector__XXX
+ SG_ FT600_Simple_G_Force_Lateral : 23|16@0- (0.001,0) [0|0] "km/h" Vector__XXX
+ SG_ FT600_Simple_YawRate_Frontal : 39|16@0- (0.001,0) [0|0] "km/h" Vector__XXX
+ SG_ FT600_Simple_YawRate_Lateral : 55|16@0- (0.001,0) [0|0] "km/h" Vector__XXX
+
+BO_ 2483553799 Fix600_607: 8 FT450_FT550_FT600
+ SG_ FT600_Simple_LambdaCorrection : 7|16@0+ (1,0) [0|0] "km/h" Vector__XXX
+ SG_ FT600_Simple_FuelFlowTotal : 23|16@0+ (0.01,0) [0|0] "l/min" Vector__XXX
+ SG_ FT600_Simple_Unknown_01 : 39|16@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ FT600_Simple_Unknown_02 : 55|16@0+ (1,0) [0|0] "" Vector__XXX
+
+
+
+CM_ BU_ Mini8ButtonPanel "Fueltech SwitchPanel 8 Button Mini";
+CM_ BU_ Old8ButtonPanel "Fueltech Switchpanel";
+VAL_ 2483032319 FTCAN_0FF_MeasureID_01 232 "Power level conf.f.ext. ignition" 154 "ECU Electro Fan" 152 "ECU Air Conditioning" 150 "ECU Cut" 148 "Burnout Signal" 146 "3-Step Signal" 144 "2-Step Signal" 142 "ECU Ignition Advance/Retard" 140 "ECU Injection Bank B Duty Cycle" 138 "ECU Injection Bank A Duty Cycle" 136 "ECU Injection Bank B Time" 134 "ECU Injection Bank A Time" 132 "ECU RPM" 130 "ECU Temperature Sensor Unit" 128 "ECU Pressure Sensor Unit" 126 "ECU Speed Sensor Unit" 124 "ECU O2 Sensor Unit" 122 "Exhaust EGT" 120 "Right bank EGT" 118 "Left bank EGT" 96 "Cylinder 8 EGT" 94 "Cylinder 7 EGT" 92 "Cylinder 6 EGT" 90 "Cylinder 5 EGT" 88 "Cylinder 4 EGT" 86 "Cylinder 3 EGT" 84 "Cylinder 2 EGT" 82 "Cylinder 1 EGT" 80 "Disabled EGT" 78 "Exhaust O2" 76 "Right bank O2" 74 "Left bank O2" 52 "Cylinder 8 O2" 50 "Cylinder 7 O2" 48 "Cylinder 6 O2" 46 "Cylinder 5 O2" 44 "Cylinder 4 O2" 42 "Cylinder 3 O2" 40 "Cylinder 2 O2" 38 "Cylinder 1 O2" 36 "Disabled O2" 34 "Gear" 32 "Driveshaft RPM" 30 "Right rear wheel speed" 28 "left rear wheel speed" 26 "Right front wheel speed" 24 "Left front wheel speed" 22 "Drag Speed" 20 "Traction Speed" 18 "ECU Battery Voltage" 16 "ECU Launch Mode" 14 "Water Pressure" 12 "Fuel Pressure" 10 "Oil Pressure" 8 "Engine Temperature" 6 "Air Temperature" 4 "MAP" 2 "TPS" 0 "Unknown" ;
+VAL_ 2483032319 FTCAN_0FF_MeasureID_02 232 "Power level conf.f.ext. ignition" 154 "ECU Electro Fan" 152 "ECU Air Conditioning" 150 "ECU Cut" 148 "Burnout Signal" 146 "3-Step Signal" 144 "2-Step Signal" 142 "ECU Ignition Advance/Retard" 140 "ECU Injection Bank B Duty Cycle" 138 "ECU Injection Bank A Duty Cycle" 136 "ECU Injection Bank B Time" 134 "ECU Injection Bank A Time" 132 "ECU RPM" 130 "ECU Temperature Sensor Unit" 128 "ECU Pressure Sensor Unit" 126 "ECU Speed Sensor Unit" 124 "ECU O2 Sensor Unit" 122 "Exhaust EGT" 120 "Right bank EGT" 118 "Left bank EGT" 96 "Cylinder 8 EGT" 94 "Cylinder 7 EGT" 92 "Cylinder 6 EGT" 90 "Cylinder 5 EGT" 88 "Cylinder 4 EGT" 86 "Cylinder 3 EGT" 84 "Cylinder 2 EGT" 82 "Cylinder 1 EGT" 80 "Disabled EGT" 78 "Exhaust O2" 76 "Right bank O2" 74 "Left bank O2" 52 "Cylinder 8 O2" 50 "Cylinder 7 O2" 48 "Cylinder 6 O2" 46 "Cylinder 5 O2" 44 "Cylinder 4 O2" 42 "Cylinder 3 O2" 40 "Cylinder 2 O2" 38 "Cylinder 1 O2" 36 "Disabled O2" 34 "Gear" 32 "Driveshaft RPM" 30 "Right rear wheel speed" 28 "left rear wheel speed" 26 "Right front wheel speed" 24 "Left front wheel speed" 22 "Drag Speed" 20 "Traction Speed" 18 "ECU Battery Voltage" 16 "ECU Launch Mode" 14 "Water Pressure" 12 "Fuel Pressure" 10 "Oil Pressure" 8 "Engine Temperature" 6 "Air Temperature" 4 "MAP" 2 "TPS" 0 "Unknown" ;
+VAL_ 2483032319 FTCAN_0FF_MeasureID_03 232 "Power level conf.f.ext. ignition" 154 "ECU Electro Fan" 152 "ECU Air Conditioning" 150 "ECU Cut" 148 "Burnout Signal" 146 "3-Step Signal" 144 "2-Step Signal" 142 "ECU Ignition Advance/Retard" 140 "ECU Injection Bank B Duty Cycle" 138 "ECU Injection Bank A Duty Cycle" 136 "ECU Injection Bank B Time" 134 "ECU Injection Bank A Time" 132 "ECU RPM" 130 "ECU Temperature Sensor Unit" 128 "ECU Pressure Sensor Unit" 126 "ECU Speed Sensor Unit" 124 "ECU O2 Sensor Unit" 122 "Exhaust EGT" 120 "Right bank EGT" 118 "Left bank EGT" 96 "Cylinder 8 EGT" 94 "Cylinder 7 EGT" 92 "Cylinder 6 EGT" 90 "Cylinder 5 EGT" 88 "Cylinder 4 EGT" 86 "Cylinder 3 EGT" 84 "Cylinder 2 EGT" 82 "Cylinder 1 EGT" 80 "Disabled EGT" 78 "Exhaust O2" 76 "Right bank O2" 74 "Left bank O2" 52 "Cylinder 8 O2" 50 "Cylinder 7 O2" 48 "Cylinder 6 O2" 46 "Cylinder 5 O2" 44 "Cylinder 4 O2" 42 "Cylinder 3 O2" 40 "Cylinder 2 O2" 38 "Cylinder 1 O2" 36 "Disabled O2" 34 "Gear" 32 "Driveshaft RPM" 30 "Right rear wheel speed" 28 "left rear wheel speed" 26 "Right front wheel speed" 24 "Left front wheel speed" 22 "Drag Speed" 20 "Traction Speed" 18 "ECU Battery Voltage" 16 "ECU Launch Mode" 14 "Water Pressure" 12 "Fuel Pressure" 10 "Oil Pressure" 8 "Engine Temperature" 6 "Air Temperature" 4 "MAP" 2 "TPS" 0 "Unknown" ;
+VAL_ 2483032575 FTCAN_1FF_MeasureID_01 232 "Power level conf.f.ext. ignition" 154 "ECU Electro Fan" 152 "ECU Air Conditioning" 150 "ECU Cut" 148 "Burnout Signal" 146 "3-Step Signal" 144 "2-Step Signal" 142 "ECU Ignition Advance/Retard" 140 "ECU Injection Bank B Duty Cycle" 138 "ECU Injection Bank A Duty Cycle" 136 "ECU Injection Bank B Time" 134 "ECU Injection Bank A Time" 132 "ECU RPM" 130 "ECU Temperature Sensor Unit" 128 "ECU Pressure Sensor Unit" 126 "ECU Speed Sensor Unit" 124 "ECU O2 Sensor Unit" 122 "Exhaust EGT" 120 "Right bank EGT" 118 "Left bank EGT" 96 "Cylinder 8 EGT" 94 "Cylinder 7 EGT" 92 "Cylinder 6 EGT" 90 "Cylinder 5 EGT" 88 "Cylinder 4 EGT" 86 "Cylinder 3 EGT" 84 "Cylinder 2 EGT" 82 "Cylinder 1 EGT" 80 "Disabled EGT" 78 "Exhaust O2" 76 "Right bank O2" 74 "Left bank O2" 52 "Cylinder 8 O2" 50 "Cylinder 7 O2" 48 "Cylinder 6 O2" 46 "Cylinder 5 O2" 44 "Cylinder 4 O2" 42 "Cylinder 3 O2" 40 "Cylinder 2 O2" 38 "Cylinder 1 O2" 36 "Disabled O2" 34 "Gear" 32 "Driveshaft RPM" 30 "Right rear wheel speed" 28 "left rear wheel speed" 26 "Right front wheel speed" 24 "Left front wheel speed" 22 "Drag Speed" 20 "Traction Speed" 18 "ECU Battery Voltage" 16 "ECU Launch Mode" 14 "Water Pressure" 12 "Fuel Pressure" 10 "Oil Pressure" 8 "Engine Temperature" 6 "Air Temperature" 4 "MAP" 2 "TPS" 0 "Unknown" ;
+VAL_ 2483032575 FTCAN_1FF_MeasureID_02 232 "Power level conf.f.ext. ignition" 154 "ECU Electro Fan" 152 "ECU Air Conditioning" 150 "ECU Cut" 148 "Burnout Signal" 146 "3-Step Signal" 144 "2-Step Signal" 142 "ECU Ignition Advance/Retard" 140 "ECU Injection Bank B Duty Cycle" 138 "ECU Injection Bank A Duty Cycle" 136 "ECU Injection Bank B Time" 134 "ECU Injection Bank A Time" 132 "ECU RPM" 130 "ECU Temperature Sensor Unit" 128 "ECU Pressure Sensor Unit" 126 "ECU Speed Sensor Unit" 124 "ECU O2 Sensor Unit" 122 "Exhaust EGT" 120 "Right bank EGT" 118 "Left bank EGT" 96 "Cylinder 8 EGT" 94 "Cylinder 7 EGT" 92 "Cylinder 6 EGT" 90 "Cylinder 5 EGT" 88 "Cylinder 4 EGT" 86 "Cylinder 3 EGT" 84 "Cylinder 2 EGT" 82 "Cylinder 1 EGT" 80 "Disabled EGT" 78 "Exhaust O2" 76 "Right bank O2" 74 "Left bank O2" 52 "Cylinder 8 O2" 50 "Cylinder 7 O2" 48 "Cylinder 6 O2" 46 "Cylinder 5 O2" 44 "Cylinder 4 O2" 42 "Cylinder 3 O2" 40 "Cylinder 2 O2" 38 "Cylinder 1 O2" 36 "Disabled O2" 34 "Gear" 32 "Driveshaft RPM" 30 "Right rear wheel speed" 28 "left rear wheel speed" 26 "Right front wheel speed" 24 "Left front wheel speed" 22 "Drag Speed" 20 "Traction Speed" 18 "ECU Battery Voltage" 16 "ECU Launch Mode" 14 "Water Pressure" 12 "Fuel Pressure" 10 "Oil Pressure" 8 "Engine Temperature" 6 "Air Temperature" 4 "MAP" 2 "TPS" 0 "Unknown" ;
+VAL_ 2483032575 FTCAN_1FF_MeasureID_03 232 "Power level conf.f.ext. ignition" 154 "ECU Electro Fan" 152 "ECU Air Conditioning" 150 "ECU Cut" 148 "Burnout Signal" 146 "3-Step Signal" 144 "2-Step Signal" 142 "ECU Ignition Advance/Retard" 140 "ECU Injection Bank B Duty Cycle" 138 "ECU Injection Bank A Duty Cycle" 136 "ECU Injection Bank B Time" 134 "ECU Injection Bank A Time" 132 "ECU RPM" 130 "ECU Temperature Sensor Unit" 128 "ECU Pressure Sensor Unit" 126 "ECU Speed Sensor Unit" 124 "ECU O2 Sensor Unit" 122 "Exhaust EGT" 120 "Right bank EGT" 118 "Left bank EGT" 96 "Cylinder 8 EGT" 94 "Cylinder 7 EGT" 92 "Cylinder 6 EGT" 90 "Cylinder 5 EGT" 88 "Cylinder 4 EGT" 86 "Cylinder 3 EGT" 84 "Cylinder 2 EGT" 82 "Cylinder 1 EGT" 80 "Disabled EGT" 78 "Exhaust O2" 76 "Right bank O2" 74 "Left bank O2" 52 "Cylinder 8 O2" 50 "Cylinder 7 O2" 48 "Cylinder 6 O2" 46 "Cylinder 5 O2" 44 "Cylinder 4 O2" 42 "Cylinder 3 O2" 40 "Cylinder 2 O2" 38 "Cylinder 1 O2" 36 "Disabled O2" 34 "Gear" 32 "Driveshaft RPM" 30 "Right rear wheel speed" 28 "left rear wheel speed" 26 "Right front wheel speed" 24 "Left front wheel speed" 22 "Drag Speed" 20 "Traction Speed" 18 "ECU Battery Voltage" 16 "ECU Launch Mode" 14 "Water Pressure" 12 "Fuel Pressure" 10 "Oil Pressure" 8 "Engine Temperature" 6 "Air Temperature" 4 "MAP" 2 "TPS" 0 "Unknown" ;
+VAL_ 2483032575 FTCAN_1FF_MeasureID_04 232 "Power level conf.f.ext. ignition" 154 "ECU Electro Fan" 152 "ECU Air Conditioning" 150 "ECU Cut" 148 "Burnout Signal" 146 "3-Step Signal" 144 "2-Step Signal" 142 "ECU Ignition Advance/Retard" 140 "ECU Injection Bank B Duty Cycle" 138 "ECU Injection Bank A Duty Cycle" 136 "ECU Injection Bank B Time" 134 "ECU Injection Bank A Time" 132 "ECU RPM" 130 "ECU Temperature Sensor Unit" 128 "ECU Pressure Sensor Unit" 126 "ECU Speed Sensor Unit" 124 "ECU O2 Sensor Unit" 122 "Exhaust EGT" 120 "Right bank EGT" 118 "Left bank EGT" 96 "Cylinder 8 EGT" 94 "Cylinder 7 EGT" 92 "Cylinder 6 EGT" 90 "Cylinder 5 EGT" 88 "Cylinder 4 EGT" 86 "Cylinder 3 EGT" 84 "Cylinder 2 EGT" 82 "Cylinder 1 EGT" 80 "Disabled EGT" 78 "Exhaust O2" 76 "Right bank O2" 74 "Left bank O2" 52 "Cylinder 8 O2" 50 "Cylinder 7 O2" 48 "Cylinder 6 O2" 46 "Cylinder 5 O2" 44 "Cylinder 4 O2" 42 "Cylinder 3 O2" 40 "Cylinder 2 O2" 38 "Cylinder 1 O2" 36 "Disabled O2" 34 "Gear" 32 "Driveshaft RPM" 30 "Right rear wheel speed" 28 "left rear wheel speed" 26 "Right front wheel speed" 24 "Left front wheel speed" 22 "Drag Speed" 20 "Traction Speed" 18 "ECU Battery Voltage" 16 "ECU Launch Mode" 14 "Water Pressure" 12 "Fuel Pressure" 10 "Oil Pressure" 8 "Engine Temperature" 6 "Air Temperature" 4 "MAP" 2 "TPS" 0 "Unknown" ;
+VAL_ 2483032575 FTCAN_1FF_MeasureID_05 232 "Power level conf.f.ext. ignition" 154 "ECU Electro Fan" 152 "ECU Air Conditioning" 150 "ECU Cut" 148 "Burnout Signal" 146 "3-Step Signal" 144 "2-Step Signal" 142 "ECU Ignition Advance/Retard" 140 "ECU Injection Bank B Duty Cycle" 138 "ECU Injection Bank A Duty Cycle" 136 "ECU Injection Bank B Time" 134 "ECU Injection Bank A Time" 132 "ECU RPM" 130 "ECU Temperature Sensor Unit" 128 "ECU Pressure Sensor Unit" 126 "ECU Speed Sensor Unit" 124 "ECU O2 Sensor Unit" 122 "Exhaust EGT" 120 "Right bank EGT" 118 "Left bank EGT" 96 "Cylinder 8 EGT" 94 "Cylinder 7 EGT" 92 "Cylinder 6 EGT" 90 "Cylinder 5 EGT" 88 "Cylinder 4 EGT" 86 "Cylinder 3 EGT" 84 "Cylinder 2 EGT" 82 "Cylinder 1 EGT" 80 "Disabled EGT" 78 "Exhaust O2" 76 "Right bank O2" 74 "Left bank O2" 52 "Cylinder 8 O2" 50 "Cylinder 7 O2" 48 "Cylinder 6 O2" 46 "Cylinder 5 O2" 44 "Cylinder 4 O2" 42 "Cylinder 3 O2" 40 "Cylinder 2 O2" 38 "Cylinder 1 O2" 36 "Disabled O2" 34 "Gear" 32 "Driveshaft RPM" 30 "Right rear wheel speed" 28 "left rear wheel speed" 26 "Right front wheel speed" 24 "Left front wheel speed" 22 "Drag Speed" 20 "Traction Speed" 18 "ECU Battery Voltage" 16 "ECU Launch Mode" 14 "Water Pressure" 12 "Fuel Pressure" 10 "Oil Pressure" 8 "Engine Temperature" 6 "Air Temperature" 4 "MAP" 2 "TPS" 0 "Unknown" ;
+VAL_ 2483032575 FTCAN_1FF_MeasureID_06 232 "Power level conf.f.ext. ignition" 154 "ECU Electro Fan" 152 "ECU Air Conditioning" 150 "ECU Cut" 148 "Burnout Signal" 146 "3-Step Signal" 144 "2-Step Signal" 142 "ECU Ignition Advance/Retard" 140 "ECU Injection Bank B Duty Cycle" 138 "ECU Injection Bank A Duty Cycle" 136 "ECU Injection Bank B Time" 134 "ECU Injection Bank A Time" 132 "ECU RPM" 130 "ECU Temperature Sensor Unit" 128 "ECU Pressure Sensor Unit" 126 "ECU Speed Sensor Unit" 124 "ECU O2 Sensor Unit" 122 "Exhaust EGT" 120 "Right bank EGT" 118 "Left bank EGT" 96 "Cylinder 8 EGT" 94 "Cylinder 7 EGT" 92 "Cylinder 6 EGT" 90 "Cylinder 5 EGT" 88 "Cylinder 4 EGT" 86 "Cylinder 3 EGT" 84 "Cylinder 2 EGT" 82 "Cylinder 1 EGT" 80 "Disabled EGT" 78 "Exhaust O2" 76 "Right bank O2" 74 "Left bank O2" 52 "Cylinder 8 O2" 50 "Cylinder 7 O2" 48 "Cylinder 6 O2" 46 "Cylinder 5 O2" 44 "Cylinder 4 O2" 42 "Cylinder 3 O2" 40 "Cylinder 2 O2" 38 "Cylinder 1 O2" 36 "Disabled O2" 34 "Gear" 32 "Driveshaft RPM" 30 "Right rear wheel speed" 28 "left rear wheel speed" 26 "Right front wheel speed" 24 "Left front wheel speed" 22 "Drag Speed" 20 "Traction Speed" 18 "ECU Battery Voltage" 16 "ECU Launch Mode" 14 "Water Pressure" 12 "Fuel Pressure" 10 "Oil Pressure" 8 "Engine Temperature" 6 "Air Temperature" 4 "MAP" 2 "TPS" 0 "Unknown" ;
+VAL_ 2483032575 FTCAN_1FF_MeasureID_07 232 "Power level conf.f.ext. ignition" 154 "ECU Electro Fan" 152 "ECU Air Conditioning" 150 "ECU Cut" 148 "Burnout Signal" 146 "3-Step Signal" 144 "2-Step Signal" 142 "ECU Ignition Advance/Retard" 140 "ECU Injection Bank B Duty Cycle" 138 "ECU Injection Bank A Duty Cycle" 136 "ECU Injection Bank B Time" 134 "ECU Injection Bank A Time" 132 "ECU RPM" 130 "ECU Temperature Sensor Unit" 128 "ECU Pressure Sensor Unit" 126 "ECU Speed Sensor Unit" 124 "ECU O2 Sensor Unit" 122 "Exhaust EGT" 120 "Right bank EGT" 118 "Left bank EGT" 96 "Cylinder 8 EGT" 94 "Cylinder 7 EGT" 92 "Cylinder 6 EGT" 90 "Cylinder 5 EGT" 88 "Cylinder 4 EGT" 86 "Cylinder 3 EGT" 84 "Cylinder 2 EGT" 82 "Cylinder 1 EGT" 80 "Disabled EGT" 78 "Exhaust O2" 76 "Right bank O2" 74 "Left bank O2" 52 "Cylinder 8 O2" 50 "Cylinder 7 O2" 48 "Cylinder 6 O2" 46 "Cylinder 5 O2" 44 "Cylinder 4 O2" 42 "Cylinder 3 O2" 40 "Cylinder 2 O2" 38 "Cylinder 1 O2" 36 "Disabled O2" 34 "Gear" 32 "Driveshaft RPM" 30 "Right rear wheel speed" 28 "left rear wheel speed" 26 "Right front wheel speed" 24 "Left front wheel speed" 22 "Drag Speed" 20 "Traction Speed" 18 "ECU Battery Voltage" 16 "ECU Launch Mode" 14 "Water Pressure" 12 "Fuel Pressure" 10 "Oil Pressure" 8 "Engine Temperature" 6 "Air Temperature" 4 "MAP" 2 "TPS" 0 "Unknown" ;
+VAL_ 2483032575 FTCAN_1FF_MeasureID_08 232 "Power level conf.f.ext. ignition" 154 "ECU Electro Fan" 152 "ECU Air Conditioning" 150 "ECU Cut" 148 "Burnout Signal" 146 "3-Step Signal" 144 "2-Step Signal" 142 "ECU Ignition Advance/Retard" 140 "ECU Injection Bank B Duty Cycle" 138 "ECU Injection Bank A Duty Cycle" 136 "ECU Injection Bank B Time" 134 "ECU Injection Bank A Time" 132 "ECU RPM" 130 "ECU Temperature Sensor Unit" 128 "ECU Pressure Sensor Unit" 126 "ECU Speed Sensor Unit" 124 "ECU O2 Sensor Unit" 122 "Exhaust EGT" 120 "Right bank EGT" 118 "Left bank EGT" 96 "Cylinder 8 EGT" 94 "Cylinder 7 EGT" 92 "Cylinder 6 EGT" 90 "Cylinder 5 EGT" 88 "Cylinder 4 EGT" 86 "Cylinder 3 EGT" 84 "Cylinder 2 EGT" 82 "Cylinder 1 EGT" 80 "Disabled EGT" 78 "Exhaust O2" 76 "Right bank O2" 74 "Left bank O2" 52 "Cylinder 8 O2" 50 "Cylinder 7 O2" 48 "Cylinder 6 O2" 46 "Cylinder 5 O2" 44 "Cylinder 4 O2" 42 "Cylinder 3 O2" 40 "Cylinder 2 O2" 38 "Cylinder 1 O2" 36 "Disabled O2" 34 "Gear" 32 "Driveshaft RPM" 30 "Right rear wheel speed" 28 "left rear wheel speed" 26 "Right front wheel speed" 24 "Left front wheel speed" 22 "Drag Speed" 20 "Traction Speed" 18 "ECU Battery Voltage" 16 "ECU Launch Mode" 14 "Water Pressure" 12 "Fuel Pressure" 10 "Oil Pressure" 8 "Engine Temperature" 6 "Air Temperature" 4 "MAP" 2 "TPS" 0 "Unknown" ;
+VAL_ 2483033087 FTCAN_3FF_MeasureID_01 232 "Power level conf.f.ext. ignition" 154 "ECU Electro Fan" 152 "ECU Air Conditioning" 150 "ECU Cut" 148 "Burnout Signal" 146 "3-Step Signal" 144 "2-Step Signal" 142 "ECU Ignition Advance/Retard" 140 "ECU Injection Bank B Duty Cycle" 138 "ECU Injection Bank A Duty Cycle" 136 "ECU Injection Bank B Time" 134 "ECU Injection Bank A Time" 132 "ECU RPM" 130 "ECU Temperature Sensor Unit" 128 "ECU Pressure Sensor Unit" 126 "ECU Speed Sensor Unit" 124 "ECU O2 Sensor Unit" 122 "Exhaust EGT" 120 "Right bank EGT" 118 "Left bank EGT" 96 "Cylinder 8 EGT" 94 "Cylinder 7 EGT" 92 "Cylinder 6 EGT" 90 "Cylinder 5 EGT" 88 "Cylinder 4 EGT" 86 "Cylinder 3 EGT" 84 "Cylinder 2 EGT" 82 "Cylinder 1 EGT" 80 "Disabled EGT" 78 "Exhaust O2" 76 "Right bank O2" 74 "Left bank O2" 52 "Cylinder 8 O2" 50 "Cylinder 7 O2" 48 "Cylinder 6 O2" 46 "Cylinder 5 O2" 44 "Cylinder 4 O2" 42 "Cylinder 3 O2" 40 "Cylinder 2 O2" 38 "Cylinder 1 O2" 36 "Disabled O2" 34 "Gear" 32 "Driveshaft RPM" 30 "Right rear wheel speed" 28 "left rear wheel speed" 26 "Right front wheel speed" 24 "Left front wheel speed" 22 "Drag Speed" 20 "Traction Speed" 18 "ECU Battery Voltage" 16 "ECU Launch Mode" 14 "Water Pressure" 12 "Fuel Pressure" 10 "Oil Pressure" 8 "Engine Temperature" 6 "Air Temperature" 4 "MAP" 2 "TPS" 0 "Unknown" ;
+VAL_ 2483033087 FTCAN_3FF_MeasureID_02 232 "Power level conf.f.ext. ignition" 154 "ECU Electro Fan" 152 "ECU Air Conditioning" 150 "ECU Cut" 148 "Burnout Signal" 146 "3-Step Signal" 144 "2-Step Signal" 142 "ECU Ignition Advance/Retard" 140 "ECU Injection Bank B Duty Cycle" 138 "ECU Injection Bank A Duty Cycle" 136 "ECU Injection Bank B Time" 134 "ECU Injection Bank A Time" 132 "ECU RPM" 130 "ECU Temperature Sensor Unit" 128 "ECU Pressure Sensor Unit" 126 "ECU Speed Sensor Unit" 124 "ECU O2 Sensor Unit" 122 "Exhaust EGT" 120 "Right bank EGT" 118 "Left bank EGT" 96 "Cylinder 8 EGT" 94 "Cylinder 7 EGT" 92 "Cylinder 6 EGT" 90 "Cylinder 5 EGT" 88 "Cylinder 4 EGT" 86 "Cylinder 3 EGT" 84 "Cylinder 2 EGT" 82 "Cylinder 1 EGT" 80 "Disabled EGT" 78 "Exhaust O2" 76 "Right bank O2" 74 "Left bank O2" 52 "Cylinder 8 O2" 50 "Cylinder 7 O2" 48 "Cylinder 6 O2" 46 "Cylinder 5 O2" 44 "Cylinder 4 O2" 42 "Cylinder 3 O2" 40 "Cylinder 2 O2" 38 "Cylinder 1 O2" 36 "Disabled O2" 34 "Gear" 32 "Driveshaft RPM" 30 "Right rear wheel speed" 28 "left rear wheel speed" 26 "Right front wheel speed" 24 "Left front wheel speed" 22 "Drag Speed" 20 "Traction Speed" 18 "ECU Battery Voltage" 16 "ECU Launch Mode" 14 "Water Pressure" 12 "Fuel Pressure" 10 "Oil Pressure" 8 "Engine Temperature" 6 "Air Temperature" 4 "MAP" 2 "TPS" 0 "Unknown" ;
+VAL_ 2483033087 FTCAN_3FF_MeasureID_03 232 "Power level conf.f.ext. ignition" 154 "ECU Electro Fan" 152 "ECU Air Conditioning" 150 "ECU Cut" 148 "Burnout Signal" 146 "3-Step Signal" 144 "2-Step Signal" 142 "ECU Ignition Advance/Retard" 140 "ECU Injection Bank B Duty Cycle" 138 "ECU Injection Bank A Duty Cycle" 136 "ECU Injection Bank B Time" 134 "ECU Injection Bank A Time" 132 "ECU RPM" 130 "ECU Temperature Sensor Unit" 128 "ECU Pressure Sensor Unit" 126 "ECU Speed Sensor Unit" 124 "ECU O2 Sensor Unit" 122 "Exhaust EGT" 120 "Right bank EGT" 118 "Left bank EGT" 96 "Cylinder 8 EGT" 94 "Cylinder 7 EGT" 92 "Cylinder 6 EGT" 90 "Cylinder 5 EGT" 88 "Cylinder 4 EGT" 86 "Cylinder 3 EGT" 84 "Cylinder 2 EGT" 82 "Cylinder 1 EGT" 80 "Disabled EGT" 78 "Exhaust O2" 76 "Right bank O2" 74 "Left bank O2" 52 "Cylinder 8 O2" 50 "Cylinder 7 O2" 48 "Cylinder 6 O2" 46 "Cylinder 5 O2" 44 "Cylinder 4 O2" 42 "Cylinder 3 O2" 40 "Cylinder 2 O2" 38 "Cylinder 1 O2" 36 "Disabled O2" 34 "Gear" 32 "Driveshaft RPM" 30 "Right rear wheel speed" 28 "left rear wheel speed" 26 "Right front wheel speed" 24 "Left front wheel speed" 22 "Drag Speed" 20 "Traction Speed" 18 "ECU Battery Voltage" 16 "ECU Launch Mode" 14 "Water Pressure" 12 "Fuel Pressure" 10 "Oil Pressure" 8 "Engine Temperature" 6 "Air Temperature" 4 "MAP" 2 "TPS" 0 "Unknown" ;
+VAL_ 483032319 FTCAN_0FF_MeasureID_01 232 "Power level conf.f.ext. ignition" 154 "ECU Electro Fan" 152 "ECU Air Conditioning" 150 "ECU Cut" 148 "Burnout Signal" 146 "3-Step Signal" 144 "2-Step Signal" 142 "ECU Ignition Advance/Retard" 140 "ECU Injection Bank B Duty Cycle" 138 "ECU Injection Bank A Duty Cycle" 136 "ECU Injection Bank B Time" 134 "ECU Injection Bank A Time" 132 "ECU RPM" 130 "ECU Temperature Sensor Unit" 128 "ECU Pressure Sensor Unit" 126 "ECU Speed Sensor Unit" 124 "ECU O2 Sensor Unit" 122 "Exhaust EGT" 120 "Right bank EGT" 118 "Left bank EGT" 96 "Cylinder 8 EGT" 94 "Cylinder 7 EGT" 92 "Cylinder 6 EGT" 90 "Cylinder 5 EGT" 88 "Cylinder 4 EGT" 86 "Cylinder 3 EGT" 84 "Cylinder 2 EGT" 82 "Cylinder 1 EGT" 80 "Disabled EGT" 78 "Exhaust O2" 76 "Right bank O2" 74 "Left bank O2" 52 "Cylinder 8 O2" 50 "Cylinder 7 O2" 48 "Cylinder 6 O2" 46 "Cylinder 5 O2" 44 "Cylinder 4 O2" 42 "Cylinder 3 O2" 40 "Cylinder 2 O2" 38 "Cylinder 1 O2" 36 "Disabled O2" 34 "Gear" 32 "Driveshaft RPM" 30 "Right rear wheel speed" 28 "left rear wheel speed" 26 "Right front wheel speed" 24 "Left front wheel speed" 22 "Drag Speed" 20 "Traction Speed" 18 "ECU Battery Voltage" 16 "ECU Launch Mode" 14 "Water Pressure" 12 "Fuel Pressure" 10 "Oil Pressure" 8 "Engine Temperature" 6 "Air Temperature" 4 "MAP" 2 "TPS" 0 "Unknown" ;
+VAL_ 483032319 FTCAN_0FF_MeasureID_02 232 "Power level conf.f.ext. ignition" 154 "ECU Electro Fan" 152 "ECU Air Conditioning" 150 "ECU Cut" 148 "Burnout Signal" 146 "3-Step Signal" 144 "2-Step Signal" 142 "ECU Ignition Advance/Retard" 140 "ECU Injection Bank B Duty Cycle" 138 "ECU Injection Bank A Duty Cycle" 136 "ECU Injection Bank B Time" 134 "ECU Injection Bank A Time" 132 "ECU RPM" 130 "ECU Temperature Sensor Unit" 128 "ECU Pressure Sensor Unit" 126 "ECU Speed Sensor Unit" 124 "ECU O2 Sensor Unit" 122 "Exhaust EGT" 120 "Right bank EGT" 118 "Left bank EGT" 96 "Cylinder 8 EGT" 94 "Cylinder 7 EGT" 92 "Cylinder 6 EGT" 90 "Cylinder 5 EGT" 88 "Cylinder 4 EGT" 86 "Cylinder 3 EGT" 84 "Cylinder 2 EGT" 82 "Cylinder 1 EGT" 80 "Disabled EGT" 78 "Exhaust O2" 76 "Right bank O2" 74 "Left bank O2" 52 "Cylinder 8 O2" 50 "Cylinder 7 O2" 48 "Cylinder 6 O2" 46 "Cylinder 5 O2" 44 "Cylinder 4 O2" 42 "Cylinder 3 O2" 40 "Cylinder 2 O2" 38 "Cylinder 1 O2" 36 "Disabled O2" 34 "Gear" 32 "Driveshaft RPM" 30 "Right rear wheel speed" 28 "left rear wheel speed" 26 "Right front wheel speed" 24 "Left front wheel speed" 22 "Drag Speed" 20 "Traction Speed" 18 "ECU Battery Voltage" 16 "ECU Launch Mode" 14 "Water Pressure" 12 "Fuel Pressure" 10 "Oil Pressure" 8 "Engine Temperature" 6 "Air Temperature" 4 "MAP" 2 "TPS" 0 "Unknown" ;
+VAL_ 483032319 FTCAN_0FF_MeasureID_03 232 "Power level conf.f.ext. ignition" 154 "ECU Electro Fan" 152 "ECU Air Conditioning" 150 "ECU Cut" 148 "Burnout Signal" 146 "3-Step Signal" 144 "2-Step Signal" 142 "ECU Ignition Advance/Retard" 140 "ECU Injection Bank B Duty Cycle" 138 "ECU Injection Bank A Duty Cycle" 136 "ECU Injection Bank B Time" 134 "ECU Injection Bank A Time" 132 "ECU RPM" 130 "ECU Temperature Sensor Unit" 128 "ECU Pressure Sensor Unit" 126 "ECU Speed Sensor Unit" 124 "ECU O2 Sensor Unit" 122 "Exhaust EGT" 120 "Right bank EGT" 118 "Left bank EGT" 96 "Cylinder 8 EGT" 94 "Cylinder 7 EGT" 92 "Cylinder 6 EGT" 90 "Cylinder 5 EGT" 88 "Cylinder 4 EGT" 86 "Cylinder 3 EGT" 84 "Cylinder 2 EGT" 82 "Cylinder 1 EGT" 80 "Disabled EGT" 78 "Exhaust O2" 76 "Right bank O2" 74 "Left bank O2" 52 "Cylinder 8 O2" 50 "Cylinder 7 O2" 48 "Cylinder 6 O2" 46 "Cylinder 5 O2" 44 "Cylinder 4 O2" 42 "Cylinder 3 O2" 40 "Cylinder 2 O2" 38 "Cylinder 1 O2" 36 "Disabled O2" 34 "Gear" 32 "Driveshaft RPM" 30 "Right rear wheel speed" 28 "left rear wheel speed" 26 "Right front wheel speed" 24 "Left front wheel speed" 22 "Drag Speed" 20 "Traction Speed" 18 "ECU Battery Voltage" 16 "ECU Launch Mode" 14 "Water Pressure" 12 "Fuel Pressure" 10 "Oil Pressure" 8 "Engine Temperature" 6 "Air Temperature" 4 "MAP" 2 "TPS" 0 "Unknown" ;
+VAL_ 483032575 FTCAN_1FF_MeasureID_01 232 "Power level conf.f.ext. ignition" 154 "ECU Electro Fan" 152 "ECU Air Conditioning" 150 "ECU Cut" 148 "Burnout Signal" 146 "3-Step Signal" 144 "2-Step Signal" 142 "ECU Ignition Advance/Retard" 140 "ECU Injection Bank B Duty Cycle" 138 "ECU Injection Bank A Duty Cycle" 136 "ECU Injection Bank B Time" 134 "ECU Injection Bank A Time" 132 "ECU RPM" 130 "ECU Temperature Sensor Unit" 128 "ECU Pressure Sensor Unit" 126 "ECU Speed Sensor Unit" 124 "ECU O2 Sensor Unit" 122 "Exhaust EGT" 120 "Right bank EGT" 118 "Left bank EGT" 96 "Cylinder 8 EGT" 94 "Cylinder 7 EGT" 92 "Cylinder 6 EGT" 90 "Cylinder 5 EGT" 88 "Cylinder 4 EGT" 86 "Cylinder 3 EGT" 84 "Cylinder 2 EGT" 82 "Cylinder 1 EGT" 80 "Disabled EGT" 78 "Exhaust O2" 76 "Right bank O2" 74 "Left bank O2" 52 "Cylinder 8 O2" 50 "Cylinder 7 O2" 48 "Cylinder 6 O2" 46 "Cylinder 5 O2" 44 "Cylinder 4 O2" 42 "Cylinder 3 O2" 40 "Cylinder 2 O2" 38 "Cylinder 1 O2" 36 "Disabled O2" 34 "Gear" 32 "Driveshaft RPM" 30 "Right rear wheel speed" 28 "left rear wheel speed" 26 "Right front wheel speed" 24 "Left front wheel speed" 22 "Drag Speed" 20 "Traction Speed" 18 "ECU Battery Voltage" 16 "ECU Launch Mode" 14 "Water Pressure" 12 "Fuel Pressure" 10 "Oil Pressure" 8 "Engine Temperature" 6 "Air Temperature" 4 "MAP" 2 "TPS" 0 "Unknown" ;
+VAL_ 483032575 FTCAN_1FF_MeasureID_02 232 "Power level conf.f.ext. ignition" 154 "ECU Electro Fan" 152 "ECU Air Conditioning" 150 "ECU Cut" 148 "Burnout Signal" 146 "3-Step Signal" 144 "2-Step Signal" 142 "ECU Ignition Advance/Retard" 140 "ECU Injection Bank B Duty Cycle" 138 "ECU Injection Bank A Duty Cycle" 136 "ECU Injection Bank B Time" 134 "ECU Injection Bank A Time" 132 "ECU RPM" 130 "ECU Temperature Sensor Unit" 128 "ECU Pressure Sensor Unit" 126 "ECU Speed Sensor Unit" 124 "ECU O2 Sensor Unit" 122 "Exhaust EGT" 120 "Right bank EGT" 118 "Left bank EGT" 96 "Cylinder 8 EGT" 94 "Cylinder 7 EGT" 92 "Cylinder 6 EGT" 90 "Cylinder 5 EGT" 88 "Cylinder 4 EGT" 86 "Cylinder 3 EGT" 84 "Cylinder 2 EGT" 82 "Cylinder 1 EGT" 80 "Disabled EGT" 78 "Exhaust O2" 76 "Right bank O2" 74 "Left bank O2" 52 "Cylinder 8 O2" 50 "Cylinder 7 O2" 48 "Cylinder 6 O2" 46 "Cylinder 5 O2" 44 "Cylinder 4 O2" 42 "Cylinder 3 O2" 40 "Cylinder 2 O2" 38 "Cylinder 1 O2" 36 "Disabled O2" 34 "Gear" 32 "Driveshaft RPM" 30 "Right rear wheel speed" 28 "left rear wheel speed" 26 "Right front wheel speed" 24 "Left front wheel speed" 22 "Drag Speed" 20 "Traction Speed" 18 "ECU Battery Voltage" 16 "ECU Launch Mode" 14 "Water Pressure" 12 "Fuel Pressure" 10 "Oil Pressure" 8 "Engine Temperature" 6 "Air Temperature" 4 "MAP" 2 "TPS" 0 "Unknown" ;
+VAL_ 483032575 FTCAN_1FF_MeasureID_03 232 "Power level conf.f.ext. ignition" 154 "ECU Electro Fan" 152 "ECU Air Conditioning" 150 "ECU Cut" 148 "Burnout Signal" 146 "3-Step Signal" 144 "2-Step Signal" 142 "ECU Ignition Advance/Retard" 140 "ECU Injection Bank B Duty Cycle" 138 "ECU Injection Bank A Duty Cycle" 136 "ECU Injection Bank B Time" 134 "ECU Injection Bank A Time" 132 "ECU RPM" 130 "ECU Temperature Sensor Unit" 128 "ECU Pressure Sensor Unit" 126 "ECU Speed Sensor Unit" 124 "ECU O2 Sensor Unit" 122 "Exhaust EGT" 120 "Right bank EGT" 118 "Left bank EGT" 96 "Cylinder 8 EGT" 94 "Cylinder 7 EGT" 92 "Cylinder 6 EGT" 90 "Cylinder 5 EGT" 88 "Cylinder 4 EGT" 86 "Cylinder 3 EGT" 84 "Cylinder 2 EGT" 82 "Cylinder 1 EGT" 80 "Disabled EGT" 78 "Exhaust O2" 76 "Right bank O2" 74 "Left bank O2" 52 "Cylinder 8 O2" 50 "Cylinder 7 O2" 48 "Cylinder 6 O2" 46 "Cylinder 5 O2" 44 "Cylinder 4 O2" 42 "Cylinder 3 O2" 40 "Cylinder 2 O2" 38 "Cylinder 1 O2" 36 "Disabled O2" 34 "Gear" 32 "Driveshaft RPM" 30 "Right rear wheel speed" 28 "left rear wheel speed" 26 "Right front wheel speed" 24 "Left front wheel speed" 22 "Drag Speed" 20 "Traction Speed" 18 "ECU Battery Voltage" 16 "ECU Launch Mode" 14 "Water Pressure" 12 "Fuel Pressure" 10 "Oil Pressure" 8 "Engine Temperature" 6 "Air Temperature" 4 "MAP" 2 "TPS" 0 "Unknown" ;
+VAL_ 483032575 FTCAN_1FF_MeasureID_04 232 "Power level conf.f.ext. ignition" 154 "ECU Electro Fan" 152 "ECU Air Conditioning" 150 "ECU Cut" 148 "Burnout Signal" 146 "3-Step Signal" 144 "2-Step Signal" 142 "ECU Ignition Advance/Retard" 140 "ECU Injection Bank B Duty Cycle" 138 "ECU Injection Bank A Duty Cycle" 136 "ECU Injection Bank B Time" 134 "ECU Injection Bank A Time" 132 "ECU RPM" 130 "ECU Temperature Sensor Unit" 128 "ECU Pressure Sensor Unit" 126 "ECU Speed Sensor Unit" 124 "ECU O2 Sensor Unit" 122 "Exhaust EGT" 120 "Right bank EGT" 118 "Left bank EGT" 96 "Cylinder 8 EGT" 94 "Cylinder 7 EGT" 92 "Cylinder 6 EGT" 90 "Cylinder 5 EGT" 88 "Cylinder 4 EGT" 86 "Cylinder 3 EGT" 84 "Cylinder 2 EGT" 82 "Cylinder 1 EGT" 80 "Disabled EGT" 78 "Exhaust O2" 76 "Right bank O2" 74 "Left bank O2" 52 "Cylinder 8 O2" 50 "Cylinder 7 O2" 48 "Cylinder 6 O2" 46 "Cylinder 5 O2" 44 "Cylinder 4 O2" 42 "Cylinder 3 O2" 40 "Cylinder 2 O2" 38 "Cylinder 1 O2" 36 "Disabled O2" 34 "Gear" 32 "Driveshaft RPM" 30 "Right rear wheel speed" 28 "left rear wheel speed" 26 "Right front wheel speed" 24 "Left front wheel speed" 22 "Drag Speed" 20 "Traction Speed" 18 "ECU Battery Voltage" 16 "ECU Launch Mode" 14 "Water Pressure" 12 "Fuel Pressure" 10 "Oil Pressure" 8 "Engine Temperature" 6 "Air Temperature" 4 "MAP" 2 "TPS" 0 "Unknown" ;
+VAL_ 483032575 FTCAN_1FF_MeasureID_05 232 "Power level conf.f.ext. ignition" 154 "ECU Electro Fan" 152 "ECU Air Conditioning" 150 "ECU Cut" 148 "Burnout Signal" 146 "3-Step Signal" 144 "2-Step Signal" 142 "ECU Ignition Advance/Retard" 140 "ECU Injection Bank B Duty Cycle" 138 "ECU Injection Bank A Duty Cycle" 136 "ECU Injection Bank B Time" 134 "ECU Injection Bank A Time" 132 "ECU RPM" 130 "ECU Temperature Sensor Unit" 128 "ECU Pressure Sensor Unit" 126 "ECU Speed Sensor Unit" 124 "ECU O2 Sensor Unit" 122 "Exhaust EGT" 120 "Right bank EGT" 118 "Left bank EGT" 96 "Cylinder 8 EGT" 94 "Cylinder 7 EGT" 92 "Cylinder 6 EGT" 90 "Cylinder 5 EGT" 88 "Cylinder 4 EGT" 86 "Cylinder 3 EGT" 84 "Cylinder 2 EGT" 82 "Cylinder 1 EGT" 80 "Disabled EGT" 78 "Exhaust O2" 76 "Right bank O2" 74 "Left bank O2" 52 "Cylinder 8 O2" 50 "Cylinder 7 O2" 48 "Cylinder 6 O2" 46 "Cylinder 5 O2" 44 "Cylinder 4 O2" 42 "Cylinder 3 O2" 40 "Cylinder 2 O2" 38 "Cylinder 1 O2" 36 "Disabled O2" 34 "Gear" 32 "Driveshaft RPM" 30 "Right rear wheel speed" 28 "left rear wheel speed" 26 "Right front wheel speed" 24 "Left front wheel speed" 22 "Drag Speed" 20 "Traction Speed" 18 "ECU Battery Voltage" 16 "ECU Launch Mode" 14 "Water Pressure" 12 "Fuel Pressure" 10 "Oil Pressure" 8 "Engine Temperature" 6 "Air Temperature" 4 "MAP" 2 "TPS" 0 "Unknown" ;
+VAL_ 483032575 FTCAN_1FF_MeasureID_06 232 "Power level conf.f.ext. ignition" 154 "ECU Electro Fan" 152 "ECU Air Conditioning" 150 "ECU Cut" 148 "Burnout Signal" 146 "3-Step Signal" 144 "2-Step Signal" 142 "ECU Ignition Advance/Retard" 140 "ECU Injection Bank B Duty Cycle" 138 "ECU Injection Bank A Duty Cycle" 136 "ECU Injection Bank B Time" 134 "ECU Injection Bank A Time" 132 "ECU RPM" 130 "ECU Temperature Sensor Unit" 128 "ECU Pressure Sensor Unit" 126 "ECU Speed Sensor Unit" 124 "ECU O2 Sensor Unit" 122 "Exhaust EGT" 120 "Right bank EGT" 118 "Left bank EGT" 96 "Cylinder 8 EGT" 94 "Cylinder 7 EGT" 92 "Cylinder 6 EGT" 90 "Cylinder 5 EGT" 88 "Cylinder 4 EGT" 86 "Cylinder 3 EGT" 84 "Cylinder 2 EGT" 82 "Cylinder 1 EGT" 80 "Disabled EGT" 78 "Exhaust O2" 76 "Right bank O2" 74 "Left bank O2" 52 "Cylinder 8 O2" 50 "Cylinder 7 O2" 48 "Cylinder 6 O2" 46 "Cylinder 5 O2" 44 "Cylinder 4 O2" 42 "Cylinder 3 O2" 40 "Cylinder 2 O2" 38 "Cylinder 1 O2" 36 "Disabled O2" 34 "Gear" 32 "Driveshaft RPM" 30 "Right rear wheel speed" 28 "left rear wheel speed" 26 "Right front wheel speed" 24 "Left front wheel speed" 22 "Drag Speed" 20 "Traction Speed" 18 "ECU Battery Voltage" 16 "ECU Launch Mode" 14 "Water Pressure" 12 "Fuel Pressure" 10 "Oil Pressure" 8 "Engine Temperature" 6 "Air Temperature" 4 "MAP" 2 "TPS" 0 "Unknown" ;
+VAL_ 483032575 FTCAN_1FF_MeasureID_07 232 "Power level conf.f.ext. ignition" 154 "ECU Electro Fan" 152 "ECU Air Conditioning" 150 "ECU Cut" 148 "Burnout Signal" 146 "3-Step Signal" 144 "2-Step Signal" 142 "ECU Ignition Advance/Retard" 140 "ECU Injection Bank B Duty Cycle" 138 "ECU Injection Bank A Duty Cycle" 136 "ECU Injection Bank B Time" 134 "ECU Injection Bank A Time" 132 "ECU RPM" 130 "ECU Temperature Sensor Unit" 128 "ECU Pressure Sensor Unit" 126 "ECU Speed Sensor Unit" 124 "ECU O2 Sensor Unit" 122 "Exhaust EGT" 120 "Right bank EGT" 118 "Left bank EGT" 96 "Cylinder 8 EGT" 94 "Cylinder 7 EGT" 92 "Cylinder 6 EGT" 90 "Cylinder 5 EGT" 88 "Cylinder 4 EGT" 86 "Cylinder 3 EGT" 84 "Cylinder 2 EGT" 82 "Cylinder 1 EGT" 80 "Disabled EGT" 78 "Exhaust O2" 76 "Right bank O2" 74 "Left bank O2" 52 "Cylinder 8 O2" 50 "Cylinder 7 O2" 48 "Cylinder 6 O2" 46 "Cylinder 5 O2" 44 "Cylinder 4 O2" 42 "Cylinder 3 O2" 40 "Cylinder 2 O2" 38 "Cylinder 1 O2" 36 "Disabled O2" 34 "Gear" 32 "Driveshaft RPM" 30 "Right rear wheel speed" 28 "left rear wheel speed" 26 "Right front wheel speed" 24 "Left front wheel speed" 22 "Drag Speed" 20 "Traction Speed" 18 "ECU Battery Voltage" 16 "ECU Launch Mode" 14 "Water Pressure" 12 "Fuel Pressure" 10 "Oil Pressure" 8 "Engine Temperature" 6 "Air Temperature" 4 "MAP" 2 "TPS" 0 "Unknown" ;
+VAL_ 483032575 FTCAN_1FF_MeasureID_08 232 "Power level conf.f.ext. ignition" 154 "ECU Electro Fan" 152 "ECU Air Conditioning" 150 "ECU Cut" 148 "Burnout Signal" 146 "3-Step Signal" 144 "2-Step Signal" 142 "ECU Ignition Advance/Retard" 140 "ECU Injection Bank B Duty Cycle" 138 "ECU Injection Bank A Duty Cycle" 136 "ECU Injection Bank B Time" 134 "ECU Injection Bank A Time" 132 "ECU RPM" 130 "ECU Temperature Sensor Unit" 128 "ECU Pressure Sensor Unit" 126 "ECU Speed Sensor Unit" 124 "ECU O2 Sensor Unit" 122 "Exhaust EGT" 120 "Right bank EGT" 118 "Left bank EGT" 96 "Cylinder 8 EGT" 94 "Cylinder 7 EGT" 92 "Cylinder 6 EGT" 90 "Cylinder 5 EGT" 88 "Cylinder 4 EGT" 86 "Cylinder 3 EGT" 84 "Cylinder 2 EGT" 82 "Cylinder 1 EGT" 80 "Disabled EGT" 78 "Exhaust O2" 76 "Right bank O2" 74 "Left bank O2" 52 "Cylinder 8 O2" 50 "Cylinder 7 O2" 48 "Cylinder 6 O2" 46 "Cylinder 5 O2" 44 "Cylinder 4 O2" 42 "Cylinder 3 O2" 40 "Cylinder 2 O2" 38 "Cylinder 1 O2" 36 "Disabled O2" 34 "Gear" 32 "Driveshaft RPM" 30 "Right rear wheel speed" 28 "left rear wheel speed" 26 "Right front wheel speed" 24 "Left front wheel speed" 22 "Drag Speed" 20 "Traction Speed" 18 "ECU Battery Voltage" 16 "ECU Launch Mode" 14 "Water Pressure" 12 "Fuel Pressure" 10 "Oil Pressure" 8 "Engine Temperature" 6 "Air Temperature" 4 "MAP" 2 "TPS" 0 "Unknown" ;
+VAL_ 483033087 FTCAN_3FF_MeasureID_01 232 "Power level conf.f.ext. ignition" 154 "ECU Electro Fan" 152 "ECU Air Conditioning" 150 "ECU Cut" 148 "Burnout Signal" 146 "3-Step Signal" 144 "2-Step Signal" 142 "ECU Ignition Advance/Retard" 140 "ECU Injection Bank B Duty Cycle" 138 "ECU Injection Bank A Duty Cycle" 136 "ECU Injection Bank B Time" 134 "ECU Injection Bank A Time" 132 "ECU RPM" 130 "ECU Temperature Sensor Unit" 128 "ECU Pressure Sensor Unit" 126 "ECU Speed Sensor Unit" 124 "ECU O2 Sensor Unit" 122 "Exhaust EGT" 120 "Right bank EGT" 118 "Left bank EGT" 96 "Cylinder 8 EGT" 94 "Cylinder 7 EGT" 92 "Cylinder 6 EGT" 90 "Cylinder 5 EGT" 88 "Cylinder 4 EGT" 86 "Cylinder 3 EGT" 84 "Cylinder 2 EGT" 82 "Cylinder 1 EGT" 80 "Disabled EGT" 78 "Exhaust O2" 76 "Right bank O2" 74 "Left bank O2" 52 "Cylinder 8 O2" 50 "Cylinder 7 O2" 48 "Cylinder 6 O2" 46 "Cylinder 5 O2" 44 "Cylinder 4 O2" 42 "Cylinder 3 O2" 40 "Cylinder 2 O2" 38 "Cylinder 1 O2" 36 "Disabled O2" 34 "Gear" 32 "Driveshaft RPM" 30 "Right rear wheel speed" 28 "left rear wheel speed" 26 "Right front wheel speed" 24 "Left front wheel speed" 22 "Drag Speed" 20 "Traction Speed" 18 "ECU Battery Voltage" 16 "ECU Launch Mode" 14 "Water Pressure" 12 "Fuel Pressure" 10 "Oil Pressure" 8 "Engine Temperature" 6 "Air Temperature" 4 "MAP" 2 "TPS" 0 "Unknown" ;
+VAL_ 483033087 FTCAN_3FF_MeasureID_02 232 "Power level conf.f.ext. ignition" 154 "ECU Electro Fan" 152 "ECU Air Conditioning" 150 "ECU Cut" 148 "Burnout Signal" 146 "3-Step Signal" 144 "2-Step Signal" 142 "ECU Ignition Advance/Retard" 140 "ECU Injection Bank B Duty Cycle" 138 "ECU Injection Bank A Duty Cycle" 136 "ECU Injection Bank B Time" 134 "ECU Injection Bank A Time" 132 "ECU RPM" 130 "ECU Temperature Sensor Unit" 128 "ECU Pressure Sensor Unit" 126 "ECU Speed Sensor Unit" 124 "ECU O2 Sensor Unit" 122 "Exhaust EGT" 120 "Right bank EGT" 118 "Left bank EGT" 96 "Cylinder 8 EGT" 94 "Cylinder 7 EGT" 92 "Cylinder 6 EGT" 90 "Cylinder 5 EGT" 88 "Cylinder 4 EGT" 86 "Cylinder 3 EGT" 84 "Cylinder 2 EGT" 82 "Cylinder 1 EGT" 80 "Disabled EGT" 78 "Exhaust O2" 76 "Right bank O2" 74 "Left bank O2" 52 "Cylinder 8 O2" 50 "Cylinder 7 O2" 48 "Cylinder 6 O2" 46 "Cylinder 5 O2" 44 "Cylinder 4 O2" 42 "Cylinder 3 O2" 40 "Cylinder 2 O2" 38 "Cylinder 1 O2" 36 "Disabled O2" 34 "Gear" 32 "Driveshaft RPM" 30 "Right rear wheel speed" 28 "left rear wheel speed" 26 "Right front wheel speed" 24 "Left front wheel speed" 22 "Drag Speed" 20 "Traction Speed" 18 "ECU Battery Voltage" 16 "ECU Launch Mode" 14 "Water Pressure" 12 "Fuel Pressure" 10 "Oil Pressure" 8 "Engine Temperature" 6 "Air Temperature" 4 "MAP" 2 "TPS" 0 "Unknown" ;
+VAL_ 483033087 FTCAN_3FF_MeasureID_03 232 "Power level conf.f.ext. ignition" 154 "ECU Electro Fan" 152 "ECU Air Conditioning" 150 "ECU Cut" 148 "Burnout Signal" 146 "3-Step Signal" 144 "2-Step Signal" 142 "ECU Ignition Advance/Retard" 140 "ECU Injection Bank B Duty Cycle" 138 "ECU Injection Bank A Duty Cycle" 136 "ECU Injection Bank B Time" 134 "ECU Injection Bank A Time" 132 "ECU RPM" 130 "ECU Temperature Sensor Unit" 128 "ECU Pressure Sensor Unit" 126 "ECU Speed Sensor Unit" 124 "ECU O2 Sensor Unit" 122 "Exhaust EGT" 120 "Right bank EGT" 118 "Left bank EGT" 96 "Cylinder 8 EGT" 94 "Cylinder 7 EGT" 92 "Cylinder 6 EGT" 90 "Cylinder 5 EGT" 88 "Cylinder 4 EGT" 86 "Cylinder 3 EGT" 84 "Cylinder 2 EGT" 82 "Cylinder 1 EGT" 80 "Disabled EGT" 78 "Exhaust O2" 76 "Right bank O2" 74 "Left bank O2" 52 "Cylinder 8 O2" 50 "Cylinder 7 O2" 48 "Cylinder 6 O2" 46 "Cylinder 5 O2" 44 "Cylinder 4 O2" 42 "Cylinder 3 O2" 40 "Cylinder 2 O2" 38 "Cylinder 1 O2" 36 "Disabled O2" 34 "Gear" 32 "Driveshaft RPM" 30 "Right rear wheel speed" 28 "left rear wheel speed" 26 "Right front wheel speed" 24 "Left front wheel speed" 22 "Drag Speed" 20 "Traction Speed" 18 "ECU Battery Voltage" 16 "ECU Launch Mode" 14 "Water Pressure" 12 "Fuel Pressure" 10 "Oil Pressure" 8 "Engine Temperature" 6 "Air Temperature" 4 "MAP" 2 "TPS" 0 "Unknown" ;
+VAL_ 2451604256 SwitchPanel_Row_1_Light 1 "On" 0 "Off" ;
+VAL_ 2451604256 SwitchPanel_Row_2_Light 1 "On" 0 "Off" ;
+VAL_ 2451604256 SwitchPanel_Button_01_State 1 "Pressed" 0 "Released" ;
+VAL_ 2451604256 SwitchPanel_Button_02_State 1 "Pressed" 0 "Released" ;
+VAL_ 2451604256 SwitchPanel_Button_03_State 1 "Pressed" 0 "Released" ;
+VAL_ 2451604256 SwitchPanel_Button_04_State 1 "Pressed" 0 "Released" ;
+VAL_ 2451604256 SwitchPanel_Button_05_State 1 "Pressed" 0 "Released" ;
+VAL_ 2451604256 SwitchPanel_Button_06_State 1 "Pressed" 0 "Released" ;
+VAL_ 2451604256 SwitchPanel_Button_07_State 1 "Pressed" 0 "Released" ;
+VAL_ 2451604256 SwitchPanel_Button_08_State 1 "Pressed" 0 "Released" ;
+VAL_ 2451571488 SwitchPanel_Row_1_Light 1 "On" 0 "Off" ;
+VAL_ 2451571488 SwitchPanel_Row_2_Light 1 "On" 0 "Off" ;
+VAL_ 2451571488 SwitchPanel_Button_01_State 1 "Pressed" 0 "Released" ;
+VAL_ 2451571488 SwitchPanel_Button_02_State 1 "Pressed" 0 "Released" ;
+VAL_ 2451571488 SwitchPanel_Button_03_State 1 "Pressed" 0 "Released" ;
+VAL_ 2451571488 SwitchPanel_Button_04_State 1 "Pressed" 0 "Released" ;
+VAL_ 2451571488 SwitchPanel_Button_05_State 1 "Pressed" 0 "Released" ;
+VAL_ 2451571488 SwitchPanel_Button_06_State 1 "Pressed" 0 "Released" ;
+VAL_ 2451571488 SwitchPanel_Button_07_State 1 "Pressed" 0 "Released" ;
+VAL_ 2451571488 SwitchPanel_Button_08_State 1 "Pressed" 0 "Released" ;
+VAL_ 2483029505 FT500_Simple_Gear 6 "Sixth Gear" 5 "Fifth Gear" 4 "Fourth Gear" 3 "Third Gear" 2 "Second Gear" 1 "First Gear" 0 "Neutral" -1 "Reverse" -2 "Park" ;
+VAL_ 2483029506 FT500_Simple_PitLimit 1 "On" 0 "Off" ;
+VAL_ 2483553793 FT600_Simple_Gear 6 "Sixth Gear" 5 "Fifth Gear" 4 "Fourth Gear" 3 "Third Gear" 2 "Second Gear" 1 "First Gear" 0 "Neutral" -1 "Reverse" -2 "Park" ;
+VAL_ 2483553794 FT600_Simple_PitLimit 1 "On" 0 "Off" ;
+
